@@ -1,7 +1,4 @@
 ﻿using Sparrow.Extension.System;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sparrow.StandardResult
 {
@@ -22,7 +19,7 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public static void SuccessResult(this ModelResult result,object data)
+        public static void SuccessResult(this ModelResult result, object data)
         {
             result.Data = data;
             result.Message = EnumModelResult.EnumResult.Success.GetDescription();

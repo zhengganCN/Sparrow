@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Extension.System
+﻿namespace Sparrow.Extension.System
 {
     /// <summary>
     /// 枚举信息
