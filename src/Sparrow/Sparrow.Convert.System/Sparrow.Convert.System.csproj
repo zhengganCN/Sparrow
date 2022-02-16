@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.1</Version>
-    <Authors>zhenggan</Authors>
-    <Description>系统类扩展</Description>
+	<TargetFramework>netstandard2.0</TargetFramework>
+	<Version>1.0.0</Version>
+	<Authors>zhenggan</Authors>
+	<Description>OpenApi转换</Description>
 	<Copyright>zhenggan</Copyright>
 	<PackageProjectUrl>https://github.com/zhengganCN/Sparrow</PackageProjectUrl>
 	<PackageIcon>logo.png</PackageIcon>
@@ -18,5 +18,4 @@
 		<PackagePath>\</PackagePath>
 	</None>
   </ItemGroup>
-
 </Project>

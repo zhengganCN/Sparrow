@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.System", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Convert", "Convert", "{28143A19-8FBB-46A3-A7A2-05538214AE27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Convert.OpenApi", "Sparrow.Convert.OpenApi\Sparrow.Convert.OpenApi.csproj", "{15153E7E-DD06-4E70-B158-9F2B14D0EFA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Convert.OpenApi", "Sparrow.Convert.OpenApi\Sparrow.Convert.OpenApi.csproj", "{15153E7E-DD06-4E70-B158-9F2B14D0EFA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Convert.System", "Sparrow.Convert.System\Sparrow.Convert.System.csproj", "{B6DD6CAC-5683-4464-8045-7122B8FB7A0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{15153E7E-DD06-4E70-B158-9F2B14D0EFA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15153E7E-DD06-4E70-B158-9F2B14D0EFA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15153E7E-DD06-4E70-B158-9F2B14D0EFA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6DD6CAC-5683-4464-8045-7122B8FB7A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6DD6CAC-5683-4464-8045-7122B8FB7A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6DD6CAC-5683-4464-8045-7122B8FB7A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6DD6CAC-5683-4464-8045-7122B8FB7A0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{1A5634FC-5CE7-4CE9-AC51-F1669675BAAC} = {32B8E9B7-3447-4FFA-9414-EED6A2D87D9A}
 		{4B624ED4-012A-47A1-A811-74C79F95080D} = {23DEE508-64DD-4415-AEFE-D47DB821B39C}
 		{15153E7E-DD06-4E70-B158-9F2B14D0EFA5} = {28143A19-8FBB-46A3-A7A2-05538214AE27}
+		{B6DD6CAC-5683-4464-8045-7122B8FB7A0C} = {28143A19-8FBB-46A3-A7A2-05538214AE27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}
