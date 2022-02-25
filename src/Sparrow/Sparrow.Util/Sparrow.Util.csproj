@@ -1,22 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+	<LangVersion>8.0</LangVersion>
 	<Version>1.0.0-beta1</Version>
 	<Authors>zhenggan</Authors>
-	<Description>configuration extension</Description>
+	<Description>common tools</Description>
 	<Copyright>zhenggan</Copyright>
 	<PackageProjectUrl>https://github.com/zhengganCN/Sparrow</PackageProjectUrl>
 	<PackageIcon>logo.png</PackageIcon>
 	<RepositoryType>git</RepositoryType>
-	<PackageTags>configuration extension</PackageTags>
+	<PackageTags>common tools</PackageTags>
   </PropertyGroup>
 
-  <ItemGroup>
-	<None Include="..\..\..\logo.png">
-		<Pack>True</Pack>
-		<PackagePath>\</PackagePath>
-	</None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\..\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
