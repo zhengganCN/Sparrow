@@ -11,7 +11,7 @@ namespace Sparrow.DataValidation.Attributes
     public sealed class OnlyNumberAttribute : ValidationAttribute
     {
         /// <summary>
-        /// 是否验证通过
+        /// 重写验证逻辑
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

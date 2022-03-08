@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sparrow.Database.Redis
+﻿namespace Sparrow.Database.Redis
 {
     /// <summary>
     /// Redis上下文配置项

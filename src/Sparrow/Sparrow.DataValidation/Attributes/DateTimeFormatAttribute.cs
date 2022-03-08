@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sparrow.Extension.System;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Sparrow.DataValidation.Attributes
@@ -41,36 +42,33 @@ namespace Sparrow.DataValidation.Attributes
             }
         }
 
-        private bool DateTimeValid(string dateTimeString)
+        private bool DateTimeValid(string value)
         {
             var result = false;
             switch (TimeFormat)
             {
                 case EnumTimeFormat.DateTime:
-                    result = TryParseDateTime(dateTimeString);
-                    break;
                 case EnumTimeFormat.Date:
-                    result = TryParseDateTime(dateTimeString);
-                    break;
                 case EnumTimeFormat.Time:
-                    result = TryParseDateTime(dateTimeString);
+                    result = value.IsDateTime();
                     break;
                 case EnumTimeFormat.DateTimeNoSeparator:
-                    if (ValidDateTimeStringLength(dateTimeString, EnumTimeFormat.DateTimeNoSeparator))
+                    if (ValidDateTimeStringLength(value, EnumTimeFormat.DateTimeNoSeparator))
                     {
-                        result = TryParseDateTime(dateTimeString.Insert(12, ":").Insert(10, ":").Insert(8, " ").Insert(6, "/").Insert(4, "/"));
+                        result = value.Insert(12, ":").Insert(10, ":").Insert(8, " ")
+                            .Insert(6, "/").Insert(4, "/").IsDateTime();
                     }
                     break;
                 case EnumTimeFormat.DateNoSeparator:
-                    if (ValidDateTimeStringLength(dateTimeString, EnumTimeFormat.DateNoSeparator))
+                    if (ValidDateTimeStringLength(value, EnumTimeFormat.DateNoSeparator))
                     {
-                        result = TryParseDateTime(dateTimeString.Insert(6, "/").Insert(4, "/"));
+                        result = value.Insert(6, "/").Insert(4, "/").IsDateTime();
                     }
                     break;
                 case EnumTimeFormat.TimeNoSeparator:
-                    if (ValidDateTimeStringLength(dateTimeString, EnumTimeFormat.TimeNoSeparator))
+                    if (ValidDateTimeStringLength(value, EnumTimeFormat.TimeNoSeparator))
                     {
-                        result = TryParseDateTime(dateTimeString.Insert(4, ":").Insert(2, ":"));
+                        result = value.Insert(4, ":").Insert(2, ":").IsDateTime();
                     }
                     break;
             }
@@ -92,21 +90,6 @@ namespace Sparrow.DataValidation.Attributes
                     result = value.Length == 6;
                     break;
             }
-            return result;
-        }
-
-        private static bool TryParseDateTime(string dateTimeString)
-        {
-            bool result;
-            if (DateTime.TryParse(dateTimeString, out DateTime _))
-            {
-                result = true;
-            }
-            else
-            {
-                result = false;
-            }
-
             return result;
         }
 

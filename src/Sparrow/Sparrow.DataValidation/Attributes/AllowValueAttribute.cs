@@ -5,15 +5,20 @@ using System.Linq;
 namespace Sparrow.DataValidation.Attributes
 {
     /// <summary>
-    /// 字符串没有空格验证特性
+    /// 允许的值
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public sealed class NoSpaceAttribute : ValidationAttribute
+    public class AllowValueAttribute : ValidationAttribute
     {
+        private readonly object[] _values;
+        public AllowValueAttribute(params object[] values)
+        {
+            _values = values;
+        }
         /// <summary>
         /// 重写验证逻辑
         /// </summary>
-        /// <param name="value">验证值</param>
+        /// <param name="value"></param>
         /// <returns></returns>
         public override bool IsValid(object value)
         {
@@ -21,12 +26,12 @@ namespace Sparrow.DataValidation.Attributes
             {
                 return true;
             }
-            var result = false;
-            if (value is string @string)
+            if (_values.Contains(value))
             {
-                result = !@string.Contains(' ');
+                return true;
             }
-            return result;
+            return false;
         }
+
     }
 }

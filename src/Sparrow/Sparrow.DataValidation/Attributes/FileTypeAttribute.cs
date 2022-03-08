@@ -6,7 +6,7 @@ using System.Linq;
 namespace Sparrow.DataValidation.Attributes
 {
     /// <summary>
-    /// 文件类型验证特性
+    /// 文件类型验证特性，只对类型IFormFile和IFormFileCollection有效
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public sealed class FileTypeAttribute : ValidationAttribute
@@ -16,7 +16,7 @@ namespace Sparrow.DataValidation.Attributes
         /// </summary>
         public string[] FileType { get; set; }
         /// <summary>
-        /// 是否验证通过
+        /// 重写验证逻辑
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

@@ -4,11 +4,21 @@ namespace Sparrow.Extension.System
 {
     public static class DateTimeExtension
     {
-
         /// <summary>
         /// 默认时间格式
         /// </summary>
-        public static string defaultFormat = "yyyy-MM-dd HH:mm:ss";
+        public const string DefaultFormat = "yyyy-MM-dd HH:mm:ss";
+
+        /// <summary>
+        /// 时间转字符串
+        /// </summary>
+        /// <param name="dateTime">时间</param>
+        /// <param name="format">格式</param>
+        /// <returns></returns>
+        public static string ToString(this DateTime? dateTime, string format)
+        {
+            return dateTime?.ToString(format);
+        }
 
         /// <summary>
         /// 获取给定月份的周数

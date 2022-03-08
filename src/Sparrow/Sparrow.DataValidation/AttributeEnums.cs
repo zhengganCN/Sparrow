@@ -1,9 +1,9 @@
-﻿namespace Sparrow.DataValidation.Attributes
+﻿namespace Sparrow.DataValidation
 {
     /// <summary>
     /// 枚举包含设置
     /// </summary>
-    public enum EnumChineseContainer
+    public enum EnumChineseOption
     {
         /// <summary>
         /// 至少包含一个中文
