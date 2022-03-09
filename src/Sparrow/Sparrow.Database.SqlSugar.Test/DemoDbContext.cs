@@ -15,8 +15,8 @@ namespace Sparrow.Database.SqlSugar.Test
         {
             builder.SetConnectionConfig(new ConnectionConfig
             {
-                ConnectionString = "Data Source=dostudy.top;Initial Catalog=BackgroundManager.Dev;User ID=sa;Password=yR8DFEYZPfQk9ExzfrKx;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
-                DbType = DbType.SqlServer
+                ConnectionString = "demo",
+                DbType = DbType.Sqlite
             });
         }
     }
