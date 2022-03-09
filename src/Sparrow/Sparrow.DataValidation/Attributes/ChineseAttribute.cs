@@ -13,9 +13,9 @@ namespace Sparrow.DataValidation.Attributes
         /// <summary>
         /// 设置要验证的值是全部都是中文，还是至少包含一个中文，默认值为至少包含一个中文
         /// </summary>
-        public EnumChineseContainer ChineseContainer { get; set; } = EnumChineseContainer.Container;
+        public EnumChineseOption ChineseOption { get; set; } = EnumChineseOption.Container;
         /// <summary>
-        /// 是否验证通过
+        /// 重写验证逻辑
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -52,12 +52,12 @@ namespace Sparrow.DataValidation.Attributes
         private bool ValidChinese(string chinese)
         {
             bool result = false;
-            switch (ChineseContainer)
+            switch (ChineseOption)
             {
-                case EnumChineseContainer.Container:
+                case EnumChineseOption.Container:
                     result = IsContainerChineseAtLeastOne(chinese);
                     break;
-                case EnumChineseContainer.All:
+                case EnumChineseOption.All:
                     result = IsAllChinese(chinese);
                     break;
             }

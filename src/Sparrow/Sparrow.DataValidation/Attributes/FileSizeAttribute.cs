@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Sparrow.DataValidation.Attributes
 {
     /// <summary>
-    /// 文件大小验证特性
+    /// 文件大小验证特性，只对类型IFormFile和IFormFileCollection有效
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public sealed class FileSizeAttribute : ValidationAttribute
@@ -19,7 +19,7 @@ namespace Sparrow.DataValidation.Attributes
         /// </summary>
         public EnumSizeUnit Unit { get; set; } = EnumSizeUnit.UnitKB;
         /// <summary>
-        /// 是否验证通过
+        /// 重写验证逻辑
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

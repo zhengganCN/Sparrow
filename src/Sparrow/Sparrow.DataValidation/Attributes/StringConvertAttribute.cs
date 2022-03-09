@@ -15,7 +15,7 @@ namespace Sparrow.DataValidation.Attributes
             ConvertType = type;
         }
         /// <summary>
-        /// 是否验证通过
+        /// 重写验证逻辑
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

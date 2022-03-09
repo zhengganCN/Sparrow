@@ -1,4 +1,4 @@
-﻿using Sparrow.Database.EntityFrameworkCore;
+using Sparrow.Database.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Reflection;
 

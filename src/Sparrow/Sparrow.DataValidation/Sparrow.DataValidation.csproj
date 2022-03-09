@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	<Version>1.0.0-beta1</Version>
+	<Version>1.0.0</Version>
 	<Authors>zhenggan</Authors>
 	<Description>data valid</Description>
 	<Copyright>zhenggan</Copyright>
@@ -12,17 +12,16 @@
 	<PackageTags>data valid</PackageTags>
   </PropertyGroup>
 
-	<ItemGroup>
-		<None Include="..\..\..\logo.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
+  <ItemGroup>
+	<None Include="..\..\..\logo.png">
+	  <Pack>True</Pack>
+	  <PackagePath>\</PackagePath>
+	</None>
+  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.14" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.2.0" />
+    <PackageReference Include="Sparrow.Extension.System" Version="1.0.2" />
   </ItemGroup>
 
 </Project>
