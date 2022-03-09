@@ -59,9 +59,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.EntityInfo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Redis", "Sparrow.Database.Redis\Sparrow.Database.Redis.csproj", "{1D3613A5-5419-4027-8EBC-A507C51DC791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Database.SqlSugar", "Sparrow.Database.SqlSugar\Sparrow.Database.SqlSugar.csproj", "{0B265B72-5028-4E73-850C-5787A381C8A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.SqlSugar", "Sparrow.Database.SqlSugar\Sparrow.Database.SqlSugar.csproj", "{0B265B72-5028-4E73-850C-5787A381C8A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.DataValidation.Test", "Sparrow.DataValidation.Test\Sparrow.DataValidation.Test.csproj", "{D47B1C98-2834-4CFC-AC3E-5F2194C22444}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.DataValidation.Test", "Sparrow.DataValidation.Test\Sparrow.DataValidation.Test.csproj", "{D47B1C98-2834-4CFC-AC3E-5F2194C22444}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Database.SqlSugar.Test", "Sparrow.Database.SqlSugar.Test\Sparrow.Database.SqlSugar.Test.csproj", "{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,10 +139,18 @@ Global
 		{1D3613A5-5419-4027-8EBC-A507C51DC791}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D3613A5-5419-4027-8EBC-A507C51DC791}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D3613A5-5419-4027-8EBC-A507C51DC791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B265B72-5028-4E73-850C-5787A381C8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B265B72-5028-4E73-850C-5787A381C8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B265B72-5028-4E73-850C-5787A381C8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B265B72-5028-4E73-850C-5787A381C8A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D47B1C98-2834-4CFC-AC3E-5F2194C22444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D47B1C98-2834-4CFC-AC3E-5F2194C22444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D47B1C98-2834-4CFC-AC3E-5F2194C22444}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D47B1C98-2834-4CFC-AC3E-5F2194C22444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,7 +173,9 @@ Global
 		{51CA6A0D-79E5-4A1E-BCCE-C6F089E0CA45} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 		{27146A21-3452-4B99-9D13-835B91A8D677} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 		{1D3613A5-5419-4027-8EBC-A507C51DC791} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
+		{0B265B72-5028-4E73-850C-5787A381C8A0} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 		{D47B1C98-2834-4CFC-AC3E-5F2194C22444} = {3B5C5180-9E9B-4AAF-B31B-E84AD6626848}
+		{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}

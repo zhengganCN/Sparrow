@@ -1,14 +1,13 @@
-﻿using System;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SqlSugar;
+using System;
 
 namespace Sparrow.Database.SqlSugar
 {
     public abstract class DbContext : IDisposable
     {
-        private static readonly ILogger<DbContext> _logger = new LoggerFactory().CreateLogger<DbContext>();
         private readonly DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
-        private readonly SqlSugarClient Client;
+        public readonly SqlSugarClient SugarClient;
 
         public DbContext()
         {
@@ -17,13 +16,17 @@ namespace Sparrow.Database.SqlSugar
             {
                 throw new ArgumentNullException(nameof(builder.Connection));
             }
-            Client = new SqlSugarClient(builder.Connection);
-            Client.Aop.OnLogExecuting = (previewSql, parameters) =>
+            SugarClient = new SqlSugarClient(builder.Connection);
+            SugarClient.Aop.OnLogExecuting = (previewSql, parameters) =>
             {
                 var sql = previewSql;
+                if (parameters != null && parameters.Length > 0)
+                {
+                    sql += "\nparameters is:";
+                }
                 foreach (var parameter in parameters)
                 {
-                    sql += parameter.Value;
+                    sql += $"\nname:{parameter.ParameterName};value:{parameter.Value}";
                 }
                 ExectionSql(sql);
             };
@@ -37,12 +40,12 @@ namespace Sparrow.Database.SqlSugar
 
         protected virtual void ExectionSql(string sql)
         {
-            _logger.LogDebug(sql);
+            StaticValues.Logger.LogDebug(sql);
         }
 
         public void Dispose()
         {
-            Client.Dispose();
+            SugarClient.Dispose();
         }
     }
 }
