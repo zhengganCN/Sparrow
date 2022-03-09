@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sparrow.Extension.System
+﻿namespace Sparrow.Extension.System
 {
     //public static class MathExtension
     //{

@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using Sparrow.Database.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace Sparrow.Database.EntityFrameworkCore
+namespace Microsoft.EntityFrameworkCore
 {
     public static class ModelBuilderExtensions
     {
