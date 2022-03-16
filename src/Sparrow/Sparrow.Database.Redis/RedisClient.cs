@@ -255,7 +255,7 @@ namespace Sparrow.Database.Redis
             var hash = _database.HashGetAll(key);
             for (int i = 0; i < hash.Length; i++)
             {
-                pairs.Add(hash[i].Name, hash[0].Value);
+                pairs.Add(hash[i].Name, hash[i].Value);
             }
             return pairs;
         }
@@ -273,13 +273,13 @@ namespace Sparrow.Database.Redis
             var hash = _database.HashGetAll(key);
             for (int i = 0; i < hash.Length; i++)
             {
-                if (string.IsNullOrWhiteSpace(hash[0].Value.ToString()))
+                if (string.IsNullOrWhiteSpace(hash[i].Value.ToString()))
                 {
                     pairs.Add(hash[i].Name, default);
                 }
                 else
                 {
-                    pairs.Add(hash[i].Name, JsonConvert.DeserializeObject<T>(hash[0].Value.ToString()));
+                    pairs.Add(hash[i].Name, JsonConvert.DeserializeObject<T>(hash[i].Value.ToString()));
                 }
             }
             return pairs;
