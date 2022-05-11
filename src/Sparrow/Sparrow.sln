@@ -63,7 +63,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.SqlSugar",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.DataValidation.Test", "Sparrow.DataValidation.Test\Sparrow.DataValidation.Test.csproj", "{D47B1C98-2834-4CFC-AC3E-5F2194C22444}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Database.SqlSugar.Test", "Sparrow.Database.SqlSugar.Test\Sparrow.Database.SqlSugar.Test.csproj", "{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.SqlSugar.Test", "Sparrow.Database.SqlSugar.Test\Sparrow.Database.SqlSugar.Test.csproj", "{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C47431F-0D2E-4BBD-921A-3478245AB221}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Export.iTextSharp.Test", "Sparrow.Export.iTextSharp.Test\Sparrow.Export.iTextSharp.Test.csproj", "{C62108A8-C361-4159-ACC6-0867199877AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,6 +158,10 @@ Global
 		{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62108A8-C361-4159-ACC6-0867199877AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62108A8-C361-4159-ACC6-0867199877AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62108A8-C361-4159-ACC6-0867199877AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62108A8-C361-4159-ACC6-0867199877AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +187,7 @@ Global
 		{0B265B72-5028-4E73-850C-5787A381C8A0} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 		{D47B1C98-2834-4CFC-AC3E-5F2194C22444} = {3B5C5180-9E9B-4AAF-B31B-E84AD6626848}
 		{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
+		{C62108A8-C361-4159-ACC6-0867199877AD} = {C1E5D574-F3A1-40F5-AAF8-2DDB2D6A4F44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}
