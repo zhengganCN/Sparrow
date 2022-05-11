@@ -5,51 +5,16 @@ using System.Collections.Generic;
 
 namespace Sparrow.Database.Redis
 {
-    public class RedisRepository : IDisposable, IRedisRepository
+    public class RedisClient
     {
-        private ConnectionMultiplexer connection;
-        private ConfigurationOptions _configurationOptions;
-        private int _db;
-        private bool disposedValue;
+        private readonly IDatabase _database;
         /// <summary>
-        /// Redis仓储构造函数
+        /// Redis客户端
         /// </summary>
-        /// <param name="configurationOptions">配置项</param>
-        /// <param name="db">数据库序号，默认为 0 </param>
-        public RedisRepository(ConfigurationOptions configurationOptions, int db = 0)
+        public RedisClient(IDatabase database)
         {
-            _configurationOptions = configurationOptions;
-            _db = db;
+            _database = database;
         }
-        /// <summary>
-        /// 配置
-        /// </summary>
-        /// <param name="configurationOptions">配置选项</param>
-        /// <param name="db">数据库号</param>
-        public virtual void OnConfiguring(ConfigurationOptions configurationOptions, int db = 0)
-        {
-            _configurationOptions = configurationOptions;
-            _db = db;
-        }
-        /// <summary>
-        /// 缓存数据库，数据库连接
-        /// </summary>
-        private ConnectionMultiplexer CacheConnection
-        {
-            get
-            {
-                if (connection == null || !connection.IsConnected)
-                {
-                    connection = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(_configurationOptions)).Value;
-                }
-                return connection;
-            }
-        }
-
-        /// <summary>
-        /// 缓存数据库
-        /// </summary>
-        private IDatabase CacheRedis => CacheConnection.GetDatabase(_db);
 
         #region String的增、改、查操作
 
@@ -62,7 +27,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool StringSet(string key, string value, TimeSpan? expiry = default)
         {
-            return CacheRedis.StringSet(key, value, expiry);
+            return _database.StringSet(key, value, expiry);
         }
 
         /// <summary>
@@ -76,7 +41,7 @@ namespace Sparrow.Database.Redis
         public bool StringSet<T>(string key, T value, TimeSpan? expiry = default)
         {
             string json = JsonConvert.SerializeObject(value);
-            return CacheRedis.StringSet(key, json, expiry);
+            return _database.StringSet(key, json, expiry);
         }
 
         /// <summary>
@@ -93,7 +58,7 @@ namespace Sparrow.Database.Redis
                 keyValuePairs[index] = new KeyValuePair<RedisKey, RedisValue>(pair.Key, pair.Value);
                 index++;
             }
-            return CacheRedis.StringSet(keyValuePairs);
+            return _database.StringSet(keyValuePairs);
         }
 
         /// <summary>
@@ -104,7 +69,7 @@ namespace Sparrow.Database.Redis
         /// <returns>返回字符串追加后的长度</returns>
         public long StringAppend(string key, string value)
         {
-            return CacheRedis.StringAppend(key, value);
+            return _database.StringAppend(key, value);
         }
 
         /// <summary>
@@ -114,7 +79,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public string StringGet(string key)
         {
-            return CacheRedis.StringGet(key);
+            return _database.StringGet(key);
         }
 
         /// <summary>
@@ -125,7 +90,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public T StringGet<T>(string key)
         {
-            return JsonConvert.DeserializeObject<T>(CacheRedis.StringGet(key));
+            return JsonConvert.DeserializeObject<T>(_database.StringGet(key));
         }
 
         /// <summary>
@@ -142,7 +107,7 @@ namespace Sparrow.Database.Redis
                 redisKeys[index] = key;
                 index++;
             }
-            var redisValues = CacheRedis.StringGet(redisKeys);
+            var redisValues = _database.StringGet(redisKeys);
             var pairs = new Dictionary<string, string>();
             for (int i = 0; i < redisKeys.Length; i++)
             {
@@ -163,10 +128,10 @@ namespace Sparrow.Database.Redis
         public IList<string> ListGet(string key)
         {
             var values = new List<string>();
-            var count = CacheRedis.ListLength(key);
+            var count = _database.ListLength(key);
             for (int i = 0; i < count; i++)
             {
-                values.Add(CacheRedis.ListGetByIndex(key, i));
+                values.Add(_database.ListGetByIndex(key, i));
             }
             return values;
         }
@@ -180,10 +145,10 @@ namespace Sparrow.Database.Redis
         public IList<T> ListGet<T>(string key)
         {
             var values = new List<T>();
-            var count = CacheRedis.ListLength(key);
+            var count = _database.ListLength(key);
             for (int i = 0; i < count; i++)
             {
-                values.Add(JsonConvert.DeserializeObject<T>(CacheRedis.ListGetByIndex(key, i)));
+                values.Add(JsonConvert.DeserializeObject<T>(_database.ListGetByIndex(key, i)));
             }
             return values;
         }
@@ -196,7 +161,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public string ListGetByIndex(string key, int index)
         {
-            return CacheRedis.ListGetByIndex(key, index);
+            return _database.ListGetByIndex(key, index);
         }
 
         /// <summary>
@@ -208,7 +173,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public T ListGetByIndex<T>(string key, int index)
         {
-            return JsonConvert.DeserializeObject<T>(CacheRedis.ListGetByIndex(key, index));
+            return JsonConvert.DeserializeObject<T>(_database.ListGetByIndex(key, index));
         }
 
         /// <summary>
@@ -219,7 +184,7 @@ namespace Sparrow.Database.Redis
         /// <param name="value">值</param>
         public void ListSetByIndex(string key, long index, string value)
         {
-            CacheRedis.ListSetByIndex(key, index, value);
+            _database.ListSetByIndex(key, index, value);
         }
 
         /// <summary>
@@ -231,7 +196,7 @@ namespace Sparrow.Database.Redis
         /// <param name="value">值</param>
         public void ListSetByIndex<T>(string key, long index, T value)
         {
-            CacheRedis.ListSetByIndex(key, index, JsonConvert.SerializeObject(value));
+            _database.ListSetByIndex(key, index, JsonConvert.SerializeObject(value));
         }
 
         /// <summary>
@@ -246,7 +211,7 @@ namespace Sparrow.Database.Redis
         /// <returns>移除的值的个数</returns>
         public long ListRemove(string key, string value, long count = 0)
         {
-            return CacheRedis.ListRemove(key, value, count);
+            return _database.ListRemove(key, value, count);
         }
 
         /// <summary>
@@ -262,7 +227,7 @@ namespace Sparrow.Database.Redis
         /// <returns>移除的值的个数</returns>
         public long ListRemove<T>(string key, T value, long count = 0)
         {
-            return CacheRedis.ListRemove(key, JsonConvert.SerializeObject(value), count);
+            return _database.ListRemove(key, JsonConvert.SerializeObject(value), count);
         }
 
         #endregion
@@ -276,7 +241,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public HashEntry[] HashGetAll(string key)
         {
-            return CacheRedis.HashGetAll(key);
+            return _database.HashGetAll(key);
         }
 
         /// <summary>
@@ -287,10 +252,10 @@ namespace Sparrow.Database.Redis
         public Dictionary<string, string> HashGet(string key)
         {
             var pairs = new Dictionary<string, string>();
-            var hash = CacheRedis.HashGetAll(key);
+            var hash = _database.HashGetAll(key);
             for (int i = 0; i < hash.Length; i++)
             {
-                pairs.Add(hash[i].Name, hash[0].Value);
+                pairs.Add(hash[i].Name, hash[i].Value);
             }
             return pairs;
         }
@@ -305,16 +270,16 @@ namespace Sparrow.Database.Redis
         public Dictionary<string, T> HashGet<T>(string key)
         {
             var pairs = new Dictionary<string, T>();
-            var hash = CacheRedis.HashGetAll(key);
+            var hash = _database.HashGetAll(key);
             for (int i = 0; i < hash.Length; i++)
             {
-                if (string.IsNullOrWhiteSpace(hash[0].Value.ToString()))
+                if (string.IsNullOrWhiteSpace(hash[i].Value.ToString()))
                 {
                     pairs.Add(hash[i].Name, default);
                 }
                 else
                 {
-                    pairs.Add(hash[i].Name, JsonConvert.DeserializeObject<T>(hash[0].Value.ToString()));
+                    pairs.Add(hash[i].Name, JsonConvert.DeserializeObject<T>(hash[i].Value.ToString()));
                 }
             }
             return pairs;
@@ -328,7 +293,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public string HashGet(string key, string field)
         {
-            return CacheRedis.HashGet(key, field);
+            return _database.HashGet(key, field);
         }
 
         /// <summary>
@@ -340,7 +305,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public T HashGet<T>(string key, string field)
         {
-            var value = CacheRedis.HashGet(key, field);
+            var value = _database.HashGet(key, field);
             return JsonConvert.DeserializeObject<T>(value.ToString());
         }
 
@@ -358,7 +323,7 @@ namespace Sparrow.Database.Redis
                 hashEntries[index] = new HashEntry(pair.Key, pair.Value);
                 index++;
             }
-            CacheRedis.HashSet(key, hashEntries);
+            _database.HashSet(key, hashEntries);
         }
 
         /// <summary>
@@ -376,7 +341,7 @@ namespace Sparrow.Database.Redis
                 hashEntries[index] = new HashEntry(pair.Key, JsonConvert.SerializeObject(pair.Value));
                 index++;
             }
-            CacheRedis.HashSet(key, hashEntries);
+            _database.HashSet(key, hashEntries);
         }
 
         /// <summary>
@@ -387,7 +352,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool HashDelete(string key, string field)
         {
-            return CacheRedis.HashDelete(key, field);
+            return _database.HashDelete(key, field);
         }
 
         /// <summary>
@@ -398,7 +363,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool HashExist(string key, string field)
         {
-            return CacheRedis.HashExists(key, field);
+            return _database.HashExists(key, field);
         }
 
         #endregion
@@ -413,7 +378,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool SetInsert(string key, string value)
         {
-            return CacheRedis.SetAdd(key, value);
+            return _database.SetAdd(key, value);
         }
 
         /// <summary>
@@ -425,7 +390,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool SetInsert<T>(string key, T value)
         {
-            return CacheRedis.SetAdd(key, JsonConvert.SerializeObject(value));
+            return _database.SetAdd(key, JsonConvert.SerializeObject(value));
         }
 
         /// <summary>
@@ -436,7 +401,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool SetDelete(string key, string value)
         {
-            return CacheRedis.SetRemove(key, value);
+            return _database.SetRemove(key, value);
         }
 
         /// <summary>
@@ -448,7 +413,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool SetDelete<T>(string key, T value)
         {
-            return CacheRedis.SetRemove(key, JsonConvert.SerializeObject(value));
+            return _database.SetRemove(key, JsonConvert.SerializeObject(value));
         }
 
         /// <summary>
@@ -458,7 +423,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public long SetLength(string key)
         {
-            return CacheRedis.SetLength(key);
+            return _database.SetLength(key);
         }
 
         /// <summary>
@@ -469,7 +434,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool SetContains(string key, string value)
         {
-            return CacheRedis.SetContains(key, value);
+            return _database.SetContains(key, value);
         }
 
         /// <summary>
@@ -481,7 +446,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool SetContains<T>(string key, T value)
         {
-            return CacheRedis.SetContains(key, JsonConvert.SerializeObject(value));
+            return _database.SetContains(key, JsonConvert.SerializeObject(value));
         }
 
         /// <summary>
@@ -494,7 +459,7 @@ namespace Sparrow.Database.Redis
         public IEnumerable<string> SetGet(string key, string pattern, int pageSize = 250)
         {
             var result = new List<string>();
-            var values = CacheRedis.SetScan(key, pattern, pageSize);
+            var values = _database.SetScan(key, pattern, pageSize);
             foreach (var value in values)
             {
                 result.Add(value);
@@ -513,7 +478,7 @@ namespace Sparrow.Database.Redis
         public IEnumerable<T> SetGet<T>(string key, string pattern, int pageSize)
         {
             var result = new List<T>();
-            var values = CacheRedis.SetScan(key, pattern, pageSize);
+            var values = _database.SetScan(key, pattern, pageSize);
             foreach (var value in values)
             {
                 result.Add(JsonConvert.DeserializeObject<T>(value));
@@ -529,7 +494,7 @@ namespace Sparrow.Database.Redis
         public IEnumerable<string> SetGet(string key)
         {
             var result = new List<string>();
-            var values = CacheRedis.SetMembers(key);
+            var values = _database.SetMembers(key);
             foreach (var value in values)
             {
                 result.Add(value);
@@ -546,7 +511,7 @@ namespace Sparrow.Database.Redis
         public IEnumerable<T> SetGet<T>(string key)
         {
             var result = new List<T>();
-            var values = CacheRedis.SetMembers(key);
+            var values = _database.SetMembers(key);
             foreach (var value in values)
             {
                 result.Add(JsonConvert.DeserializeObject<T>(value));
@@ -567,7 +532,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool ZSetInsert(string key, string value, double score)
         {
-            return CacheRedis.SortedSetAdd(key, value, score);
+            return _database.SortedSetAdd(key, value, score);
         }
 
         /// <summary>
@@ -580,7 +545,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool ZSetInsert<T>(string key, T value, double score)
         {
-            return CacheRedis.SortedSetAdd(key, JsonConvert.SerializeObject(value), score);
+            return _database.SortedSetAdd(key, JsonConvert.SerializeObject(value), score);
         }
 
         /// <summary>
@@ -591,7 +556,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool ZSetDelete(string key, string value)
         {
-            return CacheRedis.SortedSetRemove(key, value);
+            return _database.SortedSetRemove(key, value);
         }
 
         /// <summary>
@@ -603,7 +568,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool ZSetDelete<T>(string key, string value)
         {
-            return CacheRedis.SortedSetRemove(key, value);
+            return _database.SortedSetRemove(key, value);
         }
 
         /// <summary>
@@ -613,7 +578,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public long ZSetLength(string key)
         {
-            return CacheRedis.SortedSetLength(key);
+            return _database.SortedSetLength(key);
         }
 
         /// <summary>
@@ -626,7 +591,7 @@ namespace Sparrow.Database.Redis
         public IDictionary<string, double> ZSetGet(string key, string pattern, int pageSize)
         {
             var result = new Dictionary<string, double>();
-            var values = CacheRedis.SortedSetScan(key, pattern, pageSize);
+            var values = _database.SortedSetScan(key, pattern, pageSize);
             foreach (var value in values)
             {
                 result.Add(value.Element, value.Score);
@@ -645,7 +610,7 @@ namespace Sparrow.Database.Redis
         public IDictionary<T, double> ZSetGet<T>(string key, string pattern, int pageSize)
         {
             var result = new Dictionary<T, double>();
-            var values = CacheRedis.SortedSetScan(key, pattern, pageSize);
+            var values = _database.SortedSetScan(key, pattern, pageSize);
             foreach (var value in values)
             {
                 result.Add(JsonConvert.DeserializeObject<T>(value.Element), value.Score);
@@ -664,7 +629,7 @@ namespace Sparrow.Database.Redis
         /// <returns>是否删除成功</returns>
         public bool KeyDelete(string key)
         {
-            return CacheRedis.KeyDelete(key);
+            return _database.KeyDelete(key);
         }
 
         /// <summary>
@@ -681,7 +646,7 @@ namespace Sparrow.Database.Redis
                 redisKeys[index] = key;
                 index++;
             }
-            return CacheRedis.KeyDelete(redisKeys);
+            return _database.KeyDelete(redisKeys);
         }
 
         #endregion
@@ -696,7 +661,7 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool RenameKey(string oldKey, string newKey)
         {
-            return CacheRedis.KeyRename(oldKey, newKey);
+            return _database.KeyRename(oldKey, newKey);
         }
 
         #endregion
@@ -710,7 +675,7 @@ namespace Sparrow.Database.Redis
         /// <param name="datetime">过期时间</param>
         public void SetExpire(string key, DateTime datetime)
         {
-            CacheRedis.KeyExpire(key, datetime);
+            _database.KeyExpire(key, datetime);
         }
 
         #endregion
@@ -724,36 +689,10 @@ namespace Sparrow.Database.Redis
         /// <returns></returns>
         public bool KeyExist(string key)
         {
-            return CacheRedis.KeyExists(key);
+            return _database.KeyExists(key);
         }
 
         #endregion
 
-        /// <summary>
-        /// 清理
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    // 释放托管状态(托管对象)
-                }
-                CacheConnection.CloseAsync();
-                disposedValue = true;
-            }
-        }
-
-        /// <summary>
-        /// 清理
-        /// </summary>
-        public void Dispose()
-        {
-            // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
     }
 }

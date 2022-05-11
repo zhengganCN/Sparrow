@@ -8,41 +8,45 @@ namespace Sparrow.Database.Redis
     /// </summary>
     public abstract class DbContext : IDisposable
     {
-        internal ConfigurationOptions ConfigurationOptions { get; private set; }
-        private readonly DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
+        private ConnectionMultiplexer _connection;
+        private readonly DbContextOptionsBuilder _builder = new DbContextOptionsBuilder();
         private bool disposedValue;
+
+        protected DbContext()
+        {
+            OnConfiguring(_builder);
+        }
+
         /// <summary>
-        /// Redis仓储类
+        /// Redis客户端
         /// </summary>
-        public RedisRepository RedisRepository
+        public RedisClient RedisClient(int db = 0)
+        {
+            var client = new RedisClient(CacheConnection.GetDatabase(db));
+            return client;
+        }
+
+        /// <summary>
+        /// 缓存数据库，数据库连接
+        /// </summary>
+        private ConnectionMultiplexer CacheConnection
         {
             get
             {
-                return new RedisRepository(ConfigurationOptions, builder.Db);
+                if (_connection == null || !_connection.IsConnected)
+                {
+                    _connection = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(_builder.ConfigurationOptions)).Value;
+                }
+                return _connection;
             }
         }
-        /// <summary>
-        /// 初始化构造函数
-        /// </summary>
-        protected DbContext()
-        {
-            LoadConfiguration();
-        }
+
         /// <summary>
         /// 配置Redis连接参数等
         /// </summary>
         /// <param name="builder"></param>
         protected internal abstract void OnConfiguring(DbContextOptionsBuilder builder);
 
-        /// <summary>
-        /// 加载配置项
-        /// </summary>
-        private void LoadConfiguration()
-        {
-            OnConfiguring(builder);
-            ConfigurationOptions = ConfigurationOptions.Parse(builder.SslHost);
-            ConfigurationOptions.Password = builder.Password;
-        }
         /// <summary>
         /// 清理
         /// </summary>
@@ -55,7 +59,7 @@ namespace Sparrow.Database.Redis
                 {
                     // 释放托管状态(托管对象)
                 }
-                RedisRepository.Dispose();
+                _connection?.Dispose();
                 disposedValue = true;
             }
         }
