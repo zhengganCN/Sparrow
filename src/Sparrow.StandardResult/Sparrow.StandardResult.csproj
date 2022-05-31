@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sparrow.Extension.System" Version="1.0.0" />
+    <PackageReference Include="Sparrow.Extension.System" Version="1.0.3" />
   </ItemGroup>
 
 </Project>
