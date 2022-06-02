@@ -5,7 +5,7 @@ namespace Sparrow.StandardResult
     /// <summary>
     /// 枚举类
     /// </summary>
-    public class EnumModelResult
+    public class EnumDto
     {
         /// <summary>
         /// 枚举结果

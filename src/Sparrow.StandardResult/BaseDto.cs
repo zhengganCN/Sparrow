@@ -3,7 +3,7 @@ using System;
 
 namespace Sparrow.StandardResult
 {
-    public class BaseModelResult
+    public class BaseDto
     {
 
         private static readonly DateTime DateTime1970 = new DateTime(1970, 1, 1, 0, 0, 0);
@@ -11,7 +11,7 @@ namespace Sparrow.StandardResult
         /// 初始化
         /// </summary>
         /// <param name="type">时间格式类型</param>
-        public BaseModelResult(EnumTimeType type = EnumTimeType.Timestamp)
+        public BaseDto(EnumTimeType type = EnumTimeType.Timestamp)
         {
             switch (type)
             {
@@ -50,8 +50,8 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void FailResult()
         {
-            var message = EnumModelResult.EnumResult.Error.GetDescription();
-            FailResult(message, (int)EnumModelResult.EnumResult.Error);
+            var message = EnumDto.EnumResult.Error.GetDescription();
+            FailResult(message, (int)EnumDto.EnumResult.Error);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void FailResult(string message)
         {
-            FailResult(message, (int)EnumModelResult.EnumResult.Error);
+            FailResult(message, (int)EnumDto.EnumResult.Error);
         }
 
         /// <summary>

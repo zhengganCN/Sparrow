@@ -3,15 +3,15 @@
 namespace Sparrow.StandardResult
 {
     /// <summary>
-    /// 结果模型
+    /// 输出结果
     /// </summary>
-    public class ModelResult : BaseModelResult
+    public class Dto : BaseDto
     {
         /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="type">时间格式类型</param>
-        public ModelResult(EnumTimeType type = EnumTimeType.Timestamp) : base(type)
+        public Dto(EnumTimeType type = EnumTimeType.Timestamp) : base(type)
         {
 
         }
@@ -27,8 +27,8 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult()
         {
-            var message = EnumModelResult.EnumResult.Success.GetDescription();
-            SuccessResult(default, message, (int)EnumModelResult.EnumResult.Success);
+            var message = EnumDto.EnumResult.Success.GetDescription();
+            SuccessResult(default, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
@@ -37,8 +37,8 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult(object data)
         {
-            var message = EnumModelResult.EnumResult.Success.GetDescription();
-            SuccessResult(data, message, (int)EnumModelResult.EnumResult.Success);
+            var message = EnumDto.EnumResult.Success.GetDescription();
+            SuccessResult(data, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
@@ -48,7 +48,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult(object data, string message)
         {
-            SuccessResult(data, message, (int)EnumModelResult.EnumResult.Success);
+            SuccessResult(data, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
@@ -70,20 +70,20 @@ namespace Sparrow.StandardResult
         /// 成功
         /// </summary>
         /// <returns></returns>
-        public static ModelResult SuccessResultStatic()
+        public static Dto SuccessResultStatic()
         {
-            var message = EnumModelResult.EnumResult.Success.GetDescription();
-            return SuccessResultStatic(default, message, (int)EnumModelResult.EnumResult.Success);
+            var message = EnumDto.EnumResult.Success.GetDescription();
+            return SuccessResultStatic(default, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
         /// </summary>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public static ModelResult SuccessResultStatic(object data)
+        public static Dto SuccessResultStatic(object data)
         {
-            var message = EnumModelResult.EnumResult.Success.GetDescription();
-            return SuccessResultStatic(data, message, (int)EnumModelResult.EnumResult.Success);
+            var message = EnumDto.EnumResult.Success.GetDescription();
+            return SuccessResultStatic(data, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
@@ -91,9 +91,9 @@ namespace Sparrow.StandardResult
         /// <param name="data">数据</param>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public static ModelResult SuccessResultStatic(object data, string message)
+        public static Dto SuccessResultStatic(object data, string message)
         {
-            return SuccessResultStatic(data, message, (int)EnumModelResult.EnumResult.Success);
+            return SuccessResultStatic(data, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
@@ -102,15 +102,15 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public static ModelResult SuccessResultStatic(object data, string message, int code)
+        public static Dto SuccessResultStatic(object data, string message, int code)
         {
-            var model = new ModelResult
+            var dto = new Dto
             {
                 Data = data,
                 Message = message,
                 Code = code
             };
-            return model;
+            return dto;
         }
         #endregion
         #region FailResultStatic
@@ -118,10 +118,10 @@ namespace Sparrow.StandardResult
         /// 失败
         /// </summary>
         /// <returns></returns>
-        public static ModelResult FailResultStatic()
+        public static Dto FailResultStatic()
         {
-            var message = EnumModelResult.EnumResult.Error.GetDescription();
-            return FailResultStatic(message, (int)EnumModelResult.EnumResult.Error);
+            var message = EnumDto.EnumResult.Error.GetDescription();
+            return FailResultStatic(message, (int)EnumDto.EnumResult.Error);
         }
 
         /// <summary>
@@ -129,9 +129,9 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public static ModelResult FailResultStatic(string message)
+        public static Dto FailResultStatic(string message)
         {
-            return FailResultStatic(message, (int)EnumModelResult.EnumResult.Error);
+            return FailResultStatic(message, (int)EnumDto.EnumResult.Error);
         }
         /// <summary>
         /// 失败
@@ -139,14 +139,14 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public static ModelResult FailResultStatic(string message, int code)
+        public static Dto FailResultStatic(string message, int code)
         {
-            var model = new ModelResult
+            var dto = new Dto
             {
                 Message = message,
                 Code = code
             };
-            return model;
+            return dto;
         }
         #endregion
 
@@ -155,13 +155,13 @@ namespace Sparrow.StandardResult
     /// 结果模型
     /// </summary>
     /// <typeparam name="T">数据类型</typeparam>
-    public class ModelResult<T> : BaseModelResult
+    public class Dto<T> : BaseDto
     {
         /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="type">时间格式类型</param>
-        public ModelResult(EnumTimeType type = EnumTimeType.Timestamp) : base(type)
+        public Dto(EnumTimeType type = EnumTimeType.Timestamp) : base(type)
         {
         }
         /// <summary>
@@ -174,19 +174,19 @@ namespace Sparrow.StandardResult
         /// 失败
         /// </summary>
         /// <returns></returns>
-        public static ModelResult<T> FailResultStatic()
+        public static Dto<T> FailResultStatic()
         {
-            var message = EnumModelResult.EnumResult.Error.GetDescription();
-            return FailResultStatic(message, (int)EnumModelResult.EnumResult.Error);
+            var message = EnumDto.EnumResult.Error.GetDescription();
+            return FailResultStatic(message, (int)EnumDto.EnumResult.Error);
         }
         /// <summary>
         /// 失败
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public static ModelResult<T> FailResultStatic(string message)
+        public static Dto<T> FailResultStatic(string message)
         {
-            return FailResultStatic(message, (int)EnumModelResult.EnumResult.Error);
+            return FailResultStatic(message, (int)EnumDto.EnumResult.Error);
         }
         /// <summary>
         /// 失败
@@ -194,14 +194,14 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public static ModelResult<T> FailResultStatic(string message, int code)
+        public static Dto<T> FailResultStatic(string message, int code)
         {
-            var model = new ModelResult<T>
+            var dto = new Dto<T>
             {
                 Message = message,
                 Code = code
             };
-            return model;
+            return dto;
         }
         #endregion
         #region SuccessResult
@@ -211,8 +211,8 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult()
         {
-            var message = EnumModelResult.EnumResult.Success.GetDescription();
-            SuccessResult(default, message, (int)EnumModelResult.EnumResult.Success);
+            var message = EnumDto.EnumResult.Success.GetDescription();
+            SuccessResult(default, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
@@ -221,8 +221,8 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult(T data)
         {
-            var message = EnumModelResult.EnumResult.Success.GetDescription();
-            SuccessResult(data, message, (int)EnumModelResult.EnumResult.Success);
+            var message = EnumDto.EnumResult.Success.GetDescription();
+            SuccessResult(data, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
@@ -232,7 +232,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult(T data, string message)
         {
-            SuccessResult(data, message, (int)EnumModelResult.EnumResult.Success);
+            SuccessResult(data, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
@@ -253,20 +253,20 @@ namespace Sparrow.StandardResult
         /// 成功
         /// </summary>
         /// <returns></returns>
-        public static ModelResult<T> SuccessResultStatic()
+        public static Dto<T> SuccessResultStatic()
         {
-            var message = EnumModelResult.EnumResult.Success.GetDescription();
-            return SuccessResultStatic(default, message, (int)EnumModelResult.EnumResult.Success);
+            var message = EnumDto.EnumResult.Success.GetDescription();
+            return SuccessResultStatic(default, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
         /// </summary>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public static ModelResult<T> SuccessResultStatic(T data)
+        public static Dto<T> SuccessResultStatic(T data)
         {
-            var message = EnumModelResult.EnumResult.Success.GetDescription();
-            return SuccessResultStatic(data, message, (int)EnumModelResult.EnumResult.Success);
+            var message = EnumDto.EnumResult.Success.GetDescription();
+            return SuccessResultStatic(data, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
@@ -274,9 +274,9 @@ namespace Sparrow.StandardResult
         /// <param name="data">数据</param>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public static ModelResult<T> SuccessResultStatic(T data, string message)
+        public static Dto<T> SuccessResultStatic(T data, string message)
         {
-            return SuccessResultStatic(data, message, (int)EnumModelResult.EnumResult.Success);
+            return SuccessResultStatic(data, message, (int)EnumDto.EnumResult.Success);
         }
         /// <summary>
         /// 成功
@@ -285,15 +285,15 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public static ModelResult<T> SuccessResultStatic(T data, string message, int code)
+        public static Dto<T> SuccessResultStatic(T data, string message, int code)
         {
-            var model = new ModelResult<T>
+            var dto = new Dto<T>
             {
                 Data = data,
                 Message = message,
                 Code = code
             };
-            return model;
+            return dto;
         }
         #endregion
     }
