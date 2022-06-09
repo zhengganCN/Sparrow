@@ -8,13 +8,25 @@ using System.Text;
 
 namespace Sparrow.Export.NPOI
 {
+    /// <summary>
+    /// Word表格Cell扩展
+    /// </summary>
     public static class XWPFTableCellExtension
     {
+        /// <summary>
+        /// 设置文本
+        /// </summary>
+        /// <param name="cell"></param>
+        /// <param name="wordText"></param>
         public static void SetText(this XWPFTableCell cell, WordText wordText)
         {
             SetText(cell, new List<WordText> { wordText });
         }
-
+        /// <summary>
+        /// 设置文本
+        /// </summary>
+        /// <param name="cell"></param>
+        /// <param name="wordTexts"></param>
         public static void SetText(this XWPFTableCell cell, List<WordText> wordTexts)
         {
             var ctTc = cell.GetCTTc();
@@ -51,17 +63,21 @@ namespace Sparrow.Export.NPOI
             }
             var textLines = new List<string>();
             var bytes = Encoding.UTF8.GetBytes(text);
-            using MemoryStream memory = new MemoryStream(bytes);
-            using StreamReader streamReader = new StreamReader(memory);
-            string line;
-            var index = 0;
-            while ((line = streamReader.ReadLine()) != null)
+            using (MemoryStream memory = new MemoryStream(bytes))
             {
-                if (index == 0 && string.IsNullOrWhiteSpace(line))
+                using (StreamReader streamReader = new StreamReader(memory))
                 {
-                    continue;
+                    string line;
+                    var index = 0;
+                    while ((line = streamReader.ReadLine()) != null)
+                    {
+                        if (index == 0 && string.IsNullOrWhiteSpace(line))
+                        {
+                            continue;
+                        }
+                        textLines.Add(line);
+                    }
                 }
-                textLines.Add(line);
             }
             return textLines.ToArray();
         }

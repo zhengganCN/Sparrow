@@ -1,11 +1,7 @@
 ﻿using NUnit.Framework;
 using Sparrow.Export.NPOI.Components;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sparrow.Export.NPOI.Test.ExcelTest
 {
@@ -19,12 +15,12 @@ namespace Sparrow.Export.NPOI.Test.ExcelTest
         [Test]
         public void ExportExcelTest()
         {
-            
+
             using var excel = new Excel();
             excel.AddTable(GetExcelTable());
             var table = GetExcelTable();
             table.StartColumn = 20;
-            excel.AddTable(table,"sld");
+            excel.AddTable(table, "sld");
 
             if (!Directory.Exists("files"))
             {

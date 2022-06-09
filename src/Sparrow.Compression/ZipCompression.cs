@@ -4,6 +4,9 @@ using System.IO.Compression;
 
 namespace Sparrow.Compression
 {
+    /// <summary>
+    /// zip压缩
+    /// </summary>
     public static class ZipCompression
     {
         /// <summary>

@@ -11,25 +11,46 @@ using System.IO;
 
 namespace Sparrow.Export.iTextSharp
 {
+    /// <summary>
+    /// Pdf
+    /// </summary>
     public partial class Pdf : IDisposable
     {
         private static readonly string PdfFileName = Guid.NewGuid().ToString() + ".pdf";
+        /// <summary>
+        /// Pdf配置
+        /// </summary>
         public static readonly PdfConfiguration Configuration = new PdfConfiguration();
+        /// <summary>
+        /// 文档
+        /// </summary>
         public Document Document { get; private set; }
+        /// <summary>
+        /// 页面尺寸
+        /// </summary>
         public PageSize PageSize { get; private set; }
         private FileStream FileStream { get; set; } = File.Create(PdfFileName);
         private PdfWriter PdfWriter { get; set; }
         private PdfDocument PdfDocument { get; set; }
+        /// <summary>
+        /// Pdf
+        /// </summary>
+        /// <param name="pageSize"></param>
         public Pdf(PageSize pageSize)
         {
-            Init(pageSize, new SparrowPdfDocument());
+            Init(pageSize, new PdfDocumentProperties());
         }
-        public Pdf(PageSize pageSize, SparrowPdfDocument sparrow)
+        /// <summary>
+        /// Pdf
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="sparrow"></param>
+        public Pdf(PageSize pageSize, PdfDocumentProperties sparrow)
         {
             Init(pageSize, sparrow);
         }
 
-        private void Init(PageSize pageSize, SparrowPdfDocument sparrow)
+        private void Init(PageSize pageSize, PdfDocumentProperties sparrow)
         {
             PageSize = pageSize;
             FileStream.Write(EmptyPdf.Bytes, 0, EmptyPdf.Bytes.Length);
@@ -54,13 +75,19 @@ namespace Sparrow.Export.iTextSharp
             SetPdfBookmark();
             Document.Close();
         }
-
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <returns></returns>
         public byte[] Save()
         {
             BaseSave();
             return File.ReadAllBytes(PdfFileName);
         }
-
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="path">路径</param>
         public void Save(string path)
         {
             BaseSave();
@@ -150,6 +177,9 @@ namespace Sparrow.Export.iTextSharp
             }
         }
 
+        /// <summary>
+        /// 销毁
+        /// </summary>
         public void Dispose()
         {
             Document.Close();

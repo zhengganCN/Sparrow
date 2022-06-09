@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Sparrow.Database.Redis
 {
+    /// <summary>
+    /// Redis客户端
+    /// </summary>
     public class RedisClient
     {
         private readonly IDatabase _database;

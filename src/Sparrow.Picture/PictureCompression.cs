@@ -178,12 +178,14 @@ namespace Sparrow.Picture
             var srcRectangle = new Rectangle(0, 0, image.Width, image.Height);
             Rectangle destRectangle = GenerateDestRectangle(ref destSize, image.Size);
             var bitmap = new Bitmap(destRectangle.Width, destRectangle.Height);
-            using Graphics g = Graphics.FromImage(bitmap);
-            g.Clear(Color.Transparent);
-            g.CompositingQuality = CompositingQuality.HighQuality;
-            g.SmoothingMode = SmoothingMode.HighQuality;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.DrawImage(image, destRectangle, srcRectangle, GraphicsUnit.Pixel);
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+                g.Clear(Color.Transparent);
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.DrawImage(image, destRectangle, srcRectangle, GraphicsUnit.Pixel);
+            }
             return bitmap;
         }
         /// <summary>

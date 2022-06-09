@@ -1,29 +1,57 @@
 ﻿using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sparrow.Export.NPOI.Components
 {
+    /// <summary>
+    /// Excel表格
+    /// </summary>
     public class ExcelTable
     {
+        /// <summary>
+        /// 行数量
+        /// </summary>
         public int Rows { get; }
+        /// <summary>
+        /// 列数量
+        /// </summary>
         public int Columns { get; }
+        /// <summary>
+        /// Excel Cell
+        /// </summary>
         public ExcelCell[,] Cells { get; }
+        /// <summary>
+        /// 起始行索引，从0开始
+        /// </summary>
         public int StartRow { get; set; } = 0;
+        /// <summary>
+        /// 起始列索引，从0开始
+        /// </summary>
         public int StartColumn { get; set; } = 0;
         /// <summary>
         /// 是否有边框
         /// </summary>
         public bool IsBorder { get; set; } = true;
+        /// <summary>
+        /// 边框样式
+        /// </summary>
         public BorderStyle BorderStyle { get; set; } = BorderStyle.Thin;
+        /// <summary>
+        /// Excel表格
+        /// </summary>
+        /// <param name="rows">行数</param>
+        /// <param name="columns">列数</param>
         public ExcelTable(int rows, int columns)
         {
             Rows = rows;
             Columns = columns;
             Cells = new ExcelCell[Rows, Columns];
         }
+        /// <summary>
+        /// 索引
+        /// </summary>
+        /// <param name="row">行索引，从0开始</param>
+        /// <param name="col">列索引，从0开始</param>
+        /// <returns></returns>
         public ExcelCell this[int row, int col]
         {
             get
@@ -35,6 +63,9 @@ namespace Sparrow.Export.NPOI.Components
                 Cells[row, col] = value;
             }
         }
+        /// <summary>
+        /// 表格宽度
+        /// </summary>
         public int? Width { get; set; }
         internal ICellStyle BorderTopStyle { get; set; }
         internal ICellStyle BorderLeftStyle { get; set; }

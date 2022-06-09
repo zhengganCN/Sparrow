@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	<Version>1.0.0-beta1</Version>
+	<Version>1.0.0-beta2</Version>
 	<Authors>zhenggan</Authors>
 	<Description>NPOI helper</Description>
 	<Copyright>zhenggan</Copyright>
@@ -10,7 +10,7 @@
 	<PackageIcon>logo.png</PackageIcon>
 	<RepositoryType>git</RepositoryType>
 	<PackageTags>NPOI helper</PackageTags>
-	<LangVersion>8.0</LangVersion>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

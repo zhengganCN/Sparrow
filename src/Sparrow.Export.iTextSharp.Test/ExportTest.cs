@@ -53,13 +53,13 @@ namespace Sparrow.Export.iTextSharp.Test
             }
             table.Element.Cells.Add(new List<PdfTableCell>
             {
-                new PdfTableCell(2,5,"打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府"),
-                new PdfTableCell(1,6,"打道回府描述"),
-                new PdfTableCell(1,6,"打道回府描述")
+                new PdfTableCell("打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府",2,5),
+                new PdfTableCell("打道回府描述",1,6),
+                new PdfTableCell("打道回府描述",1,6)
             });
             table.Element.Cells.Add(new List<PdfTableCell>
             {
-                new PdfTableCell(2,11,"打道回府").SetHeight(100).Element
+                new PdfTableCell("打道回府",2,11).SetHeight(100).Element
             });
             return table.Element;
         }
@@ -67,7 +67,7 @@ namespace Sparrow.Export.iTextSharp.Test
         [Test]
         public void ExportFileTest()
         {
-            var sparrow = new SparrowPdfDocument();
+            var sparrow = new PdfDocumentProperties();
             sparrow.SetWaterMark((water) =>
             {
                 water.Text = "水印测试";
@@ -110,7 +110,6 @@ namespace Sparrow.Export.iTextSharp.Test
         {
             using var pdf = new Pdf(PageSize.A4);
             pdf.AddTable(GetPdfTable());
-
             pdf.Save();
             Assert.Pass();
         }

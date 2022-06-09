@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Sparrow.Extension.System
 {
+    /// <summary>
+    /// IEnumerable接口扩展
+    /// </summary>
     public static class IEnumerableExtension
     {
         /// <summary>
@@ -64,7 +67,6 @@ namespace Sparrow.Extension.System
         /// <param name="confition"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        /// <exception cref="System.NullReferenceException"></exception>
         public static IEnumerable<TSource> DefaultIfEmpty<TSource>(this IEnumerable<TSource> source, bool confition, TSource defaultValue)
         {
             return confition ? source.DefaultIfEmpty(defaultValue) : source;
@@ -117,7 +119,6 @@ namespace Sparrow.Extension.System
         /// <param name="second"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        /// <exception cref="System.NullReferenceException"></exception>
         public static IEnumerable<TSource> Except<TSource>(this IEnumerable<TSource> first, bool confition, IEnumerable<TSource> second, IEqualityComparer<TSource> comparer)
         {
             return confition ? first.Except(second, comparer) : first;

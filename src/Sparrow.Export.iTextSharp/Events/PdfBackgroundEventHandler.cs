@@ -7,14 +7,24 @@ using iText.Layout.Properties;
 
 namespace Sparrow.Export.iTextSharp.Events
 {
+    /// <summary>
+    /// Pdf背景色事件处理程序
+    /// </summary>
     public class PdfBackgroundEventHandler : IEventHandler
     {
-        private SparrowPdfDocument Sparrow { get; set; }
-        public PdfBackgroundEventHandler(SparrowPdfDocument sparrow)
+        private PdfDocumentProperties Sparrow { get; set; }
+        /// <summary>
+        /// Pdf背景色事件处理程序
+        /// </summary>
+        /// <param name="sparrow"></param>
+        public PdfBackgroundEventHandler(PdfDocumentProperties sparrow)
         {
             Sparrow = sparrow;
         }
-
+        /// <summary>
+        /// 事件处理
+        /// </summary>
+        /// <param name="event"></param>
         public void HandleEvent(Event @event)
         {
             if (Sparrow is null)

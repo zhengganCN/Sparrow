@@ -3,6 +3,9 @@ using System.IO;
 
 namespace Sparrow.Extension.System
 {
+    /// <summary>
+    /// 目录扩展
+    /// </summary>
     public static class DirectoryExtension
     {
         /// <summary>

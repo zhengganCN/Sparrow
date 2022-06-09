@@ -12,11 +12,11 @@ namespace Sparrow.Util.MP3
     public class MP3Reader
     {
         /// <summary>
-        /// 获取MP3的ID3V1数据；返回值为NULL，表示无ID3V1数据
+        /// 获取MP3的ID3V1数据
         /// </summary>
         /// <param name="path">mp3文件路径</param>
-        /// <param name="charset">MP3元数据的编码类型</param>
-        /// <returns></returns>
+        /// <param name="encoding">MP3元数据的编码类型</param>
+        /// <returns>返回值为NULL，表示无ID3V1数据</returns>
         public MP3_ID3V1 GetMP3_ID3V1(string path, Encoding encoding)
         {
             if (string.IsNullOrEmpty(path))
@@ -53,10 +53,10 @@ namespace Sparrow.Util.MP3
 
 
         /// <summary>
-        /// 获取MP3的ID3V2数据；返回值为NULL，表示无ID3V2数据
+        /// 获取MP3的ID3V2数据
         /// </summary>
         /// <param name="path">mp3文件路径</param>
-        /// <returns></returns>
+        /// <returns>返回值为NULL，表示无ID3V2数据</returns>
         public MP3_ID3V2 GetMP3_ID3V2(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -113,11 +113,13 @@ namespace Sparrow.Util.MP3
                 return null;
             }
         }
+
         /// <summary>
-        /// 
+        /// 获取MP3信息
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path">mp3文件路径</param>
+        /// <param name="encoding">MP3元数据的编码类型</param>
+        /// <returns>MP3信息</returns>
         public MP3Info GetMP3Info(string path, Encoding encoding)
         {
             var iD3V1 = GetMP3_ID3V1(path, encoding);

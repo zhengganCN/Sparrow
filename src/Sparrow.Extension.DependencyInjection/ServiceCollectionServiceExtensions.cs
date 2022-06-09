@@ -8,15 +8,18 @@ using System.Runtime.Loader;
 
 namespace Sparrow.Extension.DependencyInjection
 {
+    /// <summary>
+    /// 自动依赖注入扩展
+    /// </summary>
     public static class ServiceCollectionServiceExtensions
     {
-        private const string Const_ITransientDI = nameof(ITransientDI);
-        private const string Const_IScopedDI = nameof(IScopedDI);
-        private const string Const_ISingletonDI = nameof(ISingletonDI);
+        private const string Const_ITransientDI = nameof(ITransient);
+        private const string Const_IScopedDI = nameof(IScoped);
+        private const string Const_ISingletonDI = nameof(ISingleton);
         private static readonly string[] Const_DIs = new string[3] { Const_ITransientDI, Const_IScopedDI, Const_ISingletonDI };
         /// <summary>
         /// 自动注入
-        /// 要自动注入的接口必须继承<see cref="ITransientDI"/>，<see cref="IScopedDI"/>，<see cref="ISingletonDI"/>这三个接口之中的一个，且只能继承其中一个，不能继承多个
+        /// 要自动注入的接口必须继承<see cref="ITransient"/>，<see cref="IScoped"/>，<see cref="ISingleton"/>这三个接口之中的一个，且只能继承其中一个，不能继承多个
         /// 如果继承了多个，则按 ITransientDI、IScopedDI、ISingletonDI 的顺序按找到的第一个来注入相应的类型
         /// </summary>
         /// <param name="services">服务集合</param>

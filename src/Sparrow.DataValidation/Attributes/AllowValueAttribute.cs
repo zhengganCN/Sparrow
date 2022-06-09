@@ -5,12 +5,16 @@ using System.Linq;
 namespace Sparrow.DataValidation.Attributes
 {
     /// <summary>
-    /// 允许的值
+    /// 允许的值验证特性
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public sealed class AllowValueAttribute : ValidationAttribute
     {
         private readonly object[] _values;
+        /// <summary>
+        /// 允许的值验证特性
+        /// </summary>
+        /// <param name="values">值</param>
         public AllowValueAttribute(params object[] values)
         {
             _values = values;

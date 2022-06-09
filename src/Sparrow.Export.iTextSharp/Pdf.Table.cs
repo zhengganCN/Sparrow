@@ -23,6 +23,10 @@ namespace Sparrow.Export.iTextSharp
             }
             SetProperties(table, pdfTable);
         }
+        /// <summary>
+        /// 添加表格
+        /// </summary>
+        /// <param name="pdfTable"></param>
         public void AddTable(PdfTable pdfTable)
         {
             if (pdfTable.Columns == 0 && pdfTable.Cells?.Any() == true)

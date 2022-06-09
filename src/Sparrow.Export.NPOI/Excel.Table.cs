@@ -1,14 +1,14 @@
-﻿using NPOI.SS.UserModel;
-using NPOI.SS.Util;
-using Sparrow.Export.NPOI.Components;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Sparrow.Export.NPOI.Components;
 
 namespace Sparrow.Export.NPOI
 {
     public partial class Excel
     {
+        /// <summary>
+        /// 添加表格
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="sheetName"></param>
         public void AddTable(ExcelTable table, string sheetName = "Sheet1")
         {
             var sheet = XSSFWorkbook.GetSheet(sheetName);
@@ -16,7 +16,7 @@ namespace Sparrow.Export.NPOI
             {
                 sheet = XSSFWorkbook.CreateSheet(sheetName);
             }
-            for (int row =  0; row < table.Rows ; row++)
+            for (int row = 0; row < table.Rows; row++)
             {
                 var sheetRow = sheet.GetRow(row + table.StartRow);
                 if (sheetRow is null)
@@ -30,9 +30,9 @@ namespace Sparrow.Export.NPOI
                     {
                         sheetColumn = sheetRow.CreateCell(column + table.StartColumn);
                     }
-                    
+
                     sheetColumn.SetCellValue(table[row, column].Value);
-                    
+
                 }
             }
             table.SetStyle(XSSFWorkbook, sheet);

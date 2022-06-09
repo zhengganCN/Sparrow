@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace Sparrow.Export.NPOI.Enums
 {
@@ -39,17 +36,17 @@ namespace Sparrow.Export.NPOI.Enums
         /// 标题 4
         /// </summary>
         [Description("4")]
-        Header_4, 
+        Header_4,
         /// <summary>
         /// 标题 5
         /// </summary>
         [Description("5")]
-        Header_5, 
+        Header_5,
         /// <summary>
         /// 标题6
         /// </summary>
         [Description("6")]
-        Header_6, 
+        Header_6,
         /// <summary>
         /// 标题 7
         /// </summary>

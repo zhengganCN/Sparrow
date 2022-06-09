@@ -1,13 +1,14 @@
 ﻿using Sparrow.Export.NPOI.Components;
 using Sparrow.Extension.System;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sparrow.Export.NPOI
 {
     public partial class Word
     {
+        /// <summary>
+        /// 添加标题
+        /// </summary>
+        /// <param name="wordTitle"></param>
         public void AddTitle(WordTitle wordTitle)
         {
             var paragraph = XWPFDocument.CreateParagraph();

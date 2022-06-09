@@ -10,6 +10,7 @@
 	<PackageIcon>logo.png</PackageIcon>
 	<RepositoryType>git</RepositoryType>
 	<PackageTags>system type convert</PackageTags>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

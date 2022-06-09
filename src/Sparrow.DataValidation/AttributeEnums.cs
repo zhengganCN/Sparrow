@@ -67,9 +67,21 @@
     /// </summary>
     public enum EnumStringConvertType
     {
+        /// <summary>
+        /// 整形
+        /// </summary>
         Int = 1,
+        /// <summary>
+        /// 长整形
+        /// </summary>
         Lnog = 2,
+        /// <summary>
+        /// 单精度浮点形
+        /// </summary>
         Float = 3,
+        /// <summary>
+        /// 双精度浮点形
+        /// </summary>
         Double = 4
     }
 }

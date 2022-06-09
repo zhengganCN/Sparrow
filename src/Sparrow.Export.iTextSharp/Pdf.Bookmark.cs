@@ -9,6 +9,9 @@ namespace Sparrow.Export.iTextSharp
 {
     public partial class Pdf
     {
+        /// <summary>
+        /// 设置书签
+        /// </summary>
         public void SetPdfBookmark()
         {
             if (PdfBookmark.Catalogues is null || !PdfBookmark.Catalogues.Any())

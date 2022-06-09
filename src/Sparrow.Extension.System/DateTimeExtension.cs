@@ -2,6 +2,9 @@
 
 namespace Sparrow.Extension.System
 {
+    /// <summary>
+    /// 时间类型扩展
+    /// </summary>
     public static class DateTimeExtension
     {
         /// <summary>

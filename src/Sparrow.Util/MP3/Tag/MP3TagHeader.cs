@@ -1,5 +1,8 @@
 ﻿namespace Sparrow.Util.MP3
 {
+    /// <summary>
+    /// mp3标签头部信息
+    /// </summary>
     public class MP3TagHeader
     {
         /// <summary>

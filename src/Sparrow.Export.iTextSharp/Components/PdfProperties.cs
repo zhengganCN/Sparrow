@@ -3,18 +3,55 @@ using iText.Layout.Properties;
 
 namespace Sparrow.Export.iTextSharp.Components
 {
+    /// <summary>
+    /// 属性
+    /// </summary>
+    /// <typeparam name="T">控件</typeparam>
     public class PdfProperties<T> where T : class, new()
     {
+        /// <summary>
+        /// 元素
+        /// </summary>
         public T Element { get; set; }
+        /// <summary>
+        /// MarginLeft
+        /// </summary>
         public float? MarginLeft { get; set; }
+        /// <summary>
+        /// MarginTop
+        /// </summary>
         public float? MarginTop { get; set; }
+        /// <summary>
+        /// MarginRight
+        /// </summary>
         public float? MarginRight { get; set; }
+        /// <summary>
+        /// MarginBottom
+        /// </summary>
         public float? MarginBottom { get; set; }
+        /// <summary>
+        /// PaddingLeft
+        /// </summary>
         public float? PaddingLeft { get; set; }
+        /// <summary>
+        /// PaddingTop
+        /// </summary>
         public float? PaddingTop { get; set; }
+        /// <summary>
+        /// PaddingRight
+        /// </summary>
         public float? PaddingRight { get; set; }
+        /// <summary>
+        /// PaddingBottom
+        /// </summary>
         public float? PaddingBottom { get; set; }
+        /// <summary>
+        /// 宽度
+        /// </summary>
         public float? Width { get; set; }
+        /// <summary>
+        /// 高度
+        /// </summary>
         public float? Height { get; set; }
         /// <summary>
         /// 背景色

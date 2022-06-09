@@ -11,7 +11,9 @@ namespace Sparrow.Database.Redis
         private ConnectionMultiplexer _connection;
         private readonly DbContextOptionsBuilder _builder = new DbContextOptionsBuilder();
         private bool disposedValue;
-
+        /// <summary>
+        /// RedisDB上下文
+        /// </summary>
         protected DbContext()
         {
             OnConfiguring(_builder);

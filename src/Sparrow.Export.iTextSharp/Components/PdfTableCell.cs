@@ -2,29 +2,51 @@
 
 namespace Sparrow.Export.iTextSharp.Components
 {
+    /// <summary>
+    /// Pdf表格Cell
+    /// </summary>
     public class PdfTableCell : PdfProperties<PdfTableCell>
     {
         private Cell cell;
+        /// <summary>
+        /// 文本
+        /// </summary>
         public string Value { get; set; }
+        /// <summary>
+        /// Cell所占行数
+        /// </summary>
         public int Rowspan { get; set; }
+        /// <summary>
+        /// Cell所占列数
+        /// </summary>
         public int Colspan { get; set; }
-
+        /// <summary>
+        /// Pdf表格Cell
+        /// </summary>
         public PdfTableCell()
         {
-            Init(1, 1, string.Empty);
+            Init(string.Empty, 1, 1);
         }
-
+        /// <summary>
+        /// Pdf表格Cell
+        /// </summary>
+        /// <param name="value">文本</param>
         public PdfTableCell(string value)
         {
-            Init(1, 1, value);
+            Init(value, 1, 1);
         }
-
-        public PdfTableCell(int rowspan, int colspan, string value)
+        /// <summary>
+        /// Pdf表格Cell
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="rowspan"></param>
+        /// <param name="colspan"></param>
+        public PdfTableCell(string value, int rowspan, int colspan)
         {
-            Init(rowspan, colspan, value);
+            Init(value, rowspan, colspan);
         }
 
-        private void Init(int rowspan, int colspan, string value)
+        private void Init(string value, int rowspan, int colspan)
         {
             Rowspan = rowspan;
             Colspan = colspan;
@@ -32,7 +54,10 @@ namespace Sparrow.Export.iTextSharp.Components
             Element = this;
         }
 
-
+        /// <summary>
+        /// 获取Cell
+        /// </summary>
+        /// <returns></returns>
         public Cell GetCell()
         {
             cell = new Cell(Rowspan, Colspan);

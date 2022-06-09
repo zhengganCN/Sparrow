@@ -3,6 +3,9 @@ using System.Threading;
 
 namespace Sparrow.Algorithm
 {
+    /// <summary>
+    /// 雪花算法
+    /// </summary>
     public static class SnowflakeAlgorithm
     {
         /// <summary>
@@ -12,7 +15,9 @@ namespace Sparrow.Algorithm
         /// <summary>
         /// 时间戳bit长度，最大支持使用从1970年至以后139年的时间
         /// </summary>
+#pragma warning disable IDE0051 // 删除未使用的私有成员
         private const int TimestampBitsLength = 42;
+#pragma warning restore IDE0051 // 删除未使用的私有成员
         /// <summary>
         /// 机器位bit长度，最大支持2048台机器使用
         /// </summary>

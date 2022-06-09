@@ -4,11 +4,20 @@ using System;
 
 namespace Sparrow.Database.SqlSugar
 {
+    /// <summary>
+    /// 数据库上下文
+    /// </summary>
     public abstract class DbContext : IDisposable
     {
         private readonly DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
+        /// <summary>
+        /// 数据库客户端
+        /// </summary>
         public readonly SqlSugarClient SugarClient;
-
+        /// <summary>
+        /// 数据库上下文
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
         public DbContext()
         {
             OnConfiguring(builder);
@@ -38,11 +47,18 @@ namespace Sparrow.Database.SqlSugar
         /// <param name="builder"></param>
         protected internal abstract void OnConfiguring(DbContextOptionsBuilder builder);
 
+        /// <summary>
+        /// 打印日志
+        /// </summary>
+        /// <param name="sql"></param>
         protected virtual void ExectionSql(string sql)
         {
             StaticValues.Logger.LogDebug(sql);
         }
 
+        /// <summary>
+        /// 销毁
+        /// </summary>
         public void Dispose()
         {
             SugarClient.Dispose();

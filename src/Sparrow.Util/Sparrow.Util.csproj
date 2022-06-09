@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
 	<LangVersion>8.0</LangVersion>
-	<Version>1.0.0-beta3</Version>
+	<Version>1.0.0-beta4</Version>
 	<Authors>zhenggan</Authors>
 	<Description>common tools</Description>
 	<Copyright>zhenggan</Copyright>
@@ -11,6 +11,7 @@
 	<PackageIcon>logo.png</PackageIcon>
 	<RepositoryType>git</RepositoryType>
 	<PackageTags>common tools</PackageTags>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

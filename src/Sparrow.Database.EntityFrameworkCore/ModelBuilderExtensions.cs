@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace Microsoft.EntityFrameworkCore
 {
+    /// <summary>
+    /// 模型构建扩展
+    /// </summary>
     public static class ModelBuilderExtensions
     {
         /// <summary>

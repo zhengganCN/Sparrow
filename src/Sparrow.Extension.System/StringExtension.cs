@@ -2,6 +2,9 @@
 
 namespace Sparrow.Extension.System
 {
+    /// <summary>
+    /// 字符串扩展
+    /// </summary>
     public static class StringExtension
     {
         /// <summary>

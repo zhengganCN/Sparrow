@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
 using NUnit.Framework;
 using Sparrow.Export.NPOI.Components;
@@ -91,7 +89,7 @@ namespace Sparrow.Export.NPOI.Test.WordTest
                         BorderBottom = Borders.Dashed,
                         VerticalAlignment = TextAlignment.CENTER,
                         Alignment = ParagraphAlignment.CENTER
-                    }; 
+                    };
                     var word = new List<WordText> { new WordText("≤‚ ‘"), };
                     table.Cells[row, column] = new WordTableCell(word);
                 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Export.NPOI.Resources
+﻿namespace Sparrow.Export.NPOI.Resources
 {
     internal class FormatWord
     {

@@ -3,6 +3,9 @@ using System;
 
 namespace Sparrow.StandardResult
 {
+    /// <summary>
+    /// Base输出
+    /// </summary>
     public class BaseDto
     {
 

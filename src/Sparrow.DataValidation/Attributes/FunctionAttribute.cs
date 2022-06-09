@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Sparrow.DataValidation.Attributes
 {
@@ -26,7 +24,7 @@ namespace Sparrow.DataValidation.Attributes
     {
         private readonly IFunction ValidClass;
         /// <summary>
-        /// 自定义函数验证
+        /// 自定义函数验证特性
         /// </summary>
         /// <param name="type">必须实现<see cref="IFunction"/>接口</param>
         /// <exception cref="ArgumentException"></exception>
@@ -39,8 +37,13 @@ namespace Sparrow.DataValidation.Attributes
             ValidClass = Activator.CreateInstance(type) as IFunction;
         }
 
+        /// <summary>
+        /// 重写验证逻辑
+        /// </summary>
+        /// <param name="value">验证值</param>
+        /// <returns>是否验证通过</returns>
         public override bool IsValid(object value)
-        {            
+        {
             return ValidClass.Valid(value);
         }
     }
