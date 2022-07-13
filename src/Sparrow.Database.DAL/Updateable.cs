@@ -5,6 +5,10 @@ using System.Linq.Expressions;
 
 namespace Sparrow.Database.DAL
 {
+    /// <summary>
+    /// 更新条件
+    /// </summary>
+    /// <typeparam name="TEntity">实体类型</typeparam>
     public class Updateable<TEntity> where TEntity : class, new()
     {
         internal readonly Dictionary<string, object> properties = new Dictionary<string, object>();

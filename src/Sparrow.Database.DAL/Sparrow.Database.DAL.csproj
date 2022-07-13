@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+	<Version>1.0.0-beta1</Version>
+	<Authors>zhenggan</Authors>
+	<Description>ef core dal</Description>
+	<Copyright>zhenggan</Copyright>
+	<PackageProjectUrl>https://github.com/zhengganCN/Sparrow</PackageProjectUrl>
+	<PackageIcon>logo.png</PackageIcon>
+	<RepositoryType>git</RepositoryType>
+	<PackageTags>ef core dal</PackageTags>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 	
   <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
@@ -18,6 +27,13 @@
 
   <ItemGroup>
 	<PackageReference Include="Mapster" Version="7.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<None Include="..\..\logo.png">
+	  <Pack>True</Pack>
+	  <PackagePath>\</PackagePath>
+	</None>
   </ItemGroup>
 
 </Project>

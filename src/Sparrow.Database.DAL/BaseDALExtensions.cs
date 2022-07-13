@@ -11,14 +11,27 @@ namespace Sparrow.Database.DAL
     /// </summary>
     public static class BaseDALExtensions
     {
-        public static IQueryable<T> GetQueryable<T>(this BaseDAL<DbContext> dal) where T : class
+        /// <summary>
+        /// 获取IQueryable实例
+        /// </summary>
+        /// <typeparam name="TEntity">实体类型</typeparam>
+        /// <param name="dal">BaseDAL实例</param>
+        /// <returns></returns>
+        public static IQueryable<TEntity> GetQueryable<TEntity>(this BaseDAL<DbContext> dal) where TEntity : class
         {
-            return dal.context.Set<T>().AsQueryable();
+            return dal.context.Set<TEntity>().AsQueryable();
         }
 
-        public static Updateable<T> GetUpdateable<T>(this BaseDAL<DbContext> dal) where T : class,new()
+
+        /// <summary>
+        /// 获取Updateable实例
+        /// </summary>
+        /// <typeparam name="TEntity">实体类型</typeparam>
+        /// <param name="dal">BaseDAL实例</param>
+        /// <returns></returns>
+        public static Updateable<TEntity> GetUpdateable<TEntity>(this BaseDAL<DbContext> dal) where TEntity : class,new()
         {
-            return new Updateable<T>();
+            return new Updateable<TEntity>();
         }
     }
 }
