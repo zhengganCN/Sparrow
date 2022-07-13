@@ -67,7 +67,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.SqlSugar.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.iTextSharp.Test", "Sparrow.Export.iTextSharp.Test\Sparrow.Export.iTextSharp.Test.csproj", "{C62108A8-C361-4159-ACC6-0867199877AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Export.NPOI.Test", "Sparrow.Export.NPOI.Test\Sparrow.Export.NPOI.Test.csproj", "{66D1A119-A0C9-450D-9AD7-DC0CFBD19689}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.NPOI.Test", "Sparrow.Export.NPOI.Test\Sparrow.Export.NPOI.Test.csproj", "{66D1A119-A0C9-450D-9AD7-DC0CFBD19689}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.DAL", "Sparrow.Database.DAL\Sparrow.Database.DAL.csproj", "{780799E5-82D6-4434-96F6-7722593B972D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Database.DAL.Test", "Sparrow.Database.DAL.Test\Sparrow.Database.DAL.Test.csproj", "{CA67C7B8-407B-4240-9142-4F977B038327}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -163,6 +167,14 @@ Global
 		{66D1A119-A0C9-450D-9AD7-DC0CFBD19689}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66D1A119-A0C9-450D-9AD7-DC0CFBD19689}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66D1A119-A0C9-450D-9AD7-DC0CFBD19689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{780799E5-82D6-4434-96F6-7722593B972D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{780799E5-82D6-4434-96F6-7722593B972D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{780799E5-82D6-4434-96F6-7722593B972D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{780799E5-82D6-4434-96F6-7722593B972D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA67C7B8-407B-4240-9142-4F977B038327}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA67C7B8-407B-4240-9142-4F977B038327}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA67C7B8-407B-4240-9142-4F977B038327}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA67C7B8-407B-4240-9142-4F977B038327}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,6 +202,8 @@ Global
 		{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 		{C62108A8-C361-4159-ACC6-0867199877AD} = {C1E5D574-F3A1-40F5-AAF8-2DDB2D6A4F44}
 		{66D1A119-A0C9-450D-9AD7-DC0CFBD19689} = {C1E5D574-F3A1-40F5-AAF8-2DDB2D6A4F44}
+		{780799E5-82D6-4434-96F6-7722593B972D} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
+		{CA67C7B8-407B-4240-9142-4F977B038327} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}
