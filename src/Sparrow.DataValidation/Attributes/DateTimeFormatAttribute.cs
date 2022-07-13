@@ -13,7 +13,7 @@ namespace Sparrow.DataValidation.Attributes
         /// <summary>
         /// 验证的时间类型
         /// </summary>
-        public EnumTimeFormat TimeFormat { get; set; } = EnumTimeFormat.DateTime;
+        public TimeFormat TimeFormat { get; set; } = TimeFormat.DateTime;
         /// <summary>
         /// 重写验证逻辑
         /// </summary>
@@ -47,26 +47,26 @@ namespace Sparrow.DataValidation.Attributes
             var result = false;
             switch (TimeFormat)
             {
-                case EnumTimeFormat.DateTime:
-                case EnumTimeFormat.Date:
-                case EnumTimeFormat.Time:
+                case TimeFormat.DateTime:
+                case TimeFormat.Date:
+                case TimeFormat.Time:
                     result = value.IsDateTime();
                     break;
-                case EnumTimeFormat.DateTimeNoSeparator:
-                    if (ValidDateTimeStringLength(value, EnumTimeFormat.DateTimeNoSeparator))
+                case TimeFormat.DateTimeNoSeparator:
+                    if (ValidDateTimeStringLength(value, TimeFormat.DateTimeNoSeparator))
                     {
                         result = value.Insert(12, ":").Insert(10, ":").Insert(8, " ")
                             .Insert(6, "/").Insert(4, "/").IsDateTime();
                     }
                     break;
-                case EnumTimeFormat.DateNoSeparator:
-                    if (ValidDateTimeStringLength(value, EnumTimeFormat.DateNoSeparator))
+                case TimeFormat.DateNoSeparator:
+                    if (ValidDateTimeStringLength(value, TimeFormat.DateNoSeparator))
                     {
                         result = value.Insert(6, "/").Insert(4, "/").IsDateTime();
                     }
                     break;
-                case EnumTimeFormat.TimeNoSeparator:
-                    if (ValidDateTimeStringLength(value, EnumTimeFormat.TimeNoSeparator))
+                case TimeFormat.TimeNoSeparator:
+                    if (ValidDateTimeStringLength(value, TimeFormat.TimeNoSeparator))
                     {
                         result = value.Insert(4, ":").Insert(2, ":").IsDateTime();
                     }
@@ -75,18 +75,18 @@ namespace Sparrow.DataValidation.Attributes
             return result;
         }
 
-        private bool ValidDateTimeStringLength(string value, EnumTimeFormat format)
+        private bool ValidDateTimeStringLength(string value, TimeFormat format)
         {
             var result = false;
             switch (format)
             {
-                case EnumTimeFormat.DateTimeNoSeparator:
+                case TimeFormat.DateTimeNoSeparator:
                     result = value.Length == 14;
                     break;
-                case EnumTimeFormat.DateNoSeparator:
+                case TimeFormat.DateNoSeparator:
                     result = value.Length == 8;
                     break;
-                case EnumTimeFormat.TimeNoSeparator:
+                case TimeFormat.TimeNoSeparator:
                     result = value.Length == 6;
                     break;
             }

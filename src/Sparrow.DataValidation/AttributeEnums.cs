@@ -3,7 +3,7 @@
     /// <summary>
     /// 枚举包含设置
     /// </summary>
-    public enum EnumChineseOption
+    public enum ChineseOption
     {
         /// <summary>
         /// 至少包含一个中文
@@ -17,7 +17,7 @@
     /// <summary>
     /// 时间格式枚举
     /// </summary>
-    public enum EnumTimeFormat
+    public enum TimeFormat
     {
         /// <summary>
         /// 日期时间
@@ -47,7 +47,7 @@
     /// <summary>
     /// 文件大小单位枚举
     /// </summary>
-    public enum EnumSizeUnit
+    public enum SizeUnit
     {
         /// <summary>
         /// Byte
@@ -65,7 +65,7 @@
     /// <summary>
     /// 枚举字符可转换类型
     /// </summary>
-    public enum EnumStringConvertType
+    public enum StringConvertType
     {
         /// <summary>
         /// 整形

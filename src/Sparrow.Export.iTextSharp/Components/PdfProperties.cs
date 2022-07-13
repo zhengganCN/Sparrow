@@ -7,7 +7,7 @@ namespace Sparrow.Export.iTextSharp.Components
     /// 属性
     /// </summary>
     /// <typeparam name="T">控件</typeparam>
-    public class PdfProperties<T> where T : class, new()
+    public class PdfProperties<T>
     {
         /// <summary>
         /// 元素

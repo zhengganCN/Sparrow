@@ -17,7 +17,7 @@ namespace Sparrow.DataValidation.Attributes
         /// <summary>
         /// 大小单位，默认值为KB
         /// </summary>
-        public EnumSizeUnit Unit { get; set; } = EnumSizeUnit.UnitKB;
+        public SizeUnit Unit { get; set; } = SizeUnit.UnitKB;
         /// <summary>
         /// 重写验证逻辑
         /// </summary>
@@ -61,13 +61,13 @@ namespace Sparrow.DataValidation.Attributes
             var maxBytes = 0;
             switch (Unit)
             {
-                case EnumSizeUnit.UnitByte:
+                case SizeUnit.UnitByte:
                     maxBytes = Size;
                     break;
-                case EnumSizeUnit.UnitKB:
+                case SizeUnit.UnitKB:
                     maxBytes = Size * 1024;
                     break;
-                case EnumSizeUnit.UnitMB:
+                case SizeUnit.UnitMB:
                     maxBytes = Size * 1024 * 1024;
                     break;
             }

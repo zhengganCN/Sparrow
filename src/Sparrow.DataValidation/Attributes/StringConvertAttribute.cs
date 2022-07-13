@@ -9,8 +9,8 @@ namespace Sparrow.DataValidation.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     internal class StringConvertAttribute : ValidationAttribute
     {
-        private EnumStringConvertType ConvertType { get; set; }
-        public StringConvertAttribute(EnumStringConvertType type)
+        private StringConvertType ConvertType { get; set; }
+        public StringConvertAttribute(StringConvertType type)
         {
             ConvertType = type;
         }
@@ -30,16 +30,16 @@ namespace Sparrow.DataValidation.Attributes
             {
                 switch (ConvertType)
                 {
-                    case EnumStringConvertType.Int:
+                    case StringConvertType.Int:
                         result = int.TryParse(@string, out _);
                         break;
-                    case EnumStringConvertType.Lnog:
+                    case StringConvertType.Lnog:
                         result = long.TryParse(@string, out _);
                         break;
-                    case EnumStringConvertType.Float:
+                    case StringConvertType.Float:
                         result = float.TryParse(@string, out _);
                         break;
-                    case EnumStringConvertType.Double:
+                    case StringConvertType.Double:
                         result = double.TryParse(@string, out _);
                         break;
                 }

@@ -1,4 +1,6 @@
 ﻿using iText.Layout.Element;
+using iText.Layout.Splitting;
+using Sparrow.Export.iTextSharp.Utils;
 
 namespace Sparrow.Export.iTextSharp.Components
 {
@@ -20,6 +22,14 @@ namespace Sparrow.Export.iTextSharp.Components
         /// Cell所占列数
         /// </summary>
         public int Colspan { get; set; }
+        /// <summary>
+        /// 单词换行(true：当为连续的字母时，不换行；false：当为连续的字母时，达到最大宽度后换行)
+        /// </summary>
+        public bool IsWordWrap { get; set; } = true;
+        /// <summary>
+        /// 启用空格处理
+        /// </summary>
+        public bool EnableSpaceHandle { get; set; } = true;
         /// <summary>
         /// Pdf表格Cell
         /// </summary>
@@ -53,6 +63,15 @@ namespace Sparrow.Export.iTextSharp.Components
             Value = value;
             Element = this;
         }
+        /// <summary>
+        /// 设置单词换行(true：当为连续的字母时，不换行；false：当为连续的字母时，达到最大宽度后换行)
+        /// </summary>
+        /// <returns></returns>
+        public PdfTableCell SetIsWordWrap(bool isWordWrap)
+        {
+            IsWordWrap = isWordWrap;
+            return Element;
+        }
 
         /// <summary>
         /// 获取Cell
@@ -61,7 +80,16 @@ namespace Sparrow.Export.iTextSharp.Components
         public Cell GetCell()
         {
             cell = new Cell(Rowspan, Colspan);
-            var paragraph = new Paragraph(Value ?? "");
+            var value = (Value ?? "");
+            if (EnableSpaceHandle)
+            {
+                value.Replace("\t", "\u00A0\u00A0").Replace(' ', '\u00A0');
+            }
+            var paragraph = new Paragraph(value);
+            if (!IsWordWrap)
+            {
+                paragraph.SetSplitCharacters(new ParagraphSplitCharacters());
+            }
             cell.Add(paragraph);
             return cell;
         }

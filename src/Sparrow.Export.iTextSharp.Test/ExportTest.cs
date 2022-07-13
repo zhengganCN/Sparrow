@@ -34,7 +34,7 @@ namespace Sparrow.Export.iTextSharp.Test
                 "接种单位",
                 "在职项目"
             };
-            var table = new PdfTable().SetBackgroundColor(new DeviceRgb(232, 246, 240));
+            var table = new PdfTable(headers.Length).SetBackgroundColor(new DeviceRgb(232, 246, 240));
             var headerCells = new List<PdfTableCell>();
             foreach (var header in headers)
             {
@@ -54,7 +54,7 @@ namespace Sparrow.Export.iTextSharp.Test
             table.Element.Cells.Add(new List<PdfTableCell>
             {
                 new PdfTableCell("打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府",2,5),
-                new PdfTableCell("打道回府描述",1,6),
+                new PdfTableCell("打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府打道回府",1,6),
                 new PdfTableCell("打道回府描述",1,6)
             });
             table.Element.Cells.Add(new List<PdfTableCell>
@@ -96,12 +96,7 @@ namespace Sparrow.Export.iTextSharp.Test
             pdf.AddTable(GetPdfTable());
             pdf.AddTable(GetPdfTable());
             pdf.AddTable(GetPdfTable());
-            if (!Directory.Exists("pdf"))
-            {
-                Directory.CreateDirectory("pdf");
-            }
-            var tempPdfFileName = System.IO.Path.Combine("pdf", Guid.NewGuid().ToString() + ".pdf");
-            pdf.Save(tempPdfFileName);
+            pdf.Save(Common.GenerateSavePath("导出pdf文件"));
             Assert.Pass();
         }
 

@@ -2,6 +2,7 @@
 using iText.Kernel.Geom;
 using iText.Layout.Element;
 using Sparrow.Export.iTextSharp.Components;
+using System;
 using System.Linq;
 
 namespace Sparrow.Export.iTextSharp
@@ -29,11 +30,19 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="pdfTable"></param>
         public void AddTable(PdfTable pdfTable)
         {
-            if (pdfTable.Columns == 0 && pdfTable.Cells?.Any() == true)
+            if (pdfTable.Columns == 0)
             {
-                pdfTable.Columns = pdfTable.Cells[0].Count;
+                throw new ArgumentException($"{nameof(pdfTable.Columns)}不能为0");
             }
-            var table = new Table(pdfTable.Columns);
+            Table table;
+            if (pdfTable.ColumnWidths?.Any() == true)
+            {
+                table = new Table(pdfTable.ColumnWidths);
+            }
+            else
+            {
+                table = new Table(pdfTable.Columns);
+            }
             SetPdfTableProperties(table, pdfTable);
             foreach (var row in pdfTable.Cells)
             {
