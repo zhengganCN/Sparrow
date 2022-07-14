@@ -12,18 +12,41 @@ namespace Sparrow.Database.DAL
     /// </summary>
     public class BaseDAL<TDbContext> where TDbContext : DbContext
     {
-        internal readonly TDbContext context;
+        /// <summary>
+        /// 数据库上下文
+        /// </summary>
+        public TDbContext Context { get; }
         private readonly IMapper mapper;
         /// <summary>
         /// 初始化
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="mapper"></param>
         public BaseDAL(TDbContext context, IMapper mapper)
         {
-            this.context = context;
+            Context = context;
             this.mapper = mapper;
         }
+
+        /// <summary>
+        /// 获取IQueryable实例
+        /// </summary>
+        /// <typeparam name="TEntity">实体类型</typeparam>
+        /// <returns></returns>
+        public IQueryable<TEntity> GetQueryable<TEntity>() where TEntity : class
+        {
+            return Context.Set<TEntity>().AsQueryable();
+        }
+
+        /// <summary>
+        /// 获取Updateable实例
+        /// </summary>
+        /// <typeparam name="TEntity">实体类型</typeparam>
+        /// <returns></returns>
+        public Updateable<TEntity> GetUpdateable<TEntity>() where TEntity : class, new()
+        {
+            return new Updateable<TEntity>();
+        }
+
+
         /// <summary>
         /// 添加数据
         /// </summary>
@@ -32,8 +55,8 @@ namespace Sparrow.Database.DAL
         /// <returns></returns>
         public int Add<TEntity>(TEntity entity) where TEntity : class
         {
-            context.Set<TEntity>().Add(entity);
-            return context.SaveChanges();
+            Context.Set<TEntity>().Add(entity);
+            return Context.SaveChanges();
         }
         /// <summary>
         /// 添加数据列表
@@ -43,8 +66,8 @@ namespace Sparrow.Database.DAL
         /// <returns></returns>
         public int Add<TEntity>(List<TEntity> entities) where TEntity : class
         {
-            context.Set<TEntity>().AddRange(entities);
-            return context.SaveChanges();
+            Context.Set<TEntity>().AddRange(entities);
+            return Context.SaveChanges();
         }
         /// <summary>
         /// 修改数据
@@ -54,8 +77,8 @@ namespace Sparrow.Database.DAL
         /// <returns></returns>
         public int Update<TEntity>(TEntity entity) where TEntity : class
         {
-            context.Set<TEntity>().Update(entity);
-            return context.SaveChanges();
+            Context.Set<TEntity>().Update(entity);
+            return Context.SaveChanges();
         }
         /// <summary>
         /// 修改数据列表
@@ -65,8 +88,8 @@ namespace Sparrow.Database.DAL
         /// <returns></returns>
         public int Update<TEntity>(List<TEntity> entities) where TEntity : class
         {
-            context.Set<TEntity>().UpdateRange(entities);
-            return context.SaveChanges();
+            Context.Set<TEntity>().UpdateRange(entities);
+            return Context.SaveChanges();
         }
         /// <summary>
         /// 按条件修改数据列表
@@ -77,7 +100,7 @@ namespace Sparrow.Database.DAL
         public int Update<TEntity>(Updateable<TEntity> updateable) where TEntity : class, new()
         {
             var entities = ToList(updateable.Condition);
-            if (entities?.Any() == true)
+            if (entities.Any())
             {
                 foreach (var entity in entities)
                 {
@@ -88,7 +111,7 @@ namespace Sparrow.Database.DAL
                     }
                 }
             }
-            return context.SaveChanges();
+            return Context.SaveChanges();
         }
         /// <summary>
         /// 删除数据
@@ -98,8 +121,8 @@ namespace Sparrow.Database.DAL
         /// <returns></returns>
         public int Delete<TEntity>(TEntity entity) where TEntity : class
         {
-            context.Set<TEntity>().Remove(entity);
-            return context.SaveChanges();
+            Context.Set<TEntity>().Remove(entity);
+            return Context.SaveChanges();
         }
         /// <summary>
         /// 删除数据列表
@@ -109,8 +132,8 @@ namespace Sparrow.Database.DAL
         /// <returns></returns>
         public int Delete<TEntity>(List<TEntity> entities) where TEntity : class
         {
-            context.Set<TEntity>().RemoveRange(entities);
-            return context.SaveChanges();
+            Context.Set<TEntity>().RemoveRange(entities);
+            return Context.SaveChanges();
         }
         /// <summary>
         /// 按条件删除数据列表
@@ -121,8 +144,8 @@ namespace Sparrow.Database.DAL
         public int Delete<TEntity>(IQueryable<TEntity> condition) where TEntity : class
         {
             var entities = ToList(condition);
-            context.Set<TEntity>().RemoveRange(entities);
-            return context.SaveChanges();
+            Context.Set<TEntity>().RemoveRange(entities);
+            return Context.SaveChanges();
         }
         /// <summary>
         /// 获取第一条数据

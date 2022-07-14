@@ -1,5 +1,6 @@
 ﻿using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
+using Sparrow.Database.DAL;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -18,6 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddSingleton<IMapper, Mapper>();
             services.AddDbContext<TDbContext>();
+            services.AddScoped<BaseDAL<TDbContext>>();
             return services;
         }
     }

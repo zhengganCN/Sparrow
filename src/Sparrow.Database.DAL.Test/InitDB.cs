@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
 namespace Sparrow.Database.DAL.Test
@@ -10,11 +9,10 @@ namespace Sparrow.Database.DAL.Test
         public void Setup()
         {
             ServiceCollection services = new ServiceCollection();
-            services.AddSingleton<DbContext, TestDbContext>();
-            services.AddSingleton<BaseDAL<DbContext>>();
+            services.AddDAL<Test1DbContext>();
             var provider = services.BuildServiceProvider();
-            var context = provider.GetService<DbContext>();
-            context.Database.EnsureCreated();
+            var dal = provider.GetService<BaseDAL<Test1DbContext>>();
+            dal.Context.Database.EnsureCreated();
         }
     }
 }

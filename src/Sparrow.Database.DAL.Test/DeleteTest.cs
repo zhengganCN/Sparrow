@@ -1,5 +1,3 @@
-using MapsterMapper;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Sparrow.Database.DAL.Test.Entities;
@@ -10,17 +8,15 @@ namespace Sparrow.Database.DAL.Test
 {
     public class DeleteTest
     {
-        private BaseDAL<DbContext> dal;
+        private BaseDAL<Test1DbContext> dal;
 
         [SetUp]
         public void Setup()
         {
             ServiceCollection services = new ServiceCollection();
-            services.AddSingleton<DbContext, TestDbContext>();
-            services.AddSingleton<BaseDAL<DbContext>>();
-            services.AddSingleton<IMapper, Mapper>();
+            services.AddDAL<Test1DbContext>();
             var provider = services.BuildServiceProvider();
-            dal = provider.GetService<BaseDAL<DbContext>>();
+            dal = provider.GetService<BaseDAL<Test1DbContext>>();
         }
 
         [Test]

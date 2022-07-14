@@ -1,5 +1,3 @@
-using MapsterMapper;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Sparrow.Database.DAL.Test.Entities;
@@ -11,17 +9,15 @@ namespace Sparrow.Database.DAL.Test
 {
     public class UpdateTest
     {
-        private BaseDAL<DbContext> dal;
+        private BaseDAL<Test1DbContext> dal;
 
         [SetUp]
         public void Setup()
         {
             ServiceCollection services = new ServiceCollection();
-            services.AddSingleton<DbContext, TestDbContext>();
-            services.AddSingleton<BaseDAL<DbContext>>();
-            services.AddSingleton<IMapper, Mapper>();
+            services.AddDAL<Test1DbContext>();
             var provider = services.BuildServiceProvider();
-            dal = provider.GetService<BaseDAL<DbContext>>();
+            dal = provider.GetService<BaseDAL<Test1DbContext>>();
         }
 
         [Test]
@@ -69,7 +65,8 @@ namespace Sparrow.Database.DAL.Test
         public void ConditionUpdateData()
         {
             var updateable = dal.GetUpdateable<EntitySchool>()
-                 .SetColumn(e => "SS1" == e.Name);
+                .SetColumn(e => e.Name == "SS1")
+                .SetColumn(e => "SS1" == e.Name);
             var condition = dal.GetQueryable<EntitySchool>()
                 .Where(e => e.Name.Contains("²âÊÔÑ§Ð£1"));
             updateable.SetUpdateCondition(condition);
@@ -93,9 +90,14 @@ namespace Sparrow.Database.DAL.Test
             Assert.Throws(typeof(ArgumentException), () =>
             {
                 var updateable = dal.GetUpdateable<EntitySchool>()
-                    .SetColumn(null);
+                    .SetColumn(e => e.Name == SetNameValue());
             });
             Assert.Pass();
+        }
+
+        private string SetNameValue()
+        {
+            return "demo";
         }
     }
 }
