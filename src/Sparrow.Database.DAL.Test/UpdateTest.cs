@@ -19,7 +19,7 @@ namespace Sparrow.Database.DAL.Test
             ServiceCollection services = new ServiceCollection();
             services.AddSingleton<DbContext, TestDbContext>();
             services.AddSingleton<BaseDAL<DbContext>>();
-            services.AddSingleton<IMapper,Mapper>();
+            services.AddSingleton<IMapper, Mapper>();
             var provider = services.BuildServiceProvider();
             dal = provider.GetService<BaseDAL<DbContext>>();
         }
@@ -68,8 +68,8 @@ namespace Sparrow.Database.DAL.Test
         [Test]
         public void ConditionUpdateData()
         {
-           var updateable = dal.GetUpdateable<EntitySchool>()
-                .SetColumn(e => "SS1" == e.Name);
+            var updateable = dal.GetUpdateable<EntitySchool>()
+                 .SetColumn(e => "SS1" == e.Name);
             var condition = dal.GetQueryable<EntitySchool>()
                 .Where(e => e.Name.Contains("≤‚ ‘—ß–£1"));
             updateable.SetUpdateCondition(condition);

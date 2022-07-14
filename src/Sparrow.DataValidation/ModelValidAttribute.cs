@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 
 namespace Sparrow.DataValidation
@@ -17,7 +16,7 @@ namespace Sparrow.DataValidation
         /// 格式化函数Key;ModelValidOptions中设置的格式化函数key
         /// </summary>
         public string FormatFuncKey { get; set; }
-        
+
         /// <summary>
         /// 验证逻辑
         /// </summary>

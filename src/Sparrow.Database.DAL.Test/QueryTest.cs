@@ -19,7 +19,7 @@ namespace Sparrow.Database.DAL.Test
             ServiceCollection services = new ServiceCollection();
             services.AddSingleton<DbContext, TestDbContext>();
             services.AddSingleton<BaseDAL<DbContext>>();
-            services.AddSingleton<IMapper,Mapper>();
+            services.AddSingleton<IMapper, Mapper>();
             var provider = services.BuildServiceProvider();
             dal = provider.GetService<BaseDAL<DbContext>>();
         }

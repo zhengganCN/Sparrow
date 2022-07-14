@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.DataValidation
+﻿namespace Sparrow.DataValidation
 {
     /// <summary>
     /// 错误信息

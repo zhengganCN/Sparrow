@@ -5,7 +5,6 @@ using Sparrow.Export.iTextSharp.Components;
 using Sparrow.Export.iTextSharp.Enums;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Sparrow.Export.iTextSharp.Test
 {

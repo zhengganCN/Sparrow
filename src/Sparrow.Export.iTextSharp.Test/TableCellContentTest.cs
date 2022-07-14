@@ -3,9 +3,6 @@ using NUnit.Framework;
 using Sparrow.Export.iTextSharp.Components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sparrow.Export.iTextSharp.Test
 {
@@ -21,7 +18,7 @@ namespace Sparrow.Export.iTextSharp.Test
         [Test]
         public void ExportTableCellContentWrapTabTest()
         {
-            using var pdf = new Pdf(PageSize.A4.Rotate());           
+            using var pdf = new Pdf(PageSize.A4.Rotate());
             pdf.AddTable(GetPdfTable());
             pdf.Save(Common.GenerateSavePath("表格单元格内容换行符与制表符测试"));
             Assert.Pass();

@@ -1,12 +1,9 @@
 ﻿using iText.Kernel.Geom;
 using NUnit.Framework;
 using Sparrow.Export.iTextSharp.Components;
-using Sparrow.Export.iTextSharp.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sparrow.Export.iTextSharp.Test
 {

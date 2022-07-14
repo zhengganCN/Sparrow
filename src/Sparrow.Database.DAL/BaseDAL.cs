@@ -31,7 +31,7 @@ namespace Sparrow.Database.DAL
         /// <param name="entity">数据</param>
         /// <returns></returns>
         public int Add<TEntity>(TEntity entity) where TEntity : class
-        {            
+        {
             context.Set<TEntity>().Add(entity);
             return context.SaveChanges();
         }
@@ -196,7 +196,7 @@ namespace Sparrow.Database.DAL
         /// <param name="condition">查询条件</param>
         /// <param name="config">映射配置</param>
         /// <returns></returns>
-        public List<TDest> ToList<TEntity, TDest>(IQueryable<TEntity> condition, TypeAdapterConfig config) 
+        public List<TDest> ToList<TEntity, TDest>(IQueryable<TEntity> condition, TypeAdapterConfig config)
             where TEntity : class
         {
             var data = ToList(condition);
