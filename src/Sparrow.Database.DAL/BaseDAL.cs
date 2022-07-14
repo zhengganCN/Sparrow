@@ -10,7 +10,7 @@ namespace Sparrow.Database.DAL
     /// <summary>
     /// 数据访问基类
     /// </summary>
-    public class BaseDAL<TDbContext> where TDbContext : DbContext
+    public class BaseDAL<TDbContext> : IDisposable where TDbContext : DbContext
     {
         /// <summary>
         /// 数据库上下文
@@ -45,7 +45,6 @@ namespace Sparrow.Database.DAL
         {
             return new Updateable<TEntity>();
         }
-
 
         /// <summary>
         /// 添加数据
@@ -306,6 +305,14 @@ namespace Sparrow.Database.DAL
                 PageSize = pagination.PageSize,
                 List = list
             };
+        }
+
+        /// <summary>
+        /// 销毁
+        /// </summary>
+        public void Dispose()
+        {
+            Context.Dispose();
         }
     }
 

@@ -3,7 +3,7 @@ using Sparrow.Database.DAL.Test.Entities;
 
 namespace Sparrow.Database.DAL.Test
 {
-    internal class Test1DbContext : DbContext
+    public class Test1DbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

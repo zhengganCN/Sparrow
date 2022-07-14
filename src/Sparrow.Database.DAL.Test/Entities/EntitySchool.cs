@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sparrow.Database.DAL.Test.Entities
 {
-    internal class EntitySchool : Entity
+    public class EntitySchool : Entity
     {
         [Key]
         public long Id { get; set; }
