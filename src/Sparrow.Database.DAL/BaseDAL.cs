@@ -63,7 +63,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="entities">数据列表</param>
         /// <returns></returns>
-        public int Add<TEntity>(List<TEntity> entities) where TEntity : class
+        public int AddRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
             Context.Set<TEntity>().AddRange(entities);
             return Context.SaveChanges();
@@ -85,7 +85,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="entities">数据列表</param>
         /// <returns></returns>
-        public int Update<TEntity>(List<TEntity> entities) where TEntity : class
+        public int UpdateRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
             Context.Set<TEntity>().UpdateRange(entities);
             return Context.SaveChanges();
@@ -96,7 +96,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="updateable">更新条件</param>
         /// <returns></returns>
-        public int Update<TEntity>(Updateable<TEntity> updateable)
+        public int UpdateRange<TEntity>(Updateable<TEntity> updateable)
         {
             var entities = ToList(updateable.Condition);
             if (entities.Any())
@@ -118,7 +118,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="entity">数据</param>
         /// <returns></returns>
-        public int Delete<TEntity>(TEntity entity) where TEntity : class
+        public int Remove<TEntity>(TEntity entity) where TEntity : class
         {
             Context.Set<TEntity>().Remove(entity);
             return Context.SaveChanges();
@@ -129,7 +129,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="entities">数据列表</param>
         /// <returns></returns>
-        public int Delete<TEntity>(List<TEntity> entities) where TEntity : class
+        public int RemoveRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
             Context.Set<TEntity>().RemoveRange(entities);
             return Context.SaveChanges();
@@ -140,7 +140,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="condition">删除条件</param>
         /// <returns></returns>
-        public int Delete<TEntity>(IQueryable<TEntity> condition) where TEntity : class
+        public int RemoveRange<TEntity>(IQueryable<TEntity> condition) where TEntity : class
         {
             var entities = ToList(condition);
             Context.Set<TEntity>().RemoveRange(entities);

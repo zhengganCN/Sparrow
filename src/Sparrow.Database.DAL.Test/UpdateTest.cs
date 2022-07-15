@@ -51,12 +51,12 @@ namespace Sparrow.Database.DAL.Test
                     Name = "测试学校3"
                 }
             };
-            dal.Add(entities);
+            dal.AddRange(entities);
             foreach (var item in entities)
             {
                 item.CreateTime = DateTime.Now;
             }
-            var effect = dal.Update(entities);
+            var effect = dal.UpdateRange(entities);
             Assert.IsTrue(effect == 3);
         }
 
@@ -70,7 +70,7 @@ namespace Sparrow.Database.DAL.Test
             var condition = dal.GetQueryable<EntitySchool>()
                 .Where(e => e.Name.Contains("测试学校1"));
             updateable.SetUpdateCondition(condition);
-            var effect = dal.Update(updateable);
+            var effect = dal.UpdateRange(updateable);
             Assert.Pass();
         }
 

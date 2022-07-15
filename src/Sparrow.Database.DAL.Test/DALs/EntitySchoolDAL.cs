@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Sparrow.Database.DAL.Test
+namespace Sparrow.Database.DAL.Test.DALs
 {
     public class EntitySchoolDAL : BaseDAL<Test1DbContext>
     {

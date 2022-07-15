@@ -27,6 +27,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddDbContext<TDbContext>();
             services.AddScoped<BaseDAL<TDbContext>>();
             services.AddSingleton<DALFactory<TDbContext>>();
+            services.AddSingleton<IDALFactory<TDbContext>, DALFactory<TDbContext>>();
+            services.AddSingleton<IDALFactory, DALFactory>();
             Register<TDbContext>(services);
             return services;
         }

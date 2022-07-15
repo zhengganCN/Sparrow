@@ -27,7 +27,7 @@ namespace Sparrow.Database.DAL.Test
                 Name = "测试学校"
             };
             dal.Add(entity);
-            var effect = dal.Delete(entity);
+            var effect = dal.Remove(entity);
             Assert.IsTrue(effect == 1);
         }
 
@@ -49,8 +49,8 @@ namespace Sparrow.Database.DAL.Test
                     Name = "测试学校3"
                 }
             };
-            dal.Add(entities);
-            var effect = dal.Delete(entities);
+            dal.AddRange(entities);
+            var effect = dal.RemoveRange(entities);
             Assert.IsTrue(effect == 3);
         }
 
@@ -59,7 +59,7 @@ namespace Sparrow.Database.DAL.Test
         {
             var condition = dal.GetQueryable<EntitySchool>()
                 .Where(e => e.Name == "测试学校2");
-            var effect = dal.Delete(condition);
+            var effect = dal.RemoveRange(condition);
             Assert.Pass();
         }
     }

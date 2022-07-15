@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
-	<Version>1.0.0-beta5</Version>
+	<Version>1.0.0-beta901</Version>
 	<Authors>zhenggan</Authors>
 	<Description>ef core dal</Description>
 	<Copyright>zhenggan</Copyright>

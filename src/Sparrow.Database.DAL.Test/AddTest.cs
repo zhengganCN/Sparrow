@@ -46,7 +46,7 @@ namespace Sparrow.Database.DAL.Test
                     Name = "≤‚ ‘—ß–£3"
                 }
             };
-            dal.Add(data);
+            dal.AddRange(data);
             Assert.Pass();
         }
     }
