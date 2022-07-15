@@ -41,7 +41,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <returns></returns>
-        public Updateable<TEntity> GetUpdateable<TEntity>() where TEntity : class, new()
+        public Updateable<TEntity> GetUpdateable<TEntity>()
         {
             return new Updateable<TEntity>();
         }
@@ -96,7 +96,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="updateable">更新条件</param>
         /// <returns></returns>
-        public int Update<TEntity>(Updateable<TEntity> updateable) where TEntity : class, new()
+        public int Update<TEntity>(Updateable<TEntity> updateable)
         {
             var entities = ToList(updateable.Condition);
             if (entities.Any())
@@ -152,7 +152,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="condition">查询条件</param>
         /// <returns></returns>
-        public TEntity First<TEntity>(IQueryable<TEntity> condition) where TEntity : class
+        public TEntity First<TEntity>(IQueryable<TEntity> condition)
         {
             return condition.FirstOrDefault();
         }
@@ -163,7 +163,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TDest">映射类型</typeparam>
         /// <param name="condition">查询条件</param>
         /// <returns></returns>
-        public TDest First<TEntity, TDest>(IQueryable<TEntity> condition) where TEntity : class
+        public TDest First<TEntity, TDest>(IQueryable<TEntity> condition)
         {
             return mapper.Map<TDest>(First(condition));
         }
@@ -176,7 +176,6 @@ namespace Sparrow.Database.DAL
         /// <param name="config">映射配置</param>
         /// <returns></returns>
         public TDest First<TEntity, TDest>(IQueryable<TEntity> condition, TypeAdapterConfig config)
-            where TEntity : class
         {
             var data = First(condition);
             if (config is null)
@@ -195,7 +194,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="condition">查询条件</param>
         /// <returns></returns>
-        public List<TEntity> ToList<TEntity>(IQueryable<TEntity> condition) where TEntity : class
+        public List<TEntity> ToList<TEntity>(IQueryable<TEntity> condition)
         {
             return condition.ToList();
         }
@@ -206,7 +205,7 @@ namespace Sparrow.Database.DAL
         /// <typeparam name="TDest">映射类型</typeparam>
         /// <param name="condition">查询条件</param>
         /// <returns></returns>
-        public List<TDest> ToList<TEntity, TDest>(IQueryable<TEntity> condition) where TEntity : class
+        public List<TDest> ToList<TEntity, TDest>(IQueryable<TEntity> condition)
         {
             return mapper.Map<List<TDest>>(ToList(condition));
         }
@@ -219,7 +218,6 @@ namespace Sparrow.Database.DAL
         /// <param name="config">映射配置</param>
         /// <returns></returns>
         public List<TDest> ToList<TEntity, TDest>(IQueryable<TEntity> condition, TypeAdapterConfig config)
-            where TEntity : class
         {
             var data = ToList(condition);
             if (config is null)

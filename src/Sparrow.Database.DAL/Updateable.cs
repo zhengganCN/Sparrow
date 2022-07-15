@@ -9,7 +9,7 @@ namespace Sparrow.Database.DAL
     /// 更新条件
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
-    public class Updateable<TEntity> where TEntity : class, new()
+    public class Updateable<TEntity>
     {
         internal readonly Dictionary<string, object> properties = new Dictionary<string, object>();
         internal IQueryable<TEntity> Condition { get; private set; }
