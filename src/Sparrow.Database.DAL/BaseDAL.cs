@@ -16,34 +16,40 @@ namespace Sparrow.Database.DAL
         /// 数据库上下文
         /// </summary>
         public TDbContext Context { get; }
-        private readonly IMapper mapper;
         /// <summary>
         /// 初始化
         /// </summary>
-        public BaseDAL(TDbContext context, IMapper mapper)
+        public BaseDAL(TDbContext context)
         {
             Context = context;
-            this.mapper = mapper;
         }
-
         /// <summary>
-        /// 获取IQueryable实例
+        /// 提供针对特定数据源评估查询的功能
         /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
+        /// <typeparam name="TEntity"></typeparam>
         /// <returns></returns>
-        public IQueryable<TEntity> GetQueryable<TEntity>() where TEntity : class
+        public IQueryable<TEntity> AsQueryable<TEntity>() where TEntity : class
         {
             return Context.Set<TEntity>().AsQueryable();
         }
+        /// <summary>
+        /// 提供针对特定数据源评估更新的功能
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <returns></returns>
+        public Updateable<TEntity> AsUpdateable<TEntity>() where TEntity : class
+        {
+            return new Updateable<TEntity>(Context, AsQueryable<TEntity>());
+        }
 
         /// <summary>
-        /// 获取Updateable实例
+        /// 提供针对特定数据源评估删除的功能
         /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
+        /// <typeparam name="TEntity"></typeparam>
         /// <returns></returns>
-        public Updateable<TEntity> GetUpdateable<TEntity>()
+        public Removeable<TEntity> AsRemoveable<TEntity>() where TEntity : class
         {
-            return new Updateable<TEntity>();
+            return new Removeable<TEntity>(Context, AsQueryable<TEntity>());
         }
 
         /// <summary>
@@ -90,28 +96,7 @@ namespace Sparrow.Database.DAL
             Context.Set<TEntity>().UpdateRange(entities);
             return Context.SaveChanges();
         }
-        /// <summary>
-        /// 按条件修改数据列表
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <param name="updateable">更新条件</param>
-        /// <returns></returns>
-        public int UpdateRange<TEntity>(Updateable<TEntity> updateable)
-        {
-            var entities = ToList(updateable.Condition);
-            if (entities.Any())
-            {
-                foreach (var entity in entities)
-                {
-                    foreach (var property in updateable.properties)
-                    {
-                        entity.GetType().GetProperty(property.Key)
-                            .SetValue(entity, property.Value);
-                    }
-                }
-            }
-            return Context.SaveChanges();
-        }
+        
         /// <summary>
         /// 删除数据
         /// </summary>
@@ -134,177 +119,6 @@ namespace Sparrow.Database.DAL
             Context.Set<TEntity>().RemoveRange(entities);
             return Context.SaveChanges();
         }
-        /// <summary>
-        /// 按条件删除数据列表
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <param name="condition">删除条件</param>
-        /// <returns></returns>
-        public int RemoveRange<TEntity>(IQueryable<TEntity> condition) where TEntity : class
-        {
-            var entities = ToList(condition);
-            Context.Set<TEntity>().RemoveRange(entities);
-            return Context.SaveChanges();
-        }
-        /// <summary>
-        /// 获取第一条数据
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <param name="condition">查询条件</param>
-        /// <returns></returns>
-        public TEntity First<TEntity>(IQueryable<TEntity> condition)
-        {
-            return condition.FirstOrDefault();
-        }
-        /// <summary>
-        /// 获取第一条数据并映射到指定类型
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <typeparam name="TDest">映射类型</typeparam>
-        /// <param name="condition">查询条件</param>
-        /// <returns></returns>
-        public TDest First<TEntity, TDest>(IQueryable<TEntity> condition)
-        {
-            return mapper.Map<TDest>(First(condition));
-        }
-        /// <summary>
-        /// 获取第一条数据并映射到指定类型
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <typeparam name="TDest">映射类型</typeparam>
-        /// <param name="condition">查询条件</param>
-        /// <param name="config">映射配置</param>
-        /// <returns></returns>
-        public TDest First<TEntity, TDest>(IQueryable<TEntity> condition, TypeAdapterConfig config)
-        {
-            var data = First(condition);
-            if (config is null)
-            {
-                return mapper.Map<TDest>(data);
-            }
-            else
-            {
-                var selfMapper = new Mapper(config);
-                return selfMapper.Map<TDest>(data);
-            }
-        }
-        /// <summary>
-        /// 获取数据列表
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <param name="condition">查询条件</param>
-        /// <returns></returns>
-        public List<TEntity> ToList<TEntity>(IQueryable<TEntity> condition)
-        {
-            return condition.ToList();
-        }
-        /// <summary>
-        /// 获取数据列表并映射到指定类型列表
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <typeparam name="TDest">映射类型</typeparam>
-        /// <param name="condition">查询条件</param>
-        /// <returns></returns>
-        public List<TDest> ToList<TEntity, TDest>(IQueryable<TEntity> condition)
-        {
-            return mapper.Map<List<TDest>>(ToList(condition));
-        }
-        /// <summary>
-        /// 获取数据列表并映射到指定类型列表
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <typeparam name="TDest">映射类型</typeparam>
-        /// <param name="condition">查询条件</param>
-        /// <param name="config">映射配置</param>
-        /// <returns></returns>
-        public List<TDest> ToList<TEntity, TDest>(IQueryable<TEntity> condition, TypeAdapterConfig config)
-        {
-            var data = ToList(condition);
-            if (config is null)
-            {
-                return mapper.Map<List<TDest>>(data);
-            }
-            else
-            {
-                var selfMapper = new Mapper(config);
-                return selfMapper.Map<List<TDest>>(data);
-            }
-        }
-        /// <summary>
-        /// 分页获取数据列表
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <param name="condition">查询条件</param>
-        /// <param name="index">页码</param>
-        /// <param name="size">页大小</param>
-        /// <returns></returns>
-        public Pagination<TEntity> ToPagination<TEntity>(IQueryable<TEntity> condition, int index, int size)
-        {
-            var count = condition.Count();
-            var list = condition.Skip((index - 1) * size).Take(size).ToList();
-            return new Pagination<TEntity>
-            {
-                List = list,
-                PageSize = size,
-                PageCount = (int)Math.Ceiling((double)count / size),
-                PageIndex = index,
-                Count = count
-            };
-        }
-        /// <summary>
-        /// 分页获取数据列表并映射到指定类型列表
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <typeparam name="TDest">映射类型</typeparam>
-        /// <param name="condition">查询条件</param>
-        /// <param name="index">页码</param>
-        /// <param name="size">页大小</param>
-        /// <returns></returns>
-        public Pagination<TDest> ToPagination<TEntity, TDest>(IQueryable<TEntity> condition, int index, int size)
-        {
-            var pagination = ToPagination(condition, index, size);
-            return new Pagination<TDest>
-            {
-                PageCount = pagination.PageCount,
-                PageIndex = pagination.PageIndex,
-                Count = pagination.Count,
-                PageSize = pagination.PageSize,
-                List = mapper.Map<List<TDest>>(pagination.List)
-            };
-        }
-        /// <summary>
-        /// 分页获取数据列表并映射到指定类型列表
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <typeparam name="TDest">映射类型</typeparam>
-        /// <param name="condition">查询条件</param>
-        /// <param name="index">页码</param>
-        /// <param name="size">页大小</param>
-        /// <param name="config">映射配置</param>
-        /// <returns></returns>
-        public Pagination<TDest> ToPagination<TEntity, TDest>(IQueryable<TEntity> condition, int index, int size, TypeAdapterConfig config)
-        {
-            var pagination = ToPagination(condition, index, size);
-            List<TDest> list;
-            if (config is null)
-            {
-                list = mapper.Map<List<TDest>>(pagination.List);
-            }
-            else
-            {
-                var selfMapper = new Mapper(config);
-                list = selfMapper.Map<List<TDest>>(pagination.List);
-            }
-            return new Pagination<TDest>
-            {
-                PageCount = pagination.PageCount,
-                PageIndex = pagination.PageIndex,
-                Count = pagination.Count,
-                PageSize = pagination.PageSize,
-                List = list
-            };
-        }
-
         /// <summary>
         /// 销毁
         /// </summary>

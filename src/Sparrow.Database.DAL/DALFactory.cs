@@ -26,10 +26,6 @@ namespace Sparrow.Database.DAL
     public interface IDALFactory<TDbContext> : IDisposable where TDbContext : DbContext
     {
         /// <summary>
-        /// 数据库上下文
-        /// </summary>
-        TDbContext Context { get; }
-        /// <summary>
         /// 获取DAL实例
         /// </summary>
         /// <typeparam name="TDAL"></typeparam>
@@ -75,18 +71,13 @@ namespace Sparrow.Database.DAL
     /// <typeparam name="TDbContext"></typeparam>
     public class DALFactory<TDbContext> : IDALFactory<TDbContext> where TDbContext : DbContext
     {
-        /// <summary>
-        /// 数据库上下文
-        /// </summary>
-        public TDbContext Context { get; }
         private readonly IServiceProvider provider;
 
         /// <summary>
         /// 初始化
         /// </summary>
-        public DALFactory(TDbContext context, IServiceProvider provider)
+        public DALFactory(IServiceProvider provider)
         {
-            Context = context;
             this.provider = provider;
         }
 
@@ -105,7 +96,6 @@ namespace Sparrow.Database.DAL
         /// </summary>
         public void Dispose()
         {
-            Context.Dispose();
         }
     }
 }

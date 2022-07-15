@@ -23,29 +23,35 @@ namespace Sparrow.Database.DAL.Test
         [Test]
         public void QuerySingleData()
         {
-            var schools = dal.GetQueryable<EntitySchool>();
+            var schools = dal.Context.EntitySchool.AsQueryable();
             schools = schools.Where(e => e.Name.Contains("≤‚ ‘"));
             TypeAdapterConfig config = new TypeAdapterConfig();
             config.ForType<EntitySchool, SchoolDto>()
                 .Map(d => d.Name, s => (s.Name + "hello"));
-            var school = dal.First<EntitySchool, SchoolDto>(schools, config);
-            school = dal.First<EntitySchool, SchoolDto>(schools);
-            school = dal.First<EntitySchool, SchoolDto>(schools, null);
+            var school = dal.Context.EntitySchool.AsQueryable()
+                .FirstOrDefault<EntitySchool, SchoolDto>();
+            school = dal.Context.EntitySchool.AsQueryable()
+                .FirstOrDefault<EntitySchool, SchoolDto>(config);
+            school = dal.Context.EntitySchool.AsQueryable()
+                .FirstOrDefault<EntitySchool, SchoolDto>(null);
             Assert.Pass();
         }
 
         [Test]
         public void QueryMultipleData()
         {
-            var schools = dal.GetQueryable<EntitySchool>();
+            var schools = dal.Context.EntitySchool.AsQueryable();
             var condition = schools.Where(e => e.Name.Contains("≤‚ ‘"))
                 .OrderByDescending(e => e.Name);
             TypeAdapterConfig config = new TypeAdapterConfig();
             config.NewConfig<EntitySchool, SchoolDto>()
                 .Map(d => d.Name, s => (s.Name + "hello"));
-            var school = dal.ToList<EntitySchool, SchoolDto>(condition, config);
-            school = dal.ToList<EntitySchool, SchoolDto>(condition);
-            school = dal.ToList<EntitySchool, SchoolDto>(condition, null);
+            var school = dal.Context.EntitySchool.AsQueryable()
+                .ToList<EntitySchool, SchoolDto>(config);
+            school = dal.Context.EntitySchool.AsQueryable()
+                .ToList<EntitySchool, SchoolDto>();
+            school = dal.Context.EntitySchool.AsQueryable()
+                .ToList<EntitySchool, SchoolDto>(null);
             Assert.Pass();
         }
     }

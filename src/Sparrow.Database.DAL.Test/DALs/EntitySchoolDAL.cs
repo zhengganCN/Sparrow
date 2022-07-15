@@ -9,7 +9,7 @@ namespace Sparrow.Database.DAL.Test.DALs
 {
     public class EntitySchoolDAL : BaseDAL<Test1DbContext>
     {
-        public EntitySchoolDAL(Test1DbContext context, IMapper mapper) : base(context, mapper)
+        public EntitySchoolDAL(Test1DbContext context) : base(context)
         {
         }
 

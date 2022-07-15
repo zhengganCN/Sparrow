@@ -1,12 +1,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Sparrow.Database.DAL.Test.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Sparrow.Database.DAL.Test
 {
-    public class DeleteTest
+    public class RemoveTest
     {
         private BaseDAL<Test1DbContext> dal;
 
@@ -57,9 +58,9 @@ namespace Sparrow.Database.DAL.Test
         [Test]
         public void ConditionDeleteData()
         {
-            var condition = dal.GetQueryable<EntitySchool>()
-                .Where(e => e.Name == "测试学校2");
-            var effect = dal.RemoveRange(condition);
+            var effect = dal.AsRemoveable<EntitySchool>()
+                .Where(e => e.Name == "测试学校2")
+                .ExecuteCommand();
             Assert.Pass();
         }
     }

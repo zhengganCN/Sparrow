@@ -64,13 +64,11 @@ namespace Sparrow.Database.DAL.Test
         [Test]
         public void ConditionUpdateData()
         {
-            var updateable = dal.GetUpdateable<EntitySchool>()
+            var effect = dal.AsUpdateable<EntitySchool>()
                 .SetColumn(e => e.Name == "SS1")
-                .SetColumn(e => "SS1" == e.Name);
-            var condition = dal.GetQueryable<EntitySchool>()
-                .Where(e => e.Name.Contains("测试学校1"));
-            updateable.SetUpdateCondition(condition);
-            var effect = dal.UpdateRange(updateable);
+                .SetColumn(e => "SS1" == e.Name)
+                .Where(e => e.Name.Contains("测试学校1"))
+                .ExecuteCommand();
             Assert.Pass();
         }
 
@@ -79,17 +77,17 @@ namespace Sparrow.Database.DAL.Test
         {
             Assert.Throws(typeof(ArgumentNullException), () =>
             {
-                var updateable = dal.GetUpdateable<EntitySchool>()
+                var updateable = dal.AsUpdateable<EntitySchool>()
                     .SetColumn(null);
             });
             Assert.Throws(typeof(ArgumentException), () =>
             {
-                var updateable = dal.GetUpdateable<EntitySchool>()
+                var updateable = dal.AsUpdateable<EntitySchool>()
                     .SetColumn(e => true);
             });
             Assert.Throws(typeof(ArgumentException), () =>
             {
-                var updateable = dal.GetUpdateable<EntitySchool>()
+                var updateable = dal.AsUpdateable<EntitySchool>()
                     .SetColumn(e => e.Name == SetNameValue());
             });
             Assert.Pass();

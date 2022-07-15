@@ -3,62 +3,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 
 namespace Sparrow.Database.DAL
 {
     /// <summary>
-    /// 更新条件
+    /// 删除
     /// </summary>
-    /// <typeparam name="TEntity">实体类型</typeparam>
-    public class Updateable<TEntity> where TEntity : class
+    /// <typeparam name="TEntity"></typeparam>
+    public class Removeable<TEntity> where TEntity : class
     {
         internal readonly Dictionary<string, object> properties = new Dictionary<string, object>();
         private readonly DbContext Context;
+
         internal IQueryable<TEntity> Condition { get; private set; }
         /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="context"></param>
         /// <param name="condition"></param>
-        public Updateable(DbContext context,IQueryable<TEntity> condition)
+        public Removeable(DbContext context,IQueryable<TEntity> condition)
         {
-            Condition = condition;
             Context = context;
-        }
-
-        /// <summary>
-        /// 设置更新字段
-        /// </summary>
-        /// <param name="column">设置字段值</param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException">参数异常</exception>
-        public Updateable<TEntity> SetColumn(Expression<Func<TEntity, bool>> column)
-        {
-            if (column is null)
-            {
-                throw new ArgumentNullException(nameof(column));
-            }
-            if (!(column.Body is BinaryExpression binary))
-            {
-                throw new ArgumentException(nameof(column));
-            }
-            if (binary.Left is MemberExpression && binary.Right is ConstantExpression)
-            {
-                var member = binary.Left as MemberExpression;
-                var constant = binary.Right as ConstantExpression;
-                SetPropertyValueForEntity(member, constant);
-            }
-            else if (binary.Right is MemberExpression && binary.Left is ConstantExpression)
-            {
-                var constant = binary.Left as ConstantExpression;
-                var member = binary.Right as MemberExpression;
-                SetPropertyValueForEntity(member, constant);
-            }
-            else
-            {
-                throw new ArgumentException(nameof(column));
-            }
-            return this;
+            Condition = condition;
         }
 
         /// <summary>
@@ -72,29 +39,8 @@ namespace Sparrow.Database.DAL
             {
                 return 0;
             }
-            foreach (var entity in entities)
-            {
-                foreach (var property in properties)
-                {
-                    entity.GetType().GetProperty(property.Key).SetValue(entity, property.Value);
-                }
-            }
-            Context.Set<TEntity>().UpdateRange(entities);
+            Context.Set<TEntity>().RemoveRange(entities);
             return Context.SaveChanges();
-        }
-
-        private void SetPropertyValueForEntity(MemberExpression member, ConstantExpression constant)
-        {
-            var name = member.Member.Name;
-            var value = constant.Value;
-            if (properties.TryGetValue(name, out _))
-            {
-                properties[name] = value;
-            }
-            else
-            {
-                properties.Add(name, value);
-            }
         }
 
         /// <summary>
@@ -102,18 +48,19 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Append(TEntity element)
+        public Removeable<TEntity> Append(TEntity element)
         {
             Condition = Condition.Append(element);
             return this;
         }
+
 
         /// <summary>
         /// Concatenates two sequences.
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Concat(IEnumerable<TEntity> source)
+        public Removeable<TEntity> Concat(IEnumerable<TEntity> source)
         {
             Condition = Condition.Concat(source);
             return this;
@@ -123,7 +70,7 @@ namespace Sparrow.Database.DAL
         /// Returns the elements of the specified sequence or the type parameter's default value in a singleton collection if the sequence is empty.
         /// </summary>
         /// <returns></returns>
-        public Updateable<TEntity> DefaultIfEmpty()
+        public Removeable<TEntity> DefaultIfEmpty()
         {
             Condition = Condition.DefaultIfEmpty();
             return this;
@@ -135,7 +82,7 @@ namespace Sparrow.Database.DAL
         /// <param name="defaultValue"></param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
-        public Updateable<TEntity> DefaultIfEmpty(TEntity defaultValue)
+        public Removeable<TEntity> DefaultIfEmpty(TEntity defaultValue)
         {
             Condition = Condition.DefaultIfEmpty(defaultValue);
             return this;
@@ -145,7 +92,7 @@ namespace Sparrow.Database.DAL
         /// Returns distinct elements from a sequence by using the default equality comparer to compare values.
         /// </summary>
         /// <returns></returns>
-        public Updateable<TEntity> Distinct()
+        public Removeable<TEntity> Distinct()
         {
             Condition = Condition.Distinct();
             return this;
@@ -156,7 +103,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Distinct(IEqualityComparer<TEntity> comparer)
+        public Removeable<TEntity> Distinct(IEqualityComparer<TEntity> comparer)
         {
             Condition = Condition.Distinct(comparer);
             return this;
@@ -166,7 +113,7 @@ namespace Sparrow.Database.DAL
         /// Produces the set difference of two sequences by using the default equality comparer to compare values.
         /// </summary>
         /// <returns></returns>
-        public Updateable<TEntity> Except(IEnumerable<TEntity> source)
+        public Removeable<TEntity> Except(IEnumerable<TEntity> source)
         {
             Condition = Condition.Except(source);
             return this;
@@ -178,7 +125,7 @@ namespace Sparrow.Database.DAL
         /// <param name="source"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Except(IEnumerable<TEntity> source, IEqualityComparer<TEntity> comparer)
+        public Removeable<TEntity> Except(IEnumerable<TEntity> source, IEqualityComparer<TEntity> comparer)
         {
             Condition = Condition.Except(source, comparer);
             return this;
@@ -189,7 +136,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Intersect(IEnumerable<TEntity> source)
+        public Removeable<TEntity> Intersect(IEnumerable<TEntity> source)
         {
             Condition = Condition.Intersect(source);
             return this;
@@ -201,7 +148,7 @@ namespace Sparrow.Database.DAL
         /// <param name="source"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Intersect(IEnumerable<TEntity> source, IEqualityComparer<TEntity> comparer)
+        public Removeable<TEntity> Intersect(IEnumerable<TEntity> source, IEqualityComparer<TEntity> comparer)
         {
             Condition = Condition.Intersect(source, comparer);
             return this;
@@ -212,7 +159,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Prepend(TEntity element)
+        public Removeable<TEntity> Prepend(TEntity element)
         {
             Condition = Condition.Prepend(element);
             return this;
@@ -222,7 +169,7 @@ namespace Sparrow.Database.DAL
         /// Inverts the order of the elements in a sequence.
         /// </summary>
         /// <returns></returns>
-        public Updateable<TEntity> Reverse()
+        public Removeable<TEntity> Reverse()
         {
             Condition = Condition.Reverse();
             return this;
@@ -233,7 +180,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        public Updateable<TEntity> SkipLast(int count)
+        public Removeable<TEntity> SkipLast(int count)
         {
             Condition = Condition.SkipLast(count);
             return this;
@@ -244,7 +191,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Updateable<TEntity> SkipWhile(Expression<Func<TEntity, bool>> predicate)
+        public Removeable<TEntity> SkipWhile(Expression<Func<TEntity, bool>> predicate)
         {
             Condition = Condition.SkipWhile(predicate);
             return this;
@@ -255,7 +202,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Updateable<TEntity> SkipWhile(Expression<Func<TEntity, int, bool>> predicate)
+        public Removeable<TEntity> SkipWhile(Expression<Func<TEntity, int, bool>> predicate)
         {
             Condition = Condition.SkipWhile(predicate);
             return this;
@@ -266,7 +213,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Skip(int count)
+        public Removeable<TEntity> Skip(int count)
         {
             Condition = Condition.Skip(count);
             return this;
@@ -277,7 +224,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        public Updateable<TEntity> TakeLast(int count)
+        public Removeable<TEntity> TakeLast(int count)
         {
             Condition = Condition.TakeLast(count);
             return this;
@@ -288,7 +235,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Updateable<TEntity> TakeWhile(Expression<Func<TEntity, bool>> predicate)
+        public Removeable<TEntity> TakeWhile(Expression<Func<TEntity, bool>> predicate)
         {
             Condition = Condition.TakeWhile(predicate);
             return this;
@@ -299,7 +246,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Updateable<TEntity> TakeWhile(Expression<Func<TEntity, int, bool>> predicate)
+        public Removeable<TEntity> TakeWhile(Expression<Func<TEntity, int, bool>> predicate)
         {
             Condition = Condition.TakeWhile(predicate);
             return this;
@@ -310,7 +257,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Take(int count)
+        public Removeable<TEntity> Take(int count)
         {
             Condition = Condition.Take(count);
             return this;
@@ -321,7 +268,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Union(IEnumerable<TEntity> source)
+        public Removeable<TEntity> Union(IEnumerable<TEntity> source)
         {
             Condition = Condition.Union(source);
             return this;
@@ -333,7 +280,7 @@ namespace Sparrow.Database.DAL
         /// <param name="source"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Union(IEnumerable<TEntity> source, IEqualityComparer<TEntity> comparer)
+        public Removeable<TEntity> Union(IEnumerable<TEntity> source, IEqualityComparer<TEntity> comparer)
         {
             Condition = Condition.Union(source, comparer);
             return this;
@@ -344,7 +291,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
+        public Removeable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
         {
             Condition = Condition.Where(predicate);
             return this;
@@ -355,7 +302,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Updateable<TEntity> Where(Expression<Func<TEntity, int, bool>> predicate)
+        public Removeable<TEntity> Where(Expression<Func<TEntity, int, bool>> predicate)
         {
             Condition = Condition.Where(predicate);
             return this;
