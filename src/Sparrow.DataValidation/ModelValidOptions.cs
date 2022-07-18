@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 
 namespace Sparrow.DataValidation
 {
@@ -9,33 +8,26 @@ namespace Sparrow.DataValidation
     /// </summary>
     public class ModelValidOptions
     {
-        internal static readonly Dictionary<string, Func<ModelValidErrorInfo[], IActionResult>> FormatErrorInfos = new Dictionary<string, Func<ModelValidErrorInfo[], IActionResult>>();
-
-        /// <summary>
-        /// 默认格式化函数Key
-        /// </summary>
-        internal const string DefaultFormatFuncKey = "PSoil7G35egZ";
-
         /// <summary>
         /// 添加默认格式化错误信息
         /// </summary>
-        public static void AddDefaultFormatErrorInfo(Func<ModelValidErrorInfo[], IActionResult> func)
+        public void AddDefaultFormatErrors(Func<ModelValidErrorInfo[], IActionResult> func)
         {
             if (func is null)
             {
                 throw new ArgumentNullException($"{nameof(func)}");
             }
-            if (FormatErrorInfos.ContainsKey(DefaultFormatFuncKey))
+            if (ModelValidStaticValues.FormatErrors.ContainsKey(ModelValidStaticValues.DefaultFormatKey))
             {
-                throw new ArgumentException($"已存在key为{DefaultFormatFuncKey}的格式化函数");
+                throw new ArgumentException($"已存在key为{ModelValidStaticValues.DefaultFormatKey}的格式化函数");
             }
-            FormatErrorInfos.Add(DefaultFormatFuncKey, func);
+            ModelValidStaticValues.FormatErrors.Add(ModelValidStaticValues.DefaultFormatKey, func);
         }
 
         /// <summary>
         /// 添加格式化错误信息
         /// </summary>
-        public static void AddFormatErrorInfo(string key, Func<ModelValidErrorInfo[], IActionResult> func)
+        public void AddFormatErrors(string key, Func<ModelValidErrorInfo[], IActionResult> func)
         {
             if (func is null)
             {
@@ -45,11 +37,11 @@ namespace Sparrow.DataValidation
             {
                 throw new ArgumentException($"参数{nameof(key)}的值无效");
             }
-            if (FormatErrorInfos.ContainsKey(key))
+            if (ModelValidStaticValues.FormatErrors.ContainsKey(key))
             {
                 throw new ArgumentException($"已存在{nameof(key)}为{key}的格式化函数");
             }
-            FormatErrorInfos.Add(key, func);
+            ModelValidStaticValues.FormatErrors.Add(key, func);
         }
     }
 }

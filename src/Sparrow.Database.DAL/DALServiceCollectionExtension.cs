@@ -29,11 +29,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<DALFactory<TDbContext>>();
             services.AddSingleton<IDALFactory<TDbContext>, DALFactory<TDbContext>>();
             services.AddSingleton<IDALFactory, DALFactory>();
-            Register<TDbContext>(services);
+            Register(services);
             return services;
         }
 
-        private static void Register<TDbContext>(IServiceCollection services) where TDbContext : DbContext
+        private static void Register(IServiceCollection services)
         {
             var types = new List<Type>();
             var libraries = DependencyContext.Default.RuntimeLibraries
@@ -45,13 +45,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(name);
                 types.AddRange(assembly.GetTypes());
             }
+            var guid = typeof(BaseDAL<>).GUID;
             foreach (var type in types)
             {
                 if (!type.IsClass)
                 {
                     continue;
                 }
-                if (!typeof(BaseDAL<TDbContext>).IsAssignableFrom(type))
+                if (type.BaseType.GUID != guid)
                 {
                     continue;
                 }

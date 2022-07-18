@@ -11,7 +11,7 @@ namespace Sparrow.Database.DAL
     /// </summary>
     public static class QueryableExtension
     {
-        
+
         /// <summary>
         /// 获取第一条数据并映射到指定类型
         /// </summary>
@@ -77,7 +77,7 @@ namespace Sparrow.Database.DAL
                 return selfMapper.Map<TDest>(data);
             }
         }
-        
+
         /// <summary>
         /// 获取数据列表并映射到指定类型列表
         /// </summary>

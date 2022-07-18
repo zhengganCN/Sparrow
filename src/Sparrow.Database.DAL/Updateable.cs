@@ -20,7 +20,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="context"></param>
         /// <param name="condition"></param>
-        public Updateable(DbContext context,IQueryable<TEntity> condition)
+        public Updateable(DbContext context, IQueryable<TEntity> condition)
         {
             Condition = condition;
             Context = context;

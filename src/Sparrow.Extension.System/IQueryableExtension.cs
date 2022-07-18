@@ -18,7 +18,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="source2"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Concat<TSource>(this IQueryable<TSource> source1,bool condition, IEnumerable<TSource> source2)
+        public static IQueryable<TSource> Concat<TSource>(this IQueryable<TSource> source1, bool condition, IEnumerable<TSource> source2)
         {
             return condition ? source1.Concat(source2) : source1;
         }
@@ -44,7 +44,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> DefaultIfEmpty<TSource>(this IQueryable<TSource> source,bool condition, TSource defaultValue)
+        public static IQueryable<TSource> DefaultIfEmpty<TSource>(this IQueryable<TSource> source, bool condition, TSource defaultValue)
         {
             return condition ? source.DefaultIfEmpty(defaultValue) : source;
         }
@@ -55,7 +55,7 @@ namespace Sparrow.Extension.System
         /// <param name="source"></param>
         /// <param name="condition"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Distinct<TSource>(this IQueryable<TSource> source,bool condition)
+        public static IQueryable<TSource> Distinct<TSource>(this IQueryable<TSource> source, bool condition)
         {
             return condition ? source.Distinct() : source;
         }
@@ -69,7 +69,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Distinct<TSource>(this IQueryable<TSource> source,bool condition, IEqualityComparer<TSource> comparer)
+        public static IQueryable<TSource> Distinct<TSource>(this IQueryable<TSource> source, bool condition, IEqualityComparer<TSource> comparer)
         {
             return condition ? source.Distinct(comparer) : source;
         }
@@ -83,7 +83,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="source2"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Except<TSource>(this IQueryable<TSource> source,bool condition, IEnumerable<TSource> source2)
+        public static IQueryable<TSource> Except<TSource>(this IQueryable<TSource> source, bool condition, IEnumerable<TSource> source2)
         {
             return condition ? source.Except(source2) : source;
         }
@@ -97,7 +97,7 @@ namespace Sparrow.Extension.System
         /// <param name="source2"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Except<TSource>(this IQueryable<TSource> source,bool condition, IEnumerable<TSource> source2, IEqualityComparer<TSource> comparer)
+        public static IQueryable<TSource> Except<TSource>(this IQueryable<TSource> source, bool condition, IEnumerable<TSource> source2, IEqualityComparer<TSource> comparer)
         {
             return condition ? source.Except(source2, comparer) : source;
         }
@@ -110,7 +110,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="source2"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Intersect<TSource>(this IQueryable<TSource> source1,bool condition, IEnumerable<TSource> source2)
+        public static IQueryable<TSource> Intersect<TSource>(this IQueryable<TSource> source1, bool condition, IEnumerable<TSource> source2)
         {
             return condition ? source1.Intersect(source2) : source1;
         }
@@ -135,7 +135,7 @@ namespace Sparrow.Extension.System
         /// <param name="source"></param>
         /// <param name="condition"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Reverse<TSource>(this IQueryable<TSource> source,bool condition)
+        public static IQueryable<TSource> Reverse<TSource>(this IQueryable<TSource> source, bool condition)
         {
             return condition ? source.Reverse() : source;
         }
@@ -148,7 +148,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Skip<TSource>(this IQueryable<TSource> source,bool condition, int count)
+        public static IQueryable<TSource> Skip<TSource>(this IQueryable<TSource> source, bool condition, int count)
         {
             return condition ? source.Skip(count) : source;
         }
@@ -161,7 +161,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> SkipWhile<TSource>(this IQueryable<TSource> source,bool condition, Expression<Func<TSource, int, bool>> predicate)
+        public static IQueryable<TSource> SkipWhile<TSource>(this IQueryable<TSource> source, bool condition, Expression<Func<TSource, int, bool>> predicate)
         {
             return condition ? source.SkipWhile(predicate) : source;
         }
@@ -174,7 +174,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> SkipWhile<TSource>(this IQueryable<TSource> source,bool condition, Expression<Func<TSource, bool>> predicate)
+        public static IQueryable<TSource> SkipWhile<TSource>(this IQueryable<TSource> source, bool condition, Expression<Func<TSource, bool>> predicate)
         {
             return condition ? source.SkipWhile(predicate) : source;
         }
@@ -188,7 +188,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Take<TSource>(this IQueryable<TSource> source,bool condition, int count)
+        public static IQueryable<TSource> Take<TSource>(this IQueryable<TSource> source, bool condition, int count)
         {
             return condition ? source.Take(count) : source;
         }
@@ -201,7 +201,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> TakeWhile<TSource>(this IQueryable<TSource> source,bool condition, Expression<Func<TSource, bool>> predicate)
+        public static IQueryable<TSource> TakeWhile<TSource>(this IQueryable<TSource> source, bool condition, Expression<Func<TSource, bool>> predicate)
         {
             return condition ? source.TakeWhile(predicate) : source;
         }
@@ -214,7 +214,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> TakeWhile<TSource>(this IQueryable<TSource> source,bool condition, Expression<Func<TSource, int, bool>> predicate)
+        public static IQueryable<TSource> TakeWhile<TSource>(this IQueryable<TSource> source, bool condition, Expression<Func<TSource, int, bool>> predicate)
         {
             return condition ? source.TakeWhile(predicate) : source;
         }
@@ -228,7 +228,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="source2"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Union<TSource>(this IQueryable<TSource> source1,bool condition, IEnumerable<TSource> source2)
+        public static IQueryable<TSource> Union<TSource>(this IQueryable<TSource> source1, bool condition, IEnumerable<TSource> source2)
         {
             return condition ? source1.Union(source2) : source1;
         }
@@ -242,9 +242,9 @@ namespace Sparrow.Extension.System
         /// <param name="source2"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Union<TSource>(this IQueryable<TSource> source1,bool condition, IEnumerable<TSource> source2, IEqualityComparer<TSource> comparer)
+        public static IQueryable<TSource> Union<TSource>(this IQueryable<TSource> source1, bool condition, IEnumerable<TSource> source2, IEqualityComparer<TSource> comparer)
         {
-            return condition ? source1.Union(source2,comparer) : source1;
+            return condition ? source1.Union(source2, comparer) : source1;
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Where<TSource>(this IQueryable<TSource> source,bool condition, Expression<Func<TSource, int, bool>> predicate)
+        public static IQueryable<TSource> Where<TSource>(this IQueryable<TSource> source, bool condition, Expression<Func<TSource, int, bool>> predicate)
         {
             return condition ? source.Where(predicate) : source;
         }
@@ -268,7 +268,7 @@ namespace Sparrow.Extension.System
         /// <param name="condition"></param>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public static IQueryable<TSource> Where<TSource>(this IQueryable<TSource> source,bool condition, Expression<Func<TSource, bool>> predicate)
+        public static IQueryable<TSource> Where<TSource>(this IQueryable<TSource> source, bool condition, Expression<Func<TSource, bool>> predicate)
         {
             return condition ? source.Where(predicate) : source;
         }

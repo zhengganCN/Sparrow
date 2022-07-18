@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Sparrow.Database.DAL
 {
@@ -22,7 +21,7 @@ namespace Sparrow.Database.DAL
         /// </summary>
         /// <param name="context"></param>
         /// <param name="condition"></param>
-        public Removeable(DbContext context,IQueryable<TEntity> condition)
+        public Removeable(DbContext context, IQueryable<TEntity> condition)
         {
             Context = context;
             Condition = condition;

@@ -1,6 +1,4 @@
-﻿using Mapster;
-using MapsterMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,7 +94,7 @@ namespace Sparrow.Database.DAL
             Context.Set<TEntity>().UpdateRange(entities);
             return Context.SaveChanges();
         }
-        
+
         /// <summary>
         /// 删除数据
         /// </summary>

@@ -1,9 +1,6 @@
-﻿using MapsterMapper;
-using Sparrow.Database.DAL.Test.Entities;
-using System;
+﻿using Sparrow.Database.DAL.Test.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Sparrow.Database.DAL.Test.DALs
 {

@@ -15,7 +15,7 @@ namespace Sparrow.DataValidation
         /// <summary>
         /// 格式化函数Key;ModelValidOptions中设置的格式化函数key
         /// </summary>
-        public string FormatFuncKey { get; set; }
+        public string FormatKey { get; set; }
 
         /// <summary>
         /// 验证逻辑
@@ -37,27 +37,23 @@ namespace Sparrow.DataValidation
                     });
                 }
                 Func<ModelValidErrorInfo[], IActionResult> func;
-                var pairs = ModelValidOptions.FormatErrorInfos;
-                if (pairs.TryGetValue(ModelValidOptions.DefaultFormatFuncKey, out func))
+                var formats = ModelValidStaticValues.FormatErrors;
+                if (string.IsNullOrWhiteSpace(FormatKey))
                 {
-                    context.Result = func.Invoke(list.ToArray());
+                    if (formats.TryGetValue(ModelValidStaticValues.DefaultFormatKey, out func))
+                    {
+                        context.Result = func.Invoke(list.ToArray());
+                    }
                 }
                 else
                 {
-                    if (string.IsNullOrWhiteSpace(FormatFuncKey))
+                    if (formats.TryGetValue(FormatKey, out func))
                     {
-                        context.Result = new JsonResult(list);
+                        context.Result = func.Invoke(list.ToArray());
                     }
                     else
                     {
-                        if (pairs.TryGetValue(FormatFuncKey, out func))
-                        {
-                            context.Result = func.Invoke(list.ToArray());
-                        }
-                        else
-                        {
-                            context.Result = new JsonResult(list);
-                        }
+                        context.Result = new JsonResult(list);
                     }
                 }
             }
