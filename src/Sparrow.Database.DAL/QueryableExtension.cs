@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MapsterMapper;
+using Sparrow.StandardResult;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,14 +124,7 @@ namespace Sparrow.Database.DAL
         {
             var count = condition.Count();
             var list = condition.Skip((index - 1) * size).Take(size).ToList();
-            return new Pagination<TEntity>
-            {
-                List = list,
-                PageSize = size,
-                PageCount = (int)Math.Ceiling((double)count / size),
-                PageIndex = index,
-                Count = count
-            };
+            return Pagination.GetPagination(list, count, index, size);
         }
         /// <summary>
         /// 分页获取数据列表并映射到指定类型列表
@@ -144,14 +138,8 @@ namespace Sparrow.Database.DAL
         public static Pagination<TDest> ToPagination<TEntity, TDest>(this IQueryable<TEntity> condition, int index, int size)
         {
             var pagination = ToPagination(condition, index, size);
-            return new Pagination<TDest>
-            {
-                PageCount = pagination.PageCount,
-                PageIndex = pagination.PageIndex,
-                Count = pagination.Count,
-                PageSize = pagination.PageSize,
-                List = new Mapper().Map<List<TDest>>(pagination.List)
-            };
+            var dest = new Mapper().Map<List<TDest>>(pagination.List);
+            return Pagination.GetPagination(dest, pagination.Count, pagination.PageIndex, pagination.PageSize);
         }
 
         /// <summary>
@@ -177,14 +165,7 @@ namespace Sparrow.Database.DAL
                 var selfMapper = new Mapper(config);
                 list = selfMapper.Map<List<TDest>>(pagination.List);
             }
-            return new Pagination<TDest>
-            {
-                PageCount = pagination.PageCount,
-                PageIndex = pagination.PageIndex,
-                Count = pagination.Count,
-                PageSize = pagination.PageSize,
-                List = list
-            };
+            return Pagination.GetPagination(list, pagination.Count, pagination.PageIndex, pagination.PageSize);
         }
     }
 }

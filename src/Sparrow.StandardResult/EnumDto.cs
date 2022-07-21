@@ -37,7 +37,22 @@ namespace Sparrow.StandardResult
             /// 权限不足
             /// </summary>
             [Description("权限不足")]
-            InsufficientAuthoritys = 100002
+            InsufficientAuthoritys = 100002,
+            /// <summary>
+            /// 未登录
+            /// </summary>
+            [Description("未登录")]
+            UnLogin = 100003,
+            /// <summary>
+            /// 无效令牌
+            /// </summary>
+            [Description("无效令牌")]
+            InvalidToken = 100004,
+            /// <summary>
+            /// 令牌验证不通过
+            /// </summary>
+            [Description("令牌验证不通过")]
+            TokenValidFaild = 100005
         }
         /// <summary>
         /// 数据验证结果提示枚举
@@ -103,12 +118,12 @@ namespace Sparrow.StandardResult
         public enum EnumException
         {
             /// <summary>
-            /// 服务器异常，请稍后再试
+            /// 服务异常，请稍后再试
             /// </summary>
             [Description("服务异常，请稍后再试")]
             ServerError = 103000,
             /// <summary>
-            /// 服务器繁忙，请稍后再试
+            /// 服务繁忙，请稍后再试
             /// </summary>
             [Description("服务繁忙，请稍后再试")]
             ServerBusy = 103001
