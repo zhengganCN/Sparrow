@@ -18,9 +18,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// 添加DAL
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="services">服务集合</param>
+        /// <param name="assemblies">IDAL实现类所处的程序集</param>
         /// <returns></returns>
-        public static IServiceCollection AddDAL<TDbContext>(this IServiceCollection services)
+        public static IServiceCollection AddDAL<TDbContext>(this IServiceCollection services, Assembly[] assemblies = null)
             where TDbContext : DbContext
         {
             services.AddSingleton<IMapper, Mapper>();
@@ -28,19 +29,19 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<BaseDAL<TDbContext>>();
             services.AddScoped<DALFactory>();
             services.AddScoped<IDALFactory, DALFactory>();
-            Register(services);
+            Register(services, assemblies);
             return services;
         }
 
-        private static void Register(IServiceCollection services)
+        private static void Register(IServiceCollection services, Assembly[] assemblies)
         {
-            var types = new List<Type>();
-            var libraries = DependencyContext.Default.RuntimeLibraries
-                .ToList();
-            foreach (var library in libraries)
+            if (assemblies is null || !assemblies.Any())
             {
-                var name = new AssemblyName(library.Name);
-                var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(name);
+                return;
+            }
+            var types = new List<Type>();
+            foreach (var assembly in assemblies)
+            {
                 foreach (var type in assembly.GetTypes())
                 {
                     if (type.GetInterfaces().Any(e => e.Name == nameof(IDAL)))
@@ -49,7 +50,6 @@ namespace Microsoft.Extensions.DependencyInjection
                     }
                 }
             }
-           
             foreach (var type in types)
             {
                 if (!type.IsClass)
