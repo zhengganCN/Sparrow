@@ -8,12 +8,13 @@ namespace Sparrow.Database.DAL
     /// <summary>
     /// 数据访问基类
     /// </summary>
-    public class BaseDAL<TDbContext> : IDisposable where TDbContext : DbContext
+    public class BaseDAL<TDbContext> : IDAL where TDbContext : DbContext
     {
         /// <summary>
         /// 数据库上下文
         /// </summary>
         public TDbContext Context { get; }
+
         /// <summary>
         /// 初始化
         /// </summary>
@@ -21,6 +22,16 @@ namespace Sparrow.Database.DAL
         {
             Context = context;
         }
+
+        /// <summary>
+        /// 数据库上下文
+        /// </summary>
+        /// <returns></returns>
+        public DbContext GetDbContext()
+        {
+            return Context;
+        }
+
         /// <summary>
         /// 提供针对特定数据源评估查询的功能
         /// </summary>

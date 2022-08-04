@@ -42,23 +42,55 @@ namespace Sparrow.Database.DAL
             {
                 throw new ArgumentException(nameof(column));
             }
-            if (binary.Left is MemberExpression && binary.Right is ConstantExpression)
+            object value = null;
+            if (IsParameter(binary.Left, out string name))
             {
-                var member = binary.Left as MemberExpression;
-                var constant = binary.Right as ConstantExpression;
-                SetPropertyValueForEntity(member, constant);
+                value = Expression.Lambda(binary.Right).Compile().DynamicInvoke();
             }
-            else if (binary.Right is MemberExpression && binary.Left is ConstantExpression)
+            else if(IsParameter(binary.Right, out name))
             {
-                var constant = binary.Left as ConstantExpression;
-                var member = binary.Right as MemberExpression;
-                SetPropertyValueForEntity(member, constant);
+                value = Expression.Lambda(binary.Left).Compile().DynamicInvoke();
+            }
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                if (properties.TryGetValue(name, out _))
+                {
+                    properties[name] = value;
+                }
+                else
+                {
+                    properties.Add(name, value);
+                }
+            }
+            return this;
+        }
+
+        private static bool IsParameter(Expression expression,out string name)
+        {
+            name = default;
+            if (expression.NodeType == ExpressionType.MemberAccess)
+            {
+                if (!(expression is MemberExpression member))
+                {
+                    return false;
+                }
+                else
+                {
+                    if (member.Expression.NodeType == ExpressionType.Parameter)
+                    {
+                        name = member.Member.Name;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
             }
             else
             {
-                throw new ArgumentException(nameof(column));
+                return false;
             }
-            return this;
         }
 
         /// <summary>
@@ -81,21 +113,7 @@ namespace Sparrow.Database.DAL
             }
             Context.Set<TEntity>().UpdateRange(entities);
             return Context.SaveChanges();
-        }
-
-        private void SetPropertyValueForEntity(MemberExpression member, ConstantExpression constant)
-        {
-            var name = member.Member.Name;
-            var value = constant.Value;
-            if (properties.TryGetValue(name, out _))
-            {
-                properties[name] = value;
-            }
-            else
-            {
-                properties.Add(name, value);
-            }
-        }
+        }       
 
         /// <summary>
         /// 

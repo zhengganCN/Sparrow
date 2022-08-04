@@ -6,9 +6,8 @@ namespace Sparrow.Database.DAL.Test
 {
     internal class DALFactoryTest
     {
-        private DALFactory<Test1DbContext> factory1;
-        private IDALFactory<Test2DbContext> factory2;
-        private DALFactory<Test3DbContext> factory3;
+        private DALFactory factory1;
+        private IDALFactory factory2;
 
         [SetUp]
         public void Setup()
@@ -18,9 +17,8 @@ namespace Sparrow.Database.DAL.Test
             services.AddDAL<Test2DbContext>();
             services.AddDAL<Test3DbContext>();
             var provider = services.BuildServiceProvider();
-            factory1 = provider.GetService<DALFactory<Test1DbContext>>();
-            factory2 = provider.GetService<IDALFactory<Test2DbContext>>();
-            factory3 = provider.GetService<DALFactory<Test3DbContext>>();
+            factory1 = provider.GetService<DALFactory>();
+            factory2 = provider.GetService<IDALFactory>();
         }
 
         [Test]

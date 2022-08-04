@@ -26,9 +26,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<IMapper, Mapper>();
             services.AddDbContext<TDbContext>();
             services.AddScoped<BaseDAL<TDbContext>>();
-            services.AddSingleton<DALFactory<TDbContext>>();
-            services.AddSingleton<IDALFactory<TDbContext>, DALFactory<TDbContext>>();
-            services.AddSingleton<IDALFactory, DALFactory>();
+            services.AddScoped<DALFactory>();
+            services.AddScoped<IDALFactory, DALFactory>();
             Register(services);
             return services;
         }
@@ -37,22 +36,23 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var types = new List<Type>();
             var libraries = DependencyContext.Default.RuntimeLibraries
-                .Where(entity => entity.Type == "project")
                 .ToList();
             foreach (var library in libraries)
             {
                 var name = new AssemblyName(library.Name);
                 var assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(name);
-                types.AddRange(assembly.GetTypes());
+                foreach (var type in assembly.GetTypes())
+                {
+                    if (type.GetInterfaces().Any(e => e.Name == nameof(IDAL)))
+                    {
+                        types.Add(type);
+                    }
+                }
             }
-            var guid = typeof(BaseDAL<>).GUID;
+           
             foreach (var type in types)
             {
                 if (!type.IsClass)
-                {
-                    continue;
-                }
-                if (type.BaseType.GUID != guid)
                 {
                     continue;
                 }
