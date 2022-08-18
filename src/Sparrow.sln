@@ -83,6 +83,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Logger", "Sparrow.L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.StandardResult.Test", "Sparrow.StandardResult.Test\Sparrow.StandardResult.Test.csproj", "{A877C4FD-C636-4DCD-B298-162B2A614ECB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.StandardResult.WebTest", "Sparrow.StandardResult.WebTest\Sparrow.StandardResult.WebTest.csproj", "{BF4D5866-1FA0-4AF7-A7BD-0DCB424ACF74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.StandardResult.Web", "Sparrow.StandardResult.Web\Sparrow.StandardResult.Web.csproj", "{24A088B5-E07A-4F75-A59D-09800B7688B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,6 +201,14 @@ Global
 		{A877C4FD-C636-4DCD-B298-162B2A614ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A877C4FD-C636-4DCD-B298-162B2A614ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A877C4FD-C636-4DCD-B298-162B2A614ECB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF4D5866-1FA0-4AF7-A7BD-0DCB424ACF74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF4D5866-1FA0-4AF7-A7BD-0DCB424ACF74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF4D5866-1FA0-4AF7-A7BD-0DCB424ACF74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF4D5866-1FA0-4AF7-A7BD-0DCB424ACF74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24A088B5-E07A-4F75-A59D-09800B7688B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24A088B5-E07A-4F75-A59D-09800B7688B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24A088B5-E07A-4F75-A59D-09800B7688B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24A088B5-E07A-4F75-A59D-09800B7688B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -229,6 +241,8 @@ Global
 		{07110783-F692-4765-B3C9-0C57DFF9C16D} = {414D5FCA-F8C2-4A6E-93E7-2CA7341D8AC0}
 		{05D4FFC2-D669-43FA-BB55-2FFDA0C30C90} = {FA4BB18E-861B-456E-9E80-6F76C297160C}
 		{A877C4FD-C636-4DCD-B298-162B2A614ECB} = {32B8E9B7-3447-4FFA-9414-EED6A2D87D9A}
+		{BF4D5866-1FA0-4AF7-A7BD-0DCB424ACF74} = {32B8E9B7-3447-4FFA-9414-EED6A2D87D9A}
+		{24A088B5-E07A-4F75-A59D-09800B7688B7} = {32B8E9B7-3447-4FFA-9414-EED6A2D87D9A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}
