@@ -1,4 +1,5 @@
 ﻿using Sparrow.Extension.System;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Sparrow.StandardResult
 {
@@ -7,13 +8,14 @@ namespace Sparrow.StandardResult
     /// </summary>
     public class Dto : BaseDto
     {
+        private readonly StandardResultOption option;
         /// <summary>
         /// 初始化
         /// </summary>
-        /// <param name="type">时间格式类型</param>
-        public Dto(EnumTimeType type = EnumTimeType.Timestamp) : base(type)
+        /// <param name="key">标识</param>
+        public Dto(string key = StandardResultValues.DefaultKey)
         {
-
+            option = StandardResultValues.StandardResultOptions[key];
         }
         /// <summary>
         /// 数据
@@ -27,8 +29,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult()
         {
-            var message = EnumDto.EnumResult.Success.GetDescription();
-            SuccessResult(default, message, (int)EnumDto.EnumResult.Success);
+            SuccessResult(default, option.SuccessMessage, option.SuccessCode);
         }
         /// <summary>
         /// 成功
@@ -37,8 +38,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult(object data)
         {
-            var message = EnumDto.EnumResult.Success.GetDescription();
-            SuccessResult(data, message, (int)EnumDto.EnumResult.Success);
+            SuccessResult(data, option.SuccessMessage, option.SuccessCode);
         }
         /// <summary>
         /// 成功
@@ -48,7 +48,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult(object data, string message)
         {
-            SuccessResult(data, message, (int)EnumDto.EnumResult.Success);
+            SuccessResult(data, message, option.SuccessCode);
         }
         /// <summary>
         /// 成功
@@ -57,71 +57,23 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public void SuccessResult(object data, string message, int code)
+        public void SuccessResult(object data, string message, string code)
         {
             Data = data;
             Message = message;
             Code = code;
+            Time = option.Time.Invoke();
         }
         #endregion
 
-        #region SuccessResultStatic
-        /// <summary>
-        /// 成功
-        /// </summary>
-        /// <returns></returns>
-        public static Dto SuccessResultStatic()
-        {
-            var message = EnumDto.EnumResult.Success.GetDescription();
-            return SuccessResultStatic(default, message, (int)EnumDto.EnumResult.Success);
-        }
-        /// <summary>
-        /// 成功
-        /// </summary>
-        /// <param name="data">数据</param>
-        /// <returns></returns>
-        public static Dto SuccessResultStatic(object data)
-        {
-            var message = EnumDto.EnumResult.Success.GetDescription();
-            return SuccessResultStatic(data, message, (int)EnumDto.EnumResult.Success);
-        }
-        /// <summary>
-        /// 成功
-        /// </summary>
-        /// <param name="data">数据</param>
-        /// <param name="message">消息</param>
-        /// <returns></returns>
-        public static Dto SuccessResultStatic(object data, string message)
-        {
-            return SuccessResultStatic(data, message, (int)EnumDto.EnumResult.Success);
-        }
-        /// <summary>
-        /// 成功
-        /// </summary>
-        /// <param name="data">数据</param>
-        /// <param name="message">消息</param>
-        /// <param name="code">代码</param>
-        /// <returns></returns>
-        public static Dto SuccessResultStatic(object data, string message, int code)
-        {
-            var dto = new Dto
-            {
-                Data = data,
-                Message = message,
-                Code = code
-            };
-            return dto;
-        }
-        #endregion
-        #region FailResultStatic
+        #region FailResult
         /// <summary>
         /// 失败
         /// </summary>
         /// <returns></returns>
-        public static Dto FailResultStatic()
+        public void FailResult()
         {
-            var message = EnumDto.EnumResult.Error.GetDescription();
-            return FailResultStatic(message, (int)EnumDto.EnumResult.Error);
+            FailResult(option.FailMessage, option.FailCode, null);
         }
 
         /// <summary>
@@ -129,27 +81,84 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public static Dto FailResultStatic(string message)
+        public void FailResult(string message)
         {
-            return FailResultStatic(message, (int)EnumDto.EnumResult.Error);
+            FailResult(message, option.FailCode, null);
         }
+
         /// <summary>
         /// 失败
         /// </summary>
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public static Dto FailResultStatic(string message, int code)
+        public void FailResult(string message, string code)
         {
-            var dto = new Dto
-            {
-                Message = message,
-                Code = code
-            };
-            return dto;
+            FailResult(message, code, null);
+        }
+
+        /// <summary>
+        /// 失败
+        /// </summary>
+        /// <param name="message">消息</param>
+        /// <param name="code">代码</param>
+        /// <param name="data">数据</param>
+        /// <returns></returns>
+        public void FailResult(string message, string code, object data)
+        {
+            Message = message;
+            Code = code;
+            Data = data;
+            Time = option.Time.Invoke();
         }
         #endregion
 
+        #region ExceptionResult
+        /// <summary>
+        /// 异常
+        /// </summary>
+        /// <returns></returns>
+        public void ExceptionResult()
+        {
+            ExceptionResult(option.ExceptionMessage, option.ExceptionCode, null);
+        }
+
+        /// <summary>
+        /// 异常
+        /// </summary>
+        /// <param name="message">消息</param>
+        /// <returns></returns>
+        public void ExceptionResult(string message)
+        {
+            ExceptionResult(message, option.ExceptionCode, null);
+        }
+
+        /// <summary>
+        /// 异常
+        /// </summary>
+        /// <param name="message">消息</param>
+        /// <param name="code">代码</param>
+        /// <returns></returns>
+        public void ExceptionResult(string message, string code)
+        {
+            ExceptionResult(message, code, null);
+        }
+
+        /// <summary>
+        /// 异常
+        /// </summary>
+        /// <param name="message">消息</param>
+        /// <param name="code">代码</param>
+        /// <param name="data">数据</param>
+        /// <returns></returns>
+        public void ExceptionResult(string message, string code, object data)
+        {
+            Message = message;
+            Code = code;
+            Data = data;
+            Time = option.Time.Invoke();
+        }
+        #endregion
     }
     /// <summary>
     /// 结果模型
@@ -157,53 +166,53 @@ namespace Sparrow.StandardResult
     /// <typeparam name="T">数据类型</typeparam>
     public class Dto<T> : BaseDto
     {
+        private readonly StandardResultOption option;
         /// <summary>
         /// 初始化
         /// </summary>
-        /// <param name="type">时间格式类型</param>
-        public Dto(EnumTimeType type = EnumTimeType.Timestamp) : base(type)
+        /// <param name="key">标识</param>
+        public Dto(string key = StandardResultValues.DefaultKey)
         {
+            option = StandardResultValues.StandardResultOptions[key];
         }
         /// <summary>
         /// 数据
         /// </summary>
         public T Data { get; set; }
-
-        #region FailResultStatic
+        #region FailResult
         /// <summary>
         /// 失败
         /// </summary>
         /// <returns></returns>
-        public static Dto<T> FailResultStatic()
+        public void FailResult()
         {
-            var message = EnumDto.EnumResult.Error.GetDescription();
-            return FailResultStatic(message, (int)EnumDto.EnumResult.Error);
+            FailResult(option.FailMessage, option.FailCode);
         }
+
         /// <summary>
         /// 失败
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public static Dto<T> FailResultStatic(string message)
+        public void FailResult(string message)
         {
-            return FailResultStatic(message, (int)EnumDto.EnumResult.Error);
+            FailResult(message, option.FailCode);
         }
+
         /// <summary>
         /// 失败
         /// </summary>
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public static Dto<T> FailResultStatic(string message, int code)
+        public void FailResult(string message, string code)
         {
-            var dto = new Dto<T>
-            {
-                Message = message,
-                Code = code
-            };
-            return dto;
+            Message = message;
+            Code = code;
+            Time = option.Time.Invoke();
         }
         #endregion
+
         #region SuccessResult
         /// <summary>
         /// 成功
@@ -211,8 +220,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult()
         {
-            var message = EnumDto.EnumResult.Success.GetDescription();
-            SuccessResult(default, message, (int)EnumDto.EnumResult.Success);
+            SuccessResult(default, option.SuccessMessage, option.SuccessCode);
         }
         /// <summary>
         /// 成功
@@ -221,8 +229,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult(T data)
         {
-            var message = EnumDto.EnumResult.Success.GetDescription();
-            SuccessResult(data, message, (int)EnumDto.EnumResult.Success);
+            SuccessResult(data, option.SuccessMessage, option.SuccessCode);
         }
         /// <summary>
         /// 成功
@@ -232,7 +239,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public void SuccessResult(T data, string message)
         {
-            SuccessResult(data, message, (int)EnumDto.EnumResult.Success);
+            SuccessResult(data, message, option.SuccessCode);
         }
         /// <summary>
         /// 成功
@@ -241,59 +248,45 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public void SuccessResult(T data, string message, int code)
+        public void SuccessResult(T data, string message, string code)
         {
             Data = data;
             Message = message;
             Code = code;
+            Time = option.Time.Invoke();
         }
         #endregion
-        #region SuccessResultStatic
+        #region ExceptionResult
         /// <summary>
-        /// 成功
+        /// 异常
         /// </summary>
         /// <returns></returns>
-        public static Dto<T> SuccessResultStatic()
+        public void ExceptionResult()
         {
-            var message = EnumDto.EnumResult.Success.GetDescription();
-            return SuccessResultStatic(default, message, (int)EnumDto.EnumResult.Success);
+            ExceptionResult(option.ExceptionMessage, option.ExceptionCode);
         }
+
         /// <summary>
-        /// 成功
+        /// 异常
         /// </summary>
-        /// <param name="data">数据</param>
-        /// <returns></returns>
-        public static Dto<T> SuccessResultStatic(T data)
-        {
-            var message = EnumDto.EnumResult.Success.GetDescription();
-            return SuccessResultStatic(data, message, (int)EnumDto.EnumResult.Success);
-        }
-        /// <summary>
-        /// 成功
-        /// </summary>
-        /// <param name="data">数据</param>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public static Dto<T> SuccessResultStatic(T data, string message)
+        public void ExceptionResult(string message)
         {
-            return SuccessResultStatic(data, message, (int)EnumDto.EnumResult.Success);
+            ExceptionResult(message, option.ExceptionCode);
         }
+
         /// <summary>
-        /// 成功
+        /// 异常
         /// </summary>
-        /// <param name="data">数据</param>
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public static Dto<T> SuccessResultStatic(T data, string message, int code)
+        public void ExceptionResult(string message, string code)
         {
-            var dto = new Dto<T>
-            {
-                Data = data,
-                Message = message,
-                Code = code
-            };
-            return dto;
+            Message = message;
+            Code = code;
+            Time = option.Time.Invoke();
         }
         #endregion
     }

@@ -79,7 +79,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Security.JsonWebTok
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logger", "Logger", "{FA4BB18E-861B-456E-9E80-6F76C297160C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Logger", "Sparrow.Logger\Sparrow.Logger.csproj", "{05D4FFC2-D669-43FA-BB55-2FFDA0C30C90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Logger", "Sparrow.Logger\Sparrow.Logger.csproj", "{05D4FFC2-D669-43FA-BB55-2FFDA0C30C90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.StandardResult.Test", "Sparrow.StandardResult.Test\Sparrow.StandardResult.Test.csproj", "{A877C4FD-C636-4DCD-B298-162B2A614ECB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -191,6 +193,10 @@ Global
 		{05D4FFC2-D669-43FA-BB55-2FFDA0C30C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05D4FFC2-D669-43FA-BB55-2FFDA0C30C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05D4FFC2-D669-43FA-BB55-2FFDA0C30C90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A877C4FD-C636-4DCD-B298-162B2A614ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A877C4FD-C636-4DCD-B298-162B2A614ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A877C4FD-C636-4DCD-B298-162B2A614ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A877C4FD-C636-4DCD-B298-162B2A614ECB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -222,6 +228,7 @@ Global
 		{CA67C7B8-407B-4240-9142-4F977B038327} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 		{07110783-F692-4765-B3C9-0C57DFF9C16D} = {414D5FCA-F8C2-4A6E-93E7-2CA7341D8AC0}
 		{05D4FFC2-D669-43FA-BB55-2FFDA0C30C90} = {FA4BB18E-861B-456E-9E80-6F76C297160C}
+		{A877C4FD-C636-4DCD-B298-162B2A614ECB} = {32B8E9B7-3447-4FFA-9414-EED6A2D87D9A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}
