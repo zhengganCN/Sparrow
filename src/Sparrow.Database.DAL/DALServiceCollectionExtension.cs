@@ -1,12 +1,10 @@
 ﻿using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyModel;
 using Sparrow.Database.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Loader;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

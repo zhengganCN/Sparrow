@@ -1,5 +1,4 @@
-﻿using Sparrow.Extension.System;
-using System.Runtime.InteropServices.ComTypes;
+﻿using System.Text.Json;
 
 namespace Sparrow.StandardResult
 {
@@ -159,6 +158,30 @@ namespace Sparrow.StandardResult
             Time = option.Time.Invoke();
         }
         #endregion
+        /// <summary>
+        /// 序列化
+        /// </summary>
+        /// <returns></returns>
+        public string Serialize()
+        {
+            return Serialize(option.FormatJsonSerializerOption);
+        }
+        /// <summary>
+        /// 序列化
+        /// </summary>
+        /// <returns></returns>
+        public string Serialize(JsonSerializerOptions serializer)
+        {
+            return JsonSerializer.Serialize(option.FormatDto(this), serializer);
+        }
+        /// <summary>
+        /// 格式化
+        /// </summary>
+        /// <returns></returns>
+        public object Format()
+        {
+            return option.FormatDto(this);
+        }
     }
     /// <summary>
     /// 结果模型
@@ -167,12 +190,14 @@ namespace Sparrow.StandardResult
     public class Dto<T> : BaseDto
     {
         private readonly StandardResultOption option;
+        private readonly string _key;
         /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="key">标识</param>
         public Dto(string key = StandardResultValues.DefaultKey)
         {
+            _key = key;
             option = StandardResultValues.StandardResultOptions[key];
         }
         /// <summary>
@@ -289,5 +314,47 @@ namespace Sparrow.StandardResult
             Time = option.Time.Invoke();
         }
         #endregion
+        /// <summary>
+        /// 序列化
+        /// </summary>
+        /// <returns></returns>
+        public string Serialize()
+        {
+            return Serialize(option.FormatJsonSerializerOption);
+        }
+        /// <summary>
+        /// 序列化
+        /// </summary>
+        /// <returns></returns>
+        public string Serialize(JsonSerializerOptions serializer)
+        {
+            var dto = new Dto(_key)
+            {
+                Code = Code,
+                Message = Message,
+                Data = Data,
+                Success = Success,
+                Time = Time,
+                TraceId = TraceId
+            };
+            return JsonSerializer.Serialize(option.FormatDto(dto), serializer);
+        }
+        /// <summary>
+        /// 格式化
+        /// </summary>
+        /// <returns></returns>
+        public object Format()
+        {
+            var dto = new Dto(_key)
+            {
+                Code = Code,
+                Message = Message,
+                Data = Data,
+                Success = Success,
+                Time = Time,
+                TraceId = TraceId
+            };
+            return option.FormatDto(dto);
+        }
     }
 }

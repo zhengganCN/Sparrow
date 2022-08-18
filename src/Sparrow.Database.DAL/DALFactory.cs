@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace Sparrow.Database.DAL
@@ -16,7 +15,7 @@ namespace Sparrow.Database.DAL
         /// <returns></returns>
         TDAL GetDAL<TDAL>() where TDAL : IDAL;
     }
-    
+
     /// <summary>
     /// DAL工厂
     /// </summary>

@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Unicode;
 
 namespace Sparrow.StandardResult
 {
@@ -45,6 +46,28 @@ namespace Sparrow.StandardResult
         public TimeFormat Time { get; set; } = () =>
         {
             return ((long)(DateTime.UtcNow - StandardResultValues.DateTime1970).TotalMilliseconds).ToString();
+        };
+        /// <summary>
+        /// <see cref="Dto"/>格式化委托
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public delegate object DtoFormat(Dto dto);
+        /// <summary>
+        /// <see cref="Dto"/>格式化
+        /// </summary>
+        public DtoFormat FormatDto { get; set; } = (dto) =>
+        {
+            return dto;
+        };
+        /// <summary>
+        /// <see cref="Dto"/>格式化
+        /// </summary>
+        public JsonSerializerOptions FormatJsonSerializerOption { get; set; } = new JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
         };
     }
 }

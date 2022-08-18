@@ -22,7 +22,7 @@ namespace Sparrow.StandardResult
         /// <summary>
         /// 跟踪ID
         /// </summary>
-        public string TraceId { get; } = Guid.NewGuid().ToString();
+        public string TraceId { get; internal set; } = Guid.NewGuid().ToString();
         /// <summary>
         /// 时间
         /// </summary>

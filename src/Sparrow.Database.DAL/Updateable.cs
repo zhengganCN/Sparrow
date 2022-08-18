@@ -47,7 +47,7 @@ namespace Sparrow.Database.DAL
             {
                 value = Expression.Lambda(binary.Right).Compile().DynamicInvoke();
             }
-            else if(IsParameter(binary.Right, out name))
+            else if (IsParameter(binary.Right, out name))
             {
                 value = Expression.Lambda(binary.Left).Compile().DynamicInvoke();
             }
@@ -65,7 +65,7 @@ namespace Sparrow.Database.DAL
             return this;
         }
 
-        private static bool IsParameter(Expression expression,out string name)
+        private static bool IsParameter(Expression expression, out string name)
         {
             name = default;
             if (expression.NodeType == ExpressionType.MemberAccess)
@@ -113,7 +113,7 @@ namespace Sparrow.Database.DAL
             }
             Context.Set<TEntity>().UpdateRange(entities);
             return Context.SaveChanges();
-        }       
+        }
 
         /// <summary>
         /// 
