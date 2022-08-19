@@ -14,13 +14,6 @@ namespace Sparrow.StandardResult.WebTest.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet]
         public ActionResult Get()
         {
@@ -34,6 +27,14 @@ namespace Sparrow.StandardResult.WebTest.Controllers
             .ToArray();
             var dto = new Dto();
             dto.SuccessResult(weathers);
+            return new JsonResult(dto.Format());
+        }
+
+        [HttpGet, Route("/modelvalid")]
+        public IActionResult ModelValid([FromQuery] QueryWeather query)
+        {
+            var dto = new Dto();
+            dto.SuccessResult();
             return new JsonResult(dto.Format());
         }
 

@@ -13,7 +13,7 @@ namespace Sparrow.StandardResult.Web
             Dto dto = string.IsNullOrWhiteSpace(WebValues.StardandKey) ?
                 new Dto() : new Dto(WebValues.StardandKey);
             dto.ExceptionResult();
-            return new JsonResult(dto.Format());
+            return Ok(dto.Serialize());
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sparrow.DataValidation;
+using System;
+using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -35,6 +37,27 @@ namespace Sparrow.StandardResult
         /// 设置异常信息，默认值为“未知错误”
         /// </summary>
         public string ExceptionMessage { get; set; } = "未知错误";
+        /// <summary>
+        /// 设置模型验证失败代码，默认值为“-3”
+        /// </summary>
+        public string ModelValidCode { get; set; } = "-3";
+        /// <summary>
+        /// 设置模型验证失败信息，默认值为“无效数据”
+        /// </summary>
+        public string ModelValidMessage { get; set; } = "无效数据";
+        /// <summary>
+        /// 模型验证错误信息格式化委托
+        /// </summary>
+        /// <param name="errors"></param>
+        /// <returns></returns>
+        public delegate object ModelValidFormat(List<ModelValidErrorInfo> errors);
+        /// <summary>
+        /// 格式化模型验证信息
+        /// </summary>
+        public ModelValidFormat FormatModelValid { get; set; } = (errors) =>
+        {
+            return errors;
+        };
         /// <summary>
         /// 时间戳格式委托
         /// </summary>

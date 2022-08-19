@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sparrow.StandardResult.Web;
+using System.Linq;
 
 namespace Sparrow.StandardResult.WebTest
 {
@@ -33,9 +35,9 @@ namespace Sparrow.StandardResult.WebTest
                     };
                 };
             });
-            services.AddControllers(options =>
+            services.AddControllers().ConfigureApiBehaviorOptions(options =>
             {
-                //options.Filters.Add<HttpResponseExceptionFilter>();
+                options.InvalidModelStateResponseFactory = StardandResultWeb.StardandResultModelStateResponse;
             });
         }
 
@@ -48,7 +50,7 @@ namespace Sparrow.StandardResult.WebTest
             }
             else
             {
-                app.UseSparrowExceptionHandler();
+                app.UseStandardExceptionHandler();
             }
             app.UseRouting();
 
