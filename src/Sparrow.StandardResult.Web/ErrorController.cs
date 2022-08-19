@@ -7,6 +7,10 @@ namespace Sparrow.StandardResult.Web
     /// </summary>
     public class ErrorController : ControllerBase
     {
+        /// <summary>
+        /// 错误处理
+        /// </summary>
+        /// <returns></returns>
         [HttpGet, Route(WebValues.ErrorTemplatePath)]
         public IActionResult Error()
         {

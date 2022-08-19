@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Sparrow.StandardResult.Web\Sparrow.StandardResult.Web.csproj" />
-    <ProjectReference Include="..\Sparrow.StandardResult\Sparrow.StandardResult.csproj" />
   </ItemGroup>
 
 

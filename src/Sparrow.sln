@@ -81,11 +81,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logger", "Logger", "{FA4BB1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Logger", "Sparrow.Logger\Sparrow.Logger.csproj", "{05D4FFC2-D669-43FA-BB55-2FFDA0C30C90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.StandardResult.Test", "Sparrow.StandardResult.Test\Sparrow.StandardResult.Test.csproj", "{A877C4FD-C636-4DCD-B298-162B2A614ECB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult.Test", "Sparrow.StandardResult.Test\Sparrow.StandardResult.Test.csproj", "{A877C4FD-C636-4DCD-B298-162B2A614ECB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.StandardResult.WebTest", "Sparrow.StandardResult.WebTest\Sparrow.StandardResult.WebTest.csproj", "{BF4D5866-1FA0-4AF7-A7BD-0DCB424ACF74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult.WebTest", "Sparrow.StandardResult.WebTest\Sparrow.StandardResult.WebTest.csproj", "{BF4D5866-1FA0-4AF7-A7BD-0DCB424ACF74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.StandardResult.Web", "Sparrow.StandardResult.Web\Sparrow.StandardResult.Web.csproj", "{24A088B5-E07A-4F75-A59D-09800B7688B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult.Web", "Sparrow.StandardResult.Web\Sparrow.StandardResult.Web.csproj", "{24A088B5-E07A-4F75-A59D-09800B7688B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9329B693-4D67-45AA-9E8B-C9E511613973}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

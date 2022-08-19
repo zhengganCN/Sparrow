@@ -7,13 +7,26 @@ using System.Text.Json;
 
 namespace Sparrow.StandardResult.Web
 {
+    /// <summary>
+    /// 模型验证错误信息输出
+    /// </summary>
     public static class StardandResultWeb
     {
+        /// <summary>
+        /// 模型验证错误信息处理
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static IActionResult StardandResultModelStateResponse(ActionContext context)
         {
             return StardandResultModelStateResponse(context, default);
         }
-
+        /// <summary>
+        /// 模型验证错误信息处理
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="key"><see cref="Dto"/>构造函数中的key值</param>
+        /// <returns></returns>
         public static IActionResult StardandResultModelStateResponse(ActionContext context, string key)
         {
             Dto dto = string.IsNullOrWhiteSpace(key) ? new Dto() : new Dto(key);
