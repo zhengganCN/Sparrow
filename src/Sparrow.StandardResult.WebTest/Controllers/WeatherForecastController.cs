@@ -37,24 +37,9 @@ namespace Sparrow.StandardResult.WebTest.Controllers
             return new JsonResult(dto.Format());
         }
 
-        [HttpGet, Route("exception")]
-        public ActionResult GetException()
-        {
-            var rng = new Random();
-            var weathers = Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-            var dto = new Dto();
-            dto.SuccessResult(weathers);
-            return new JsonResult(dto.Format());
-        }
+        [HttpGet, Route("/exception")]
+        public ActionResult GetException() => throw new Exception("Sample exception.");
 
-        [HttpGet("Throw")]
-        public IActionResult Throw() => throw new Exception("Sample exception.");
         [HttpGet, Route("/error")]
         public IActionResult Error()
         {

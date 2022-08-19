@@ -8,5 +8,11 @@ namespace Microsoft.AspNetCore.Builder
         {
             app.UseExceptionHandler(WebValues.ErrorTemplatePath);
         }
+
+        public static void UseSparrowExceptionHandler(this IApplicationBuilder app, string key)
+        {
+            WebValues.StardandKey = key;
+            app.UseExceptionHandler(WebValues.ErrorTemplatePath);
+        }
     }
 }

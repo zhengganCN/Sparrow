@@ -10,7 +10,8 @@ namespace Sparrow.StandardResult.Web
         [HttpGet, Route(WebValues.ErrorTemplatePath)]
         public IActionResult Error()
         {
-            var dto = new Dto();
+            Dto dto = string.IsNullOrWhiteSpace(WebValues.StardandKey) ?
+                new Dto() : new Dto(WebValues.StardandKey);
             dto.ExceptionResult();
             return new JsonResult(dto.Format());
         }
