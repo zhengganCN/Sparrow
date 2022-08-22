@@ -25,11 +25,11 @@ namespace Sparrow.StandardResult.Web
         /// 模型验证错误信息处理
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="key"><see cref="Dto"/>构造函数中的key值</param>
+        /// <param name="key"><see cref="StandardDto"/>构造函数中的key值</param>
         /// <returns></returns>
         public static IActionResult StardandResultModelStateResponse(ActionContext context, string key)
         {
-            Dto dto = string.IsNullOrWhiteSpace(key) ? new Dto() : new Dto(key);
+            StandardDto dto = string.IsNullOrWhiteSpace(key) ? new StandardDto() : new StandardDto(key);
             var bad = new BadRequestObjectResult(context.ModelState);
             var json = JsonSerializer.Serialize(bad.Value);
             var errors = JsonSerializer.Deserialize<Dictionary<string, string[]>>(json);

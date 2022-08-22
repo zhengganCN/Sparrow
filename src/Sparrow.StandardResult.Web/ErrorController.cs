@@ -14,8 +14,8 @@ namespace Sparrow.StandardResult.Web
         [HttpGet, Route(WebValues.ErrorTemplatePath)]
         public IActionResult Error()
         {
-            Dto dto = string.IsNullOrWhiteSpace(WebValues.StardandKey) ?
-                new Dto() : new Dto(WebValues.StardandKey);
+            StandardDto dto = string.IsNullOrWhiteSpace(WebValues.StardandKey) ?
+                new StandardDto() : new StandardDto(WebValues.StardandKey);
             dto.ExceptionResult();
             return Ok(dto.Serialize());
         }

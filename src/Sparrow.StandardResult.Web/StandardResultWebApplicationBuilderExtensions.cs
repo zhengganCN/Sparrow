@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Builder
         /// 异常处理
         /// </summary>
         /// <param name="app"></param>
-        /// <param name="key"><see cref="Dto"/>构造函数中的key值</param>
+        /// <param name="key"><see cref="StandardDto"/>构造函数中的key值</param>
         public static void UseStandardExceptionHandler(this IApplicationBuilder app, string key)
         {
             WebValues.StardandKey = key;
