@@ -40,7 +40,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void FormatSerializeTest()
         {
-            var dto = new Dto();
+            var dto = new StandardDto();
             dto.SuccessResult("数据");
             var format = dto.Format();
             var json = dto.Serialize();

@@ -71,20 +71,20 @@ namespace Sparrow.StandardResult
             return ((long)(DateTime.UtcNow - StandardResultValues.DateTime1970).TotalMilliseconds).ToString();
         };
         /// <summary>
-        /// <see cref="Dto"/>格式化委托
+        /// <see cref="StandardDto"/>格式化委托
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public delegate object DtoFormat(Dto dto);
+        public delegate object DtoFormat(StandardDto dto);
         /// <summary>
-        /// <see cref="Dto"/>格式化
+        /// <see cref="StandardDto"/>格式化
         /// </summary>
         public DtoFormat FormatDto { get; set; } = (dto) =>
         {
             return dto;
         };
         /// <summary>
-        /// <see cref="Dto"/>格式化
+        /// <see cref="StandardDto"/>格式化
         /// </summary>
         public JsonSerializerOptions FormatJsonSerializerOption { get; set; } = new JsonSerializerOptions
         {

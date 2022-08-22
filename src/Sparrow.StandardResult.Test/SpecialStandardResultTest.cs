@@ -31,7 +31,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void SuccessTest()
         {
-            var dto = new Dto(Key);
+            var dto = new StandardDto(Key);
             dto.SuccessResult();
             Assert.IsTrue(dto.Code == SuccessCode);
             Assert.IsTrue(dto.Message == SuccessMessage);
@@ -40,7 +40,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void FailTest()
         {
-            var dto = new Dto(Key);
+            var dto = new StandardDto(Key);
             dto.FailResult();
             Assert.IsTrue(dto.Code == FailCode);
             Assert.IsTrue(dto.Message == FailMessage);
@@ -49,7 +49,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void ExceptionTest()
         {
-            var dto = new Dto(Key);
+            var dto = new StandardDto(Key);
             dto.ExceptionResult();
             Assert.IsTrue(dto.Code == ExceptionCode);
             Assert.IsTrue(dto.Message == ExceptionMessage);

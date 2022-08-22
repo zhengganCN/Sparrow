@@ -7,14 +7,14 @@ namespace Sparrow.StandardResult
     /// <summary>
     /// 输出结果
     /// </summary>
-    public class Dto : BaseDto
+    public class StandardDto : BaseDto
     {
         private readonly StandardResultOption option;
         /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="key">标识</param>
-        public Dto(string key = StandardResultValues.DefaultKey)
+        public StandardDto(string key = StandardResultValues.DefaultKey)
         {
             option = StandardResultValues.StandardResultOptions[key];
         }
@@ -420,7 +420,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public string Serialize(JsonSerializerOptions serializer)
         {
-            var dto = new Dto(_key)
+            var dto = new StandardDto(_key)
             {
                 Code = Code,
                 Message = Message,
@@ -437,7 +437,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public object Format()
         {
-            var dto = new Dto(_key)
+            var dto = new StandardDto(_key)
             {
                 Code = Code,
                 Message = Message,
