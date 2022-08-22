@@ -51,7 +51,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void GenericFormatSerializeTest()
         {
-            var dto = new Dto<string>();
+            var dto = new StandardDto<string>();
             dto.SuccessResult();
             var format = dto.Format();
             var json = dto.Serialize();

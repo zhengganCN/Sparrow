@@ -245,7 +245,7 @@ namespace Sparrow.StandardResult
     /// 结果模型
     /// </summary>
     /// <typeparam name="T">数据类型</typeparam>
-    public class Dto<T> : BaseDto
+    public class StandardDto<T> : BaseDto
     {
         private readonly StandardResultOption option;
         private readonly string _key;
@@ -253,7 +253,7 @@ namespace Sparrow.StandardResult
         /// 初始化
         /// </summary>
         /// <param name="key">标识</param>
-        public Dto(string key = StandardResultValues.DefaultKey)
+        public StandardDto(string key = StandardResultValues.DefaultKey)
         {
             _key = key;
             option = StandardResultValues.StandardResultOptions[key];

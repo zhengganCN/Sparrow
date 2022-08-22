@@ -67,7 +67,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void GenericSuccessTest()
         {
-            var dto = new Dto<string>();
+            var dto = new StandardDto<string>();
             dto.SuccessResult();
             Assert.IsTrue(dto.Code == "200");
             Assert.IsTrue(dto.Message == "操作成功");
@@ -87,7 +87,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void GenericFailTest()
         {
-            var dto = new Dto<string>();
+            var dto = new StandardDto<string>();
             dto.FailResult();
             Assert.IsTrue(dto.Code == "-1");
             Assert.IsTrue(dto.Message == "操作失败");
@@ -102,7 +102,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void GenericExceptionTest()
         {
-            var dto = new Dto<string>();
+            var dto = new StandardDto<string>();
             dto.ExceptionResult();
             Assert.IsTrue(dto.Code == "-2");
             Assert.IsTrue(dto.Message == "未知错误");
