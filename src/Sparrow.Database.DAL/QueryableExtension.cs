@@ -1,6 +1,5 @@
 ﻿using Mapster;
 using MapsterMapper;
-using Sparrow.StandardResult;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -119,12 +118,26 @@ namespace Sparrow.Database.DAL
         /// <param name="index">页码</param>
         /// <param name="size">页大小</param>
         /// <returns></returns>
-        public static Pagination<TEntity> ToPagination<TEntity>(this IQueryable<TEntity> condition, int index, int size)
+        public static IList<TEntity> ToPagination<TEntity>(this IQueryable<TEntity> condition, int index, int size)
         {
-            var count = condition.Count();
-            var list = condition.Skip((index - 1) * size).Take(size).ToList();
-            return Pagination.GetPagination(list, count, index, size);
+            return condition.Skip((index - 1) * size).Take(size).ToList();
         }
+
+        /// <summary>
+        /// 分页获取数据列表，并返回总数
+        /// </summary>
+        /// <typeparam name="TEntity">实体类型</typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="index">页码</param>
+        /// <param name="size">页大小</param>
+        /// <param name="count">总数</param>
+        /// <returns></returns>
+        public static IList<TEntity> ToPagination<TEntity>(this IQueryable<TEntity> condition, int index, int size, out int count)
+        {
+            count = condition.Count();
+            return condition.Skip((index - 1) * size).Take(size).ToList();
+        }
+
         /// <summary>
         /// 分页获取数据列表并映射到指定类型列表
         /// </summary>
@@ -134,11 +147,26 @@ namespace Sparrow.Database.DAL
         /// <param name="index">页码</param>
         /// <param name="size">页大小</param>
         /// <returns></returns>
-        public static Pagination<TDest> ToPagination<TEntity, TDest>(this IQueryable<TEntity> condition, int index, int size)
+        public static IList<TDest> ToPagination<TEntity, TDest>(this IQueryable<TEntity> condition, int index, int size)
         {
             var pagination = ToPagination(condition, index, size);
-            var dest = new Mapper().Map<List<TDest>>(pagination.List);
-            return Pagination.GetPagination(dest, pagination.Count, pagination.PageIndex, pagination.PageSize);
+            return new Mapper().Map<List<TDest>>(pagination);
+        }
+
+        /// <summary>
+        /// 分页获取数据列表并映射到指定类型列表，并返回总数
+        /// </summary>
+        /// <typeparam name="TEntity">实体类型</typeparam>
+        /// <typeparam name="TDest">映射类型</typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="index">页码</param>
+        /// <param name="size">页大小</param>
+        /// <param name="count">总数</param>
+        /// <returns></returns>
+        public static IList<TDest> ToPagination<TEntity, TDest>(this IQueryable<TEntity> condition, int index, int size, out int count)
+        {
+            var pagination = ToPagination(condition, index, size, out count);
+            return new Mapper().Map<List<TDest>>(pagination);
         }
 
         /// <summary>
@@ -151,20 +179,47 @@ namespace Sparrow.Database.DAL
         /// <param name="size">页大小</param>
         /// <param name="config">映射配置</param>
         /// <returns></returns>
-        public static Pagination<TDest> ToPagination<TEntity, TDest>(this IQueryable<TEntity> condition, int index, int size, TypeAdapterConfig config)
+        public static IList<TDest> ToPagination<TEntity, TDest>(this IQueryable<TEntity> condition, int index, int size, TypeAdapterConfig config)
         {
             var pagination = ToPagination(condition, index, size);
-            List<TDest> list;
+            IList<TDest> list;
             if (config is null)
             {
-                list = new Mapper().Map<List<TDest>>(pagination.List);
+                list = new Mapper().Map<List<TDest>>(pagination);
             }
             else
             {
                 var selfMapper = new Mapper(config);
-                list = selfMapper.Map<List<TDest>>(pagination.List);
+                list = selfMapper.Map<List<TDest>>(pagination);
             }
-            return Pagination.GetPagination(list, pagination.Count, pagination.PageIndex, pagination.PageSize);
+            return list;
+        }
+
+        /// <summary>
+        /// 分页获取数据列表并映射到指定类型列表，并返回总数
+        /// </summary>
+        /// <typeparam name="TEntity">实体类型</typeparam>
+        /// <typeparam name="TDest">映射类型</typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="index">页码</param>
+        /// <param name="size">页大小</param>
+        /// <param name="config">映射配置</param>
+        /// <param name="count">总数</param>
+        /// <returns></returns>
+        public static IList<TDest> ToPagination<TEntity, TDest>(this IQueryable<TEntity> condition, int index, int size, TypeAdapterConfig config, out int count)
+        {
+            var pagination = ToPagination(condition, index, size, out count);
+            IList<TDest> list;
+            if (config is null)
+            {
+                list = new Mapper().Map<List<TDest>>(pagination);
+            }
+            else
+            {
+                var selfMapper = new Mapper(config);
+                list = selfMapper.Map<List<TDest>>(pagination);
+            }
+            return list;
         }
     }
 }
