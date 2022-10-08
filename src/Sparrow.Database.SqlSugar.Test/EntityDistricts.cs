@@ -9,7 +9,7 @@ namespace Sparrow.Database.SqlSugar.Test
     public class EntityDistricts : Entity
     {
         [SugarColumn(IsIdentity = true, IsPrimaryKey = true)]
-        public long Id { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// 上级地区代码
         /// </summary>

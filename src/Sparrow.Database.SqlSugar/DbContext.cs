@@ -7,7 +7,7 @@ namespace Sparrow.Database.SqlSugar
     /// <summary>
     /// 数据库上下文
     /// </summary>
-    public abstract class DbContext : IDisposable
+    public abstract class DbContext : IDbContext, IDisposable
     {
         private readonly DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
         /// <summary>
@@ -26,19 +26,8 @@ namespace Sparrow.Database.SqlSugar
                 throw new ArgumentNullException(nameof(builder.Connection));
             }
             SugarClient = new SqlSugarClient(builder.Connection);
-            SugarClient.Aop.OnLogExecuting = (previewSql, parameters) =>
-            {
-                var sql = previewSql;
-                if (parameters != null && parameters.Length > 0)
-                {
-                    sql += "\nparameters is:";
-                }
-                foreach (var parameter in parameters)
-                {
-                    sql += $"\nname:{parameter.ParameterName};value:{parameter.Value}";
-                }
-                ExectionSql(sql);
-            };
+            SugarClient.Aop.OnLogExecuting = ExectionSql;
+            SetSqlSugarClient(SugarClient);
         }
 
         /// <summary>
@@ -48,12 +37,36 @@ namespace Sparrow.Database.SqlSugar
         protected internal abstract void OnConfiguring(DbContextOptionsBuilder builder);
 
         /// <summary>
+        /// 设置SqlSugarClient
+        /// </summary>
+        /// <param name="client">SqlSugarClient</param>
+        protected virtual void SetSqlSugarClient(SqlSugarClient client)
+        {
+        }
+
+        /// <summary>
         /// 打印日志
         /// </summary>
-        /// <param name="sql"></param>
-        protected virtual void ExectionSql(string sql)
+        /// <param name="sql">sql语句</param>
+        /// <param name="parameters">sql参数</param>
+        protected virtual void ExectionSql(string sql, SugarParameter[] parameters)
         {
-            StaticValues.Logger.LogDebug(sql);
+            if (parameters != null && parameters.Length > 0)
+            {
+                sql += "\nparameters is:";
+            }
+            foreach (var parameter in parameters)
+            {
+                sql += $"\nname:{parameter.ParameterName};value:{parameter.Value}";
+            }
+            if (StaticValues.Logger is null)
+            {
+                Console.WriteLine(sql);
+            }
+            else
+            {
+                StaticValues.Logger.LogDebug(sql);
+            }
         }
 
         /// <summary>

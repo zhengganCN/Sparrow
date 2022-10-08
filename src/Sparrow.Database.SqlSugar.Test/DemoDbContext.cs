@@ -6,7 +6,7 @@ namespace Sparrow.Database.SqlSugar.Test
     internal class DemoDbContext : DbContext
     {
 
-        protected override void ExectionSql(string sql)
+        protected override void ExectionSql(string sql, SugarParameter[] parameters)
         {
             Console.WriteLine(sql);
         }
@@ -15,7 +15,7 @@ namespace Sparrow.Database.SqlSugar.Test
         {
             builder.SetConnectionConfig(new ConnectionConfig
             {
-                ConnectionString = "demo",
+                ConnectionString = "Data Source=Demo.db;Cache=Shared",
                 DbType = DbType.Sqlite
             });
         }
