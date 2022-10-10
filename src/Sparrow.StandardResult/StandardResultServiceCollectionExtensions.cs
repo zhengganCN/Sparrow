@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns></returns>
         public static IServiceCollection AddDefaultStandardResult(this IServiceCollection services, Action<StandardResultOption> option = null)
         {
-            return services.AddStandardResult(StandardResultValues.DefaultKey, option);
+            return services.AddStandardResult(StandardResultConsts.DefaultKey, option);
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace Sparrow.StandardResult
         /// 初始化
         /// </summary>
         /// <param name="key">标识</param>
-        public StandardDto(string key = StandardResultValues.DefaultKey)
+        public StandardDto(string key = StandardResultConsts.DefaultKey)
         {
             option = StandardResultValues.StandardResultOptions[key];
         }
@@ -28,18 +28,18 @@ namespace Sparrow.StandardResult
         /// 成功
         /// </summary>
         /// <returns></returns>
-        public void SuccessResult()
+        public object SuccessResult()
         {
-            SuccessResult(default, option.SuccessMessage, option.SuccessCode);
+            return SuccessResult(default, option.SuccessMessage, option.SuccessCode);
         }
         /// <summary>
         /// 成功
         /// </summary>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public void SuccessResult(object data)
+        public object SuccessResult(object data)
         {
-            SuccessResult(data, option.SuccessMessage, option.SuccessCode);
+            return SuccessResult(data, option.SuccessMessage, option.SuccessCode);
         }
         /// <summary>
         /// 成功
@@ -47,9 +47,9 @@ namespace Sparrow.StandardResult
         /// <param name="data">数据</param>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public void SuccessResult(object data, string message)
+        public object SuccessResult(object data, string message)
         {
-            SuccessResult(data, message, option.SuccessCode);
+            return SuccessResult(data, message, option.SuccessCode);
         }
         /// <summary>
         /// 成功
@@ -58,12 +58,13 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public void SuccessResult(object data, string message, string code)
+        public object SuccessResult(object data, string message, string code)
         {
             Data = data;
             Message = message;
             Code = code;
             Time = option.Time.Invoke();
+            return Format();
         }
         #endregion
 
@@ -72,9 +73,9 @@ namespace Sparrow.StandardResult
         /// 失败
         /// </summary>
         /// <returns></returns>
-        public void FailResult()
+        public object FailResult()
         {
-            FailResult(option.FailMessage, option.FailCode, null);
+            return FailResult(option.FailMessage, option.FailCode, null);
         }
 
         /// <summary>
@@ -82,9 +83,9 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public void FailResult(string message)
+        public object FailResult(string message)
         {
-            FailResult(message, option.FailCode, null);
+            return FailResult(message, option.FailCode, null);
         }
 
         /// <summary>
@@ -93,9 +94,9 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public void FailResult(string message, string code)
+        public object FailResult(string message, string code)
         {
-            FailResult(message, code, null);
+            return FailResult(message, code, null);
         }
 
         /// <summary>
@@ -105,12 +106,13 @@ namespace Sparrow.StandardResult
         /// <param name="code">代码</param>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public void FailResult(string message, string code, object data)
+        public object FailResult(string message, string code, object data)
         {
             Message = message;
             Code = code;
             Data = data;
             Time = option.Time.Invoke();
+            return Format();
         }
         #endregion
 
@@ -119,9 +121,9 @@ namespace Sparrow.StandardResult
         /// 异常
         /// </summary>
         /// <returns></returns>
-        public void ExceptionResult()
+        public object ExceptionResult()
         {
-            ExceptionResult(option.ExceptionMessage, option.ExceptionCode, null);
+            return ExceptionResult(option.ExceptionMessage, option.ExceptionCode, null);
         }
 
         /// <summary>
@@ -129,9 +131,9 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public void ExceptionResult(string message)
+        public object ExceptionResult(string message)
         {
-            ExceptionResult(message, option.ExceptionCode, null);
+            return ExceptionResult(message, option.ExceptionCode, null);
         }
 
         /// <summary>
@@ -140,9 +142,9 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public void ExceptionResult(string message, string code)
+        public object ExceptionResult(string message, string code)
         {
-            ExceptionResult(message, code, null);
+            return ExceptionResult(message, code, null);
         }
 
         /// <summary>
@@ -152,12 +154,13 @@ namespace Sparrow.StandardResult
         /// <param name="code">代码</param>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public void ExceptionResult(string message, string code, object data)
+        public object ExceptionResult(string message, string code, object data)
         {
             Message = message;
             Code = code;
             Data = data;
             Time = option.Time.Invoke();
+            return Format();
         }
         #endregion
 
@@ -166,9 +169,9 @@ namespace Sparrow.StandardResult
         /// 模型验证失败
         /// </summary>
         /// <returns></returns>
-        public void ModelValidResult()
+        public object ModelValidResult()
         {
-            ModelValidResult(option.ModelValidMessage, option.ModelValidCode, null);
+            return ModelValidResult(option.ModelValidMessage, option.ModelValidCode, null);
         }
 
         /// <summary>
@@ -176,18 +179,18 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public void ModelValidResult(string message)
+        public object ModelValidResult(string message)
         {
-            ModelValidResult(message, option.ModelValidCode, null);
+            return ModelValidResult(message, option.ModelValidCode, null);
         }
         /// <summary>
         /// 模型验证失败
         /// </summary>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public void ModelValidResult(List<ModelValidErrorInfo> data)
+        public object ModelValidResult(List<ModelValidErrorInfo> data)
         {
-            ModelValidResult(option.ModelValidMessage, option.ModelValidCode, data);
+            return ModelValidResult(option.ModelValidMessage, option.ModelValidCode, data);
         }
 
         /// <summary>
@@ -196,9 +199,9 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public void ModelValidResult(string message, string code)
+        public object ModelValidResult(string message, string code)
         {
-            ModelValidResult(message, code, null);
+            return ModelValidResult(message, code, null);
         }
 
         /// <summary>
@@ -208,12 +211,13 @@ namespace Sparrow.StandardResult
         /// <param name="code">代码</param>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public void ModelValidResult(string message, string code, List<ModelValidErrorInfo> data)
+        public object ModelValidResult(string message, string code, List<ModelValidErrorInfo> data)
         {
             Message = message;
             Code = code;
             Data = option.FormatModelValid.Invoke(data);
             Time = option.Time.Invoke();
+            return Format();
         }
         #endregion
         /// <summary>
@@ -236,7 +240,7 @@ namespace Sparrow.StandardResult
         /// 格式化
         /// </summary>
         /// <returns></returns>
-        public object Format()
+        private object Format()
         {
             return option.FormatDto(this);
         }
@@ -253,7 +257,7 @@ namespace Sparrow.StandardResult
         /// 初始化
         /// </summary>
         /// <param name="key">标识</param>
-        public StandardDto(string key = StandardResultValues.DefaultKey)
+        public StandardDto(string key = StandardResultConsts.DefaultKey)
         {
             _key = key;
             option = StandardResultValues.StandardResultOptions[key];
@@ -262,14 +266,15 @@ namespace Sparrow.StandardResult
         /// 数据
         /// </summary>
         public T Data { get; set; }
+
         #region FailResult
         /// <summary>
         /// 失败
         /// </summary>
         /// <returns></returns>
-        public void FailResult()
+        public object FailResult()
         {
-            FailResult(option.FailMessage, option.FailCode);
+            return FailResult(option.FailMessage, option.FailCode);
         }
 
         /// <summary>
@@ -277,9 +282,9 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public void FailResult(string message)
+        public object FailResult(string message)
         {
-            FailResult(message, option.FailCode);
+            return FailResult(message, option.FailCode);
         }
 
         /// <summary>
@@ -288,11 +293,12 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public void FailResult(string message, string code)
+        public object FailResult(string message, string code)
         {
             Message = message;
             Code = code;
             Time = option.Time.Invoke();
+            return Format();
         }
         #endregion
 
@@ -301,18 +307,18 @@ namespace Sparrow.StandardResult
         /// 成功
         /// </summary>
         /// <returns></returns>
-        public void SuccessResult()
+        public object SuccessResult()
         {
-            SuccessResult(default, option.SuccessMessage, option.SuccessCode);
+            return SuccessResult(default, option.SuccessMessage, option.SuccessCode);
         }
         /// <summary>
         /// 成功
         /// </summary>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public void SuccessResult(T data)
+        public object SuccessResult(T data)
         {
-            SuccessResult(data, option.SuccessMessage, option.SuccessCode);
+            return SuccessResult(data, option.SuccessMessage, option.SuccessCode);
         }
         /// <summary>
         /// 成功
@@ -320,9 +326,9 @@ namespace Sparrow.StandardResult
         /// <param name="data">数据</param>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public void SuccessResult(T data, string message)
+        public object SuccessResult(T data, string message)
         {
-            SuccessResult(data, message, option.SuccessCode);
+            return SuccessResult(data, message, option.SuccessCode);
         }
         /// <summary>
         /// 成功
@@ -331,22 +337,24 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public void SuccessResult(T data, string message, string code)
+        public object SuccessResult(T data, string message, string code)
         {
             Data = data;
             Message = message;
             Code = code;
             Time = option.Time.Invoke();
+            return Format();
         }
         #endregion
+
         #region ExceptionResult
         /// <summary>
         /// 异常
         /// </summary>
         /// <returns></returns>
-        public void ExceptionResult()
+        public object ExceptionResult()
         {
-            ExceptionResult(option.ExceptionMessage, option.ExceptionCode);
+            return ExceptionResult(option.ExceptionMessage, option.ExceptionCode);
         }
 
         /// <summary>
@@ -354,9 +362,9 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public void ExceptionResult(string message)
+        public object ExceptionResult(string message)
         {
-            ExceptionResult(message, option.ExceptionCode);
+            return ExceptionResult(message, option.ExceptionCode);
         }
 
         /// <summary>
@@ -365,11 +373,12 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public void ExceptionResult(string message, string code)
+        public object ExceptionResult(string message, string code)
         {
             Message = message;
             Code = code;
             Time = option.Time.Invoke();
+            return Format();
         }
         #endregion
 
@@ -378,9 +387,9 @@ namespace Sparrow.StandardResult
         /// 模型验证失败
         /// </summary>
         /// <returns></returns>
-        public void ModelValidResult()
+        public object ModelValidResult()
         {
-            ModelValidResult(option.ExceptionMessage, option.ExceptionCode);
+            return ModelValidResult(option.ExceptionMessage, option.ExceptionCode);
         }
 
         /// <summary>
@@ -388,9 +397,9 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns></returns>
-        public void ModelValidResult(string message)
+        public object ModelValidResult(string message)
         {
-            ModelValidResult(message, option.ExceptionCode);
+            return ModelValidResult(message, option.ExceptionCode);
         }
 
         /// <summary>
@@ -399,13 +408,15 @@ namespace Sparrow.StandardResult
         /// <param name="message">消息</param>
         /// <param name="code">代码</param>
         /// <returns></returns>
-        public void ModelValidResult(string message, string code)
+        public object ModelValidResult(string message, string code)
         {
             Message = message;
             Code = code;
             Time = option.Time.Invoke();
+            return Format();
         }
         #endregion
+        
         /// <summary>
         /// 序列化
         /// </summary>
@@ -414,6 +425,7 @@ namespace Sparrow.StandardResult
         {
             return Serialize(option.FormatJsonSerializerOption);
         }
+
         /// <summary>
         /// 序列化
         /// </summary>
@@ -431,11 +443,12 @@ namespace Sparrow.StandardResult
             };
             return JsonSerializer.Serialize(option.FormatDto(dto), serializer);
         }
+
         /// <summary>
         /// 格式化
         /// </summary>
         /// <returns></returns>
-        public object Format()
+        private object Format()
         {
             var dto = new StandardDto(_key)
             {
@@ -448,5 +461,6 @@ namespace Sparrow.StandardResult
             };
             return option.FormatDto(dto);
         }
+
     }
 }

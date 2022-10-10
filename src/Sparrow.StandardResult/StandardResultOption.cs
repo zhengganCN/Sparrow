@@ -16,35 +16,35 @@ namespace Sparrow.StandardResult
         /// <summary>
         /// 设置成功代码，默认值为“200”
         /// </summary>
-        public string SuccessCode { get; set; } = "200";
+        public string SuccessCode { get; set; } = StandardResultConsts.SuccessCode;
         /// <summary>
         /// 设置成功信息，默认值为“操作成功”
         /// </summary>
-        public string SuccessMessage { get; set; } = "操作成功";
+        public string SuccessMessage { get; set; } = StandardResultConsts.SuccessMessage;
         /// <summary>
         /// 设置失败代码，默认值为“-1”
         /// </summary>
-        public string FailCode { get; set; } = "-1";
+        public string FailCode { get; set; } = StandardResultConsts.FailCode;
         /// <summary>
         /// 设置失败信息，默认值为“操作失败”
         /// </summary>
-        public string FailMessage { get; set; } = "操作失败";
+        public string FailMessage { get; set; } = StandardResultConsts.FailMessage;
         /// <summary>
         /// 设置异常代码，默认值为“-2”
         /// </summary>
-        public string ExceptionCode { get; set; } = "-2";
+        public string ExceptionCode { get; set; } = StandardResultConsts.ExceptionCode;
         /// <summary>
         /// 设置异常信息，默认值为“未知错误”
         /// </summary>
-        public string ExceptionMessage { get; set; } = "未知错误";
+        public string ExceptionMessage { get; set; } = StandardResultConsts.ExceptionMessage;
         /// <summary>
         /// 设置模型验证失败代码，默认值为“-3”
         /// </summary>
-        public string ModelValidCode { get; set; } = "-3";
+        public string ModelValidCode { get; set; } = StandardResultConsts.ModelValidCode;
         /// <summary>
         /// 设置模型验证失败信息，默认值为“无效数据”
         /// </summary>
-        public string ModelValidMessage { get; set; } = "无效数据";
+        public string ModelValidMessage { get; set; } = StandardResultConsts.ModelValidMessage;
         /// <summary>
         /// 模型验证错误信息格式化委托
         /// </summary>
@@ -83,6 +83,7 @@ namespace Sparrow.StandardResult
         {
             return dto;
         };
+
         /// <summary>
         /// <see cref="StandardDto"/>格式化
         /// </summary>

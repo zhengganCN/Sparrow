@@ -8,5 +8,4 @@
     <ProjectReference Include="..\Sparrow.StandardResult.Web\Sparrow.StandardResult.Web.csproj" />
   </ItemGroup>
 
-
 </Project>

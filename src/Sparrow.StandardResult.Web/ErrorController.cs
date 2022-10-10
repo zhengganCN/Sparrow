@@ -5,6 +5,7 @@ namespace Sparrow.StandardResult.Web
     /// <summary>
     /// 错误处理
     /// </summary>
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ErrorController : ControllerBase
     {
         /// <summary>

@@ -13,16 +13,12 @@ namespace Sparrow.StandardResult
         /// </summary>
         internal static readonly DateTime DateTime1970 = new DateTime(1970, 1, 1, 0, 0, 0);
         /// <summary>
-        /// 默认key值
-        /// </summary>
-        internal const string DefaultKey = "default-sparrow-standard-result";
-        /// <summary>
         /// 配置项集合
         /// </summary>
-        internal static Dictionary<string, StandardResultOption> StandardResultOptions =
+        internal static Dictionary<string, StandardResultOption> StandardResultOptions { get; set; } =
             new Dictionary<string, StandardResultOption>
             {
-                { DefaultKey, new StandardResultOption() }
+                { StandardResultConsts.DefaultKey, new StandardResultOption() }
             };
     }
 }
