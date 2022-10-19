@@ -53,11 +53,11 @@ namespace Sparrow.Database.SqlSugar
         {
             if (parameters != null && parameters.Length > 0)
             {
-                sql += "\nparameters is:";
+                sql += "\nparameters is: ";
             }
             foreach (var parameter in parameters)
             {
-                sql += $"\nname:{parameter.ParameterName};value:{parameter.Value}";
+                sql += $"\nname: {parameter.ParameterName}; value: {parameter.Value}";
             }
             if (StaticValues.Logger is null)
             {
