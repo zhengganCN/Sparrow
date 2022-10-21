@@ -1,22 +1,16 @@
-﻿
-using iText.Kernel.Colors;
+﻿using iText.Kernel.Colors;
 using iText.Kernel.Geom;
 using NUnit.Framework;
 
 namespace Sparrow.Export.iTextSharp.Test
 {
-    public class ExportTest
+    /// <summary>
+    /// 背景测试
+    /// </summary>
+    public class BackgroundTest
     {
         [Test]
-        public void ExportMultipleTest()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                PdfFile();
-            }
-        }
-
-        private static void PdfFile()
+        public void BackgroundColorTest()
         {
             using var pdf = new SparrowPdf(PageSize.A4.Rotate());
             pdf.RegisterFont(Common.FontPath);
@@ -24,7 +18,7 @@ namespace Sparrow.Export.iTextSharp.Test
             {
                 Rgb = new DeviceRgb(85, 255, 235)
             });
-            pdf.Save(Common.GenerateSavePath("ExportMultipleTest"));
+            pdf.Save(Common.GenerateSavePath("BackgroundColorTest"));
         }
     }
 }

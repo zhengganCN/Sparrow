@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 
@@ -25,7 +24,7 @@ namespace Sparrow.StandardResult.WebTest.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-            var dto = new StandardDto();            ;
+            var dto = new StandardDto(); ;
             return new JsonResult(dto.SuccessResult(weathers));
         }
 

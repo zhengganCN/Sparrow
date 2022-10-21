@@ -5,6 +5,7 @@ namespace Sparrow.Export.iTextSharp.Test
 {
     internal class Common
     {
+        internal static string FontPath = Path.Combine(AppContext.BaseDirectory, "resource/simsun.ttc");
         /// <summary>
         /// 生成保存路径字符串
         /// </summary>

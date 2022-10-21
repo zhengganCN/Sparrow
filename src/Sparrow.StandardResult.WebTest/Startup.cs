@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sparrow.StandardResult.Web;
-using System.Linq;
 
 namespace Sparrow.StandardResult.WebTest
 {

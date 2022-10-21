@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.StandardResult.Test
+﻿namespace Sparrow.StandardResult.Test
 {
 #pragma warning disable IDE1006 // 命名样式
     internal class DefinedDto

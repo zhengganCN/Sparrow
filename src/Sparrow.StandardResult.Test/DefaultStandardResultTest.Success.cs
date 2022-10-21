@@ -1,4 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
 namespace Sparrow.StandardResult.Test
@@ -23,7 +22,7 @@ namespace Sparrow.StandardResult.Test
             dto.SuccessResult(null, msg);
             Assert.IsTrue(dto.Code == StandardResultConsts.SuccessCode);
             Assert.IsTrue(dto.Message == msg);
-            
+
         }
 
         [Test]
@@ -34,14 +33,14 @@ namespace Sparrow.StandardResult.Test
             var dto = new StandardDto();
             dto.SuccessResult(null, msg, code);
             Assert.IsTrue(dto.Code == code);
-            Assert.IsTrue(dto.Message == msg);           
+            Assert.IsTrue(dto.Message == msg);
         }
 
         [Test]
         public void SuccessTest_4()
         {
             var data = "³É¹¦";
-            var dto = new StandardDto();           
+            var dto = new StandardDto();
             dto.SuccessResult(data);
             Assert.IsTrue(dto.Data.ToString() == data);
             Assert.IsTrue(dto.Success == true);
@@ -70,9 +69,9 @@ namespace Sparrow.StandardResult.Test
             Assert.IsTrue(dto.Time != null);
         }
 
-       
 
-       
+
+
 
     }
 }

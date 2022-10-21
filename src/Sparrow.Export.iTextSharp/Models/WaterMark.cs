@@ -1,6 +1,6 @@
 ﻿using iText.Kernel.Colors;
 
-namespace Sparrow.Export.iTextSharp.Models
+namespace Sparrow.Export.iTextSharp
 {
     /// <summary>
     /// 水印

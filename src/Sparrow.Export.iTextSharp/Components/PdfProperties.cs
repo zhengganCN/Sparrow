@@ -1,7 +1,7 @@
 ﻿using iText.Kernel.Colors;
 using iText.Layout.Properties;
 
-namespace Sparrow.Export.iTextSharp.Components
+namespace Sparrow.Export.iTextSharp
 {
     /// <summary>
     /// 属性
@@ -12,7 +12,7 @@ namespace Sparrow.Export.iTextSharp.Components
         /// <summary>
         /// 元素
         /// </summary>
-        public T Element { get; set; }
+        internal T Element { get; set; }
         /// <summary>
         /// MarginLeft
         /// </summary>

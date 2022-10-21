@@ -1,7 +1,6 @@
-﻿using Sparrow.Export.iTextSharp.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Sparrow.Export.iTextSharp.Components
+namespace Sparrow.Export.iTextSharp
 {
     /// <summary>
     /// 书签

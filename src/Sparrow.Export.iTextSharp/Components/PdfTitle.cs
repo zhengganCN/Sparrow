@@ -1,6 +1,6 @@
 ﻿using Sparrow.Export.iTextSharp.Enums;
 
-namespace Sparrow.Export.iTextSharp.Components
+namespace Sparrow.Export.iTextSharp
 {
     /// <summary>
     /// Pdf标题

@@ -4,20 +4,16 @@ using System.IO;
 
 namespace Sparrow.Export.iTextSharp
 {
-    /// <summary>
-    /// pdf配置
-    /// </summary>
-    public class PdfConfiguration
+    public partial class SparrowPdf
     {
-        internal PdfFont PdfFont { get; private set; }
         /// <summary>
         /// 注册字体
         /// </summary>
         /// <param name="path">路径</param>
-        public void RegisterPdfFont(string path)
+        public void RegisterFont(string path)
         {
             var file = new FileInfo(path);
-            RegisterPdfFont(path, file.Name.Split('.')[0]);
+            RegisterFont(path, file.Name.Split('.')[0]);
         }
 
         /// <summary>
@@ -25,11 +21,16 @@ namespace Sparrow.Export.iTextSharp
         /// </summary>
         /// <param name="path">路径</param>
         /// <param name="name">字体名称</param>
-        public void RegisterPdfFont(string path, string name)
+        public void RegisterFont(string path, string name)
         {
             PdfFontFactory.Register(path);
-            PdfFont = PdfFontFactory.CreateRegisteredFont(name, PdfEncodings.IDENTITY_H,
-               PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED, true);
+            var encoding = PdfEncodings.IDENTITY_H;
+            //嵌入策略
+            var strategy = PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED;
+            PdfFont = PdfFontFactory.CreateRegisteredFont(name, encoding, strategy, true);
+            Document.SetFont(PdfFont);
         }
+
+
     }
 }

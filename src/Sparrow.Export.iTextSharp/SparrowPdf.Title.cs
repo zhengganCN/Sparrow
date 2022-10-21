@@ -1,10 +1,8 @@
 ﻿using iText.Layout.Element;
-using Sparrow.Export.iTextSharp.Components;
-using Sparrow.Export.iTextSharp.Models;
 
 namespace Sparrow.Export.iTextSharp
 {
-    public partial class Pdf
+    public partial class SparrowPdf
     {
         /// <summary>
         /// 添加标题

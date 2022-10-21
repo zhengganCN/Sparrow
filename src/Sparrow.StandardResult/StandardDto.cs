@@ -416,7 +416,7 @@ namespace Sparrow.StandardResult
             return Format();
         }
         #endregion
-        
+
         /// <summary>
         /// 序列化
         /// </summary>

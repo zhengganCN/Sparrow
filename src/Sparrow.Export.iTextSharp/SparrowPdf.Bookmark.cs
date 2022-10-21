@@ -1,13 +1,11 @@
 ﻿using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Action;
-using Sparrow.Export.iTextSharp.Components;
-using Sparrow.Export.iTextSharp.Models;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Sparrow.Export.iTextSharp
 {
-    public partial class Pdf
+    public partial class SparrowPdf
     {
         /// <summary>
         /// 设置书签

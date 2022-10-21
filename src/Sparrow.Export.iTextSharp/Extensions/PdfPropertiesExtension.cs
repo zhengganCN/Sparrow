@@ -1,6 +1,5 @@
 ﻿using iText.Kernel.Colors;
 using iText.Layout.Properties;
-using Sparrow.Export.iTextSharp.Components;
 
 namespace Sparrow.Export.iTextSharp
 {
@@ -16,10 +15,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="width">宽度</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetWidth<T>(this PdfProperties<T> properties, float width) where T : class, new()
+        public static T SetWidth<T>(this PdfProperties<T> properties, float width) where T : class
         {
             properties.Width = width;
-            return properties;
+            return properties.Element;
         }
         /// <summary>
         /// 设置高度
@@ -28,10 +27,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="height">高度</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetHeight<T>(this PdfProperties<T> properties, float height) where T : class, new()
+        public static T SetHeight<T>(this PdfProperties<T> properties, float height) where T : class
         {
             properties.Height = height;
-            return properties;
+            return properties.Element;
         }
         /// <summary>
         /// 设置marginLeft
@@ -40,10 +39,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="marginLeft">marginLeft</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetMarginLeft<T>(this PdfProperties<T> properties, float marginLeft) where T : class, new()
+        public static T SetMarginLeft<T>(this PdfProperties<T> properties, float marginLeft) where T : class
         {
             properties.MarginLeft = marginLeft;
-            return properties;
+            return properties.Element;
         }
         /// <summary>
         /// 设置marginTop
@@ -52,10 +51,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="marginTop">marginTop</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetMarginTop<T>(this PdfProperties<T> properties, float marginTop) where T : class, new()
+        public static T SetMarginTop<T>(this PdfProperties<T> properties, float marginTop) where T : class
         {
             properties.MarginTop = marginTop;
-            return properties;
+            return properties.Element;
         }
         /// <summary>
         /// 设置marginRight
@@ -64,10 +63,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="marginRight">marginRight</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetMarginRight<T>(this PdfProperties<T> properties, float marginRight) where T : class, new()
+        public static T SetMarginRight<T>(this PdfProperties<T> properties, float marginRight) where T : class
         {
             properties.MarginRight = marginRight;
-            return properties;
+            return properties.Element;
         }
         /// <summary>
         /// 设置marginBottom
@@ -76,10 +75,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="marginBottom">marginBottom</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetMarginBottom<T>(this PdfProperties<T> properties, float marginBottom) where T : class, new()
+        public static T SetMarginBottom<T>(this PdfProperties<T> properties, float marginBottom) where T : class
         {
             properties.MarginBottom = marginBottom;
-            return properties;
+            return properties.Element;
         }
         /// <summary>
         /// 设置paddingLeft
@@ -88,10 +87,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="paddingLeft">paddingLeft</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetPaddingLeft<T>(this PdfProperties<T> properties, float paddingLeft) where T : class, new()
+        public static T SetPaddingLeft<T>(this PdfProperties<T> properties, float paddingLeft) where T : class
         {
             properties.PaddingLeft = paddingLeft;
-            return properties;
+            return properties.Element;
         }
         /// <summary>
         /// 设置paddingTop
@@ -100,10 +99,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="paddingTop">paddingTop</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetPaddingTop<T>(this PdfProperties<T> properties, float paddingTop) where T : class, new()
+        public static T SetPaddingTop<T>(this PdfProperties<T> properties, float paddingTop) where T : class
         {
             properties.PaddingTop = paddingTop;
-            return properties;
+            return properties.Element;
         }
         /// <summary>
         /// 设置paddingRight
@@ -112,10 +111,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="paddingRight">paddingRight</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetPaddingRight<T>(this PdfProperties<T> properties, float paddingRight) where T : class, new()
+        public static T SetPaddingRight<T>(this PdfProperties<T> properties, float paddingRight) where T : class
         {
             properties.PaddingRight = paddingRight;
-            return properties;
+            return properties.Element;
         }
         /// <summary>
         /// 设置paddingBottom
@@ -124,10 +123,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="paddingBottom">paddingBottom</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetPaddingBottom<T>(this PdfProperties<T> properties, float paddingBottom) where T : class, new()
+        public static T SetPaddingBottom<T>(this PdfProperties<T> properties, float paddingBottom) where T : class
         {
             properties.PaddingBottom = paddingBottom;
-            return properties;
+            return properties.Element;
         }
         /// <summary>
         /// 设置背景色
@@ -136,10 +135,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="backgroundColor">背景色</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetBackgroundColor<T>(this PdfProperties<T> properties, DeviceRgb backgroundColor) where T : class, new()
+        public static T SetBackgroundColor<T>(this PdfProperties<T> properties, DeviceRgb backgroundColor) where T : class
         {
             properties.BackgroundColor = backgroundColor;
-            return properties;
+            return properties.Element;
         }
         #region 字体设置
         /// <summary>
@@ -149,10 +148,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="fontSize">字体大小</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetFontSize<T>(this PdfProperties<T> properties, float fontSize) where T : class, new()
+        public static T SetFontSize<T>(this PdfProperties<T> properties, float fontSize) where T : class
         {
             properties.FontSize = fontSize;
-            return properties;
+            return properties.Element;
         }
 
         /// <summary>
@@ -162,10 +161,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="fontItalic">字体斜体</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetFontItalic<T>(this PdfProperties<T> properties, bool fontItalic) where T : class, new()
+        public static T SetFontItalic<T>(this PdfProperties<T> properties, bool fontItalic) where T : class
         {
             properties.FontItalic = fontItalic;
-            return properties;
+            return properties.Element;
         }
 
         /// <summary>
@@ -175,10 +174,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="fontBold">字体粗体</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetFontBold<T>(this PdfProperties<T> properties, bool fontBold) where T : class, new()
+        public static T SetFontBold<T>(this PdfProperties<T> properties, bool fontBold) where T : class
         {
             properties.FontBold = fontBold;
-            return properties;
+            return properties.Element;
         }
 
         /// <summary>
@@ -188,10 +187,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="fontColor">字体颜色</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetFontColor<T>(this PdfProperties<T> properties, DeviceRgb fontColor) where T : class, new()
+        public static T SetFontColor<T>(this PdfProperties<T> properties, DeviceRgb fontColor) where T : class
         {
             properties.FontColor = fontColor;
-            return properties;
+            return properties.Element;
         }
 
         /// <summary>
@@ -201,10 +200,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="textAlignment">水平位置</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetTextAlignment<T>(this PdfProperties<T> properties, TextAlignment textAlignment) where T : class, new()
+        public static T SetTextAlignment<T>(this PdfProperties<T> properties, TextAlignment textAlignment) where T : class
         {
             properties.TextAlignment = textAlignment;
-            return properties;
+            return properties.Element;
         }
 
         /// <summary>
@@ -214,10 +213,10 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="properties">控件属性</param>
         /// <param name="verticalAlignment">垂直位置</param>
         /// <returns></returns>
-        public static PdfProperties<T> SetVerticalAlignment<T>(this PdfProperties<T> properties, VerticalAlignment verticalAlignment) where T : class, new()
+        public static T SetVerticalAlignment<T>(this PdfProperties<T> properties, VerticalAlignment verticalAlignment) where T : class
         {
             properties.VerticalAlignment = verticalAlignment;
-            return properties;
+            return properties.Element;
         }
         #endregion
     }

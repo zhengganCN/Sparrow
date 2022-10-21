@@ -1,13 +1,10 @@
 ﻿using iText.Kernel.Colors;
 using iText.Kernel.Geom;
 using iText.Layout.Element;
-using Sparrow.Export.iTextSharp.Components;
-using System;
-using System.Linq;
 
 namespace Sparrow.Export.iTextSharp
 {
-    public partial class Pdf
+    public partial class SparrowPdf
     {
 
         private void SetPdfTableProperties(Table table, PdfTable pdfTable)
@@ -30,25 +27,26 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="pdfTable"></param>
         public void AddTable(PdfTable pdfTable)
         {
-            if (pdfTable.Columns == 0)
+            var maxColNum = 0;
+            foreach (var row in pdfTable.Rows)
             {
-                throw new ArgumentException($"{nameof(pdfTable.Columns)}不能为0");
-            }
-            Table table;
-            if (pdfTable.ColumnWidths?.Any() == true)
-            {
-                table = new Table(pdfTable.ColumnWidths);
-            }
-            else
-            {
-                table = new Table(pdfTable.Columns);
-            }
-            SetPdfTableProperties(table, pdfTable);
-            foreach (var row in pdfTable.Cells)
-            {
-                foreach (var column in row)
+                var rowColNum = 0;
+                foreach (var cell in row.Cells)
                 {
-                    var cell = column.GetCell();
+                    rowColNum += cell.Colspan;
+                }
+                if (maxColNum < rowColNum)
+                {
+                    maxColNum = rowColNum;
+                }
+            }
+            Table table = new Table(maxColNum);
+            SetPdfTableProperties(table, pdfTable);
+            foreach (var tableRow in pdfTable.Rows)
+            {
+                foreach (var column in tableRow.Cells)
+                {
+                    var cell = column.RendererCell();
                     SetProperties(cell, column);
                     table.AddCell(cell);
                 }

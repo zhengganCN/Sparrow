@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sparrow.StandardResult.Test
 {
