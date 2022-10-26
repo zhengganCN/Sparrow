@@ -24,18 +24,33 @@ namespace Sparrow.Export.iTextSharp
         /// Cell所占列数
         /// </summary>
         public int Colspan { get; private set; } = 1;
+        /// <summary>
+        /// 文本
+        /// </summary>
+        public string Value { get; private set; }
+        /// <summary>
+        /// 单词换行(true：当为连续的字母时，不换行；false：当为连续的字母时，达到最大宽度后换行)
+        /// </summary>
+        public bool IsWordWrap { get; private set; } = true;
+        /// <summary>
+        /// 启用空格处理
+        /// </summary>
+        public bool EnableSpaceHandle { get; private set; } = true;
 
         /// <summary>
         /// 表格单元格
         /// </summary>
+        /// <param name="value">文本</param>
         /// <param name="rowNumber">行号</param>
         /// <param name="columnNumber">列号</param>
-        public PdfTableCell(int rowNumber, int columnNumber)
+        public PdfTableCell(string value,int rowNumber, int columnNumber)
         {
             Element = this;
+            Value = value;
             RowNumber = rowNumber;
             ColumnNumber = columnNumber;
         }
+
         /// <summary>
         /// 设置Cell所占行数
         /// </summary>
@@ -46,6 +61,7 @@ namespace Sparrow.Export.iTextSharp
             Rowspan = rowspan;
             return this;
         }
+
         /// <summary>
         /// 设置Cell所占列数
         /// </summary>
@@ -58,19 +74,6 @@ namespace Sparrow.Export.iTextSharp
         }
 
         /// <summary>
-        /// 文本
-        /// </summary>
-        public string Value { get; private set; }
-
-        /// <summary>
-        /// 单词换行(true：当为连续的字母时，不换行；false：当为连续的字母时，达到最大宽度后换行)
-        /// </summary>
-        public bool IsWordWrap { get; private set; } = true;
-        /// <summary>
-        /// 启用空格处理
-        /// </summary>
-        public bool EnableSpaceHandle { get; private set; } = true;
-        /// <summary>
         /// 启用空格处理
         /// </summary>
         public PdfTableCell SetEnableSpaceHandle(bool enableSpaceHandle)
@@ -78,6 +81,7 @@ namespace Sparrow.Export.iTextSharp
             EnableSpaceHandle = enableSpaceHandle;
             return this;
         }
+
         /// <summary>
         /// 设置单词换行(true：当为连续的字母时，不换行；false：当为连续的字母时，达到最大宽度后换行)
         /// </summary>

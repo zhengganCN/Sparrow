@@ -32,9 +32,9 @@ namespace Sparrow.Export.iTextSharp
         /// 添加单元格
         /// </summary>
         /// <returns></returns>
-        public PdfTableCell AddCell()
+        public PdfTableCell AddCell(string value = "")
         {
-            var cell = new PdfTableCell(RowNumber, ++Columns);
+            var cell = new PdfTableCell(value, RowNumber, ++Columns);
             Cells.Add(cell);
             return cell;
         }

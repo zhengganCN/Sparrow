@@ -6,7 +6,7 @@ namespace Sparrow.Export.iTextSharp.Test
     internal partial class PageNumberTest
     {
         [Test]
-        public void FooterSimplePageNumberTest()
+        public void FooterPageNumberFontSizeTest()
         {
             using var pdf = new SparrowPdf(PageSize.A4.Rotate());
             pdf.RegisterFont(Common.FontPath);
@@ -17,8 +17,9 @@ namespace Sparrow.Export.iTextSharp.Test
                     page.IsShow = true;
                     page.DefinePageText = (num) =>
                     {
-                        return $"第{num}页！";
+                        return $"第{num}页";
                     };
+                    page.FontSize = 15;
                 });
             });
             for (int i = 0; i < 1000; i++)
@@ -28,11 +29,11 @@ namespace Sparrow.Export.iTextSharp.Test
                     Title = "测试页码"
                 });
             }
-            pdf.Save(Common.GenerateSavePath("FooterSimplePageNumberTest"));
+            pdf.Save(Common.GenerateSavePath("FooterPageNumberFontSizeTest"));
         }
 
         [Test]
-        public void HeaderSimplePageNumberTest()
+        public void HeaderPageNumberFontSizeTest()
         {
             using var pdf = new SparrowPdf(PageSize.A4.Rotate());
             pdf.RegisterFont(Common.FontPath);
@@ -43,8 +44,9 @@ namespace Sparrow.Export.iTextSharp.Test
                     page.IsShow = true;
                     page.DefinePageText = (num) =>
                     {
-                        return $"第{num}页！";
+                        return $"第{num}页";
                     };
+                    page.FontSize = 15;
                 });
             });
             for (int i = 0; i < 1000; i++)
@@ -54,7 +56,7 @@ namespace Sparrow.Export.iTextSharp.Test
                     Title = "测试页码"
                 });
             }
-            pdf.Save(Common.GenerateSavePath("HeaderSimplePageNumberTest"));
+            pdf.Save(Common.GenerateSavePath("HeaderPageNumberFontSizeTest"));
         }
     }
 }

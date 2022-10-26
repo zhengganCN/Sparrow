@@ -1,7 +1,6 @@
 ﻿using iText.Kernel.Events;
-using iText.Layout.Element;
-using iText.Layout.Properties;
 using Sparrow.Export.iTextSharp.Events;
+using System;
 
 namespace Sparrow.Export.iTextSharp
 {
@@ -29,15 +28,16 @@ namespace Sparrow.Export.iTextSharp
             return this;
         }
 
-        
+
 
         /// <summary>
         /// 设置头部样式
         /// </summary>
         /// <returns></returns>
-        public SparrowPdf SetHeader()
+        public SparrowPdf SetHeader(Action<Header> action)
         {
-            var handle = new HeaderEvent();
+            action.Invoke(PageHeader);
+            var handle = new HeaderEvent(PageHeader, PdfFont);
             PdfDocument.AddEventHandler(PdfDocumentEvent.INSERT_PAGE, handle);
             return this;
         }
@@ -46,9 +46,10 @@ namespace Sparrow.Export.iTextSharp
         /// 设置底部样式
         /// </summary>
         /// <returns></returns>
-        public SparrowPdf SetFooter(Footer footer)
+        public SparrowPdf SetFooter(Action<Footer> action)
         {
-            var handle = new FooterEvent(footer);
+            action.Invoke(PageFooter);
+            var handle = new FooterEvent(PageFooter, PdfFont);
             PdfDocument.AddEventHandler(PdfDocumentEvent.INSERT_PAGE, handle);
             return this;
         }

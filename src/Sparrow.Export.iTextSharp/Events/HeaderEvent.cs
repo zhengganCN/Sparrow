@@ -1,4 +1,5 @@
 ﻿using iText.Kernel.Events;
+using iText.Kernel.Font;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf.Canvas;
 
@@ -9,15 +10,19 @@ namespace Sparrow.Export.iTextSharp.Events
     /// </summary>
     public class HeaderEvent : IEventHandler
     {
-        //private PdfDocumentProperties Sparrow { get; set; }
-        ///// <summary>
-        ///// Pdf背景色事件处理程序
-        ///// </summary>
-        ///// <param name="sparrow"></param>
-        //public PdfBackgroundEventHandler(PdfDocumentProperties sparrow)
-        //{
-        //    Sparrow = sparrow;
-        //}
+        private readonly Header _header;
+        private PdfFont _font;
+        /// <summary>
+        /// 页面底部绘制事件
+        /// </summary>
+        /// <param name="header">首部参数</param>
+        /// <param name="font">字体</param>
+        public HeaderEvent(Header header, PdfFont font)
+        {
+            _header = header;
+            _font = font;
+        }
+
         /// <summary>
         /// 事件处理
         /// </summary>
@@ -25,33 +30,39 @@ namespace Sparrow.Export.iTextSharp.Events
         public void HandleEvent(Event @event)
         {
             var documentEvent = (PdfDocumentEvent)@event;
-            var pdfDocument = documentEvent.GetDocument();
+            var document = documentEvent.GetDocument();
+            if (_font is null)
+            {
+                _font = document.GetDefaultFont();
+            }
             var page = documentEvent.GetPage();
-            int pageNumber = pdfDocument.GetPageNumber(page);
-            var pageSize = page.GetPageSize();
-            var pdfStream = page.NewContentStreamBefore();
-            var pdfCanvas = new PdfCanvas(pdfStream, page.GetResources(), pdfDocument);
-
-            SetHeaderFooter(pdfCanvas, pageSize, pageNumber);
-
-            pdfCanvas.Release();
+            int pageNumber = document.GetPageNumber(page);
+            var rectangle = page.GetPageSize();
+            var stream = page.NewContentStreamBefore();
+            var canvas = new PdfCanvas(stream, page.GetResources(), document);
+            SetPageNumber(canvas, rectangle, pageNumber);
+            canvas.Release();
 
         }
 
-
-
-        private void SetHeaderFooter(PdfCanvas pdfCanvas, Rectangle pageSize, int pageNumber)
+        /// <summary>
+        /// 设置页码
+        /// </summary>
+        /// <returns></returns>
+        public void SetPageNumber(PdfCanvas canvas, Rectangle rectangle, int pageNumber)
         {
-            //pdfCanvas.BeginText()
-            //    //.SetFontAndSize(SparrowPdf.Font, 9)
-            //    .MoveText(pageSize.GetWidth() / 2 - 60, pageSize.GetTop() - 20)
-            //    .ShowText(string.IsNullOrWhiteSpace(Sparrow.HeaderText) ? "" : Sparrow.HeaderText)
-            //    .MoveText(60, -pageSize.GetTop() + 30)
-            //    .ShowText(pageNumber.ToString())
-            //    .EndText();
+            if (_header.PageNumber.IsShow)
+            {
+                var text = _header.PageNumber.DefinePageText(pageNumber);
+                var count = text.Length;
+                canvas.BeginText();
+                canvas.SetFontAndSize(_font, _header.PageNumber.FontSize);
+                var x = _header.PageNumber.StartX(rectangle, count);
+                var y = _header.PageNumber.StartY(rectangle);
+                canvas.MoveText(x, y).ShowText(text);
+                canvas.EndText();
+            }
         }
-
-
 
     }
 }

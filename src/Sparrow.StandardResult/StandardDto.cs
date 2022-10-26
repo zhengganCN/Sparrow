@@ -240,7 +240,7 @@ namespace Sparrow.StandardResult
         /// 格式化
         /// </summary>
         /// <returns></returns>
-        private object Format()
+        public object Format()
         {
             return option.FormatDto(this);
         }
@@ -448,7 +448,7 @@ namespace Sparrow.StandardResult
         /// 格式化
         /// </summary>
         /// <returns></returns>
-        private object Format()
+        public object Format()
         {
             var dto = new StandardDto(_key)
             {

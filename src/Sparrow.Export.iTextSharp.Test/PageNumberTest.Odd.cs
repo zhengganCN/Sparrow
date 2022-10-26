@@ -6,7 +6,7 @@ namespace Sparrow.Export.iTextSharp.Test
     internal partial class PageNumberTest
     {
         [Test]
-        public void FooterSimplePageNumberTest()
+        public void FooterNotOddPageNumberTest()
         {
             using var pdf = new SparrowPdf(PageSize.A4.Rotate());
             pdf.RegisterFont(Common.FontPath);
@@ -17,7 +17,7 @@ namespace Sparrow.Export.iTextSharp.Test
                     page.IsShow = true;
                     page.DefinePageText = (num) =>
                     {
-                        return $"第{num}页！";
+                        return $"第{num}页";
                     };
                 });
             });
@@ -28,11 +28,11 @@ namespace Sparrow.Export.iTextSharp.Test
                     Title = "测试页码"
                 });
             }
-            pdf.Save(Common.GenerateSavePath("FooterSimplePageNumberTest"));
+            pdf.Save(Common.GenerateSavePath("FooterNotOddPageNumberTest"));
         }
 
         [Test]
-        public void HeaderSimplePageNumberTest()
+        public void HeaderNotOddPageNumberTest()
         {
             using var pdf = new SparrowPdf(PageSize.A4.Rotate());
             pdf.RegisterFont(Common.FontPath);
@@ -43,7 +43,7 @@ namespace Sparrow.Export.iTextSharp.Test
                     page.IsShow = true;
                     page.DefinePageText = (num) =>
                     {
-                        return $"第{num}页！";
+                        return $"第{num}页";
                     };
                 });
             });
@@ -54,7 +54,7 @@ namespace Sparrow.Export.iTextSharp.Test
                     Title = "测试页码"
                 });
             }
-            pdf.Save(Common.GenerateSavePath("HeaderSimplePageNumberTest"));
+            pdf.Save(Common.GenerateSavePath("HeaderNotOddPageNumberTest"));
         }
     }
 }

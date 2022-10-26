@@ -35,6 +35,8 @@ namespace Sparrow.Export.iTextSharp
         /// 页面尺寸
         /// </summary>
         public PageSize PageSize { get; private set; }
+        internal Header PageHeader { get; private set; } = new Header();
+        internal Footer PageFooter { get; private set; } = new Footer();
         /// <summary>
         /// Pdf文档
         /// </summary>
