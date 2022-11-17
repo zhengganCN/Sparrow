@@ -10,24 +10,30 @@ namespace Sparrow.Database.SqlSugar
     public abstract class DbContext : IDbContext, IDisposable
     {
         private readonly DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
+        private bool isInitialization = false;
+        private SqlSugarClient client;
         /// <summary>
         /// 数据库客户端
         /// </summary>
-        public readonly SqlSugarClient SugarClient;
-        /// <summary>
-        /// 数据库上下文
-        /// </summary>
-        /// <exception cref="ArgumentNullException"></exception>
-        public DbContext()
+        public SqlSugarClient SugarClient
         {
-            OnConfiguring(builder);
-            if (builder.Connection is null)
+            get
             {
-                throw new ArgumentNullException(nameof(builder.Connection));
+                if (isInitialization)
+                {
+                    return client;
+                }
+                OnConfiguring(builder);
+                if (builder.Connection is null)
+                {
+                    throw new ArgumentNullException(nameof(builder.Connection));
+                }
+                client = new SqlSugarClient(builder.Connection);
+                client.Aop.OnLogExecuting = ExectionSql;
+                SetSqlSugarClient(client);
+                isInitialization = true;
+                return client;
             }
-            SugarClient = new SqlSugarClient(builder.Connection);
-            SugarClient.Aop.OnLogExecuting = ExectionSql;
-            SetSqlSugarClient(SugarClient);
         }
 
         /// <summary>
@@ -74,7 +80,7 @@ namespace Sparrow.Database.SqlSugar
         /// </summary>
         public void Dispose()
         {
-            SugarClient.Dispose();
+            SugarClient?.Dispose();
         }
     }
 }
