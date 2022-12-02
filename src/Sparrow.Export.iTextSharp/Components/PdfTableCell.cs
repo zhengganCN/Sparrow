@@ -43,7 +43,7 @@ namespace Sparrow.Export.iTextSharp
         /// <param name="value">文本</param>
         /// <param name="rowNumber">行号</param>
         /// <param name="columnNumber">列号</param>
-        public PdfTableCell(string value,int rowNumber, int columnNumber)
+        public PdfTableCell(string value, int rowNumber, int columnNumber)
         {
             Element = this;
             Value = value;

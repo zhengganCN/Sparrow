@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Sparrow.Database.DAL.Test": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50139;http://localhost:50144"
+    }
+  }
+}

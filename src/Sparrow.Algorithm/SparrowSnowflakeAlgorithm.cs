@@ -6,7 +6,7 @@ namespace Sparrow.Algorithm
     /// <summary>
     /// 雪花算法
     /// </summary>
-    public static class SnowflakeAlgorithm
+    public static class SparrowSnowflakeAlgorithm
     {
         /// <summary>
         /// 机器ID

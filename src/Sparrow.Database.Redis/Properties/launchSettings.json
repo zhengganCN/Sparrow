@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Sparrow.Database.Redis": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50158;http://localhost:50159"
+    }
+  }
+}
