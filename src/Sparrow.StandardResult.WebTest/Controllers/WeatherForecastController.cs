@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sparrow.StandardResult.WebTest.Models;
 using System;
 using System.Linq;
 
@@ -30,6 +31,13 @@ namespace Sparrow.StandardResult.WebTest.Controllers
 
         [HttpGet, Route("/modelvalid")]
         public IActionResult ModelValid([FromQuery] QueryWeather query)
+        {
+            var dto = new StandardDto();
+            return new JsonResult(dto.SuccessResult());
+        }
+
+        [HttpPost, Route("/CreateWeather")]
+        public IActionResult CreateWeather([FromBody] CreateWeather weather)
         {
             var dto = new StandardDto();
             return new JsonResult(dto.SuccessResult());

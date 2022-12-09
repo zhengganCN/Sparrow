@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Sparrow.StandardResult.WebTest
+namespace Sparrow.StandardResult.WebTest.Models
 {
     public class QueryWeather
     {

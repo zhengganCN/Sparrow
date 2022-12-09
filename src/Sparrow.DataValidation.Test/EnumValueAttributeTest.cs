@@ -13,14 +13,14 @@ namespace Sparrow.DataValidation.Test
         [Test]
         public void VaildSuccessTest()
         {
-            var enumValue = new EnumValueAttribute(typeof(DemoEnum));
+            var enumValue = new SparrowEnumValueAttribute(typeof(DemoEnum));
             Assert.IsTrue(enumValue.IsValid(1));
             Assert.IsTrue(enumValue.IsValid("1"));
         }
         [Test]
         public void VaildFaildTest()
         {
-            var enumValue = new EnumValueAttribute(typeof(DemoEnum));
+            var enumValue = new SparrowEnumValueAttribute(typeof(DemoEnum));
             Assert.IsFalse(enumValue.IsValid(3));
             Assert.IsFalse(enumValue.IsValid("3"));
         }

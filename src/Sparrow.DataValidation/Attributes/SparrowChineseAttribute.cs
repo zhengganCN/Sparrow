@@ -8,7 +8,7 @@ namespace Sparrow.DataValidation.Attributes
     /// 中文验证
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public sealed class ChineseAttribute : ValidationAttribute
+    public sealed class SparrowChineseAttribute : ValidationAttribute
     {
         /// <summary>
         /// 设置要验证的值是全部都是中文，还是至少包含一个中文，默认值为至少包含一个中文

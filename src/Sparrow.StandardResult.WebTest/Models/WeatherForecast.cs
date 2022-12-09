@@ -1,6 +1,6 @@
 using System;
 
-namespace Sparrow.StandardResult.WebTest
+namespace Sparrow.StandardResult.WebTest.Models
 {
     public class WeatherForecast
     {

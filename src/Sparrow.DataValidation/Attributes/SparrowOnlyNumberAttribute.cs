@@ -1,19 +1,19 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Sparrow.DataValidation.Attributes
 {
     /// <summary>
-    /// 字符串没有空格验证特性
+    /// 字符串只能包含数字特性
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public sealed class NoSpaceAttribute : ValidationAttribute
+    public sealed class SparrowOnlyNumberAttribute : ValidationAttribute
     {
         /// <summary>
         /// 重写验证逻辑
         /// </summary>
-        /// <param name="value">验证值</param>
+        /// <param name="value"></param>
         /// <returns></returns>
         public override bool IsValid(object value)
         {
@@ -24,7 +24,7 @@ namespace Sparrow.DataValidation.Attributes
             var result = false;
             if (value is string @string)
             {
-                result = !@string.Contains(' ');
+                result = !Regex.IsMatch(@string, @"[^0-9]");
             }
             return result;
         }

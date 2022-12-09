@@ -8,7 +8,7 @@ namespace Sparrow.DataValidation.Attributes
     /// 时间格式验证，验证的参数只能是字符串
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public sealed class DateTimeFormatAttribute : ValidationAttribute
+    public sealed class SparrowDateTimeFormatAttribute : ValidationAttribute
     {
         /// <summary>
         /// 验证的时间类型

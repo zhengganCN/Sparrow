@@ -1,23 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Sparrow.DataValidation.Attributes
 {
     /// <summary>
-    /// 文件大小验证特性，只对类型IFormFile和IFormFileCollection有效
+    /// 文件类型验证特性，只对类型IFormFile和IFormFileCollection有效
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public sealed class FileSizeAttribute : ValidationAttribute
+    public sealed class SparrowFileTypeAttribute : ValidationAttribute
     {
         /// <summary>
-        /// 文件大小验证特性
+        /// 文件类型
         /// </summary>
-        public int Size { get; set; } = 1000;
-        /// <summary>
-        /// 大小单位，默认值为KB
-        /// </summary>
-        public SizeUnit Unit { get; set; } = SizeUnit.UnitKB;
+        public string[] FileType { get; set; }
         /// <summary>
         /// 重写验证逻辑
         /// </summary>
@@ -32,16 +29,16 @@ namespace Sparrow.DataValidation.Attributes
             bool result = false;
             if (value is IFormFile file)
             {
-                result = ValidFileSize(file);
+                result = ValidFileType(file);
             }
             else if (value is IFormFileCollection files)
             {
                 foreach (IFormFile fileItem in files)
                 {
-                    result = ValidFileSize(fileItem);
+                    result = ValidFileType(fileItem);
                     if (!result)
                     {
-                        break;
+                        result = false;
                     }
                 }
             }
@@ -52,28 +49,29 @@ namespace Sparrow.DataValidation.Attributes
             return result;
         }
         /// <summary>
-        /// 验证文件大小是否符合要求
+        /// 验证文件类型
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        private bool ValidFileSize(IFormFile file)
+        private bool ValidFileType(IFormFile file)
         {
-            var maxBytes = 0;
-            switch (Unit)
+            var splits = file.FileName.Split('.');
+            if (splits.Length >= 2)
             {
-                case SizeUnit.UnitByte:
-                    maxBytes = Size;
-                    break;
-                case SizeUnit.UnitKB:
-                    maxBytes = Size * 1024;
-                    break;
-                case SizeUnit.UnitMB:
-                    maxBytes = Size * 1024 * 1024;
-                    break;
+                string fileType = splits[splits.Length - 1].ToUpper();
+                if (FileType.Any(entity => entity.ToUpper() == fileType))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            return file.Length <= maxBytes;
+            else
+            {
+                return false;
+            }
         }
-
-
     }
 }

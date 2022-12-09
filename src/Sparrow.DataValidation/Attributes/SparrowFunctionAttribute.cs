@@ -6,7 +6,7 @@ namespace Sparrow.DataValidation.Attributes
     /// <summary>
     /// 自定义函数验证接口
     /// </summary>
-    public interface IFunction
+    public interface ISparrowFunction
     {
         /// <summary>
         /// 自定义验证函数
@@ -20,21 +20,21 @@ namespace Sparrow.DataValidation.Attributes
     /// 自定义函数验证特性
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public sealed class FunctionAttribute : ValidationAttribute
+    public sealed class SparrowFunctionAttribute : ValidationAttribute
     {
-        private readonly IFunction ValidClass;
+        private readonly ISparrowFunction ValidClass;
         /// <summary>
         /// 自定义函数验证特性
         /// </summary>
-        /// <param name="type">必须实现<see cref="IFunction"/>接口</param>
+        /// <param name="type">必须实现<see cref="ISparrowFunction"/>接口</param>
         /// <exception cref="ArgumentException"></exception>
-        public FunctionAttribute(Type type)
+        public SparrowFunctionAttribute(Type type)
         {
-            if (type.GetInterface(nameof(IFunction)) is null)
+            if (type.GetInterface(nameof(ISparrowFunction)) is null)
             {
                 throw new ArgumentException("未实现IFunction接口");
             }
-            ValidClass = Activator.CreateInstance(type) as IFunction;
+            ValidClass = Activator.CreateInstance(type) as ISparrowFunction;
         }
 
         /// <summary>
