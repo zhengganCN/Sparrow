@@ -3,7 +3,7 @@ using Sparrow.Extension.System;
 
 namespace Sparrow.Export.NPOI
 {
-    public partial class Word
+    public partial class SparrowWord
     {
         /// <summary>
         /// 添加标题

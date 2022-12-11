@@ -18,6 +18,15 @@
 		<Pack>True</Pack>
 		<PackagePath>\</PackagePath>
 	</None>
+	<None Include="SparrowWord.Table.cs">
+	  <DependentUpon>SparrowWord.cs</DependentUpon>
+	</None>
+	<None Include="SparrowWord.Text.cs">
+	  <DependentUpon>SparrowWord.cs</DependentUpon>
+	</None>
+	<None Include="SparrowWord.Title.cs">
+	  <DependentUpon>SparrowWord.cs</DependentUpon>
+	</None>
   </ItemGroup>
 
   <ItemGroup>

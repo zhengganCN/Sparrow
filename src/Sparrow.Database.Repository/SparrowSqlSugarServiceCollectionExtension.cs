@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
-using Sparrow.Database.SqlSugar;
+using Sparrow.Database.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +8,16 @@ using System.Reflection;
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// SqlSugar服务扩展
+    /// Repository服务扩展
     /// </summary>
     public static class SparrowSqlSugarServiceCollectionExtension
     {
         /// <summary>
-        /// 注册SqlSugar
+        /// 注册Repository
         /// </summary>
         /// <returns></returns>
-        public static IServiceCollection AddSqlSugar(this IServiceCollection services, params Assembly[] assemblies)
+        public static IServiceCollection AddSparrowRepository(this IServiceCollection services, params Assembly[] assemblies)
         {
-            StaticValues.Services = services;
-            StaticValues.Logger ??= services.BuildServiceProvider().GetService<ILogger<DbContext>>();
             RegisterRepository(services, assemblies);
             services.TryAddSingleton<RepositoryFactory>();
             return services;

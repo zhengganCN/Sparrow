@@ -8,7 +8,7 @@ namespace Sparrow.Export.NPOI
     /// <summary>
     /// Word
     /// </summary>
-    public partial class Word : IDisposable
+    public partial class SparrowWord : IDisposable
     {
         /// <summary>
         /// 文档
@@ -17,7 +17,7 @@ namespace Sparrow.Export.NPOI
         /// <summary>
         /// Word
         /// </summary>
-        public Word()
+        public SparrowWord()
         {
             var buffer = Convert.FromBase64String(FormatWord.WordBase64);
             MemoryStream memory = new MemoryStream();
@@ -31,7 +31,7 @@ namespace Sparrow.Export.NPOI
         /// Word
         /// </summary>
         /// <param name="document">文档</param>
-        public Word(XWPFDocument document)
+        public SparrowWord(XWPFDocument document)
         {
             XWPFDocument = document;
         }
