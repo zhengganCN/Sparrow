@@ -41,6 +41,12 @@ namespace Sparrow.Convert.System.Test
                 var datetime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 Assert.That(SparrowConvert.Parse<DateTime>(datetime.ToString("yyyy-MM-dd HH:mm:ss")), Is.EqualTo(datetime));
                 Assert.That(SparrowConvert.Parse<DateTime?>(""), Is.EqualTo(null));
+                var timespan = datetime - DateTime.Parse("1970-01-01 08:00:00");
+                Assert.That(SparrowConvert.Parse<TimeSpan>(timespan.ToString()), Is.EqualTo(timespan));
+                Assert.That(SparrowConvert.Parse<TimeSpan?>(""), Is.EqualTo(null));
+                var offset = DateTimeOffset.Parse(datetime.ToString("yyyy-MM-dd HH:mm:ss"));                
+                Assert.That(SparrowConvert.Parse<DateTimeOffset>(offset.ToString("yyyy-MM-dd HH:mm:ss")), Is.EqualTo(offset));
+                Assert.That(SparrowConvert.Parse<DateTimeOffset?>(""), Is.EqualTo(null));
                 var guid = Guid.NewGuid();
                 Assert.That(SparrowConvert.Parse<Guid>(guid.ToString()), Is.EqualTo(guid));
                 Assert.That(SparrowConvert.Parse<Guid?>(""), Is.EqualTo(null));

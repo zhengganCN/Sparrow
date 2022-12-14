@@ -229,6 +229,36 @@ namespace Sparrow.ConvertSystem
                     return default;
                 }
             }
+            else if (typeof(TimeSpan) == type)
+            {
+                return CastOperation<T>(TimeSpan.Parse(value));
+            }
+            else if (typeof(TimeSpan?) == type)
+            {
+                if (TimeSpan.TryParse(value, out TimeSpan result))
+                {
+                    return CastOperation<T>(result);
+                }
+                else
+                {
+                    return default;
+                }
+            }
+            else if (typeof(DateTimeOffset) == type)
+            {
+                return CastOperation<T>(DateTimeOffset.Parse(value));
+            }
+            else if (typeof(DateTimeOffset?) == type)
+            {
+                if (DateTimeOffset.TryParse(value, out DateTimeOffset result))
+                {
+                    return CastOperation<T>(result);
+                }
+                else
+                {
+                    return default;
+                }
+            }
             else if (typeof(Guid) == type)
             {
                 return CastOperation<T>(Guid.Parse(value));
