@@ -4,7 +4,7 @@ using Sparrow.Export.NPOI.Components;
 
 namespace Sparrow.Export.NPOI
 {
-    public partial class Word
+    public partial class SparrowWord
     {
         private void SetTableProperties(XWPFTable xWPFTable, WordTable table)
         {

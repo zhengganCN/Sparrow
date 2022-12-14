@@ -1,12 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
-namespace Sparrow.Database.SqlSugar
+namespace Sparrow.Database.Repository
 {
     /// <summary>
     /// 仓储工厂
     /// </summary>
     public class RepositoryFactory
     {
+        private readonly IServiceProvider _provider;
+
+        public RepositoryFactory(IServiceProvider provider)
+        {
+            _provider = provider;
+        }
 
         /// <summary>
         /// 获取Repository
@@ -15,7 +22,7 @@ namespace Sparrow.Database.SqlSugar
         /// <returns></returns>
         public TRepository GetRepository<TRepository>() where TRepository : IRepository
         {
-            return StaticValues.Services.BuildServiceProvider().GetService<TRepository>();
+            return _provider.GetService<TRepository>();
         }
     }
 }

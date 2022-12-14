@@ -18,7 +18,7 @@ namespace Sparrow.Export.NPOI.Test.WordTest
         public void ExportWordTest()
         {
 
-            using var word = new Word();
+            using var word = new SparrowWord();
 
             word.AddTitle(new WordTitle("1级标题", Enums.EnumTitle.Header_1));
             word.AddTitle(new WordTitle("2级标题", Enums.EnumTitle.Header_2));
@@ -43,8 +43,30 @@ namespace Sparrow.Export.NPOI.Test.WordTest
         [Test]
         public void ExportLinesCellWordTest()
         {
-            using var word = new Word();
+            using var word = new SparrowWord();
             word.AddTable(GetLinesCellWordTable());
+            if (!Directory.Exists("files"))
+            {
+                Directory.CreateDirectory("files");
+            }
+            word.Save(Path.Combine("files", Guid.NewGuid().ToString() + ".doc"));
+        }
+
+        [Test]
+        public void ExportComplexWordTest()
+        {
+            using var word = new SparrowWord();
+            var rows = 1;
+            var cols = 6;
+            var table = new WordTable(rows, cols);
+            table.Cells[0, 0] = new WordTableCell(new WordText("摘要"));
+            var summary = new WordTableCell(new WordText("摘要"))
+            {
+                Colspan = cols - 1
+            };
+            table.Cells[0, 1] = summary;
+
+            word.AddTable(table);
             if (!Directory.Exists("files"))
             {
                 Directory.CreateDirectory("files");
@@ -84,17 +106,13 @@ namespace Sparrow.Export.NPOI.Test.WordTest
             {
                 for (int column = 0; column < table.Columns; column++)
                 {
-                    var wordText = new WordText("测试")
-                    {
-                        BorderBottom = Borders.Dashed,
-                        VerticalAlignment = TextAlignment.CENTER,
-                        Alignment = ParagraphAlignment.CENTER
-                    };
                     var word = new List<WordText> { new WordText("测试"), };
                     table.Cells[row, column] = new WordTableCell(word);
                 }
             }
             return table;
         }
+
+
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Sparrow.Database.SqlSugar
+﻿namespace Sparrow.Database.Repository
 {
     /// <summary>
     /// 仓储

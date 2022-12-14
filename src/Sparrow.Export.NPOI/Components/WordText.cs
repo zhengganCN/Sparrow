@@ -60,7 +60,7 @@ namespace Sparrow.Export.NPOI.Components
         /// <summary>
         /// 垂直对齐方式
         /// </summary>
-        public TextAlignment VerticalAlignment { get; set; }
+        public TextAlignment VerticalAlignment { get; set; } = TextAlignment.CENTER;
         /// <summary>
         /// 字体对齐
         /// </summary>
@@ -80,7 +80,7 @@ namespace Sparrow.Export.NPOI.Components
         /// <summary>
         /// 对齐
         /// </summary>
-        public ParagraphAlignment Alignment { get; set; }
+        public ParagraphAlignment Alignment { get; set; } = ParagraphAlignment.LEFT;
         /// <summary>
         /// IndentationRight
         /// </summary>

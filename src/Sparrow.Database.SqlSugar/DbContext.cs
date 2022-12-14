@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using SqlSugar;
+﻿using SqlSugar;
 using System;
 
 namespace Sparrow.Database.SqlSugar
@@ -65,14 +64,7 @@ namespace Sparrow.Database.SqlSugar
             {
                 sql += $"\nname: {parameter.ParameterName}; value: {parameter.Value}";
             }
-            if (StaticValues.Logger is null)
-            {
-                Console.WriteLine(sql);
-            }
-            else
-            {
-                StaticValues.Logger.LogDebug(sql);
-            }
+            Console.WriteLine(sql);
         }
 
         /// <summary>
