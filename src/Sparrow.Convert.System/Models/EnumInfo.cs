@@ -1,4 +1,4 @@
-﻿namespace Sparrow.Convert.System
+﻿namespace Sparrow.ConvertSystem
 {
     /// <summary>
     /// 枚举信息

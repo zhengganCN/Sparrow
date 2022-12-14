@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace Sparrow.Convert.System
+namespace Sparrow.ConvertSystem
 {
     public static partial class SparrowConvert
     {

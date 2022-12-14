@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Sparrow.Convert.System
+namespace Sparrow.ConvertSystem
 {
     /// <summary>
     /// 字符串枚举

@@ -1,4 +1,4 @@
-﻿namespace Sparrow.Convert.System
+﻿namespace Sparrow.ConvertSystem
 {
     /// <summary>
     /// 类型转换
