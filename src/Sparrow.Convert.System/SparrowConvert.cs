@@ -5,5 +5,6 @@
     /// </summary>
     public static partial class SparrowConvert
     {
+
     }
 }

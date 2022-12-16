@@ -1,11 +1,29 @@
 ﻿using System;
-using System.Data.SqlTypes;
-using System.Text;
 
 namespace Sparrow.ConvertSystem
 {
     public static partial class SparrowConvert
     {
+        /// <summary>
+        /// 内置类型数据转换
+        /// </summary>
+        /// <typeparam name="T">内置类型</typeparam>
+        /// <param name="value">值</param>
+        /// <param name="defaultValue">默认值</param>
+        /// <returns></returns>
+        public static T Parse<T>(this string value, T defaultValue)
+        {
+            var data = Parse<T>(value);
+            if (data == null)
+            {
+                return defaultValue;
+            }
+            else
+            {
+                return data;
+            }
+        }
+
         /// <summary>
         /// 内置类型数据转换
         /// </summary>
@@ -27,7 +45,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             if (typeof(byte) == type)
@@ -42,7 +60,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             if (typeof(sbyte) == type)
@@ -57,7 +75,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             if (typeof(char) == type)
@@ -72,7 +90,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(decimal) == type)
@@ -87,7 +105,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(double) == type)
@@ -102,7 +120,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(float) == type)
@@ -117,7 +135,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(int) == type)
@@ -132,7 +150,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(uint) == type)
@@ -147,7 +165,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(long) == type)
@@ -162,7 +180,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(ulong) == type)
@@ -177,7 +195,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(short) == type)
@@ -192,7 +210,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(ushort) == type)
@@ -207,9 +225,9 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
-            }            
+            }
             else if (typeof(string) == type)
             {
                 return CastOperation<T>(value);
@@ -226,7 +244,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(TimeSpan) == type)
@@ -241,7 +259,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(DateTimeOffset) == type)
@@ -256,7 +274,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             else if (typeof(Guid) == type)
@@ -271,7 +289,7 @@ namespace Sparrow.ConvertSystem
                 }
                 else
                 {
-                    return default;
+                    return GetDefaultValue<T>();
                 }
             }
             return CastOperation<T>(value); ;
@@ -282,65 +300,10 @@ namespace Sparrow.ConvertSystem
             return (T)value;
         }
 
-        /// <summary>
-        /// 首字母小写
-        /// </summary>
-        /// <param name="value">待处理字符</param>
-        /// <returns></returns>
-        public static string LowercaseFirstLetter(this string value)
+        private static T GetDefaultValue<T>()
         {
-            return HandleString(value, StringCaseEnum.Lowercase);
+            return default;
         }
 
-        /// <summary>
-        /// 首字母大写
-        /// </summary>
-        /// <param name="value">待处理字符</param>
-        /// <returns></returns>
-        public static string UppercaseFirstLetter(this string value)
-        {
-            return HandleString(value, StringCaseEnum.Uppercase);
-        }
-
-        /// <summary>
-        /// 字符处理
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="case"></param>
-        /// <returns></returns>
-        private static string HandleString(string value, StringCaseEnum @case)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                return string.Empty;
-            }
-            var builder = new StringBuilder(' ');
-            builder.Append(value);
-            bool isFirstLetterNextChar;
-            for (int i = 0; i < builder.Length; i++)
-            {
-                if (builder[i] == ' ')
-                {
-                    isFirstLetterNextChar = true;
-                }
-                else
-                {
-                    isFirstLetterNextChar = false;
-                }
-                if (isFirstLetterNextChar && builder[i] != ' ')
-                {
-                    switch (@case)
-                    {
-                        case StringCaseEnum.Lowercase:
-                            builder[i] = builder[i].ToString().ToLowerInvariant().ToCharArray()[0];
-                            break;
-                        case StringCaseEnum.Uppercase:
-                            builder[i] = builder[i].ToString().ToUpperInvariant().ToCharArray()[0];
-                            break;
-                    }
-                }
-            }
-            return builder.ToString();
-        }
     }
 }
