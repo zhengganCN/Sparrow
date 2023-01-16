@@ -4,9 +4,9 @@ using System.IO;
 namespace Sparrow.Extension.System
 {
     /// <summary>
-    /// 目录扩展
+    /// 目录操作
     /// </summary>
-    public static class DirectoryExtension
+    public static class SparrowDirectory
     {
         /// <summary>
         /// 获取文件夹路径
@@ -14,7 +14,7 @@ namespace Sparrow.Extension.System
         /// <param name="path">根目录</param>
         /// <param name="deep">递归深度；当为null时或小于等于0时，不递归目录</param>
         /// <returns></returns>
-        public static IList<string> GetDirectories(this string path, int? deep = null)
+        public static IList<string> GetDirectories(string path, uint deep)
         {
             var directoryPaths = Directory.GetDirectories(path);
             return GetDirectories(directoryPaths, deep);
@@ -25,7 +25,7 @@ namespace Sparrow.Extension.System
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static IList<string> GetDirectoriesByRecursive(this string path)
+        public static IList<string> GetDirectoriesByRecursive(string path)
         {
             var paths = new List<string>();
             var directories = Directory.GetDirectories(path);
@@ -43,11 +43,11 @@ namespace Sparrow.Extension.System
         /// <param name="directoryPaths">目录路径</param>
         /// <param name="deep">递归深度；当为null时或小于等于0时，不递归目录</param>
         /// <returns></returns>
-        private static List<string> GetDirectories(IList<string> directoryPaths, int? deep = null)
+        private static List<string> GetDirectories(IList<string> directoryPaths, uint deep)
         {
             var allOfDirectoryPaths = new List<string>();
             allOfDirectoryPaths.AddRange(directoryPaths);
-            if (deep.HasValue && --deep < 0)
+            if (deep == 0)
             {
                 return allOfDirectoryPaths;
             }
