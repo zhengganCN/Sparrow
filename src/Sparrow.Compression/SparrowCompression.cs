@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Compression
+﻿namespace Sparrow.Compression
 {
     /// <summary>
     /// 压缩/解压缩
