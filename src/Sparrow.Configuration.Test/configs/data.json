@@ -1,0 +1,37 @@
+﻿{
+    "num_1": 1,
+    "string_1": "无敌",
+    "list_num": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ],
+    "list_obj": [
+        {
+            "one": 1,
+            "two": 2
+        }
+    ],
+    "obj": {
+        "one": 1,
+        "two": 2
+    },
+    "person": {
+        "Age": 22,
+        "Name": "王莎",
+        "BirthDate": "2023-01-03",
+        "list_obj": [
+            {
+                "one": 1,
+                "two": 2,
+                "person": {
+                    "Age": 21,
+                    "Name": "苏莎",
+                    "BirthDate": "2022-01-06"
+                }
+            }
+        ]
+    }
+} 
