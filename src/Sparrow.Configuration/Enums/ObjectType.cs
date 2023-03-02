@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Configuration.Enums
+﻿namespace Sparrow.Configuration.Enums
 {
     internal enum ObjectType
     {

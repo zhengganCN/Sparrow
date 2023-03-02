@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Extension.RabbitMQ
+﻿namespace Sparrow.Extension.RabbitMQ
 {
+    /// <summary>
+    /// 枚举交换机参数
+    /// </summary>
     public enum EnumExchangeArgument
     {
         /// <summary>

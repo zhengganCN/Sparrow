@@ -1,7 +1,4 @@
 ﻿using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sparrow.Extension.RabbitMQ
 {
@@ -28,5 +25,10 @@ namespace Sparrow.Extension.RabbitMQ
             return result;
         }
 
+
+        internal static string GetQueueArgumentKey(EnumQueueArguments arguments)
+        {
+            return arguments.ToString().Replace('_', '-');
+        }
     }
 }

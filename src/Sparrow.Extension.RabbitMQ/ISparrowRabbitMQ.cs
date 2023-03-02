@@ -1,8 +1,9 @@
-﻿using System;
-
-namespace Sparrow.Extension.RabbitMQ
+﻿namespace Sparrow.Extension.RabbitMQ
 {
-    public interface ISparrowRabbitMQ : IDisposable
+    /// <summary>
+    /// 扩展接口
+    /// </summary>
+    public interface ISparrowRabbitMQ
     {
     }
 }

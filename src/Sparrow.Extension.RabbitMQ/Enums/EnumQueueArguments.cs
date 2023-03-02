@@ -1,5 +1,8 @@
 ﻿namespace Sparrow.Extension.RabbitMQ
 {
+    /// <summary>
+    /// 枚举队列参数
+    /// </summary>
     public enum EnumQueueArguments
     {
         /// <summary>

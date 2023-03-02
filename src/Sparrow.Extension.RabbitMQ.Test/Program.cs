@@ -1,9 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sparrow.Extension.RabbitMQ.Test
 {
@@ -19,15 +15,22 @@ namespace Sparrow.Extension.RabbitMQ.Test
                 options.HostName = "dostudy.top";
             });
             Console.WriteLine("Press enter number to choice function");
-            
+
             var provider = services.BuildServiceProvider();
             var mq = provider.GetService<SparrowRabbtiMQ>();
             var test = new Tests();
-            test.QueueDeclare(mq);
-            test.SimplePublic(mq);
-            //new Tests().Consume(mq);
+            test.ExchangeDeclare(mq);
+            //test.QueueDeclare(mq);
+            //test.SimplePublic(mq);
+            //test.Consume(mq);
+            TestDeadLetterQueue(mq, test);
             Console.ReadLine();
             Console.WriteLine("Hello World!");
+        }
+
+        private static void TestDeadLetterQueue(SparrowRabbtiMQ mq, Tests test)
+        {
+            test.DeadLetterQueueDeclare(mq);
         }
     }
 }

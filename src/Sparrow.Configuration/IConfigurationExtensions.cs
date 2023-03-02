@@ -1,12 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Sparrow.Configuration.Enums;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Sparrow.Configuration
 {
@@ -178,7 +175,7 @@ namespace Sparrow.Configuration
         /// <param name="key">key</param>
         /// <param name="configs">配置</param>
         /// <returns></returns>
-        private static ObjectType? ConfigObjType(string key,List<KeyValuePair<string,string>> configs)
+        private static ObjectType? ConfigObjType(string key, List<KeyValuePair<string, string>> configs)
         {
             if (configs.Any(e => e.Key == key))
             {

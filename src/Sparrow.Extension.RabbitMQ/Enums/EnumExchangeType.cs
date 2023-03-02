@@ -6,13 +6,19 @@
     public enum EnumExchangeType
     {
         /// <summary>
-        /// 直连
+        /// 直连模式
         /// </summary>
         Direct,
+        /// <summary>
+        /// 发布/订阅模式(一个生产者发送的消息会被多个消费者获取)
+        /// </summary>
         Fanout,
+        /// <summary>
+        /// 参数模式
+        /// </summary>
         Headers,
         /// <summary>
-        /// 订阅
+        /// 主题模式
         /// </summary>
         Topic
     }

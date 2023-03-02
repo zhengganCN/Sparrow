@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Extension.RabbitMQ
+﻿namespace Sparrow.Extension.RabbitMQ
 {
+    /// <summary>
+    /// 枚举队列参数
+    /// </summary>
     public enum EnumQueueArgumentOverflow
     {
+        /// <summary>
+        /// 
+        /// </summary>
         drop_head,
-        reject_publish ,
+        /// <summary>
+        /// 
+        /// </summary>
+        reject_publish,
+        /// <summary>
+        /// 
+        /// </summary>
         reject_publish_dlx
     }
 }

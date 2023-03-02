@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Configuration;
 using Sparrow.Configuration.Test.models;
-using System.Text;
 
 namespace Sparrow.Configuration.Test
 {

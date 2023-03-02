@@ -1,6 +1,5 @@
-using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
+using System;
 using System.Text;
 
 namespace Sparrow.Extension.RabbitMQ.Test
@@ -33,55 +32,99 @@ namespace Sparrow.Extension.RabbitMQ.Test
             channel.Close();
         }
 
-        public void SimplePublic(SparrowRabbtiMQ mq)
+        private const string ExchangeDlx = "test.sparrow.exchange.dlx";
+        private const string ExchangeDirect = "test.sparrow.exchange.direct";
+        private const string ExchangeFanout = "test.sparrow.exchange.fanout";
+        private const string ExchangeTopic = "test.sparrow.exchange.topic";
+        private const string ExchangeHeaders = "test.sparrow.exchange.headers";
+
+        /// <summary>
+        /// 声明交换机
+        /// </summary>
+        /// <param name="mq"></param>
+        public void ExchangeDeclare(SparrowRabbtiMQ mq)
         {
             if (mq is null)
             {
                 return;
             }
             var channel = mq.CreateChannel();
-            //声明一个队列
-            channel.CreateQueue("hello");
-            for (int i = 0; i < 10; i++)
+            channel.CreateExchange(ExchangeDlx, new ExchangeArgument
             {
-                channel.PublicMessage("hello", Encoding.UTF8.GetBytes("消息"));
-            }
-            channel.Close();
+                Type = EnumExchangeType.Direct
+            });
+            channel.CreateExchange(ExchangeDirect, new ExchangeArgument
+            {
+                Type = EnumExchangeType.Direct
+            });
+            channel.CreateExchange(ExchangeFanout, new ExchangeArgument
+            {
+                Type = EnumExchangeType.Fanout
+            });
+            channel.CreateExchange(ExchangeTopic, new ExchangeArgument
+            {
+                Type = EnumExchangeType.Topic
+            });
+            channel.CreateExchange(ExchangeHeaders, new ExchangeArgument
+            {
+                Type = EnumExchangeType.Headers
+            });
         }
 
-        public void Consume(SparrowRabbtiMQ mq)
+        /// <summary>
+        /// 声明正常队列和死信队列，并绑定死信队列
+        /// </summary>
+        /// <param name="mq"></param>
+        public void DeadLetterQueueDeclare(SparrowRabbtiMQ mq)
         {
             if (mq is null)
             {
                 return;
             }
-            //创建连接
-            var connection = mq.CreateConnection();
-            
-            //创建通道
-            var channel = connection.CreateModel();
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (ch, ea) =>
+            var channel = mq.CreateChannel();
+            var queue = "test.sparrow.queue.001";
+            var routingKey = queue;
+            var queueDlx = "test.sparrow.queue.001.dlx";
+            var routingKeyDlx = queueDlx;
+            channel.CreateQueue(queueDlx, new QueueArgument
             {
-                var body = ea.Body.ToArray();
-                var msg = Encoding.UTF8.GetString(body);
-
-                // copy or deserialise the payload
-                // and process the message
-                // ...
-                channel.BasicAck(ea.DeliveryTag, false);
+                Type = EnumQueueType.Classic
+            });
+            var queueArgument = new QueueArgument
+            {
+                Type = EnumQueueType.Classic
             };
-            var argument = new ConsumerArgument
+            queueArgument.BindDeadLetterQueue(ExchangeDlx, routingKeyDlx);
+            channel.CreateQueue(queue, queueArgument);
+
+            channel.QueueBind(queue, ExchangeDirect, routingKey);
+            channel.QueueBind(queueDlx, ExchangeDlx, routingKeyDlx);
+
+            for (int i = 0; i < 3; i++)
+            {
+                var msg = Encoding.UTF8.GetBytes($"第{i}条消息");
+                channel.PublishMessage(ExchangeDirect, routingKey, msg);
+            }
+            channel.BasicQos(0, 1, false);
+            var consumeArgument = new ConsumeArgument
             {
                 AutoAck = false,
-                Consumer = consumer
+                Received = (obj, deliver) =>
+                {
+                    try
+                    {
+                        var body = deliver.Body.ToArray();
+                        var msg = Encoding.UTF8.GetString(body);
+                        channel.BasicAck(deliver.DeliveryTag, false);
+                    }
+                    catch (Exception ex)
+                    {
+                        channel.BasicNack(deliver.DeliveryTag, false, false);
+                        Console.WriteLine(ex.ToString());
+                    }
+                }
             };
-            channel.ConsumeMessage("hello", argument);
-            //var consumer1 = new EventingBasicConsumer(model);
-            //consumer1.Received
-            //model.BasicConsume();
-            //channel.Close();
-            //connection.Close();
+            channel.ConsumeMessage(queue, consumeArgument);
         }
     }
 }
