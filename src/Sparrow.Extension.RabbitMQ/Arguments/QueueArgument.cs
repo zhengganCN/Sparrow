@@ -31,6 +31,24 @@ namespace Sparrow.Extension.RabbitMQ
         public IDictionary<string, object> Arguments { get; set; } = new Dictionary<string, object>();
 
         /// <summary>
+        /// 新增其他属性（如果属性已存在，则替换属性值）
+        /// </summary>
+        /// <param name="arguments">属性类型</param>
+        /// <param name="value"></param>
+        public void AddArguments(EnumQueueArguments arguments, object value)
+        {
+            var key = Utils.GetQueueArgumentKey(arguments);
+            if (Arguments.ContainsKey(key))
+            {
+                Arguments[key] = value;
+            }
+            else
+            {
+                Arguments.Add(key, value);
+            }
+        }
+
+        /// <summary>
         /// 绑定死信队列
         /// </summary>
         /// <param name="exchange">交换机</param>
@@ -46,26 +64,10 @@ namespace Sparrow.Extension.RabbitMQ
         /// <param name="routeKey">路由key</param>
         public void BindDeadLetterQueue(string exchange, string routeKey)
         {
-            var x_dead_letter_exchange = Utils.GetQueueArgumentKey(EnumQueueArguments.x_dead_letter_exchange);
-            if (Arguments.ContainsKey(x_dead_letter_exchange))
-            {
-                Arguments[x_dead_letter_exchange] = exchange;
-            }
-            else
-            {
-                Arguments.Add(x_dead_letter_exchange, exchange);
-            }
+            AddArguments(EnumQueueArguments.x_dead_letter_exchange, exchange);
             if (!string.IsNullOrWhiteSpace(routeKey))
             {
-                var x_dead_letter_routing_key = Utils.GetQueueArgumentKey(EnumQueueArguments.x_dead_letter_routing_key);
-                if (Arguments.ContainsKey(x_dead_letter_routing_key))
-                {
-                    Arguments[x_dead_letter_routing_key] = routeKey;
-                }
-                else
-                {
-                    Arguments.Add(x_dead_letter_routing_key, routeKey);
-                }
+                AddArguments(EnumQueueArguments.x_dead_letter_routing_key, routeKey);
             }
         }
     }
