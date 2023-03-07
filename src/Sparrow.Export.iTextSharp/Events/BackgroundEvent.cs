@@ -32,7 +32,6 @@ namespace Sparrow.Export.iTextSharp.Events
             var pageSize = page.GetPageSize();
             var pdfStream = page.NewContentStreamBefore();
             var pdfCanvas = new PdfCanvas(pdfStream, page.GetResources(), pdfDocument);
-
             SetBackgroundColor(pdfCanvas, pageSize, pageNumber);
             pdfCanvas.Release();
         }

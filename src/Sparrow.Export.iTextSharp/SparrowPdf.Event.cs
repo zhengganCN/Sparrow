@@ -28,6 +28,18 @@ namespace Sparrow.Export.iTextSharp
             return this;
         }
 
+        /// <summary>
+        /// 设置图片水印
+        /// </summary>
+        /// <param name="mark">水印参数</param>
+        /// <returns></returns>
+        public SparrowPdf SetWaterMark(ImageWaterMark mark)
+        {
+            var handle = new WaterMarkEvent(mark, PdfFont);
+            PdfDocument.AddEventHandler(PdfDocumentEvent.INSERT_PAGE, handle);
+            return this;
+        }
+
 
 
         /// <summary>

@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="resource\1638175710256.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="resource\simsun.ttc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
