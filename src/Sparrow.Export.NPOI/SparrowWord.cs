@@ -48,6 +48,22 @@ namespace Sparrow.Export.NPOI
         }
 
         /// <summary>
+        /// 保存
+        /// </summary>
+        public byte[] Save()
+        {
+            byte[] buffer;
+            using (var memory = new MemoryStream())
+            {
+                XWPFDocument.Write(memory);
+                memory.Position = 0;
+                buffer = new byte[memory.Length];
+                memory.Read(buffer, 0, buffer.Length);
+            }
+            return buffer;
+        }
+
+        /// <summary>
         /// 销毁
         /// </summary>
         public void Dispose()

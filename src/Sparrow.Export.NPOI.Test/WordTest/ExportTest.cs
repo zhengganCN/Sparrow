@@ -1,13 +1,17 @@
+using DocumentFormat.OpenXml.Spreadsheet;
 using NPOI.XWPF.UserModel;
 using NUnit.Framework;
 using Sparrow.Export.NPOI.Components;
+using Sparrow.Export.NPOI.Enums;
+using Sparrow.Export.NPOI.Styles;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Borders = NPOI.XWPF.UserModel.Borders;
 
 namespace Sparrow.Export.NPOI.Test.WordTest
 {
-    public class ExportTest
+    internal partial class ExportTest
     {
         [SetUp]
         public void Setup()
@@ -20,19 +24,30 @@ namespace Sparrow.Export.NPOI.Test.WordTest
 
             using var word = new SparrowWord();
 
-            word.AddTitle(new WordTitle("1级标题", Enums.EnumTitle.Header_1));
-            word.AddTitle(new WordTitle("2级标题", Enums.EnumTitle.Header_2));
-            word.AddTitle(new WordTitle("3级标题", Enums.EnumTitle.Header_3));
-            word.AddTitle(new WordTitle("4级标题", Enums.EnumTitle.Header_4));
-            word.AddTitle(new WordTitle("5级标题", Enums.EnumTitle.Header_5));
-            word.AddTitle(new WordTitle("6级标题", Enums.EnumTitle.Header_6));
-            word.AddTitle(new WordTitle("7级标题", Enums.EnumTitle.Header_7));
-            word.AddTitle(new WordTitle("8级标题", Enums.EnumTitle.Header_8));
-            word.AddTitle(new WordTitle("9级标题", Enums.EnumTitle.Header_9));
-            word.AddTitle(new WordTitle("标题", Enums.EnumTitle.Title));
-            word.AddTitle(new WordTitle("副标题", Enums.EnumTitle.SubTitle));
-            word.AddTable(GetWordTable());
-            word.AddText(new WordText("\t这是一个文本段"));
+            word.AddTitle("1级标题", WordTitleType.Header_1);
+            word.AddTitle("2级标题", WordTitleType.Header_2);
+            word.AddTitle("3级标题", WordTitleType.Header_3);
+            word.AddTitle("4级标题", WordTitleType.Header_4);
+            word.AddTitle("5级标题", WordTitleType.Header_5);
+            word.AddTitle("6级标题", WordTitleType.Header_6);
+            word.AddTitle("7级标题", WordTitleType.Header_7);
+            word.AddTitle("8级标题", WordTitleType.Header_8);
+            word.AddTitle("9级标题", WordTitleType.Header_9);
+            word.AddTitle("标题", WordTitleType.Title);
+            word.AddTitle("副标题", WordTitleType.SubTitle);
+            var table = word.AddTable(new WordTableStyle
+            {
+                Width = 8000
+            });
+            for (int r = 0; r < 6; r++)
+            {
+                var row = table.AddRow();
+                for (int c = 0; c < 6; c++)
+                {
+                    row.AddCell().SetText("测试");
+                }
+            }
+            word.AddText("\t这是一个文本段");
             if (!Directory.Exists("files"))
             {
                 Directory.CreateDirectory("files");
@@ -44,7 +59,24 @@ namespace Sparrow.Export.NPOI.Test.WordTest
         public void ExportLinesCellWordTest()
         {
             using var word = new SparrowWord();
-            word.AddTable(GetLinesCellWordTable());
+            var table = word.AddTable(new WordTableStyle
+            {
+                Width = 8000
+            });
+            var style = new WordTextStyle
+            {
+                BorderBottom = Borders.Dashed,
+                VerticalAlignment = TextAlignment.CENTER,
+                Alignment = ParagraphAlignment.CENTER
+            };
+            for (int r = 0; r < 6; r++)
+            {
+                var row = table.AddRow();
+                for (int c = 0; c < 6; c++)
+                {
+                    row.AddCell().SetText("测试", style);
+                }
+            }
             if (!Directory.Exists("files"))
             {
                 Directory.CreateDirectory("files");
@@ -53,20 +85,32 @@ namespace Sparrow.Export.NPOI.Test.WordTest
         }
 
         [Test]
-        public void ExportComplexWordTest()
+        public void ExportMergeTest()
         {
             using var word = new SparrowWord();
-            var rows = 1;
-            var cols = 6;
-            var table = new WordTable(rows, cols);
-            table.Cells[0, 0] = new WordTableCell(new WordText("摘要"));
-            var summary = new WordTableCell(new WordText("摘要"))
-            {
-                Colspan = cols - 1
-            };
-            table.Cells[0, 1] = summary;
-
-            word.AddTable(table);
+            var table = word.AddTable();
+            var row = table.AddRow();
+            row.AddCell().SetText("摘要");
+            row.AddCell().SetText("摘要");
+            row.AddCell(2).SetText("摘要");
+            row.AddCell(3).SetText("摘要");
+            var row2 = table.AddRow();
+            row2.AddCell().SetText("摘要");
+            row2.AddCell().SetText("摘要");
+            row2.AddCell().SetText("摘要");
+            row2.AddCell().SetText("摘要");
+            row2.AddCell().SetText("摘要");
+            row2.AddCell().SetText("摘要");
+            row2.AddCell().SetText("摘要"); 
+            var row3 = table.AddRow();
+            row3.AddCell().SetText("摘要");
+            row3.AddCell().SetText("摘要");
+            row3.AddCell().SetText("摘要");
+            row3.AddCell().SetText("摘要");
+            row3.AddCell().SetText("摘要");
+            row3.AddCell().SetText("摘要");
+            row3.AddCell().SetText("摘要");
+            table.MergeRows(2, 1, 2);
             if (!Directory.Exists("files"))
             {
                 Directory.CreateDirectory("files");
@@ -74,45 +118,7 @@ namespace Sparrow.Export.NPOI.Test.WordTest
             word.Save(Path.Combine("files", Guid.NewGuid().ToString() + ".doc"));
         }
 
-        private static WordTable GetWordTable()
-        {
-            var table = new WordTable(10, 7)
-            {
-                Width = 8000
-            };
-            for (int row = 0; row < table.Rows; row++)
-            {
-                for (int column = 0; column < table.Columns; column++)
-                {
-                    var wordText = new WordText("测试")
-                    {
-                        BorderBottom = Borders.Dashed,
-                        VerticalAlignment = TextAlignment.CENTER,
-                        Alignment = ParagraphAlignment.CENTER
-                    };
-                    table.Cells[row, column] = new WordTableCell(wordText);
-                }
-            }
-            return table;
-        }
-
-        private static WordTable GetLinesCellWordTable()
-        {
-            var table = new WordTable(10, 7)
-            {
-                Width = 8000
-            };
-            for (int row = 0; row < table.Rows; row++)
-            {
-                for (int column = 0; column < table.Columns; column++)
-                {
-                    var word = new List<WordText> { new WordText("测试"), };
-                    table.Cells[row, column] = new WordTableCell(word);
-                }
-            }
-            return table;
-        }
-
+       
 
     }
 }

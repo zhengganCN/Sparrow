@@ -30,10 +30,10 @@ namespace Sparrow.Export.NPOI
         /// <summary>
         /// 创建表格
         /// </summary>
-        public void AddText(WordText wordText)
+        public void AddText(string text)
         {
             var paragraph = XWPFDocument.CreateParagraph();
-            paragraph.CreateRun().AppendText(wordText.Text);
+            paragraph.CreateRun().AppendText(text);
         }
     }
 }

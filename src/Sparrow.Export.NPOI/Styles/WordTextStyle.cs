@@ -1,22 +1,16 @@
 ﻿using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Sparrow.Export.NPOI.Components
+namespace Sparrow.Export.NPOI.Styles
 {
     /// <summary>
-    /// Word内容
+    /// 文本样式
     /// </summary>
-    public class WordText
+    public class WordTextStyle
     {
-        internal string Text { get; set; }
-        /// <summary>
-        /// Word内容
-        /// </summary>
-        /// <param name="text">文本</param>
-        public WordText(string text)
-        {
-            Text = text;
-        }
         /// <summary>
         /// SpacingAfterLines
         /// </summary>

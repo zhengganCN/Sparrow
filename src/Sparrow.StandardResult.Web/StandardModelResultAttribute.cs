@@ -8,9 +8,13 @@ using System.Text.Json;
 namespace Sparrow.StandardResult
 {
     /// <summary>
-    /// 标准结果特性
+    /// 模型验证特性
     /// </summary>
-    public class StandardResultAttribute : Attribute, IActionFilter
+    /// <remarks>
+    /// 验证不通过则返回<see cref="StandardDto"/>结构
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
+    public class StandardModelResultAttribute : Attribute, IActionFilter
     {
         /// <summary>
         /// <see cref="StandardDto"/>构造函数中的key值
@@ -46,7 +50,7 @@ namespace Sparrow.StandardResult
                     });
                 }
                 dto.ModelValidResult(list);
-                context.Result = new ContentResult { Content = dto.Serialize() };
+                context.Result = new JsonResult(dto);
             }
         }
     }

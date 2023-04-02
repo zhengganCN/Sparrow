@@ -5,7 +5,7 @@ namespace Sparrow.Export.NPOI.Enums
     /// <summary>
     /// 标题
     /// </summary>
-    public enum EnumTitle
+    public enum WordTitleType
     {
         /// <summary>
         /// 标题

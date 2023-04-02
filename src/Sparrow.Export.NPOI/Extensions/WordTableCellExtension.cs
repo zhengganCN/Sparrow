@@ -1,6 +1,7 @@
 ﻿using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
 using Sparrow.Export.NPOI.Components;
+using Sparrow.Export.NPOI.Styles;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,26 +12,37 @@ namespace Sparrow.Export.NPOI
     /// <summary>
     /// Word表格Cell扩展
     /// </summary>
-    public static class XWPFTableCellExtension
+    public static class WordTableCellExtension
     {
         /// <summary>
         /// 设置文本
         /// </summary>
         /// <param name="cell"></param>
-        /// <param name="wordText"></param>
-        public static void SetText(this XWPFTableCell cell, WordText wordText)
+        /// <param name="text"></param>
+        public static void SetText(this WordTableCell cell, string text)
         {
-            SetText(cell, new List<WordText> { wordText });
+            SetText(cell, new List<string> { text }, new WordTextStyle());
         }
         /// <summary>
         /// 设置文本
         /// </summary>
         /// <param name="cell"></param>
-        /// <param name="wordTexts"></param>
-        public static void SetText(this XWPFTableCell cell, List<WordText> wordTexts)
+        /// <param name="text"></param>
+        /// <param name="style"></param>
+        public static void SetText(this WordTableCell cell, string text, WordTextStyle style)
         {
-            var ctTc = cell.GetCTTc();
-            for (int i = 0; i < wordTexts.Count; i++)
+            SetText(cell, new List<string> { text }, style);
+        }
+        /// <summary>
+        /// 设置文本
+        /// </summary>
+        /// <param name="cell"></param>
+        /// <param name="texts"></param>
+        /// <param name="style"></param>
+        public static void SetText(this WordTableCell cell, List<string> texts, WordTextStyle style)
+        {
+            var ctTc = cell.Cell.GetCTTc();
+            for (int i = 0; i < texts.Count; i++)
             {
                 CT_P ctP;
                 if (ctTc.SizeOfPArray() > i)
@@ -41,13 +53,18 @@ namespace Sparrow.Export.NPOI
                 {
                     ctP = ctTc.AddNewP();
                 }
-                var paragraph = new XWPFParagraph(ctP, cell);
-                paragraph.CreateRun().AppendText(wordTexts[i].Text);
-                paragraph.Alignment = wordTexts[i].Alignment;
-                paragraph.VerticalAlignment = wordTexts[i].VerticalAlignment;
-                cell.AddParagraph();
+                var paragraph = new XWPFParagraph(ctP, cell.Cell);
+                paragraph.CreateRun().AppendText(texts[i]);
+                paragraph.Alignment = style.Alignment;
+                paragraph.VerticalAlignment = style.VerticalAlignment;
+                cell.Cell.AddParagraph();
             }
-            ctTc.RemoveP(wordTexts.Count);
+            if (ctTc.tcPr == null)
+            {
+                ctTc.tcPr = ctTc.AddNewTcPr();
+            }
+            cell.Cell.SetVerticalAlignment(XWPFTableCell.XWPFVertAlign.CENTER);
+            ctTc.RemoveP(texts.Count);
         }
 
         /// <summary>
@@ -85,11 +102,11 @@ namespace Sparrow.Export.NPOI
         /// <summary>
         /// 设置表格单元格的宽度
         /// </summary>
-        /// <param name="xWPFTableCell">单元格</param>
+        /// <param name="cell">单元格</param>
         /// <param name="width">宽度</param>
-        internal static void SetCellWidth(XWPFTableCell xWPFTableCell, int? width = null)
+        internal static void SetCellWidth(WordTableCell cell, int? width = null)
         {
-            CT_TcPr m_Pr = xWPFTableCell.GetCTTc().AddNewTcPr();
+            CT_TcPr m_Pr = cell.Cell.GetCTTc().AddNewTcPr();
             if (width != null)
             {
                 m_Pr.tcW = new CT_TblWidth
@@ -100,27 +117,25 @@ namespace Sparrow.Export.NPOI
             }
         }
 
-
-
         /// <summary>
         /// 向表格单元格追加文本
         /// </summary>
-        /// <param name="xWPFTableCell">单元格</param>
+        /// <param name="cell">单元格</param>
         /// <param name="text">文本</param>
         /// <returns></returns>
-        internal static void AppendText(XWPFTableCell xWPFTableCell, string text)
+        internal static void AppendText(WordTableCell cell, string text)
         {
-            AddTextNewLine(xWPFTableCell, HandleTableCellText(text));
+            AddTextNewLine(cell, HandleTableCellText(text));
         }
 
         /// <summary>
         /// 换行后追加文本
         /// </summary>
-        /// <param name="xWPFTableCell">单元格</param>
+        /// <param name="cell">单元格</param>
         /// <param name="lines">文本行</param>
-        internal static void AddTextNewLine(XWPFTableCell xWPFTableCell, string[] lines)
+        internal static void AddTextNewLine(WordTableCell cell, string[] lines)
         {
-            var paragraph = xWPFTableCell.AddParagraph();
+            var paragraph = cell.Cell.AddParagraph();
             for (int i = 1; i < lines.Length; i++)
             {
                 XWPFRun xWPFRun = paragraph.CreateRun();
@@ -132,17 +147,16 @@ namespace Sparrow.Export.NPOI
             }
         }
 
-
-
         /// <summary>
         /// 设置单元格背景色
         /// </summary>
-        /// <param name="xWPFTableCell">单元格</param>
+        /// <param name="cell">单元格</param>
         /// <param name="color">颜色，十六进制颜色代码</param>
-        internal static void SetCellBacogroundColor(XWPFTableCell xWPFTableCell, string color)
+        internal static void SetCellBacogroundColor(WordTableCell cell, string color)
         {
-            xWPFTableCell.SetColor(color);
+            cell.Cell.SetColor(color);
         }
+
         /// <summary>
         /// 合并单元格
         /// </summary>
