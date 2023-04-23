@@ -96,9 +96,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Repository
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Configuration.Test", "Sparrow.Configuration.Test\Sparrow.Configuration.Test.csproj", "{A6405A03-B065-419D-8BFD-C57EFA65BC08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Extension.RabbitMQ", "Sparrow.Extension.RabbitMQ\Sparrow.Extension.RabbitMQ.csproj", "{E808EF25-BC9C-4FBB-8CBE-C991FCCB590C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.RabbitMQ", "Sparrow.Extension.RabbitMQ\Sparrow.Extension.RabbitMQ.csproj", "{E808EF25-BC9C-4FBB-8CBE-C991FCCB590C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Extension.RabbitMQ.Test", "Sparrow.Extension.RabbitMQ.Test\Sparrow.Extension.RabbitMQ.Test.csproj", "{2DE8EEB0-A5FA-4F49-9F64-E0AEF7727161}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.RabbitMQ.Test", "Sparrow.Extension.RabbitMQ.Test\Sparrow.Extension.RabbitMQ.Test.csproj", "{2DE8EEB0-A5FA-4F49-9F64-E0AEF7727161}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Export.iTextSharp.Font.SimSun", "Sparrow.Export.iTextSharp.Font.SimSun\Sparrow.Export.iTextSharp.Font.SimSun.csproj", "{C0963178-0538-405F-9259-17B4A3118926}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -238,6 +240,10 @@ Global
 		{2DE8EEB0-A5FA-4F49-9F64-E0AEF7727161}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DE8EEB0-A5FA-4F49-9F64-E0AEF7727161}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DE8EEB0-A5FA-4F49-9F64-E0AEF7727161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0963178-0538-405F-9259-17B4A3118926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0963178-0538-405F-9259-17B4A3118926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0963178-0538-405F-9259-17B4A3118926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0963178-0538-405F-9259-17B4A3118926}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -276,6 +282,7 @@ Global
 		{A6405A03-B065-419D-8BFD-C57EFA65BC08} = {9B1BC684-1422-4680-9B0F-BF3C7DB7523B}
 		{E808EF25-BC9C-4FBB-8CBE-C991FCCB590C} = {23DEE508-64DD-4415-AEFE-D47DB821B39C}
 		{2DE8EEB0-A5FA-4F49-9F64-E0AEF7727161} = {23DEE508-64DD-4415-AEFE-D47DB821B39C}
+		{C0963178-0538-405F-9259-17B4A3118926} = {C1E5D574-F3A1-40F5-AAF8-2DDB2D6A4F44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}
