@@ -21,11 +21,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSparrowRabbitMQ(StaticValues.default_key, action);
             return services;
         }
+
         /// <summary>
         /// 注册RabbitMQ
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="key">区分不同的RabbitMQ客户端；<see cref="SparrowRabbtiMQ"/>函数中的key</param>
+        /// <param name="key">区分不同的RabbitMQ客户端；<see cref="SparrowRabbitMQ"/>函数中的key</param>
         /// <param name="action">参数</param>
         /// <returns></returns>
         public static IServiceCollection AddSparrowRabbitMQ(this IServiceCollection services, string key, Action<ConnectionFactory> action)
@@ -40,8 +41,23 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 StaticValues.ConnectionFactories.Add(key, factory);
             }
-            services.AddSingleton<SparrowRabbtiMQ>();
-            services.AddSingleton<ISparrowRabbitMQ, SparrowRabbtiMQ>();
+            try
+            {
+                if (StaticValues.Connections.Any(e => e.Key == key))
+                {
+                    StaticValues.Connections[key] = factory.CreateConnection();
+                }
+                else
+                {
+                    StaticValues.Connections.Add(key, factory.CreateConnection());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }            
+            services.AddSingleton<SparrowRabbitMQ>();
+            services.AddSingleton<ISparrowRabbitMQ, SparrowRabbitMQ>();
             return services;
         }
 

@@ -81,7 +81,7 @@ namespace Sparrow.DataValidation
             else if (property.PropertyType.GetInterface(nameof(IEnumerable)) != null)
             {
                 AddErrors(infos, GetValidationAttribute(property, model, name));
-                var list = property.GetValue(model) as IEnumerable<object>;
+                var list = model is null ? null : property.GetValue(model) as IEnumerable<object>;
                 if (list != null)
                 {
                     var index = 0;
@@ -117,14 +117,24 @@ namespace Sparrow.DataValidation
         private static SparrowValidationInfo GetValidationAttribute(PropertyInfo property, object model, string name = "")
         {
             var validations = property.GetCustomAttributes<ValidationAttribute>();
+            var displayName = property.GetCustomAttribute<DisplayAttribute>()?.Name;
+            displayName = string.IsNullOrWhiteSpace(displayName) ? property.Name : displayName;
             var errors = new List<string>();
             foreach (var validation in validations)
             {
-                var value = property.GetValue(model);
-                var result = validation.IsValid(value);
+                var value = model is null ? null : property.GetValue(model);
+                bool result = true;
+                if (value != null)
+                {
+                    result = validation.GetValidationResult(value, new ValidationContext(model)) is null;
+                }
+                if (result)
+                {
+                    result = validation.IsValid(value);
+                }
                 if (!result)
                 {
-                    errors.Add(validation.FormatErrorMessage(property.Name));
+                    errors.Add(validation.FormatErrorMessage(displayName));
                 }
             }
             if (errors.Count == 0)

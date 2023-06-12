@@ -7,7 +7,7 @@ namespace Sparrow.Extension.RabbitMQ.Test
     public class Tests
     {
         /// <summary>
-        /// ÉùÃ÷¶ÓÁÐ
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="mq"></param>
         public void QueueDeclare(SparrowRabbtiMQ mq)
@@ -39,7 +39,7 @@ namespace Sparrow.Extension.RabbitMQ.Test
         private const string ExchangeHeaders = "test.sparrow.exchange.headers";
 
         /// <summary>
-        /// ÉùÃ÷½»»»»ú
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="mq"></param>
         public void ExchangeDeclare(SparrowRabbtiMQ mq)
@@ -72,7 +72,7 @@ namespace Sparrow.Extension.RabbitMQ.Test
         }
 
         /// <summary>
-        /// ÉùÃ÷Õý³£¶ÓÁÐºÍËÀÐÅ¶ÓÁÐ£¬²¢°ó¶¨ËÀÐÅ¶ÓÁÐ
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½ï¿½ï¿½ï¿½Å¶ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="mq"></param>
         public void DeadLetterQueueDeclare(SparrowRabbtiMQ mq)
@@ -102,7 +102,7 @@ namespace Sparrow.Extension.RabbitMQ.Test
 
             for (int i = 0; i < 3; i++)
             {
-                var msg = Encoding.UTF8.GetBytes($"µÚ{i}ÌõÏûÏ¢");
+                var msg = Encoding.UTF8.GetBytes($"ï¿½ï¿½{i}ï¿½ï¿½ï¿½ï¿½Ï¢");
                 channel.PublishMessage(ExchangeDirect, routingKey, msg);
             }
             channel.BasicQos(0, 1, false);

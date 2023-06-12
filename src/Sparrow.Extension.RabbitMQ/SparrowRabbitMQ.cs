@@ -7,8 +7,9 @@ namespace Sparrow.Extension.RabbitMQ
     /// <summary>
     /// RabbitMQ
     /// </summary>
-    public class SparrowRabbtiMQ : ISparrowRabbitMQ
+    public class SparrowRabbitMQ : ISparrowRabbitMQ
     {
+        private static readonly object ObjectLock = new object();
         /// <summary>
         /// 创建连接工厂
         /// </summary>
@@ -35,18 +36,31 @@ namespace Sparrow.Extension.RabbitMQ
         /// <summary>
         /// 创建连接
         /// </summary>
+        /// <param name="singleton">单例模式，默认值为false</param>
         /// <returns></returns>
-        public IConnection CreateConnection()
+        public IConnection CreateConnection(bool singleton = false)
         {
-            return CreateConnection(StaticValues.default_key);
+            return CreateConnection(StaticValues.default_key, singleton);
         }
         /// <summary>
         /// 创建连接
         /// </summary>
         /// <param name="key">指定注册的key创建连接工厂</param>
+        /// <param name="singleton">单例模式，默认值为false</param>
         /// <returns></returns>
-        public IConnection CreateConnection(string key)
+        public IConnection CreateConnection(string key, bool singleton = false)
         {
+            if (singleton)
+            {
+                lock (ObjectLock)
+                {
+                    if (!StaticValues.Connections.Any(e => e.Key == key))
+                    {
+                        StaticValues.Connections[key] = CreateConnectionFactory(key).CreateConnection();
+                    }
+                }
+                return StaticValues.Connections[key];
+            }
             return CreateConnectionFactory(key).CreateConnection();
         }
         /// <summary>

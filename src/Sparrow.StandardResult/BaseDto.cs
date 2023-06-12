@@ -27,5 +27,9 @@ namespace Sparrow.StandardResult
         /// 时间
         /// </summary>
         public object Time { get; set; }
+        /// <summary>
+        /// 错误列表
+        /// </summary>
+        public string[] Errors { get; set; }
     }
 }

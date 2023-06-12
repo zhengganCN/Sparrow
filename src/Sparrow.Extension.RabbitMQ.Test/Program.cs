@@ -8,11 +8,18 @@ namespace Sparrow.Extension.RabbitMQ.Test
         static void Main(string[] args)
         {
             var services = new ServiceCollection();
+            //services.AddSparrowRabbitMQ(options =>
+            //{
+            //    options.UserName = "admin";
+            //    options.Password = "hyy5201314";
+            //    options.HostName = "dostudy.top";
+            //});
             services.AddSparrowRabbitMQ(options =>
             {
-                options.UserName = "admin";
-                options.Password = "hyy5201314";
-                options.HostName = "dostudy.top";
+                options.UserName = "guest";
+                options.Password = "guest";
+                options.Port = 5672;
+                options.HostName = "192.168.3.122";
             });
             Console.WriteLine("Press enter number to choice function");
 

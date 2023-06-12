@@ -1,5 +1,6 @@
 ﻿using Sparrow.DataValidation;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 
 namespace Sparrow.StandardResult
@@ -213,9 +214,18 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public object ModelValidResult(string message, string code, List<ModelValidErrorInfo> data)
         {
+            var errors = new List<string>();
+            foreach (var item in data)
+            {
+                if (item.Errors?.Any() == true)
+                {
+                    errors.AddRange(item.Errors);
+                }
+            }
             Message = message;
             Code = code;
             Data = option.FormatModelValid.Invoke(data);
+            Errors = errors.ToArray();
             Time = option.Time.Invoke();
             return Format();
         }
@@ -410,11 +420,34 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public object ModelValidResult(string message, string code)
         {
+            ModelValidResult(message, code, null);
+            return Format();
+        }
+
+        /// <summary>
+        /// 模型验证失败
+        /// </summary>
+        /// <param name="message">消息</param>
+        /// <param name="code">代码</param>
+        /// <param name="data">数据</param>
+        /// <returns></returns>
+        public object ModelValidResult(string message, string code, List<ModelValidErrorInfo> data)
+        {
+            var errors = new List<string>();
+            foreach (var item in data)
+            {
+                if (item.Errors?.Any() == true)
+                {
+                    errors.AddRange(item.Errors);
+                }
+            }
             Message = message;
             Code = code;
+            Errors = errors.ToArray();
             Time = option.Time.Invoke();
             return Format();
         }
+
         #endregion
 
         /// <summary>

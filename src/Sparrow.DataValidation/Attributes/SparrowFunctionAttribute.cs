@@ -19,7 +19,7 @@ namespace Sparrow.DataValidation.Attributes
     /// <summary>
     /// 自定义函数验证特性
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public sealed class SparrowFunctionAttribute : ValidationAttribute
     {
         private readonly ISparrowFunction ValidClass;

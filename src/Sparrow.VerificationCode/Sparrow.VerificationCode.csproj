@@ -2,27 +2,27 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
     <Version>1.0.1</Version>
     <Authors>zhenggan</Authors>
-    <Description>RabbitMQ extension</Description>
+    <Description>verification code</Description>
     <Copyright>zhenggan</Copyright>
     <PackageProjectUrl>https://github.com/zhengganCN/Sparrow</PackageProjectUrl>
     <PackageIcon>logo.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>RabbitMQ extension</PackageTags>
+    <PackageTags>verification code</PackageTags>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-    <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\logo.png">
         <Pack>True</Pack>
         <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="2.88.3" />
   </ItemGroup>
 
 </Project>

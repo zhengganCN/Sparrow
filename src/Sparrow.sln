@@ -100,7 +100,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.RabbitMQ"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.RabbitMQ.Test", "Sparrow.Extension.RabbitMQ.Test\Sparrow.Extension.RabbitMQ.Test.csproj", "{2DE8EEB0-A5FA-4F49-9F64-E0AEF7727161}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Export.iTextSharp.Font.SimSun", "Sparrow.Export.iTextSharp.Font.SimSun\Sparrow.Export.iTextSharp.Font.SimSun.csproj", "{C0963178-0538-405F-9259-17B4A3118926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.iTextSharp.Font.SimSun", "Sparrow.Export.iTextSharp.Font.SimSun\Sparrow.Export.iTextSharp.Font.SimSun.csproj", "{C0963178-0538-405F-9259-17B4A3118926}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VerificationCode", "VerificationCode", "{7A2E30C3-51E5-4D57-9403-1B694AEA597D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.VerificationCode", "Sparrow.VerificationCode\Sparrow.VerificationCode.csproj", "{687122F8-EF75-445C-9401-CC54FB9C4207}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.VerificationCode.Test", "Sparrow.VerificationCode.Test\Sparrow.VerificationCode.Test.csproj", "{0AA78D46-D68F-4C75-9FAF-6B1BBE160C34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WeiXin", "WeiXin", "{91496C80-053E-4D5A-8A9B-1326E882EF18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -244,6 +252,14 @@ Global
 		{C0963178-0538-405F-9259-17B4A3118926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0963178-0538-405F-9259-17B4A3118926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0963178-0538-405F-9259-17B4A3118926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687122F8-EF75-445C-9401-CC54FB9C4207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687122F8-EF75-445C-9401-CC54FB9C4207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687122F8-EF75-445C-9401-CC54FB9C4207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687122F8-EF75-445C-9401-CC54FB9C4207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AA78D46-D68F-4C75-9FAF-6B1BBE160C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AA78D46-D68F-4C75-9FAF-6B1BBE160C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AA78D46-D68F-4C75-9FAF-6B1BBE160C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AA78D46-D68F-4C75-9FAF-6B1BBE160C34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -283,6 +299,8 @@ Global
 		{E808EF25-BC9C-4FBB-8CBE-C991FCCB590C} = {23DEE508-64DD-4415-AEFE-D47DB821B39C}
 		{2DE8EEB0-A5FA-4F49-9F64-E0AEF7727161} = {23DEE508-64DD-4415-AEFE-D47DB821B39C}
 		{C0963178-0538-405F-9259-17B4A3118926} = {C1E5D574-F3A1-40F5-AAF8-2DDB2D6A4F44}
+		{687122F8-EF75-445C-9401-CC54FB9C4207} = {7A2E30C3-51E5-4D57-9403-1B694AEA597D}
+		{0AA78D46-D68F-4C75-9FAF-6B1BBE160C34} = {7A2E30C3-51E5-4D57-9403-1B694AEA597D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}

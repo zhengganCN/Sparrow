@@ -11,12 +11,29 @@ namespace Sparrow.Database.SqlSugar
     /// <summary>
     /// 数据库上下文
     /// </summary>
-    public abstract class DbContext : IDbContext, IDisposable
+    public class DbContext : IDbContext, IDisposable
     {
         private readonly DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
         private bool isInitialization = false;
         private SqlSugarClient client;
         private SshClient sshClient;
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        public DbContext()
+        {
+
+        }
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="configure">配置构造器</param>
+        public DbContext(Action<DbContextOptionsBuilder> configure)
+        {
+            configure.Invoke(builder);
+        }
+
         /// <summary>
         /// 数据库客户端
         /// </summary>
@@ -45,8 +62,11 @@ namespace Sparrow.Database.SqlSugar
         /// <summary>
         /// 配置DbContext
         /// </summary>
-        /// <param name="builder"></param>
-        protected internal abstract void OnConfiguring(DbContextOptionsBuilder builder);
+        /// <param name="builder">配置构造器</param>
+        protected virtual void OnConfiguring(DbContextOptionsBuilder builder)
+        {
+
+        }
 
         /// <summary>
         /// 设置SqlSugarClient
