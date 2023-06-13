@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Sparrow.DataValidation.Attributes
 {
@@ -10,6 +11,10 @@ namespace Sparrow.DataValidation.Attributes
     public class SparrowEnumValueAttribute : ValidationAttribute
     {
         private readonly Type @enum;
+        /// <summary>
+        /// 排除需要验证的枚举值
+        /// </summary>
+        public int[] Exclude { get; set; }
         /// <summary>
         /// 枚举值验证特性
         /// </summary>
@@ -36,6 +41,10 @@ namespace Sparrow.DataValidation.Attributes
 
         private bool IsContainer(int data)
         {
+            if (Exclude?.Contains(data) == true) 
+            {
+                return false; 
+            }
             var enumValues = Enum.GetValues(@enum);
             foreach (var item in enumValues)
             {

@@ -24,7 +24,14 @@ namespace Sparrow.DataValidation.Test
             Assert.IsFalse(enumValue.IsValid(3));
             Assert.IsFalse(enumValue.IsValid("3"));
         }
-
+        [Test]
+        public void ExcludeTest()
+        {
+            var enumValue = new SparrowEnumValueAttribute(typeof(DemoEnum));
+            enumValue.Exclude = new int[] { 1 };
+            Assert.IsTrue(enumValue.IsValid(2));
+            Assert.IsFalse(enumValue.IsValid("1"));
+        }
         public enum DemoEnum
         {
             Hello = 1,
