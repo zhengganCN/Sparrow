@@ -24,7 +24,7 @@ namespace Sparrow.Extension.RabbitMQ.Test
             Console.WriteLine("Press enter number to choice function");
 
             var provider = services.BuildServiceProvider();
-            var mq = provider.GetService<SparrowRabbtiMQ>();
+            var mq = provider.GetService<SparrowRabbitMQ>();
             var test = new Tests();
             test.ExchangeDeclare(mq);
             //test.QueueDeclare(mq);
@@ -35,7 +35,7 @@ namespace Sparrow.Extension.RabbitMQ.Test
             Console.WriteLine("Hello World!");
         }
 
-        private static void TestDeadLetterQueue(SparrowRabbtiMQ mq, Tests test)
+        private static void TestDeadLetterQueue(SparrowRabbitMQ mq, Tests test)
         {
             test.DeadLetterQueueDeclare(mq);
         }

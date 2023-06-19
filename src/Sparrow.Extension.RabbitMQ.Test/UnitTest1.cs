@@ -7,10 +7,10 @@ namespace Sparrow.Extension.RabbitMQ.Test
     public class Tests
     {
         /// <summary>
-        /// ��������
+        /// 测试
         /// </summary>
         /// <param name="mq"></param>
-        public void QueueDeclare(SparrowRabbtiMQ mq)
+        public void QueueDeclare(SparrowRabbitMQ mq)
         {
             if (mq is null)
             {
@@ -42,7 +42,7 @@ namespace Sparrow.Extension.RabbitMQ.Test
         /// ����������
         /// </summary>
         /// <param name="mq"></param>
-        public void ExchangeDeclare(SparrowRabbtiMQ mq)
+        public void ExchangeDeclare(SparrowRabbitMQ mq)
         {
             if (mq is null)
             {
@@ -75,7 +75,7 @@ namespace Sparrow.Extension.RabbitMQ.Test
         /// �����������к����Ŷ��У��������Ŷ���
         /// </summary>
         /// <param name="mq"></param>
-        public void DeadLetterQueueDeclare(SparrowRabbtiMQ mq)
+        public void DeadLetterQueueDeclare(SparrowRabbitMQ mq)
         {
             if (mq is null)
             {
