@@ -1,11 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace Sparrow.Logger
 {
@@ -29,6 +24,7 @@ namespace Sparrow.Logger
             {
                 if (_logger is null)
                 {
+                    CheckLoggerFactory();
                     _logger = LoggerFactory.CreateLogger(nameof(SparrowLogger));
                 }
                 return _logger;
@@ -40,11 +36,12 @@ namespace Sparrow.Logger
         /// </summary>
         public static ILogger GetLogger<T>() where T : class
         {
-            if (!_loggers.TryGetValue(typeof(T).FullName, out ILogger logger))
+            var categoryName = typeof(T).FullName;
+            if (!_loggers.TryGetValue(categoryName, out ILogger logger))
             {
-                var name = typeof(T).FullName;
-                logger = LoggerFactory.CreateLogger(name);
-                _loggers = _loggers.Add(name, logger);
+                CheckLoggerFactory();
+                logger = LoggerFactory.CreateLogger(categoryName);
+                _loggers = _loggers.Add(categoryName, logger);
             }
             return logger;
         }
@@ -52,6 +49,13 @@ namespace Sparrow.Logger
         /// <summary>
         /// 日志，需要在<see cref="ILoggingBuilder"/>中注册<see cref="LoggingBuilderExtension.AddSparrowLogger"/>
         /// </summary>
+        /// <example>
+        ///  .ConfigureLogging(loggingBuilder =>
+        ///  {
+        ///     loggingBuilder.AddSparrowLogger();
+        ///  });
+        /// </example>
+        /// <exception cref="ArgumentNullException"></exception>
         public static ILogger GetLogger(string categoryName)
         {
             if (string.IsNullOrWhiteSpace(categoryName))
@@ -60,10 +64,19 @@ namespace Sparrow.Logger
             }
             if (!_loggers.TryGetValue(categoryName, out ILogger logger))
             {
+                CheckLoggerFactory();
                 logger = LoggerFactory.CreateLogger(categoryName);
                 _loggers = _loggers.Add(categoryName, logger);
             }
             return logger;
+        }
+
+        private static void CheckLoggerFactory()
+        {
+            if (LoggerFactory is null)
+            {
+                throw new ArgumentNullException(nameof(LoggerFactory));
+            }
         }
     }
 }

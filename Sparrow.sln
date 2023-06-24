@@ -5,43 +5,43 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{9B1BC684-1422-4680-9B0F-BF3C7DB7523B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Configuration", "Sparrow.Configuration\Sparrow.Configuration.csproj", "{046C4B34-FF74-467C-A9E5-C056F144DC23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Configuration", "src\Sparrow.Configuration\Sparrow.Configuration.csproj", "{046C4B34-FF74-467C-A9E5-C056F144DC23}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StandardResult", "StandardResult", "{32B8E9B7-3447-4FFA-9414-EED6A2D87D9A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extension", "Extension", "{23DEE508-64DD-4415-AEFE-D47DB821B39C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult", "Sparrow.StandardResult\Sparrow.StandardResult.csproj", "{1A5634FC-5CE7-4CE9-AC51-F1669675BAAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult", "src\Sparrow.StandardResult\Sparrow.StandardResult.csproj", "{1A5634FC-5CE7-4CE9-AC51-F1669675BAAC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.System", "Sparrow.Extension.System\Sparrow.Extension.System.csproj", "{4B624ED4-012A-47A1-A811-74C79F95080D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.System", "src\Sparrow.Extension.System\Sparrow.Extension.System.csproj", "{4B624ED4-012A-47A1-A811-74C79F95080D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Convert", "Convert", "{28143A19-8FBB-46A3-A7A2-05538214AE27}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Convert.OpenApi", "Sparrow.Convert.OpenApi\Sparrow.Convert.OpenApi.csproj", "{15153E7E-DD06-4E70-B158-9F2B14D0EFA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Convert.OpenApi", "src\Sparrow.Convert.OpenApi\Sparrow.Convert.OpenApi.csproj", "{15153E7E-DD06-4E70-B158-9F2B14D0EFA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Convert.System", "Sparrow.Convert.System\Sparrow.Convert.System.csproj", "{B6DD6CAC-5683-4464-8045-7122B8FB7A0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Convert.System", "src\Sparrow.Convert.System\Sparrow.Convert.System.csproj", "{B6DD6CAC-5683-4464-8045-7122B8FB7A0C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Algorithm", "Algorithm", "{4ECA656C-2AF0-4F9C-BDC8-8C7B36E7815D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Algorithm", "Sparrow.Algorithm\Sparrow.Algorithm.csproj", "{D2296792-8D7E-45EB-A302-392AC390FE1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Algorithm", "src\Sparrow.Algorithm\Sparrow.Algorithm.csproj", "{D2296792-8D7E-45EB-A302-392AC390FE1C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataValidation", "DataValidation", "{3B5C5180-9E9B-4AAF-B31B-E84AD6626848}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.DataValidation", "Sparrow.DataValidation\Sparrow.DataValidation.csproj", "{DAD5DE06-5467-4FA9-8EBC-FCA8721929E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.DataValidation", "src\Sparrow.DataValidation\Sparrow.DataValidation.csproj", "{DAD5DE06-5467-4FA9-8EBC-FCA8721929E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Export", "Export", "{C1E5D574-F3A1-40F5-AAF8-2DDB2D6A4F44}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.Html", "Sparrow.Export.Html\Sparrow.Export.Html.csproj", "{7357FC2D-50B0-4900-989B-035B2E64969E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.Html", "src\Sparrow.Export.Html\Sparrow.Export.Html.csproj", "{7357FC2D-50B0-4900-989B-035B2E64969E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.NPOI", "Sparrow.Export.NPOI\Sparrow.Export.NPOI.csproj", "{8B8D5594-769B-45D6-90B7-63982D778386}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.NPOI", "src\Sparrow.Export.NPOI\Sparrow.Export.NPOI.csproj", "{8B8D5594-769B-45D6-90B7-63982D778386}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.iTextSharp", "Sparrow.Export.iTextSharp\Sparrow.Export.iTextSharp.csproj", "{890A0A12-03A9-4DEB-9E57-CF1FCB27E077}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.iTextSharp", "src\Sparrow.Export.iTextSharp\Sparrow.Export.iTextSharp.csproj", "{890A0A12-03A9-4DEB-9E57-CF1FCB27E077}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.DependencyInjection", "Sparrow.Extension.DependencyInjection\Sparrow.Extension.DependencyInjection.csproj", "{1992C422-877F-4E48-9E3E-808D6C9FAAAF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compression", "Compression", "{3BCC185B-AA83-4FFE-99FB-84AB444F94F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Compression", "Sparrow.Compression\Sparrow.Compression.csproj", "{E330BB26-6939-4361-9A2A-3669ADB7B936}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Compression", "src\Sparrow.Compression\Sparrow.Compression.csproj", "{E330BB26-6939-4361-9A2A-3669ADB7B936}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Util", "Util", "{BF7A8972-E108-40BB-84CF-3E22C0B7ABC7}"
 EndProject
@@ -49,70 +49,70 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Util", "Sparrow.Uti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Picture", "Picture", "{1F1EFFA6-94B1-4E84-BB0B-6334AECA5379}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Picture", "Sparrow.Picture\Sparrow.Picture.csproj", "{794ECF65-8AD8-4DF4-8915-E6A9CC57CD07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Picture", "src\Sparrow.Picture\Sparrow.Picture.csproj", "{794ECF65-8AD8-4DF4-8915-E6A9CC57CD07}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{C281BAF7-5469-48DE-A24B-C61DE952283C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.EntityFrameworkCore", "Sparrow.Database.EntityFrameworkCore\Sparrow.Database.EntityFrameworkCore.csproj", "{51CA6A0D-79E5-4A1E-BCCE-C6F089E0CA45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.EntityFrameworkCore", "src\Sparrow.Database.EntityFrameworkCore\Sparrow.Database.EntityFrameworkCore.csproj", "{51CA6A0D-79E5-4A1E-BCCE-C6F089E0CA45}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.EntityInfo", "Sparrow.Database.EntityInfo\Sparrow.Database.EntityInfo.csproj", "{27146A21-3452-4B99-9D13-835B91A8D677}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.EntityInfo", "src\Sparrow.Database.EntityInfo\Sparrow.Database.EntityInfo.csproj", "{27146A21-3452-4B99-9D13-835B91A8D677}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Redis", "Sparrow.Database.Redis\Sparrow.Database.Redis.csproj", "{1D3613A5-5419-4027-8EBC-A507C51DC791}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Redis", "src\Sparrow.Database.Redis\Sparrow.Database.Redis.csproj", "{1D3613A5-5419-4027-8EBC-A507C51DC791}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.SqlSugar", "Sparrow.Database.SqlSugar\Sparrow.Database.SqlSugar.csproj", "{0B265B72-5028-4E73-850C-5787A381C8A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.SqlSugar", "src\Sparrow.Database.SqlSugar\Sparrow.Database.SqlSugar.csproj", "{0B265B72-5028-4E73-850C-5787A381C8A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.DataValidation.Test", "Sparrow.DataValidation.Test\Sparrow.DataValidation.Test.csproj", "{D47B1C98-2834-4CFC-AC3E-5F2194C22444}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.DataValidation.Test", "src\Sparrow.DataValidation.Test\Sparrow.DataValidation.Test.csproj", "{D47B1C98-2834-4CFC-AC3E-5F2194C22444}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.SqlSugar.Test", "Sparrow.Database.SqlSugar.Test\Sparrow.Database.SqlSugar.Test.csproj", "{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.SqlSugar.Test", "src\Sparrow.Database.SqlSugar.Test\Sparrow.Database.SqlSugar.Test.csproj", "{FEE7A9CF-0B50-428A-9E5F-E3DF1D4C61C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.iTextSharp.Test", "Sparrow.Export.iTextSharp.Test\Sparrow.Export.iTextSharp.Test.csproj", "{C62108A8-C361-4159-ACC6-0867199877AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.iTextSharp.Test", "src\Sparrow.Export.iTextSharp.Test\Sparrow.Export.iTextSharp.Test.csproj", "{C62108A8-C361-4159-ACC6-0867199877AD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.NPOI.Test", "Sparrow.Export.NPOI.Test\Sparrow.Export.NPOI.Test.csproj", "{66D1A119-A0C9-450D-9AD7-DC0CFBD19689}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.NPOI.Test", "src\Sparrow.Export.NPOI.Test\Sparrow.Export.NPOI.Test.csproj", "{66D1A119-A0C9-450D-9AD7-DC0CFBD19689}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{414D5FCA-F8C2-4A6E-93E7-2CA7341D8AC0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Security.JsonWebToken", "Sparrow.Security.JsonWebToken\Sparrow.Security.JsonWebToken.csproj", "{07110783-F692-4765-B3C9-0C57DFF9C16D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Security.JsonWebToken", "src\Sparrow.Security.JsonWebToken\Sparrow.Security.JsonWebToken.csproj", "{07110783-F692-4765-B3C9-0C57DFF9C16D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logger", "Logger", "{FA4BB18E-861B-456E-9E80-6F76C297160C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Logger", "Sparrow.Logger\Sparrow.Logger.csproj", "{05D4FFC2-D669-43FA-BB55-2FFDA0C30C90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Logger", "src\Sparrow.Logger\Sparrow.Logger.csproj", "{05D4FFC2-D669-43FA-BB55-2FFDA0C30C90}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult.Test", "Sparrow.StandardResult.Test\Sparrow.StandardResult.Test.csproj", "{A877C4FD-C636-4DCD-B298-162B2A614ECB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult.Test", "src\Sparrow.StandardResult.Test\Sparrow.StandardResult.Test.csproj", "{A877C4FD-C636-4DCD-B298-162B2A614ECB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult.WebTest", "Sparrow.StandardResult.WebTest\Sparrow.StandardResult.WebTest.csproj", "{BF4D5866-1FA0-4AF7-A7BD-0DCB424ACF74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult.WebTest", "src\Sparrow.StandardResult.WebTest\Sparrow.StandardResult.WebTest.csproj", "{BF4D5866-1FA0-4AF7-A7BD-0DCB424ACF74}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult.Web", "Sparrow.StandardResult.Web\Sparrow.StandardResult.Web.csproj", "{24A088B5-E07A-4F75-A59D-09800B7688B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.StandardResult.Web", "src\Sparrow.StandardResult.Web\Sparrow.StandardResult.Web.csproj", "{24A088B5-E07A-4F75-A59D-09800B7688B7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9329B693-4D67-45AA-9E8B-C9E511613973}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Algorithm.Test", "Sparrow.Algorithm.Test\Sparrow.Algorithm.Test.csproj", "{849E15FC-79AA-4687-ABD3-D0ABDC52D771}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Algorithm.Test", "src\Sparrow.Algorithm.Test\Sparrow.Algorithm.Test.csproj", "{849E15FC-79AA-4687-ABD3-D0ABDC52D771}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Convert.System.Test", "Sparrow.Convert.System.Test\Sparrow.Convert.System.Test.csproj", "{44003CA7-275D-4CEE-81CA-5D867D3D0361}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Convert.System.Test", "src\Sparrow.Convert.System.Test\Sparrow.Convert.System.Test.csproj", "{44003CA7-275D-4CEE-81CA-5D867D3D0361}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Repository", "Sparrow.Database.Repository\Sparrow.Database.Repository.csproj", "{51C53C3F-75DE-4266-89E3-8EBAF9AD2D14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Repository", "src\Sparrow.Database.Repository\Sparrow.Database.Repository.csproj", "{51C53C3F-75DE-4266-89E3-8EBAF9AD2D14}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Configuration.Test", "Sparrow.Configuration.Test\Sparrow.Configuration.Test.csproj", "{A6405A03-B065-419D-8BFD-C57EFA65BC08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Configuration.Test", "src\Sparrow.Configuration.Test\Sparrow.Configuration.Test.csproj", "{A6405A03-B065-419D-8BFD-C57EFA65BC08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.RabbitMQ", "Sparrow.Extension.RabbitMQ\Sparrow.Extension.RabbitMQ.csproj", "{E808EF25-BC9C-4FBB-8CBE-C991FCCB590C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.RabbitMQ", "src\Sparrow.Extension.RabbitMQ\Sparrow.Extension.RabbitMQ.csproj", "{E808EF25-BC9C-4FBB-8CBE-C991FCCB590C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.RabbitMQ.Test", "Sparrow.Extension.RabbitMQ.Test\Sparrow.Extension.RabbitMQ.Test.csproj", "{2DE8EEB0-A5FA-4F49-9F64-E0AEF7727161}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.RabbitMQ.Test", "src\Sparrow.Extension.RabbitMQ.Test\Sparrow.Extension.RabbitMQ.Test.csproj", "{2DE8EEB0-A5FA-4F49-9F64-E0AEF7727161}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.iTextSharp.Font.SimSun", "Sparrow.Export.iTextSharp.Font.SimSun\Sparrow.Export.iTextSharp.Font.SimSun.csproj", "{C0963178-0538-405F-9259-17B4A3118926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.iTextSharp.Font.SimSun", "src\Sparrow.Export.iTextSharp.Font.SimSun\Sparrow.Export.iTextSharp.Font.SimSun.csproj", "{C0963178-0538-405F-9259-17B4A3118926}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VerificationCode", "VerificationCode", "{7A2E30C3-51E5-4D57-9403-1B694AEA597D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.VerificationCode", "Sparrow.VerificationCode\Sparrow.VerificationCode.csproj", "{687122F8-EF75-445C-9401-CC54FB9C4207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.VerificationCode", "src\Sparrow.VerificationCode\Sparrow.VerificationCode.csproj", "{687122F8-EF75-445C-9401-CC54FB9C4207}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.VerificationCode.Test", "Sparrow.VerificationCode.Test\Sparrow.VerificationCode.Test.csproj", "{0AA78D46-D68F-4C75-9FAF-6B1BBE160C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.VerificationCode.Test", "src\Sparrow.VerificationCode.Test\Sparrow.VerificationCode.Test.csproj", "{0AA78D46-D68F-4C75-9FAF-6B1BBE160C34}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WeiXin", "WeiXin", "{91496C80-053E-4D5A-8A9B-1326E882EF18}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.System.Test", "Sparrow.Extension.System.Test\Sparrow.Extension.System.Test.csproj", "{18861DCA-CF71-42C9-8412-473384EE5DDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.System.Test", "src\Sparrow.Extension.System.Test\Sparrow.Extension.System.Test.csproj", "{18861DCA-CF71-42C9-8412-473384EE5DDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Logger.Test", "Sparrow.Logger.Test\Sparrow.Logger.Test.csproj", "{EED235B4-098E-460D-B5C5-5242C69933F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Logger.Test", "src\Sparrow.Logger.Test\Sparrow.Logger.Test.csproj", "{EED235B4-098E-460D-B5C5-5242C69933F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

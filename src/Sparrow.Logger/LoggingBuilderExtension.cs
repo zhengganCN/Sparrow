@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Sparrow.Logger;
-using System.Reflection;
 
 namespace Sparrow.Logger
 {
