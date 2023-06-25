@@ -7,7 +7,7 @@ namespace Sparrow.Extension.System
     /// </summary>
     public static class Extension
     {
-        
+
 
         /// <summary>
         /// 映射

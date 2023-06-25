@@ -1,11 +1,8 @@
-using DocumentFormat.OpenXml.Spreadsheet;
 using NPOI.XWPF.UserModel;
 using NUnit.Framework;
-using Sparrow.Export.NPOI.Components;
 using Sparrow.Export.NPOI.Enums;
 using Sparrow.Export.NPOI.Styles;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Borders = NPOI.XWPF.UserModel.Borders;
 
@@ -24,17 +21,17 @@ namespace Sparrow.Export.NPOI.Test.WordTest
 
             using var word = new SparrowWord();
 
-            word.AddTitle("1¼¶±êÌâ", WordTitleType.Header_1);
-            word.AddTitle("2¼¶±êÌâ", WordTitleType.Header_2);
-            word.AddTitle("3¼¶±êÌâ", WordTitleType.Header_3);
-            word.AddTitle("4¼¶±êÌâ", WordTitleType.Header_4);
-            word.AddTitle("5¼¶±êÌâ", WordTitleType.Header_5);
-            word.AddTitle("6¼¶±êÌâ", WordTitleType.Header_6);
-            word.AddTitle("7¼¶±êÌâ", WordTitleType.Header_7);
-            word.AddTitle("8¼¶±êÌâ", WordTitleType.Header_8);
-            word.AddTitle("9¼¶±êÌâ", WordTitleType.Header_9);
-            word.AddTitle("±êÌâ", WordTitleType.Title);
-            word.AddTitle("¸±±êÌâ", WordTitleType.SubTitle);
+            word.AddTitle("1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", WordTitleType.Header_1);
+            word.AddTitle("2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", WordTitleType.Header_2);
+            word.AddTitle("3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", WordTitleType.Header_3);
+            word.AddTitle("4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", WordTitleType.Header_4);
+            word.AddTitle("5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", WordTitleType.Header_5);
+            word.AddTitle("6ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", WordTitleType.Header_6);
+            word.AddTitle("7ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", WordTitleType.Header_7);
+            word.AddTitle("8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", WordTitleType.Header_8);
+            word.AddTitle("9ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", WordTitleType.Header_9);
+            word.AddTitle("ï¿½ï¿½ï¿½ï¿½", WordTitleType.Title);
+            word.AddTitle("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", WordTitleType.SubTitle);
             var table = word.AddTable(new WordTableStyle
             {
                 Width = 8000
@@ -44,10 +41,10 @@ namespace Sparrow.Export.NPOI.Test.WordTest
                 var row = table.AddRow();
                 for (int c = 0; c < 6; c++)
                 {
-                    row.AddCell().SetText("²âÊÔ");
+                    row.AddCell().SetText("ï¿½ï¿½ï¿½ï¿½");
                 }
             }
-            word.AddText("\tÕâÊÇÒ»¸öÎÄ±¾¶Î");
+            word.AddText("\tï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½");
             if (!Directory.Exists("files"))
             {
                 Directory.CreateDirectory("files");
@@ -74,7 +71,7 @@ namespace Sparrow.Export.NPOI.Test.WordTest
                 var row = table.AddRow();
                 for (int c = 0; c < 6; c++)
                 {
-                    row.AddCell().SetText("²âÊÔ", style);
+                    row.AddCell().SetText("ï¿½ï¿½ï¿½ï¿½", style);
                 }
             }
             if (!Directory.Exists("files"))
@@ -101,7 +98,7 @@ namespace Sparrow.Export.NPOI.Test.WordTest
             row2.AddCell().SetText("ÕªÒª");
             row2.AddCell().SetText("ÕªÒª");
             row2.AddCell().SetText("ÕªÒª");
-            row2.AddCell().SetText("ÕªÒª"); 
+            row2.AddCell().SetText("ÕªÒª");
             var row3 = table.AddRow();
             row3.AddCell().SetText("ÕªÒª");
             row3.AddCell().SetText("ÕªÒª");
@@ -118,7 +115,7 @@ namespace Sparrow.Export.NPOI.Test.WordTest
             word.Save(Path.Combine("files", Guid.NewGuid().ToString() + ".doc"));
         }
 
-       
+
 
     }
 }

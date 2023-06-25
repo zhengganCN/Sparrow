@@ -55,7 +55,7 @@ namespace Microsoft.Extensions.DependencyInjection
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-            }            
+            }
             services.AddSingleton<SparrowRabbitMQ>();
             services.AddSingleton<ISparrowRabbitMQ, SparrowRabbitMQ>();
             return services;

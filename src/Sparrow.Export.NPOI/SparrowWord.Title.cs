@@ -1,5 +1,4 @@
-﻿using Sparrow.Export.NPOI.Components;
-using Sparrow.Export.NPOI.Enums;
+﻿using Sparrow.Export.NPOI.Enums;
 using Sparrow.Extension.System;
 
 namespace Sparrow.Export.NPOI
@@ -20,7 +19,7 @@ namespace Sparrow.Export.NPOI
         /// </summary>
         /// <param name="title"></param>
         /// <param name="type"></param>
-        public void AddTitle(string title,WordTitleType type)
+        public void AddTitle(string title, WordTitleType type)
         {
             var paragraph = XWPFDocument.CreateParagraph();
             var id = type.GetDescription();

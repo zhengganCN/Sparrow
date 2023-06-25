@@ -1,6 +1,4 @@
-﻿using Sparrow.Export.NPOI.Components;
-
-namespace Sparrow.Export.NPOI
+﻿namespace Sparrow.Export.NPOI
 {
     public partial class SparrowWord
     {

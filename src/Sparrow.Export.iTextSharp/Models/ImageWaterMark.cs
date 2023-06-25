@@ -1,9 +1,4 @@
-﻿using iText.Kernel.Colors;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Export.iTextSharp
+﻿namespace Sparrow.Export.iTextSharp
 {
     /// <summary>
     /// 图片水印

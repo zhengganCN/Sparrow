@@ -103,7 +103,7 @@ namespace Sparrow.Export.iTextSharp.Events
             var canvas = new Canvas(pdfCanvas, new Rectangle(width, height));
             canvas.SetFont(_font);
             var image = new Image(ImageDataFactory.Create(_imageMark.Image));
-            var scaleH = image.GetImageScaledHeight()/ avgH;
+            var scaleH = image.GetImageScaledHeight() / avgH;
             var scaleW = image.GetImageScaledWidth() / avgW;
             var maxScale = Math.Max(scaleH, scaleW);
             var imageW = (image.GetImageScaledWidth() / maxScale) - 10;

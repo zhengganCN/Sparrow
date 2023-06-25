@@ -3,12 +3,8 @@ using NUnit.Framework;
 using Sparrow.Export.NPOI.Components;
 using Sparrow.Export.NPOI.Enums;
 using Sparrow.Export.NPOI.Styles;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sparrow.Export.NPOI.Test.WordTest
 {
@@ -31,7 +27,7 @@ namespace Sparrow.Export.NPOI.Test.WordTest
                 Width = 8000
             });
             table.SetColumnWidth(0, 600);
-            table.SetColumnWidth(1, 500);            
+            table.SetColumnWidth(1, 500);
             var row = table.AddRow();
             row.AddCell().SetText("摘要", TextStyle);
             row.AddCell(_cols - 1).SetText("XXXXXXX接口", TextStyle);
@@ -190,7 +186,7 @@ namespace Sparrow.Export.NPOI.Test.WordTest
         {
             var title = table.AddRow();
             title.AddCell(_cols).SetText("对象列表", TextStyle);
-            var header = table.AddRow(); 
+            var header = table.AddRow();
             header.AddCell().SetText("对象类型", TextStyle);
             header.AddCell().SetText("名称", TextStyle);
             header.AddCell().SetText("类型", TextStyle);

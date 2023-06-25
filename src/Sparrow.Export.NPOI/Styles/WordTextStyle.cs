@@ -1,8 +1,5 @@
 ﻿using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sparrow.Export.NPOI.Styles
 {

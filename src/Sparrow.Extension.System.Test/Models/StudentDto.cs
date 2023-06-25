@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Extension.System.Test.Models
+﻿namespace Sparrow.Extension.System.Test.Models
 {
     internal class StudentDto
     {

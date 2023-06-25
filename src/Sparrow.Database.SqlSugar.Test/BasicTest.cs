@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Sparrow.Database.SqlSugar.Test.Entities;
 
 namespace Sparrow.Database.SqlSugar.Test
 {

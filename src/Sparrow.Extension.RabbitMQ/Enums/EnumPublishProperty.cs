@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Extension.RabbitMQ.Enums
+﻿namespace Sparrow.Extension.RabbitMQ.Enums
 {
     /// <summary>
     /// 枚举发布属性

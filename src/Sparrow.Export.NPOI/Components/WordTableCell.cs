@@ -1,5 +1,4 @@
-﻿using NPOI.OpenXmlFormats.Wordprocessing;
-using NPOI.XWPF.UserModel;
+﻿using NPOI.XWPF.UserModel;
 
 namespace Sparrow.Export.NPOI.Components
 {

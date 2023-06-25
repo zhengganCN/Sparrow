@@ -1,4 +1,5 @@
 ﻿using Renci.SshNet;
+using Sparrow.Database.Interface;
 using SqlSugar;
 using System;
 using System.Linq;

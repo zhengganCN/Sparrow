@@ -41,9 +41,9 @@ namespace Sparrow.DataValidation.Attributes
 
         private bool IsContainer(int data)
         {
-            if (Exclude?.Contains(data) == true) 
+            if (Exclude?.Contains(data) == true)
             {
-                return false; 
+                return false;
             }
             var enumValues = Enum.GetValues(@enum);
             foreach (var item in enumValues)

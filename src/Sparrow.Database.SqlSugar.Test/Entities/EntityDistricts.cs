@@ -3,7 +3,7 @@ using SqlSugar;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Sparrow.Database.SqlSugar.Test
+namespace Sparrow.Database.SqlSugar.Test.Entities
 {
     [Description("地区")]
     public class EntityDistricts : Entity

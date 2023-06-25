@@ -1,9 +1,5 @@
-﻿using DocumentFormat.OpenXml.Presentation;
-using NPOI.XWPF.UserModel;
-using Sparrow.Export.NPOI.Styles;
+﻿using NPOI.XWPF.UserModel;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Sparrow.Export.NPOI.Components
 {
@@ -23,7 +19,7 @@ namespace Sparrow.Export.NPOI.Components
         {
             return AddCell(1);
         }
-        
+
 
         public WordTableCell AddCell(int colspan)
         {

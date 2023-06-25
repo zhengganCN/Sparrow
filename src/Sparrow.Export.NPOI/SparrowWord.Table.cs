@@ -1,5 +1,4 @@
 ﻿using NPOI.OpenXmlFormats.Wordprocessing;
-using NPOI.XSSF.UserModel;
 using NPOI.XWPF.UserModel;
 using Sparrow.Export.NPOI.Components;
 using Sparrow.Export.NPOI.Styles;
@@ -7,7 +6,7 @@ using Sparrow.Export.NPOI.Styles;
 namespace Sparrow.Export.NPOI
 {
     public partial class SparrowWord
-    {      
+    {
 
         private void SetTableProperties(XWPFTable xWPFTable, WordTableStyle style)
         {
@@ -31,7 +30,7 @@ namespace Sparrow.Export.NPOI
             {
                 type.type = ST_TblLayoutType.autofit;
             }
-        }       
+        }
 
         /// <summary>
         /// 创建表格
@@ -48,7 +47,7 @@ namespace Sparrow.Export.NPOI
         /// </summary>
         public WordTable AddTable(WordTableStyle style)
         {
-            var table = XWPFDocument.CreateTable();            
+            var table = XWPFDocument.CreateTable();
             SetTableProperties(table, style);
             table.RemoveRow(0);
             return new WordTable { Table = table };

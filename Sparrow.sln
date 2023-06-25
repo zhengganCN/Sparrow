@@ -112,7 +112,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WeiXin", "WeiXin", "{91496C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.System.Test", "src\Sparrow.Extension.System.Test\Sparrow.Extension.System.Test.csproj", "{18861DCA-CF71-42C9-8412-473384EE5DDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Logger.Test", "src\Sparrow.Logger.Test\Sparrow.Logger.Test.csproj", "{EED235B4-098E-460D-B5C5-5242C69933F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Logger.Test", "src\Sparrow.Logger.Test\Sparrow.Logger.Test.csproj", "{EED235B4-098E-460D-B5C5-5242C69933F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Migration", "src\Sparrow.Database.Migration\Sparrow.Database.Migration.csproj", "{33FA8063-7789-4622-BBC3-E3D610AF6479}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Migration.Test", "src\Sparrow.Database.Migration.Test\Sparrow.Database.Migration.Test.csproj", "{BB5AAE50-9352-4595-B132-624FEE05F748}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Database.Interface", "src\Sparrow.Database.Interface\Sparrow.Database.Interface.csproj", "{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -272,6 +278,18 @@ Global
 		{EED235B4-098E-460D-B5C5-5242C69933F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EED235B4-098E-460D-B5C5-5242C69933F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EED235B4-098E-460D-B5C5-5242C69933F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33FA8063-7789-4622-BBC3-E3D610AF6479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33FA8063-7789-4622-BBC3-E3D610AF6479}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33FA8063-7789-4622-BBC3-E3D610AF6479}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33FA8063-7789-4622-BBC3-E3D610AF6479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB5AAE50-9352-4595-B132-624FEE05F748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB5AAE50-9352-4595-B132-624FEE05F748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB5AAE50-9352-4595-B132-624FEE05F748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB5AAE50-9352-4595-B132-624FEE05F748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -315,6 +333,9 @@ Global
 		{0AA78D46-D68F-4C75-9FAF-6B1BBE160C34} = {7A2E30C3-51E5-4D57-9403-1B694AEA597D}
 		{18861DCA-CF71-42C9-8412-473384EE5DDF} = {23DEE508-64DD-4415-AEFE-D47DB821B39C}
 		{EED235B4-098E-460D-B5C5-5242C69933F8} = {FA4BB18E-861B-456E-9E80-6F76C297160C}
+		{33FA8063-7789-4622-BBC3-E3D610AF6479} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
+		{BB5AAE50-9352-4595-B132-624FEE05F748} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
+		{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}

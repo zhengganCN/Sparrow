@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Export.iTextSharp.Font.SimSun
+﻿namespace Sparrow.Export.iTextSharp.Font.SimSun
 {
     public static class SparrowPdfExtension
     {

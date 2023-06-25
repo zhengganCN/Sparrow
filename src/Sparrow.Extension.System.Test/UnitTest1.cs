@@ -1,7 +1,5 @@
 using NUnit.Framework;
-using Sparrow.Extension.System;
 using Sparrow.Extension.System.Test.Models;
-using System;
 
 namespace Sparrow.Extension.System.Test
 {
@@ -21,7 +19,7 @@ namespace Sparrow.Extension.System.Test
                 Name = "Name",
                 Description = "Description",
             };
-            var dto = student.Map(e=> new StudentDto
+            var dto = student.Map(e => new StudentDto
             {
                 Id = e.Id,
                 Name = e.Name,

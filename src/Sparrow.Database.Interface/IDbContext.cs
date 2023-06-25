@@ -1,9 +1,10 @@
-﻿namespace Sparrow.Database.SqlSugar
+﻿namespace Sparrow.Database.Interface
 {
     /// <summary>
-    /// DbContext接口
+    /// 数据库上下文接口
     /// </summary>
     public interface IDbContext
     {
+
     }
 }

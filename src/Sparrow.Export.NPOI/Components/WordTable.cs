@@ -1,7 +1,4 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
-using NPOI.OpenXmlFormats.Wordprocessing;
-using NPOI.SS.Formula.Functions;
-using NPOI.XSSF.UserModel;
+﻿using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
 using System.Collections.Generic;
 
@@ -71,7 +68,7 @@ namespace Sparrow.Export.NPOI.Components
         {
             for (int rowIndex = fromRow; rowIndex <= toRow; rowIndex++)
             {
-               var cell = Table.GetRow(rowIndex).GetCell(col);
+                var cell = Table.GetRow(rowIndex).GetCell(col);
                 CT_Tc cttc = cell.GetCTTc();
                 if (cttc.tcPr == null)
                 {
