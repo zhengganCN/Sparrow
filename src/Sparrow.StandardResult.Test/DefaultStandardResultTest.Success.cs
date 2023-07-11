@@ -17,7 +17,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void SuccessTest_2()
         {
-            var msg = "³É¹¦";
+            var msg = "ï¿½É¹ï¿½";
             var dto = new StandardDto();
             dto.SuccessResult(null, msg);
             Assert.IsTrue(dto.Code == StandardResultConsts.SuccessCode);
@@ -29,7 +29,7 @@ namespace Sparrow.StandardResult.Test
         public void SuccessTest_3()
         {
             var code = "1";
-            var msg = "³É¹¦";
+            var msg = "ï¿½É¹ï¿½";
             var dto = new StandardDto();
             dto.SuccessResult(null, msg, code);
             Assert.IsTrue(dto.Code == code);
@@ -39,7 +39,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void SuccessTest_4()
         {
-            var data = "³É¹¦";
+            var data = "ï¿½É¹ï¿½";
             var dto = new StandardDto();
             dto.SuccessResult(data);
             Assert.IsTrue(dto.Data.ToString() == data);
@@ -55,15 +55,15 @@ namespace Sparrow.StandardResult.Test
             var dto = new StandardDto<string>();
             dto.SuccessResult();
             Assert.IsTrue(dto.Code == "200");
-            Assert.IsTrue(dto.Message == "²Ù×÷³É¹¦");
-            dto.SuccessResult(null, "³É¹¦1");
+            Assert.IsTrue(dto.Message == "ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
+            dto.SuccessResult(null, "ï¿½É¹ï¿½1");
             Assert.IsTrue(dto.Code == "200");
-            Assert.IsTrue(dto.Message == "³É¹¦1");
-            dto.SuccessResult(null, "³É¹¦2", "1");
+            Assert.IsTrue(dto.Message == "ï¿½É¹ï¿½1");
+            dto.SuccessResult(null, "ï¿½É¹ï¿½2", "1");
             Assert.IsTrue(dto.Code == "1");
-            Assert.IsTrue(dto.Message == "³É¹¦2");
-            dto.SuccessResult("Êý¾Ý");
-            Assert.IsTrue(dto.Data.ToString() == "Êý¾Ý");
+            Assert.IsTrue(dto.Message == "ï¿½É¹ï¿½2");
+            dto.SuccessResult("ï¿½ï¿½ï¿½ï¿½");
+            Assert.IsTrue(dto.Data.ToString() == "ï¿½ï¿½ï¿½ï¿½");
             Assert.IsTrue(dto.Success == true);
             Assert.IsNotEmpty(dto.TraceId);
             Assert.IsTrue(dto.Time != null);
