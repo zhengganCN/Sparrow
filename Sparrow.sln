@@ -37,8 +37,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.NPOI", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Export.iTextSharp", "src\Sparrow.Export.iTextSharp\Sparrow.Export.iTextSharp.csproj", "{890A0A12-03A9-4DEB-9E57-CF1FCB27E077}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.DependencyInjection", "Sparrow.Extension.DependencyInjection\Sparrow.Extension.DependencyInjection.csproj", "{1992C422-877F-4E48-9E3E-808D6C9FAAAF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compression", "Compression", "{3BCC185B-AA83-4FFE-99FB-84AB444F94F0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Compression", "src\Sparrow.Compression\Sparrow.Compression.csproj", "{E330BB26-6939-4361-9A2A-3669ADB7B936}"
@@ -118,7 +116,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Migration"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Migration.Test", "src\Sparrow.Database.Migration.Test\Sparrow.Database.Migration.Test.csproj", "{BB5AAE50-9352-4595-B132-624FEE05F748}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Database.Interface", "src\Sparrow.Database.Interface\Sparrow.Database.Interface.csproj", "{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Database.Interface", "src\Sparrow.Database.Interface\Sparrow.Database.Interface.csproj", "{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Extension.DependencyInjection", "src\Sparrow.Extension.DependencyInjection\Sparrow.Extension.DependencyInjection.csproj", "{780B602A-D106-498E-9F8C-DC62759579F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -166,10 +166,6 @@ Global
 		{890A0A12-03A9-4DEB-9E57-CF1FCB27E077}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{890A0A12-03A9-4DEB-9E57-CF1FCB27E077}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{890A0A12-03A9-4DEB-9E57-CF1FCB27E077}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1992C422-877F-4E48-9E3E-808D6C9FAAAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1992C422-877F-4E48-9E3E-808D6C9FAAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1992C422-877F-4E48-9E3E-808D6C9FAAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1992C422-877F-4E48-9E3E-808D6C9FAAAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E330BB26-6939-4361-9A2A-3669ADB7B936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E330BB26-6939-4361-9A2A-3669ADB7B936}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E330BB26-6939-4361-9A2A-3669ADB7B936}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -290,6 +286,10 @@ Global
 		{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{780B602A-D106-498E-9F8C-DC62759579F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{780B602A-D106-498E-9F8C-DC62759579F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{780B602A-D106-498E-9F8C-DC62759579F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{780B602A-D106-498E-9F8C-DC62759579F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -305,7 +305,6 @@ Global
 		{7357FC2D-50B0-4900-989B-035B2E64969E} = {C1E5D574-F3A1-40F5-AAF8-2DDB2D6A4F44}
 		{8B8D5594-769B-45D6-90B7-63982D778386} = {C1E5D574-F3A1-40F5-AAF8-2DDB2D6A4F44}
 		{890A0A12-03A9-4DEB-9E57-CF1FCB27E077} = {C1E5D574-F3A1-40F5-AAF8-2DDB2D6A4F44}
-		{1992C422-877F-4E48-9E3E-808D6C9FAAAF} = {23DEE508-64DD-4415-AEFE-D47DB821B39C}
 		{E330BB26-6939-4361-9A2A-3669ADB7B936} = {3BCC185B-AA83-4FFE-99FB-84AB444F94F0}
 		{6DBA256C-63B3-44D8-BE66-708261927E0E} = {BF7A8972-E108-40BB-84CF-3E22C0B7ABC7}
 		{794ECF65-8AD8-4DF4-8915-E6A9CC57CD07} = {1F1EFFA6-94B1-4E84-BB0B-6334AECA5379}
@@ -336,6 +335,7 @@ Global
 		{33FA8063-7789-4622-BBC3-E3D610AF6479} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 		{BB5AAE50-9352-4595-B132-624FEE05F748} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
 		{416A6D72-F2BF-4A46-BB0B-31C4F372FFFF} = {C281BAF7-5469-48DE-A24B-C61DE952283C}
+		{780B602A-D106-498E-9F8C-DC62759579F6} = {23DEE508-64DD-4415-AEFE-D47DB821B39C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}

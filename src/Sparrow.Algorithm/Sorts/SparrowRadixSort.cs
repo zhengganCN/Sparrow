@@ -10,7 +10,6 @@ namespace Sparrow.Algorithm.Sorts
         /// <summary>
         /// 排序
         /// </summary>
-        /// <typeparam name="T">类型</typeparam>
         /// <param name="array">待排序数组</param>
         /// <returns></returns>
         public static int[] Sort(int[] array)
