@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Sparrow.Extension.System
 {
@@ -18,6 +19,16 @@ namespace Sparrow.Extension.System
         public static R Map<T, R>(this T source, Func<T, R> func)
         {
             return func.Invoke(source);
+        }
+
+        public static bool Compare<T>(this T souece) where T : IComparable
+        {
+            return false;
+        }
+
+        public static bool Compare<T>(this IEnumerable<T> souece) where T : IComparable
+        {
+            return false;
         }
     }
 }

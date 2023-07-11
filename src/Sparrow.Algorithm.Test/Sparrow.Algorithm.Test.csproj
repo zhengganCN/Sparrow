@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Sparrow.Algorithm\Sparrow.Algorithm.csproj" />
+    <ProjectReference Include="..\Sparrow.Extension.System\Sparrow.Extension.System.csproj" />
   </ItemGroup>
 
 </Project>
