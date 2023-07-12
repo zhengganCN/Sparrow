@@ -8,6 +8,7 @@ namespace Sparrow.Extension.System.Test
         [SetUp]
         public void Setup()
         {
+
         }
 
         [Test]
