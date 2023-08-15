@@ -12,11 +12,11 @@ namespace Sparrow.StandardResult.Test
             ServiceCollection services = new ServiceCollection();
             services.AddDefaultStandardResult(option =>
             {
-                option.FormatDto = (dto) =>
+                option.FormatStandardDto = (dto) =>
                 {
                     return new DefinedDto
                     {
-                        defined_code = dto.Code,
+                        defined_code = dto.Code as string,
                         defined_message = dto.Message,
                         defined_data = dto.Data,
                         defined_success = dto.Success,
@@ -35,7 +35,7 @@ namespace Sparrow.StandardResult.Test
             dto.SuccessResult(data);
             var json = JsonConvert.SerializeObject(new DefinedDto
             {
-                defined_code = dto.Code,
+                defined_code = dto.Code as string,
                 defined_message = dto.Message,
                 defined_data = dto.Data,
                 defined_success = dto.Success,

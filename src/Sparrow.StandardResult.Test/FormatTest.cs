@@ -13,11 +13,11 @@ namespace Sparrow.StandardResult.Test
             ServiceCollection services = new ServiceCollection();
             services.AddDefaultStandardResult(option =>
             {
-                option.FormatDto = (dto) =>
+                option.FormatStandardDto = (dto) =>
                 {
                     return new DefinedDto
                     {
-                        defined_code = dto.Code,
+                        defined_code = dto.Code as string,
                         defined_message = dto.Message,
                         defined_data = dto.Data,
                         defined_success = dto.Success,
@@ -28,11 +28,11 @@ namespace Sparrow.StandardResult.Test
             });
             services.AddStandardResult(other, option =>
             {
-                option.FormatDto = (dto) =>
+                option.FormatStandardDto = (dto) =>
                 {
                     return new OtherDto
                     {
-                        other_code = dto.Code,
+                        other_code = dto.Code as string,
                         other_message = dto.Message,
                         other_data = dto.Data,
                         other_success = dto.Success,
@@ -51,7 +51,7 @@ namespace Sparrow.StandardResult.Test
             var dto_json = JsonConvert.SerializeObject(dto.SuccessResult(data));
             var json = JsonConvert.SerializeObject(new DefinedDto
             {
-                defined_code = dto.Code,
+                defined_code = dto.Code as string,
                 defined_message = dto.Message,
                 defined_data = dto.Data,
                 defined_success = dto.Success,
@@ -69,7 +69,7 @@ namespace Sparrow.StandardResult.Test
             var dto_json = JsonConvert.SerializeObject(dto.SuccessResult(data));
             var json = JsonConvert.SerializeObject(new OtherDto
             {
-                other_code = dto.Code,
+                other_code = dto.Code as string,
                 other_message = dto.Message,
                 other_data = dto.Data,
                 other_success = dto.Success,
@@ -88,7 +88,7 @@ namespace Sparrow.StandardResult.Test
             var dto_json = JsonConvert.SerializeObject(dto.SuccessResult(data));
             var json = JsonConvert.SerializeObject(new DefinedDto
             {
-                defined_code = dto.Code,
+                defined_code = dto.Code as string,
                 defined_message = dto.Message,
                 defined_data = dto.Data,
                 defined_success = dto.Success,
@@ -107,7 +107,7 @@ namespace Sparrow.StandardResult.Test
             var dto_json = JsonConvert.SerializeObject(dto.SuccessResult(data));
             var json = JsonConvert.SerializeObject(new OtherDto
             {
-                other_code = dto.Code,
+                other_code = dto.Code as string,
                 other_message = dto.Message,
                 other_data = dto.Data,
                 other_success = dto.Success,

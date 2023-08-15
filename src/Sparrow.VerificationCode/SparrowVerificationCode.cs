@@ -178,7 +178,7 @@ namespace Sparrow.VerificationCode
             //创建画布
             using var canvas = new SKCanvas(bitmap);
             //填充背景颜色
-            canvas.DrawColor(SKColors.LightGray);
+            canvas.DrawColor(paramter.BackgroundColor);
             var array = paramter.Code.ToArray();
             for (int i = 0; i < array.Length; i++)
             {
@@ -186,38 +186,56 @@ namespace Sparrow.VerificationCode
                 using var paintText = CreatePaint(paramter.Height);
                 canvas.DrawText(array[i].ToString(), i * 32 + 1, paramter.Height - 1, paintText);
             }
-            //画随机干扰线
-            using var paintLine = new SKPaint();
-            var random = GetRandom();
-            for (int i = 0; i < paramter.Line; i++)
-            {
-                paintLine.Color = GetColor();
-                paintLine.StrokeWidth = paramter.LineStrokeWidth;
-                var x0 = random.Next(0, paramter.Width);
-                var y0 = random.Next(0, paramter.Height);
-                var x1 = random.Next(0, paramter.Width);
-                var y1 = random.Next(0, paramter.Height);
-                canvas.DrawLine(x0, y0, x1, y1, paintLine);
-            }
+            DrawInterferenceLine(paramter, canvas);
             //返回图片byte
             using var img = SKImage.FromBitmap(bitmap);
             using var data = img.Encode(paramter.ImageFormat, paramter.ImageQuality);
             return data.ToArray();
         }
 
-        // 创建画笔
-        private static SKPaint CreatePaint(float fontSize)
+        /// <summary>
+        /// 画随机干扰线
+        /// </summary>
+        /// <returns></returns>
+        private static void DrawInterferenceLine(CodeParamter paramter, SKCanvas canvas)
+        {
+            using SKPaint paint = new SKPaint();
+            var random = GetRandom();
+            for (int i = 0; i < paramter.Line; i++)
+            {
+                paint.Color = GetColor();
+                paint.StrokeWidth = paramter.LineStrokeWidth;
+                var x0 = random.Next(0, paramter.Width);
+                var y0 = random.Next(0, paramter.Height);
+                var x1 = random.Next(0, paramter.Width);
+                var y1 = random.Next(0, paramter.Height);
+                canvas.DrawLine(x0, y0, x1, y1, paint);
+            }
+        }
+
+        /// <summary>
+        /// 创建画笔
+        /// </summary>
+        /// <param name="fontSize">画笔大小</param>
+        /// <param name="excludeColors">需要排除的颜色</param>
+        /// <returns></returns>
+        private static SKPaint CreatePaint(float fontSize, SKColor[] excludeColors = null)
         {
             SKPaint paint = new SKPaint
             {
                 IsAntialias = true,
-                Color = GetColor(),
+                Color = GetColor(excludeColors),
                 TextSize = fontSize
             };
             return paint;
         }
 
-        private static SKColor GetColor()
+        /// <summary>
+        /// 获取颜色
+        /// </summary>
+        /// <param name="excludeColors">需要排除的颜色</param>
+        /// <returns></returns>
+        private static SKColor GetColor(SKColor[] excludeColors = null)
         {
             return Colors[GetRandom().Next(Colors.Count)];
         }

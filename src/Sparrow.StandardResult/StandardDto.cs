@@ -8,7 +8,7 @@ namespace Sparrow.StandardResult
     /// <summary>
     /// 输出结果
     /// </summary>
-    public class StandardDto : BaseDto
+    public class StandardDto : BaseDto, IStandardResultFormat
     {
         private readonly StandardResultOption option;
         /// <summary>
@@ -244,7 +244,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public string Serialize(JsonSerializerOptions serializer)
         {
-            return JsonSerializer.Serialize(option.FormatDto(this), serializer);
+            return JsonSerializer.Serialize(Format(), serializer);
         }
         /// <summary>
         /// 格式化
@@ -252,14 +252,14 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public object Format()
         {
-            return option.FormatDto(this);
+            return option.FormatStandardDto(this);
         }
     }
     /// <summary>
     /// 结果模型
     /// </summary>
     /// <typeparam name="T">数据类型</typeparam>
-    public class StandardDto<T> : BaseDto
+    public class StandardDto<T> : BaseDto, IStandardResultFormat
     {
         private readonly StandardResultOption option;
         private readonly string _key;
@@ -465,16 +465,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public string Serialize(JsonSerializerOptions serializer)
         {
-            var dto = new StandardDto(_key)
-            {
-                Code = Code,
-                Message = Message,
-                Data = Data,
-                Success = Success,
-                Time = Time,
-                TraceId = TraceId
-            };
-            return JsonSerializer.Serialize(option.FormatDto(dto), serializer);
+            return JsonSerializer.Serialize(Format(), serializer);
         }
 
         /// <summary>
@@ -492,7 +483,7 @@ namespace Sparrow.StandardResult
                 Time = Time,
                 TraceId = TraceId
             };
-            return option.FormatDto(dto);
+            return option.FormatStandardDto(dto);
         }
 
     }

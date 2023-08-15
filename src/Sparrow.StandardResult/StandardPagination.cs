@@ -6,8 +6,17 @@ namespace Sparrow.StandardResult
     /// <summary>
     /// 分页数据
     /// </summary>
-    public class StandardPagination : BasePagination
+    public class StandardPagination : BasePagination, IStandardResultFormat
     {
+        private readonly StandardResultOption option;
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="key">标识</param>
+        public StandardPagination(string key = StandardResultConsts.DefaultKey)
+        {
+            option = StandardResultValues.StandardResultOptions[key];
+        }
         /// <summary>
         /// 数据列表
         /// </summary>
@@ -36,10 +45,10 @@ namespace Sparrow.StandardResult
         /// <param name="pageIndex">页码，默认值为1</param>
         /// <param name="pageSize">页面大小，默认值为10</param>
         /// <returns></returns>
-        public static StandardPagination GetPagination(object list, int count, int pageIndex = 1, int pageSize = 10)
+        public static object GetPagination(object list, int count, int pageIndex = 1, int pageSize = 10)
         {
             var pagination = new StandardPagination(list, count, pageIndex, pageSize);
-            return pagination;
+            return pagination.Format();
         }
         /// <summary>
         /// 获取分页信息
@@ -48,10 +57,19 @@ namespace Sparrow.StandardResult
         /// <param name="count">总数</param>
         /// <param name="page">分页参数</param>
         /// <returns></returns>
-        public static StandardPagination GetPagination(object list, int count, IPagination page)
+        public static object GetPagination(object list, int count, IPagination page)
         {
             var pagination = new StandardPagination(list, count, page.GetPageIndex(), page.GetPageSize());
-            return pagination;
+            return pagination.Format();
+        }
+
+        /// <summary>
+        /// 格式化
+        /// </summary>
+        /// <returns></returns>
+        public object Format()
+        {
+            return option.FormatStandardPagination(this);
         }
     }
 

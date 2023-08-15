@@ -14,7 +14,7 @@ namespace Sparrow.StandardResult
         /// <summary>
         /// 代码
         /// </summary>
-        public string Code { get; set; }
+        public object Code { get; set; }
         /// <summary>
         /// 请求是否成功
         /// </summary>

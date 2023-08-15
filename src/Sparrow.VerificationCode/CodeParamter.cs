@@ -12,6 +12,10 @@ namespace Sparrow.VerificationCode
         /// </summary>
         public string Code { get; set; }
         /// <summary>
+        /// 需要排除的验证码颜色
+        /// </summary>
+        public SKColor[] ExcludeCodeColors { get; set; }
+        /// <summary>
         /// 图片宽度（默认值为120）
         /// </summary>
         public int Width { get; set; } = 120;
@@ -28,6 +32,10 @@ namespace Sparrow.VerificationCode
         /// </summary>
         public uint LineStrokeWidth { get; set; } = 2;
         /// <summary>
+        /// 需要排除的线条颜色
+        /// </summary>
+        public SKColor[] ExcludeLineColors { get; set; }
+        /// <summary>
         /// 图片格式（默认值为jpeg）
         /// </summary>
         public SKEncodedImageFormat ImageFormat { get; set; } = SKEncodedImageFormat.Jpeg;
@@ -35,5 +43,9 @@ namespace Sparrow.VerificationCode
         /// 图片质量（数值为0-100，默认值为100）
         /// </summary>
         public int ImageQuality { get; set; } = 100;
+        /// <summary>
+        /// 背景色，默认为亮灰色
+        /// </summary>
+        public SKColor BackgroundColor { get; set; } = SKColors.LightGray;
     }
 }

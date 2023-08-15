@@ -105,6 +105,7 @@ namespace Sparrow.Extension.RabbitMQ
             };
             model.BasicConsume(queue, argument.AutoAck, argument.ConsumerTag,
                 argument.NoLocal, argument.Exclusive, argument.Arguments, eventing);
+           
         }
     }
 }

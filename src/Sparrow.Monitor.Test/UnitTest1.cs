@@ -1,3 +1,6 @@
+using Sparrow.Monitor.Enums;
+using Sparrow.Monitor.Flow;
+
 namespace Sparrow.Monitor.Test
 {
     public class Tests
@@ -11,15 +14,10 @@ namespace Sparrow.Monitor.Test
         [Test]
         public void Test1()
         {
-            //var bu = new TokenBucket();
-            //for (int i = 0; i < 1; i++)
-            //{
-            //    bu.Set("hello", i, TimeSpan.FromSeconds(100000));
-            //}
-            //for (int i = 0; i < 2000000; i++)
-            //{
-            //    var ll = bu.Get<int>("hello");
-            //}
+            for (int i = 0; i < 100000; i++)
+            {
+                AccessFrequencyCachae.Access("get", "/weatherforecast", 1, AccessFrequencyUnit.Minite);
+            }
             Assert.Pass();
         }
     }

@@ -10,13 +10,19 @@ namespace Sparrow.VerificationCode.Test
         [Test]
         public void Test1()
         {
-            var bytes = SparrowVerificationCode.GetImage(new CodeParamter
+            var param = new CodeParamter
             {
-                Code = "1265",
-                Width = 150,
+                Code = "1267",
+                Width = 120,
                 Height = 30
-            });
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "code.png");
+            };
+            var bytes = SparrowVerificationCode.GetImage(param);
+            var dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images");
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            var path = Path.Combine(dir, $"{param.Code}_{Guid.NewGuid()}.png");
             File.WriteAllBytes(path, bytes);
             Assert.Pass();
         }

@@ -25,7 +25,7 @@ namespace Sparrow.Monitor.Web.Test.Controllers
         }
 
         [HttpGet]
-        [SparrowAccessFrequency(1, Unit = AccessFrequencyUnit.Minite, Times = 100)]
+        //[SparrowAccessFrequency(1, Unit = AccessFrequencyUnit.Minite, Times = 100)]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();

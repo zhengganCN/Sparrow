@@ -15,6 +15,7 @@ namespace Sparrow.Monitor.Flow
         /// <summary>
         /// 为路径增加一次访问次数，并返回当前访问次数
         /// </summary>
+        /// <param name="method">请求方式</param>
         /// <param name="path">路径</param>
         /// <param name="unitCount">频率单位数量</param>
         /// <param name="unit">频率单位</param>

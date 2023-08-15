@@ -22,12 +22,12 @@ namespace Sparrow.Monitor.Web.Test
         {
             services.AddSparrowAccessFrequency(option =>
             {
-                option.Result = new ContentResult
-                {
-                    StatusCode = 555,
-                    ContentType = MediaTypeNames.Text.Plain,
-                    Content = "访问过于频繁"
-                };
+                //option.Result = new ContentResult
+                //{
+                //    StatusCode = 555,
+                //    ContentType = MediaTypeNames.Text.Plain,
+                //    Content = "访问过于频繁"
+                //};
             });
             services.AddControllers();
         }
@@ -35,6 +35,7 @@ namespace Sparrow.Monitor.Web.Test
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //app.UseSparrowHttpRecorder();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
