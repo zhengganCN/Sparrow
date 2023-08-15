@@ -5,8 +5,8 @@ using System.Linq;
 
 namespace Sparrow.StandardResult.WebTest.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
+    [StandardModelResult]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

@@ -50,7 +50,7 @@ namespace Sparrow.StandardResult
                     });
                 }
                 dto.ModelValidResult(list);
-                context.Result = new JsonResult(dto);
+                context.Result = new ContentResult { Content = dto.Serialize() };
             }
         }
     }

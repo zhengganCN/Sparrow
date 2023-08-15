@@ -21,7 +21,7 @@ namespace Sparrow.StandardResult.WebTest
         {
             services.AddDefaultStandardResult(option =>
             {
-                option.FormatDto = (dto) =>
+                option.FormatStandardDto = (dto) =>
                 {
                     return new
                     {
@@ -34,10 +34,11 @@ namespace Sparrow.StandardResult.WebTest
                     };
                 };
             });
-            services.AddControllers().ConfigureApiBehaviorOptions(options =>
-            {
-                options.InvalidModelStateResponseFactory = StardandResultWeb.StardandResultModelStateResponse;
-            });
+            services.AddControllers();
+                //.ConfigureApiBehaviorOptions(options =>
+                //{
+                //    options.InvalidModelStateResponseFactory = StardandResultWeb.StardandResultModelStateResponse;
+                //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +50,7 @@ namespace Sparrow.StandardResult.WebTest
             }
             else
             {
-                app.UseStandardExceptionHandler();
+                //app.UseStandardExceptionHandler();
             }
             app.UseRouting();
 
