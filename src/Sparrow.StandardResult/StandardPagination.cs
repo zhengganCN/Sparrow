@@ -22,13 +22,13 @@ namespace Sparrow.StandardResult
         /// </summary>
         public object List { get; set; }
         /// <summary>
-        /// 初始化
+        /// 计算分页数据
         /// </summary>
         /// <param name="list">数据</param>
         /// <param name="count">总数</param>
         /// <param name="pageIndex">页码，默认值为1</param>
         /// <param name="pageSize">页面大小，默认值为10</param>
-        public StandardPagination(object list, int count, int pageIndex = 1, int pageSize = 10)
+        private void Computer(object list, int count, int pageIndex = 1, int pageSize = 10)
         {
             List = list;
             Count = count;
@@ -45,10 +45,10 @@ namespace Sparrow.StandardResult
         /// <param name="pageIndex">页码，默认值为1</param>
         /// <param name="pageSize">页面大小，默认值为10</param>
         /// <returns></returns>
-        public static object GetPagination(object list, int count, int pageIndex = 1, int pageSize = 10)
+        public object GetPagination(object list, int count, int pageIndex = 1, int pageSize = 10)
         {
-            var pagination = new StandardPagination(list, count, pageIndex, pageSize);
-            return pagination.Format();
+            Computer(list, count, pageIndex, pageSize);
+            return Format();
         }
         /// <summary>
         /// 获取分页信息
@@ -57,10 +57,10 @@ namespace Sparrow.StandardResult
         /// <param name="count">总数</param>
         /// <param name="page">分页参数</param>
         /// <returns></returns>
-        public static object GetPagination(object list, int count, IPagination page)
+        public object GetPagination(object list, int count, IPagination page)
         {
-            var pagination = new StandardPagination(list, count, page.GetPageIndex(), page.GetPageSize());
-            return pagination.Format();
+            Computer(list, count, page.GetPageIndex(), page.GetPageSize());
+            return Format();
         }
 
         /// <summary>
