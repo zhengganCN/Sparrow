@@ -12,7 +12,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public object FailResult()
         {
-            return FailResult(option.FailMessage, option.FailCode, null);
+            return FailResult(option.FailMessage, option.FailCode, default);
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public object FailResult(string message)
         {
-            return FailResult(message, option.FailCode, null);
+            return FailResult(message, option.FailCode, default);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public object FailResult(string message, string code)
         {
-            return FailResult(message, code, null);
+            return FailResult(message, code, default);
         }
 
         /// <summary>

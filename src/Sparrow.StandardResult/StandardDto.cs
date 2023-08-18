@@ -23,7 +23,7 @@ namespace Sparrow.StandardResult
     /// 结果模型
     /// </summary>
     /// <typeparam name="T">数据类型</typeparam>
-    public class StandardDto<T> : BaseDto<T>, IStandardResultFormat where T : class
+    public class StandardDto<T> : BaseDto<T>, IStandardResultFormat
     {
         /// <summary>
         /// 初始化

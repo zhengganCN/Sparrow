@@ -7,7 +7,7 @@ namespace Sparrow.StandardResult
     /// <summary>
     /// Base输出
     /// </summary>
-    public abstract partial class BaseDto<T> where T : class
+    public abstract partial class BaseDto<T>
     {
         internal StandardResultOption option;
         /// <summary>
