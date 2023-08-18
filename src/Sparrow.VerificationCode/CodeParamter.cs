@@ -12,6 +12,10 @@ namespace Sparrow.VerificationCode
         /// </summary>
         public string Code { get; set; }
         /// <summary>
+        /// 验证码颜色
+        /// </summary>
+        public SKColor[] CodeColors { get; set; }
+        /// <summary>
         /// 需要排除的验证码颜色
         /// </summary>
         public SKColor[] ExcludeCodeColors { get; set; }
@@ -32,7 +36,11 @@ namespace Sparrow.VerificationCode
         /// </summary>
         public uint LineStrokeWidth { get; set; } = 2;
         /// <summary>
-        /// 需要排除的线条颜色
+        /// 干扰线颜色
+        /// </summary>
+        public SKColor[] LineColors { get; set; }
+        /// <summary>
+        /// 需要排除的干扰线颜色
         /// </summary>
         public SKColor[] ExcludeLineColors { get; set; }
         /// <summary>
@@ -44,7 +52,7 @@ namespace Sparrow.VerificationCode
         /// </summary>
         public int ImageQuality { get; set; } = 100;
         /// <summary>
-        /// 背景色，默认为亮灰色
+        /// 背景色，默认为亮灰色<see cref="SKColors"/>
         /// </summary>
         public SKColor BackgroundColor { get; set; } = SKColors.LightGray;
     }

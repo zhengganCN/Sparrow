@@ -10,6 +10,7 @@ namespace Sparrow.VerificationCode
     /// </summary>
     public static class SparrowVerificationCode
     {
+        private static readonly Random _random = new Random();
         /// <summary>
         /// 颜色集合
         /// </summary>
@@ -183,7 +184,7 @@ namespace Sparrow.VerificationCode
             for (int i = 0; i < array.Length; i++)
             {
                 //将文字写到画布上
-                using var paintText = CreatePaint(paramter.Height);
+                using var paintText = CreatePaint(paramter.Height, paramter.CodeColors, paramter.ExcludeCodeColors);
                 canvas.DrawText(array[i].ToString(), i * 32 + 1, paramter.Height - 1, paintText);
             }
             DrawInterferenceLine(paramter, canvas);
@@ -200,15 +201,14 @@ namespace Sparrow.VerificationCode
         private static void DrawInterferenceLine(CodeParamter paramter, SKCanvas canvas)
         {
             using SKPaint paint = new SKPaint();
-            var random = GetRandom();
             for (int i = 0; i < paramter.Line; i++)
             {
-                paint.Color = GetColor();
+                paint.Color = GetRandomColor(paramter.LineColors, paramter.ExcludeLineColors);
                 paint.StrokeWidth = paramter.LineStrokeWidth;
-                var x0 = random.Next(0, paramter.Width);
-                var y0 = random.Next(0, paramter.Height);
-                var x1 = random.Next(0, paramter.Width);
-                var y1 = random.Next(0, paramter.Height);
+                var x0 = _random.Next(0, paramter.Width);
+                var y0 = _random.Next(0, paramter.Height);
+                var x1 = _random.Next(0, paramter.Width);
+                var y1 = _random.Next(0, paramter.Height);
                 canvas.DrawLine(x0, y0, x1, y1, paint);
             }
         }
@@ -217,32 +217,64 @@ namespace Sparrow.VerificationCode
         /// 创建画笔
         /// </summary>
         /// <param name="fontSize">画笔大小</param>
+        /// <param name="includeColors">需要包含的颜色</param>
         /// <param name="excludeColors">需要排除的颜色</param>
         /// <returns></returns>
-        private static SKPaint CreatePaint(float fontSize, SKColor[] excludeColors = null)
+        private static SKPaint CreatePaint(float fontSize, SKColor[] includeColors, SKColor[] excludeColors)
         {
             SKPaint paint = new SKPaint
             {
                 IsAntialias = true,
-                Color = GetColor(excludeColors),
+                Color = GetRandomColor(includeColors, excludeColors),
                 TextSize = fontSize
             };
             return paint;
         }
 
         /// <summary>
-        /// 获取颜色
+        /// 随机获取颜色
         /// </summary>
+        /// <param name="includeColors">需要包含的颜色</param>
         /// <param name="excludeColors">需要排除的颜色</param>
         /// <returns></returns>
-        private static SKColor GetColor(SKColor[] excludeColors = null)
+        private static SKColor GetRandomColor(SKColor[] includeColors, SKColor[] excludeColors)
         {
-            return Colors[GetRandom().Next(Colors.Count)];
+            var colors = GetColors(includeColors, excludeColors);
+            return colors[_random.Next(colors.Length)];
         }
 
-        private static Random GetRandom()
+        /// <summary>
+        /// 获取排除颜色后的颜色
+        /// </summary>
+        /// <param name="includeColors">需要包含的颜色</param>
+        /// <param name="excludeColors">需要排除的颜色</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">颜色数量</exception>
+        private static SKColor[] GetColors(SKColor[] includeColors, SKColor[] excludeColors)
         {
-            return new Random();
+            IEnumerable<SKColor> colors;
+            if (includeColors == null)
+            {
+                colors = Colors;
+            }
+            else
+            {
+                if (includeColors.Length < 3)
+                {
+                    throw new ArgumentException("the number of colors cannot be less than 3");
+                }
+                colors = includeColors;
+            }
+            if (excludeColors == null || excludeColors.Length == 0)
+            {
+                return colors.ToArray();
+            }
+            colors = colors.Except(excludeColors).ToArray();
+            if (colors.Count() < 3)
+            {
+                throw new ArgumentException("the number of colors cannot be less than 3");
+            }
+            return colors.ToArray();
         }
     }
 }
