@@ -6,11 +6,11 @@ namespace Sparrow.StandardResult.Test
     public class SpecialStandardResultTest
     {
         private readonly string Key = "test";
-        private readonly string SuccessMessage = "≥…π¶";
+        private readonly string SuccessMessage = "ÊàêÂäü";
         private readonly string SuccessCode = "1";
-        private readonly string FailMessage = " ß∞‹";
+        private readonly string FailMessage = "Â§±Ë¥•";
         private readonly string FailCode = "2";
-        private readonly string ExceptionMessage = "“Ï≥£";
+        private readonly string ExceptionMessage = "ÂºÇÂ∏∏";
         private readonly string ExceptionCode = "3";
 
         [SetUp]
@@ -19,11 +19,11 @@ namespace Sparrow.StandardResult.Test
             ServiceCollection services = new ServiceCollection();
             services.AddStandardResult(Key, option =>
             {
-                option.SuccessMessage = "≥…π¶";
+                option.SuccessMessage = "ÊàêÂäü";
                 option.SuccessCode = "1";
-                option.FailMessage = " ß∞‹";
+                option.FailMessage = "Â§±Ë¥•";
                 option.FailCode = "2";
-                option.ExceptionMessage = "“Ï≥£";
+                option.ExceptionMessage = "ÂºÇÂ∏∏";
                 option.ExceptionCode = "3";
             });
         }

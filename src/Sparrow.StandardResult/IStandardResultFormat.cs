@@ -14,5 +14,10 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <returns></returns>
         object Format();
+        /// <summary>
+        /// 格式化返回结果
+        /// </summary>
+        /// <returns></returns>
+        object Format(Dictionary<string, object> additional);
     }
 }

@@ -254,6 +254,32 @@ namespace Sparrow.StandardResult
         {
             return option.FormatStandardDto(this);
         }
+
+        /// <summary>
+        /// 格式化
+        /// </summary>
+        /// <param name="additional">附加属性</param>
+        /// <returns></returns>
+        public object Format(Dictionary<string, object> additional)
+        {
+            var obj = Format();
+            if (additional == null || additional.Count == 0)
+            {
+                return obj;
+            }
+            var properties = obj.GetType().GetProperties();
+            var dic = new Dictionary<string, object>();
+            foreach (var property in properties)
+            {
+                dic.Add(property.Name, property.GetValue(obj, null));
+            }
+            foreach (var item in additional)
+            {
+                dic.Add(item.Key, item.Value);
+            }
+            var dynamic = dic as dynamic;
+            return dynamic;
+        }
     }
     /// <summary>
     /// 结果模型
@@ -486,5 +512,30 @@ namespace Sparrow.StandardResult
             return option.FormatStandardDto(dto);
         }
 
+        /// <summary>
+        /// 格式化
+        /// </summary>
+        /// <param name="additional">附加属性</param>
+        /// <returns></returns>
+        public object Format(Dictionary<string, object> additional)
+        {
+            var obj = Format();
+            if (additional == null || additional.Count == 0)
+            {
+                return obj;
+            }
+            var properties = obj.GetType().GetProperties();
+            var dic = new Dictionary<string, object>();
+            foreach (var property in properties)
+            {
+                dic.Add(property.Name, property.GetValue(obj, null));
+            }
+            foreach (var item in additional)
+            {
+                dic.Add(item.Key, item.Value);
+            }
+            var dynamic = dic as dynamic;
+            return dynamic;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Sparrow.StandardResult.Test
 {
@@ -115,6 +116,30 @@ namespace Sparrow.StandardResult.Test
                 other_traceid = dto.TraceId,
             });
             Assert.IsTrue(dto_json == json);
+        }
+
+        [Test]
+        public void AdditionalFormatTest()
+        {
+            var list = new List<int>
+            {
+                1,2, 3, 4, 5, 6, 7
+            };
+            var additional = new Dictionary<string, object>
+            {
+                { "name", "zheng" },
+                { "age", 23 }
+            };
+            var standard1 = new StandardDto();
+            standard1.SuccessResult(list);
+            var obj1 = standard1.Format(additional);
+            var json1 = JsonConvert.SerializeObject(obj1);
+
+            var standard2 = new StandardDto<List<int>>();
+            standard2.SuccessResult(list);
+            var obj2 = standard2.Format(additional);
+            var json2 = JsonConvert.SerializeObject(obj2);
+            Assert.Pass();
         }
     }
 }

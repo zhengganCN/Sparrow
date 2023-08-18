@@ -88,7 +88,7 @@ namespace Sparrow.StandardResult
         /// </summary>
         /// <param name="pagination"></param>
         /// <returns></returns>
-        public delegate object StandardPaginationDtoFormat(StandardPagination pagination);
+        public delegate object StandardPaginationDtoFormat(BasePagination pagination);
         /// <summary>
         /// <see cref="StandardPagination"/>格式化
         /// </summary>

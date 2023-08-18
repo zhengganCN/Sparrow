@@ -1,10 +1,16 @@
-﻿namespace Sparrow.StandardResult
+﻿using System.Collections.Generic;
+
+namespace Sparrow.StandardResult
 {
     /// <summary>
     /// 基础分页
     /// </summary>
     public abstract class BasePagination
     {
+        /// <summary>
+        /// 数据列表
+        /// </summary>
+        public object List { get; set; }
         /// <summary>
         /// 页面索引
         /// </summary>
