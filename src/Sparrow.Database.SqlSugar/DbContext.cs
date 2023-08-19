@@ -12,7 +12,7 @@ namespace Sparrow.Database.SqlSugar
     /// <summary>
     /// 数据库上下文
     /// </summary>
-    public class DbContext : IDbContext, IDisposable
+    public partial class DbContext : IDbContext, IDisposable
     {
         private readonly DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
         private bool isInitialization = false;
@@ -23,7 +23,7 @@ namespace Sparrow.Database.SqlSugar
         /// </summary>
         public DbContext()
         {
-
+            InitSugarClient();
         }
 
         /// <summary>
@@ -33,6 +33,7 @@ namespace Sparrow.Database.SqlSugar
         public DbContext(Action<DbContextOptionsBuilder> configure)
         {
             configure.Invoke(builder);
+            InitSugarClient();
         }
 
         /// <summary>
@@ -42,22 +43,27 @@ namespace Sparrow.Database.SqlSugar
         {
             get
             {
-                if (isInitialization)
-                {
-                    return client;
-                }
-                OnConfiguring(builder);
-                if (builder.Connection is null)
-                {
-                    throw new ArgumentNullException(nameof(builder.Connection));
-                }
-                client = new SqlSugarClient(builder.Connection);
-                client.Aop.OnLogExecuting = ExectionSql;
-                SetSqlSugarClient(client);
-                isInitialization = true;
-                SshConnect();
                 return client;
             }
+        }
+
+        private void InitSugarClient()
+        {
+            if (isInitialization)
+            {
+                return;
+            }
+            OnConfiguring(builder);
+            if (builder.Connection is null)
+            {
+                throw new ArgumentNullException(nameof(builder.Connection));
+            }
+            client = new SqlSugarClient(builder.Connection);
+            client.Aop.OnLogExecuting = ExectionSql;
+            SetSqlSugarClient(client);
+            InitDbSets();
+            SshConnect();
+            isInitialization = true;
         }
 
         /// <summary>
@@ -93,65 +99,21 @@ namespace Sparrow.Database.SqlSugar
                 sql += $"\nname: {parameter.ParameterName}; value: {parameter.Value}";
             }
             Console.WriteLine(sql);
-        }
+        }        
 
         /// <summary>
-        /// 连接ssh
+        /// 初始化DbSet属性
         /// </summary>
-        private void SshConnect()
+        private void InitDbSets()
         {
-            if (builder.SshConfig is null)
+            var properties = GetType().GetProperties();
+            var dbsets = properties.Where(e => e.PropertyType.Name == typeof(DbSet<>).Name).ToList();
+            foreach (var dbset in dbsets)
             {
-                return;
+                // 使用 Activator.CreateInstance 方法创建泛型实例
+                object instance = Activator.CreateInstance(dbset.PropertyType, client);
+                dbset.SetValue(this, instance);
             }
-            if (string.IsNullOrWhiteSpace(builder.SshConfig.SshHost))
-            {
-                throw new ArgumentNullException(nameof(builder.SshConfig.SshHost));
-            }
-            int forwardedPort = GetUnActiveTcpPort();
-            var loopback = IPAddress.Loopback.ToString();
-            ReplaceConnectionString(forwardedPort, loopback);
-            var auth = new PasswordAuthenticationMethod(builder.SshConfig.SshUser, builder.SshConfig.SshPassword);
-            ConnectionInfo conInfo = new ConnectionInfo(builder.SshConfig.SshHost, (int)builder.SshConfig.SshPort, builder.SshConfig.SshUser, auth);
-            sshClient = new SshClient(conInfo);
-            var forwarded = new ForwardedPortLocal(loopback, (uint)forwardedPort, builder.SshConfig.DbHost, (uint)builder.SshConfig.DbPort);
-            sshClient.Connect();
-            if (!sshClient.IsConnected)
-            {
-                throw new Exception("ssh连接失败");
-            }
-            sshClient.AddForwardedPort(forwarded);
-            forwarded.Start();
-        }
-
-        /// <summary>
-        /// 替换连接字符串中的ip为本机的回环地址，端口为转发端口
-        /// </summary>
-        /// <param name="forwardedPort">转发端口</param>
-        /// <param name="loopback">本机的回环地</param>
-        private void ReplaceConnectionString(int forwardedPort, string loopback)
-        {
-            var connect = client.CurrentConnectionConfig.ConnectionString;
-            var ipRegex = new Regex("(.*)(=)([0-9]*\\.[0-9]*\\.[0-9]*\\.[0-9]*)(.*)");
-            connect = ipRegex.Replace(connect, $"$1={loopback}$4");
-            var portRegex = new Regex("(.*)(=)([0-9]{4,5})(.*)");
-            connect = portRegex.Replace(connect, $"$1={forwardedPort}$4");
-            client.CurrentConnectionConfig.ConnectionString = connect;
-        }
-
-        /// <summary>
-        /// 随机获取未使用的端口
-        /// </summary>
-        /// <returns></returns>
-        private static int GetUnActiveTcpPort()
-        {
-            var random = new Random();
-            var port = random.Next(10000, 65535);
-            while (IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpListeners().Any(p => p.Port == port))
-            {
-                port = random.Next(10000, 65535);
-            }
-            return port;
         }
 
         /// <summary>

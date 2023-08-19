@@ -1,4 +1,5 @@
-﻿using SqlSugar;
+﻿using Sparrow.Database.SqlSugar.Test.Entities;
+using SqlSugar;
 using System;
 
 namespace Sparrow.Database.SqlSugar.Test
@@ -19,5 +20,10 @@ namespace Sparrow.Database.SqlSugar.Test
                 DbType = DbType.Sqlite
             });
         }
+
+        /// <summary>
+        /// 地区表
+        /// </summary>
+        public DbSet<EntityDistricts> Districts { get; set; }
     }
 }
