@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sparrow.StandardResult.Web;
 using Sparrow.StandardResult.WebTest.Models;
 using System;
 using System.Linq;
@@ -7,12 +8,17 @@ namespace Sparrow.StandardResult.WebTest.Controllers
 {
     [Route("[controller]")]
     [StandardModelResult]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : StandardControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+
+        public WeatherForecastController() : base()
+        {
+
+        }
 
         [HttpGet]
         public ActionResult Get()
