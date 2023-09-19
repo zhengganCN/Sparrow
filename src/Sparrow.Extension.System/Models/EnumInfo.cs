@@ -12,7 +12,7 @@
         /// <summary>
         /// 值
         /// </summary>
-        public string Value { get; set; }
+        public object Value { get; set; }
         /// <summary>
         /// 描述
         /// </summary>

@@ -10,6 +10,7 @@ namespace Sparrow.StandardResult.Web
     /// </summary>
     public static class StardandResultWeb
     {
+        internal static StandardResultWebOptions StandardResultWebOptions { get; set; } = new StandardResultWebOptions();
         /// <summary>
         /// 模型验证错误信息处理
         /// </summary>
