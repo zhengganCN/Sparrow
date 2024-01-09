@@ -1,5 +1,7 @@
 ﻿using Sparrow.Database.Interface;
 using Sparrow.Database.Migration;
+using Sparrow.Database.SqlSugar;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -12,36 +14,34 @@ namespace Microsoft.Extensions.DependencyInjection
         /// 数据库迁移
         /// </summary>
         /// <param name="services">服务集合</param>
-        /// <param name="sparrow">版本</param>
+        /// <param name="version">版本</param>
         /// <returns></returns>
-        public static IServiceCollection AddSparrowDatabaseMigration<D, M, V>(this IServiceCollection services, ISparrowVersion sparrow)
-            where D : IDbContext, new()
-            where M : ISparrowDatabaseMigration<V>, new()
+        public static IServiceCollection AddSparrowDatabaseMigration<M, V>(this IServiceCollection services, V version)
+            where M : ISparrowDatabaseMigration, new() 
             where V : class, ISparrowVersion, new()
         {
             var migration = new M();
-            if (migration.ExistVersionTable())
+            if (migration.ExistVersionTable<V>())
             {
-                var version = migration.GetCurrentVersion(sparrow.Name);
-                if (version == null || sparrow.Compare(version) == 1)
+                var current_version = migration.GetCurrentVersion<V>(version.Name);
+                if (current_version == null || version.Compare(current_version) > 0)
                 {
-                    ExcuteMigration(migration, sparrow);
+                    ExcuteMigration(migration, version);
                 }
             }
             else
             {
-                ExcuteMigration(migration, sparrow);
+                ExcuteMigration(migration, version);
             }
             return services;
         }
 
-        private static void ExcuteMigration<V>(ISparrowDatabaseMigration<V> migration, ISparrowVersion sparrow)
-            where V : class, ISparrowVersion, new()
+        private static void ExcuteMigration<V>(ISparrowDatabaseMigration migration, V sparrow) where V : class, ISparrowVersion, new()
         {
-            migration.ExcuteBeforeDatabaseSynchronous();
-            migration.ExcuteDatabaseSynchronous();
-            migration.ExcuteAfterDatabaseSynchronous();
-            migration.SaveCurrentVersion((V)sparrow);
+            migration.ExcuteBeforeDatabaseSynchronous(sparrow);
+            migration.ExcuteDatabaseSynchronous(sparrow);
+            migration.ExcuteAfterDatabaseSynchronous(sparrow);
+            migration.SaveCurrentVersion(sparrow);
         }
     }
 }

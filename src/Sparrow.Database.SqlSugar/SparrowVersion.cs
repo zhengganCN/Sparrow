@@ -16,7 +16,30 @@ namespace Sparrow.Database.SqlSugar
         public SparrowVersion()
         {
         }
-
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        public SparrowVersion(ushort major)
+        {
+            Major = major;
+        }
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        public SparrowVersion(ushort major, ushort minor)
+        {
+            Major = major;
+            Minor = minor;
+        }
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        public SparrowVersion(ushort major, ushort minor, ushort revision)
+        {
+            Major = major;
+            Minor = minor;
+            Revision = revision;
+        }
         /// <summary>
         /// 初始化
         /// </summary>
@@ -30,7 +53,7 @@ namespace Sparrow.Database.SqlSugar
         /// <summary>
         /// 名称
         /// </summary>
-        [SugarColumn(Length = 255, ColumnDescription = "名称")]
+        [SugarColumn(IsPrimaryKey = true, Length = 255, ColumnDescription = "名称")]
         public string Name { get; set; }
         /// <summary>
         /// 主版本号

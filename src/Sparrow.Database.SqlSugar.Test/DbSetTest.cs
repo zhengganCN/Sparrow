@@ -11,8 +11,6 @@ namespace Sparrow.Database.SqlSugar.Test
         {
             using var context = new DemoDbContext();
             context.SugarClient.CodeFirst.InitTables(typeof(EntityDistricts));
-            var list = context.SugarClient.Queryable<EntityDistricts>()
-                .ToList();
             var districts = new EntityDistricts
             {
                 CreateTime = DateTime.Now,
@@ -28,9 +26,11 @@ namespace Sparrow.Database.SqlSugar.Test
                 Updator = 0
             };
             context.Districts.Insert(districts);
-            list = context.Districts.Queryable
+            var exist = context.Districts.Queryable
                 .Where(e => e.IsDeleted == false)
-                .ToList();
+                .Where(e => e.DistrictCode == "110")
+                .Any();
+            Assert.IsTrue(exist);
         }
     }
 }

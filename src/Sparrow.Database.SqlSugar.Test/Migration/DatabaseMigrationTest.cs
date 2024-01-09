@@ -10,13 +10,13 @@ namespace Sparrow.Database.SqlSugar.Test.Migration
         public void MigrationTest()
         {
             var services = new ServiceCollection();
-            var version = new SparrowVersion(1, 0, 0, 1)
+            var version = new SparrowVersion(1, 0, 1, 6)
             {
                 Name = "test",
                 Creator = "test",
                 CreateTime = DateTime.Now
             };
-            services.AddSparrowDatabaseMigration<DemoDbContext, DemoMigration<DemoDbContext, SparrowVersion>, SparrowVersion>(version);
+            services.AddSparrowDatabaseMigration<DemoMigration<DemoDbContext>, SparrowVersion>(version);
         }
     }
 }

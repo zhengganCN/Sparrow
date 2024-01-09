@@ -6,13 +6,11 @@ using System.Reflection;
 namespace Sparrow.Database.SqlSugar
 {
     /// <summary>
-    /// 默认<see cref="ISparrowDatabaseMigration{T}"/>实现
+    /// 默认<see cref="ISparrowDatabaseMigration"/>实现
     /// </summary>
     /// <typeparam name="D">数据库上下文</typeparam>
-    /// <typeparam name="V">实现<see cref="ISparrowVersion"/>接口的版本表</typeparam>
-    public class DefaultSparrowDatabaseMigration<D, V> : ISparrowDatabaseMigration<V>
+    public class DefaultSparrowDatabaseMigration<D> : ISparrowDatabaseMigration
         where D : IDbContext, new()
-        where V : class, ISparrowVersion, new()
     {
         /// <summary>
         /// 数据库上下文
@@ -29,7 +27,7 @@ namespace Sparrow.Database.SqlSugar
         /// 判断版本表是否存在
         /// </summary>
         /// <returns></returns>
-        public virtual bool ExistVersionTable()
+        public virtual bool ExistVersionTable<V>() where V : class, ISparrowVersion, new()
         {
             string name;
             var type = typeof(V);
@@ -49,7 +47,7 @@ namespace Sparrow.Database.SqlSugar
         /// </summary>
         /// <param name="name">名称</param>
         /// <returns></returns>
-        public virtual ISparrowVersion GetCurrentVersion(string name)
+        public virtual ISparrowVersion GetCurrentVersion<V>(string name) where V : class, ISparrowVersion, new()
         {
             return Context.SugarClient.Queryable<V>()
                     .Where(e => e.Name == name)
@@ -63,27 +61,36 @@ namespace Sparrow.Database.SqlSugar
         /// 保存当前版本
         /// </summary>
         /// <param name="version"></param>
-        public virtual void SaveCurrentVersion(V version)
+        public virtual void SaveCurrentVersion<V>(V version) where V : class, ISparrowVersion, new()
         {
-            Context.SugarClient.Insertable(version).ExecuteCommand();
+            if (ExistVersionTable<V>())
+            {
+                Context.SugarClient.Updateable(version)
+                    .Where(e=>e.Name == version.Name)
+                    .ExecuteCommand();
+            }
+            else
+            {
+                Context.SugarClient.Insertable(version).ExecuteCommand();
+            }
         }
         /// <summary>
         /// 在表同步之前执行
         /// </summary>
-        public virtual void ExcuteBeforeDatabaseSynchronous()
+        public virtual void ExcuteBeforeDatabaseSynchronous<V>(V version) where V : class, ISparrowVersion, new()
         {
         }
         /// <summary>
         /// 表同步执行
         /// </summary>
-        public virtual void ExcuteDatabaseSynchronous()
+        public virtual void ExcuteDatabaseSynchronous<V>(V version) where V : class, ISparrowVersion, new()
         {
             Context.SugarClient.CodeFirst.InitTables(typeof(V));
         }
         /// <summary>
         /// 在表同步之后执行
         /// </summary>
-        public virtual void ExcuteAfterDatabaseSynchronous()
+        public virtual void ExcuteAfterDatabaseSynchronous<V>(V version) where V : class, ISparrowVersion, new()
         {
         }
     }

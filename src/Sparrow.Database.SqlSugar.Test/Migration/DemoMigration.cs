@@ -7,9 +7,8 @@ using System.Text;
 
 namespace Sparrow.Database.SqlSugar.Test.Migration
 {
-    internal class DemoMigration<D, V> : DefaultSparrowDatabaseMigration<D, V>
+    internal class DemoMigration<D> : DefaultSparrowDatabaseMigration<D>
         where D : IDbContext, new()
-        where V : class, ISparrowVersion, new()
     {
         private readonly FileStream _stream;
 
@@ -22,20 +21,22 @@ namespace Sparrow.Database.SqlSugar.Test.Migration
         {
             _stream.Close();
         }
-        public override void ExcuteBeforeDatabaseSynchronous()
+
+        public override void ExcuteBeforeDatabaseSynchronous<V>(V version)
         {
             _stream.Write(Encoding.UTF8.GetBytes("ExcuteBeforeDatabaseSynchronous"));
         }
-        public override void ExcuteDatabaseSynchronous()
+
+        public override void ExcuteDatabaseSynchronous<V>(V version)
         {
             Context.SugarClient.CodeFirst.InitTables(
                     typeof(EntityMigration));
-            base.ExcuteDatabaseSynchronous();
+            base.ExcuteDatabaseSynchronous(version);
         }
-        public override void ExcuteAfterDatabaseSynchronous()
+
+        public override void ExcuteAfterDatabaseSynchronous<V>(V version)
         {
             _stream.Write(Encoding.UTF8.GetBytes("ExcuteAfterDatabaseSynchronous"));
         }
-
     }
 }
