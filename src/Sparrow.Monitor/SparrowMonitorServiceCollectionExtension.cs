@@ -31,6 +31,6 @@ namespace Sparrow.Monitor
             HttpRecorder.RecordStringAction = recorder;
             return services;
         }
-        
+
     }
 }

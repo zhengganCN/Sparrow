@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Sparrow.Database.SqlSugar.Test.Entities
 {
     [Description("地区")]
-    public class EntityDistricts : Entity
+    public class EntityDistricts : BaseEntity
     {
         [SugarColumn(IsIdentity = true, IsPrimaryKey = true)]
         public int Id { get; set; }

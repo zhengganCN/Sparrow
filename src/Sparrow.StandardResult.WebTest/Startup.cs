@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sparrow.StandardResult.Web;
 
 namespace Sparrow.StandardResult.WebTest
 {
@@ -35,10 +34,10 @@ namespace Sparrow.StandardResult.WebTest
                 };
             });
             services.AddControllers();
-                //.ConfigureApiBehaviorOptions(options =>
-                //{
-                //    options.InvalidModelStateResponseFactory = StardandResultWeb.StardandResultModelStateResponse;
-                //});
+            //.ConfigureApiBehaviorOptions(options =>
+            //{
+            //    options.InvalidModelStateResponseFactory = StardandResultWeb.StardandResultModelStateResponse;
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

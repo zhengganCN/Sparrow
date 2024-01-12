@@ -3,9 +3,6 @@ using Sparrow.Database.Interface;
 using SqlSugar;
 using System;
 using System.Linq;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Text.RegularExpressions;
 
 namespace Sparrow.Database.SqlSugar
 {
@@ -99,7 +96,7 @@ namespace Sparrow.Database.SqlSugar
                 sql += $"\nname: {parameter.ParameterName}; value: {parameter.Value}";
             }
             Console.WriteLine(sql);
-        }        
+        }
 
         /// <summary>
         /// 初始化DbSet属性

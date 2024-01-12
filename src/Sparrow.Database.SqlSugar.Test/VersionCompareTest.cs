@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Sparrow.Database.Migration;
+using Sparrow.Database.SqlSugar.Models;
 using System.Collections.Generic;
 
 namespace Sparrow.Database.SqlSugar.Test

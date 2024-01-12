@@ -1,9 +1,6 @@
 ﻿//using Sparrow.Algorithm.Ciphers;
-using System.Globalization;
-using System.Text;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Security;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Sparrow.Algorithm.Test
 {
@@ -85,7 +82,7 @@ namespace Sparrow.Algorithm.Test
                 using CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
                 using StreamReader srDecrypt = new StreamReader(csDecrypt);
 
-                var s= srDecrypt.ReadToEnd();
+                var s = srDecrypt.ReadToEnd();
                 //var name = $"AES/ECB/PKCS5PADDING";
                 //IBufferedCipher Cipher = CipherUtilities.GetCipher(name);
                 //cipher.SetCipher(CipherBlockAlgorithm.AES, CipherMode.ECB, CipherPadding.PKCS5PADDING);

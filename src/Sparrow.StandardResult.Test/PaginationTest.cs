@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Sparrow.StandardResult.Test
 {
@@ -48,7 +46,7 @@ namespace Sparrow.StandardResult.Test
             {
                 1,2, 3, 4, 5, 6, 7
             };
-            var additional = new Dictionary<string, object> 
+            var additional = new Dictionary<string, object>
             {
                 { "name", "zheng" },
                 { "age", 23 }

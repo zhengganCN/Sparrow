@@ -1,9 +1,4 @@
-﻿using Sparrow.DataValidation;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-
-namespace Sparrow.StandardResult
+﻿namespace Sparrow.StandardResult
 {
     /// <summary>
     /// 输出结果
@@ -17,7 +12,7 @@ namespace Sparrow.StandardResult
         public StandardDto(string key = StandardResultConsts.DefaultKey)
         {
             option = StandardResultValues.StandardResultOptions[key];
-        }        
+        }
     }
     /// <summary>
     /// 结果模型

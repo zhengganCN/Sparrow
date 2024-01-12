@@ -14,16 +14,16 @@ namespace Sparrow.Database.SqlSugar.Test
             var districts = new EntityDistricts
             {
                 CreateTime = DateTime.Now,
-                Creator = 0,
+                Creator = "0",
                 DistrictCode = "110",
                 DistrictLevel = 1,
                 DistrictName = "北京市",
                 IsDeleted = false,
                 ParentDistrictCode = "",
                 DeleteTime = DateTime.Now,
-                Deletor = 0,
+                Deletor = "0",
                 UpdateTime = DateTime.Now,
-                Updator = 0
+                Updator = "0"
             };
             context.Districts.Insert(districts);
             var exist = context.Districts.Queryable

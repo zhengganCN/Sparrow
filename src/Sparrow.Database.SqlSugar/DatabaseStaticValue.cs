@@ -1,4 +1,6 @@
-﻿namespace Sparrow.Database.SqlSugar
+﻿using Sparrow.Database.SqlSugar.Models;
+
+namespace Sparrow.Database.SqlSugar
 {
     internal static class DatabaseStaticValue
     {

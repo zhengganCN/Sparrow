@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json;
 
 namespace Sparrow.StandardResult
 {
@@ -30,7 +29,7 @@ namespace Sparrow.StandardResult
         /// 页面总数
         /// </summary>
         public int PageCount { get; set; }
-        
+
         /// <summary>
         /// 计算分页数据
         /// </summary>

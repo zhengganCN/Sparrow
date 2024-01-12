@@ -1,7 +1,6 @@
 ﻿using Sparrow.Database.Interface;
-using Sparrow.Database.Migration;
-using Sparrow.Database.SqlSugar;
-using System;
+using Sparrow.Database.SqlSugar.Interfaces;
+using Sparrow.Database.SqlSugar.Models;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -14,34 +13,40 @@ namespace Microsoft.Extensions.DependencyInjection
         /// 数据库迁移
         /// </summary>
         /// <param name="services">服务集合</param>
-        /// <param name="version">版本</param>
+        /// <param name="version">版本信息</param>
         /// <returns></returns>
-        public static IServiceCollection AddSparrowDatabaseMigration<M, V>(this IServiceCollection services, V version)
-            where M : ISparrowDatabaseMigration, new() 
-            where V : class, ISparrowVersion, new()
+        public static IServiceCollection AddSparrowDatabaseMigration<M, D>(this IServiceCollection services, SparrowVersion version)
+            where M : ISparrowDatabaseMigration, new()
+            where D : IDbContext, new()
         {
-            var migration = new M();
-            if (migration.ExistVersionTable<V>())
-            {
-                var current_version = migration.GetCurrentVersion<V>(version.Name);
-                if (current_version == null || version.Compare(current_version) > 0)
-                {
-                    ExcuteMigration(migration, version);
-                }
-            }
-            else
-            {
-                ExcuteMigration(migration, version);
-            }
+            new M().Execute<D>(version);
             return services;
         }
-
-        private static void ExcuteMigration<V>(ISparrowDatabaseMigration migration, V sparrow) where V : class, ISparrowVersion, new()
+        /// <summary>
+        /// 数据库迁移
+        /// </summary>
+        /// <param name="services">服务集合</param>
+        /// <param name="version">版本信息</param>
+        /// <returns></returns>
+        public static IServiceCollection AddSparrowDatabaseMigration<M, D>(this IServiceCollection services, sparrow_version version)
+            where M : ISparrowDatabaseMigration, new()
+            where D : IDbContext, new()
         {
-            migration.ExcuteBeforeDatabaseSynchronous(sparrow);
-            migration.ExcuteDatabaseSynchronous(sparrow);
-            migration.ExcuteAfterDatabaseSynchronous(sparrow);
-            migration.SaveCurrentVersion(sparrow);
+            new M().Execute<D>(version);
+            return services;
+        }
+        /// <summary>
+        /// 数据库迁移
+        /// </summary>
+        /// <param name="services">服务集合</param>
+        /// <param name="version">版本信息</param>
+        /// <returns></returns>
+        public static IServiceCollection AddSparrowDatabaseMigration<M, D>(this IServiceCollection services, object version)
+            where M : ISparrowDatabaseMigration, new()
+            where D : IDbContext, new()
+        {
+            new M().Execute<D>(version);
+            return services;
         }
     }
 }
