@@ -115,18 +115,7 @@ namespace Sparrow.Database.SqlSugar.Test.Migration
                 }
             }
             var sync_version = GetSyncDatabaseVersion(context, current) as demo_version;
-            if (sync_version is null)
-            {
-                if (InsertVersionData(context, current))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            if (CanUpdateVersion(current, sync_version))
+            if (sync_version is null || CanUpdateVersion(current, sync_version))
             {
                 if (!ExcuteBeforeDatabaseSynchronous())
                 {

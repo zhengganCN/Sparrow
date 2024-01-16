@@ -115,18 +115,7 @@ namespace Sparrow.Database.SqlSugar.Migrations
                 }
             }
             var sync_version = GetSyncDatabaseVersion(context, current) as sparrow_version;
-            if (sync_version is null)
-            {
-                if (InsertVersionData(context, current))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            if (CanUpdateVersion(current, sync_version))
+            if (sync_version is null || CanUpdateVersion(current, sync_version))
             {
                 if (!ExcuteBeforeDatabaseSynchronous())
                 {
