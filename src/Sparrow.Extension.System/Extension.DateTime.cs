@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sparrow.Extension.System.Enums;
+using System;
+using System.Reflection;
 
 namespace Sparrow.Extension.System
 {
@@ -24,120 +26,133 @@ namespace Sparrow.Extension.System
         }
 
         /// <summary>
-        /// 获取给定月份的周数
+        /// 获取年/月“周”数
         /// </summary>
-        /// <param name="dateTime">要获取周数的年月</param>
+        /// <param name="time">时间</param>
+        /// <param name="type">“周”数量类型枚举</param>
         /// <returns></returns>
-        public static int GetCurrentMonthWeekCount(this DateTime dateTime)
+        public static int GetWeeks(this DateTime time, WeekNumberType type = WeekNumberType.Month)
         {
-            var firstDayOfMonth = dateTime.AddDays(-(dateTime.Day - 1));//获取当月的第一天
-            var dayCountOfMonth = DateTime.DaysInMonth(firstDayOfMonth.Year, firstDayOfMonth.Month);//获取指定年月的天数
-            var weeksCount = 0;//获取指定年月的周数
-            for (int i = 0; i < dayCountOfMonth; i++)
+            DateTime? begin = null;//年/月的开始时间
+            int end = 0;//年/月的天数
+            switch (type)
             {
-                if (firstDayOfMonth.AddDays(i).DayOfWeek == DayOfWeek.Sunday)
+                case WeekNumberType.Month:
+                    begin = DateTime.Parse($"{time.Year}-{time.Month:00}-01");
+                    end = DateTime.DaysInMonth(begin.Value.Year, begin.Value.Month);
+                    break;
+                case WeekNumberType.Year:
+                    begin = DateTime.Parse($"{time.Year}-01-01");
+                    end = begin.Value.AddYears(1).AddDays(-1).DayOfYear;
+                    break;
+            }
+            int weeks = 0;//年/月的周数
+            for (int i = 0; i < end; i++)
+            {
+                if (begin.Value.AddDays(i).DayOfWeek == DayOfWeek.Monday)
                 {
-                    weeksCount++;
+                    weeks++;
                 }
             }
-            if (firstDayOfMonth.AddDays(dayCountOfMonth - 1).DayOfWeek != DayOfWeek.Sunday)
-            {
-                weeksCount++;
-            }
-            return weeksCount;
+            return weeks;
         }
 
         /// <summary>
         /// 获取给定月份的周索引，从1开始
         /// </summary>
-        /// <param name="dateTime">要获取周索引的年月</param>
+        /// <param name="time">时间</param>
         /// <returns></returns>
-        public static int GetCurrentMonthWeekIndex(this DateTime dateTime)
+        public static int GetWeekIndexInMonth(this DateTime time)
         {
-            var firstDayOfMonth = dateTime.AddDays(-(dateTime.Day - 1));//获取当月的第一天
-            var dayCountOfMonth = DateTime.DaysInMonth(firstDayOfMonth.Year, firstDayOfMonth.Month);//获取指定年月的天数
-            var weekIndex = 0;//获取指定年月的周数
-            for (int i = 0; i < dayCountOfMonth; i++)
+            DateTime begin = DateTime.Parse($"{time.Year}-{time.Month:00}-01");//年/月的开始时间
+            int end = DateTime.DaysInMonth(begin.Year, begin.Month);//月的天数
+            var index = 0;//当前时间在年/月的周索引
+            for (int i = 0; i < end; i++)
             {
-                if (firstDayOfMonth.AddDays(i).DayOfWeek == DayOfWeek.Sunday)
+                if (begin.AddDays(i).DayOfWeek == DayOfWeek.Monday)
                 {
-                    if (firstDayOfMonth.AddDays(i) > dateTime)
-                    {
-                        break;
-                    }
-                    weekIndex++;
+                    index++;
                 }
             }
-            if (firstDayOfMonth.AddDays(dayCountOfMonth - 1).DayOfWeek != DayOfWeek.Sunday)
-            {
-                weekIndex++;
-            }
-            return weekIndex;
+            return index;
         }
 
         /// <summary>
-        /// 获取给定年月的给定周的起止日期
+        /// 获取给定年的周索引，从1开始
         /// </summary>
-        /// <param name="dateTime"></param>
+        /// <param name="time">时间</param>
+        /// <returns></returns>
+        public static int GetWeekIndexInYear(this DateTime time)
+        {
+            DateTime begin = DateTime.Parse($"{time.Year}-01-01");//年/月的开始时间
+            int end = begin.AddYears(1).AddDays(-1).DayOfYear;//年的天数
+            var index = 0;//当前时间在年/月的周索引
+            for (int i = 0; i < end; i++)
+            {
+                if (begin.AddDays(i).DayOfWeek == DayOfWeek.Monday)
+                {
+                    index++;
+                }
+            }
+            return index;
+        }
+
+        /// <summary>
+        /// 获取给定月的周的起止日期，未匹配到则返回null
+        /// </summary>
+        /// <param name="time"></param>
         /// <param name="week">周，从1开始</param>
         /// <returns>
         /// 第一项：给定周的开始时间
         /// 第二项：给定周的结束时间
         /// </returns>
-        public static Tuple<DateTime, DateTime> GetCurrentWeekStartEndTime(this DateTime dateTime, int week)
+        public static Tuple<DateTime, DateTime> GetWeekTimeInMonth(this DateTime time, int week)
         {
-            DateTime weekStartDate;//指定周的开始时间
-            DateTime weekEndDate;//指定周的结束时间
-            var firstDayOfMonth = dateTime.AddDays(-(dateTime.Day - 1));//获取当月的第一天
-            weekStartDate = firstDayOfMonth;
-            weekEndDate = firstDayOfMonth.AddDays(6);//临时赋值
-            var dayCountOfMonth = DateTime.DaysInMonth(firstDayOfMonth.Year, firstDayOfMonth.Month);//获取指定年月的天数
-            var weeksCount = 0;//获取指定年月的周数
-            for (int i = 0; i < dayCountOfMonth; i++)
+            DateTime begin = DateTime.Parse($"{time.Year}-{time.Month:00}-01");//指定周的开始时间
+            int end = DateTime.DaysInMonth(begin.Year, begin.Month);//月的天数
+            int index = 0;
+            for (int i = 0; i < end; i++)
             {
-                if (firstDayOfMonth.AddDays(i).DayOfWeek == DayOfWeek.Sunday)
+                if (begin.AddDays(i).DayOfWeek == DayOfWeek.Monday)
                 {
-                    weeksCount++;
-                    if (weeksCount == week)
+                    index++;
+                    if (week == index)
                     {
-                        weekEndDate = firstDayOfMonth.AddDays(i);
-                        GetCurrentWeekEndTime(ref weekStartDate, ref weekEndDate, firstDayOfMonth);
+                        begin = begin.AddDays(i);
+                        return new Tuple<DateTime, DateTime>(begin, begin.AddDays(6));
                     }
                 }
             }
-            if (firstDayOfMonth.AddDays(dayCountOfMonth - 1).DayOfWeek != DayOfWeek.Sunday)
-            {
-                weeksCount++;
-                if (weeksCount == week)
-                {
-                    weekEndDate = firstDayOfMonth.AddMonths(1).AddDays(-1);
-                    GetCurrentWeekEndTime(ref weekStartDate, ref weekEndDate, firstDayOfMonth);
-                }
-            }
-            if (week > weeksCount || week <= 0)
-            {
-                throw new ArgumentException(nameof(week) + "参数无效");
-            }
-            return new Tuple<DateTime, DateTime>(weekStartDate, weekEndDate);
+            return null;
         }
 
-        private static void GetCurrentWeekEndTime(ref DateTime weekStartDate, ref DateTime weekEndDate, DateTime firstDayOfMonth)
+        /// <summary>
+        /// 获取给定年的周的起止日期，未匹配到则返回null
+        /// </summary>
+        /// <param name="time"></param>
+        /// <param name="week">周，从1开始</param>
+        /// <returns>
+        /// 第一项：给定周的开始时间
+        /// 第二项：给定周的结束时间
+        /// </returns>
+        public static Tuple<DateTime, DateTime> GetWeekTimeInYear(this DateTime time, int week)
         {
-            for (int dayIndexOfInWeek = 1; dayIndexOfInWeek < 7; dayIndexOfInWeek++)
+            DateTime begin = DateTime.Parse($"{time.Year}-01-01");//指定周的开始时间
+            int end = begin.AddYears(1).AddDays(-1).DayOfYear;//年的天数
+            int index = 0;
+            for (int i = 0; i < end; i++)
             {
-                var currentDate = weekEndDate.AddDays(-dayIndexOfInWeek);
-                if (currentDate.Month != firstDayOfMonth.Month)
+                if (begin.AddDays(i).DayOfWeek == DayOfWeek.Monday)
                 {
-                    weekStartDate = currentDate.AddDays(1);
-                    break;
-                }
-                else if (currentDate.DayOfWeek == DayOfWeek.Monday)
-                {
-                    weekStartDate = currentDate;
-                    break;
+                    index++;
+                    if (week == index)
+                    {
+                        begin = begin.AddDays(i);
+                        return new Tuple<DateTime, DateTime>(begin, begin.AddDays(6));
+                    }
                 }
             }
+            return null;
         }
-
     }
 }
