@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.Extension.System.Enums
+﻿namespace Sparrow.Extension.System.Enums
 {
     /// <summary>
     /// “周”数量类型枚举

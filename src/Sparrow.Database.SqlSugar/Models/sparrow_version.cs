@@ -10,50 +10,6 @@ namespace Sparrow.Database.SqlSugar.Models
     public class sparrow_version : base_entity
     {
         /// <summary>
-        /// 无参构造函数
-        /// </summary>
-        public sparrow_version()
-        {
-        }
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        public sparrow_version(ushort major, string name = "database")
-        {
-            this.major = major;
-            this.name = name;
-        }
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        public sparrow_version(ushort major, ushort minor, string name = "database")
-        {
-            this.major = major;
-            this.minor = minor;
-            this.name = name;
-        }
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        public sparrow_version(ushort major, ushort minor, ushort revision, string name = "database")
-        {
-            this.major = major;
-            this.minor = minor;
-            this.revision = revision;
-            this.name = name;
-        }
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        public sparrow_version(ushort major, ushort minor, ushort revision, ushort temporary, string name = "database")
-        {
-            this.major = major;
-            this.minor = minor;
-            this.revision = revision;
-            this.temporary = temporary;
-            this.name = name;
-        }
-        /// <summary>
         /// 主键
         /// </summary>
         [SugarColumn(IsPrimaryKey = true, ColumnDescription = "主键")]
@@ -62,7 +18,7 @@ namespace Sparrow.Database.SqlSugar.Models
         /// 名称
         /// </summary>
         [SugarColumn(IsNullable = false, Length = 255, ColumnDescription = "名称")]
-        public string name { get; set; } = "database";
+        public string name { get; set; }
         /// <summary>
         /// 主版本号
         /// </summary>
@@ -88,21 +44,6 @@ namespace Sparrow.Database.SqlSugar.Models
         /// </summary>
         [SugarColumn(IsNullable = false, ColumnDescription = "序列")]
         public ulong serial { get; set; }
-        /// <summary>
-        /// 比较版本号大小
-        /// </summary>
-        /// <param name="version">待比较版本</param>
-        /// <returns>相等返回0,大于返回1，小于返回-1</returns>
-        public int Compare(sparrow_version version)
-        {
-            var result1 = SparrowVersionStatic.ComputerVersionSeria(major, minor, revision, temporary);
-            var result2 = SparrowVersionStatic.ComputerVersionSeria(version.major, version.minor, version.revision, version.temporary);
-            if (result1 == result2)
-            {
-                return 0;
-            }
-            return result1 > result2 ? 1 : -1;
-        }
     }
 #pragma warning restore IDE1006 // 命名样式
 }

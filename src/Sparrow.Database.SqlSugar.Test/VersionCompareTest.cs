@@ -9,29 +9,26 @@ namespace Sparrow.Database.SqlSugar.Test
         [Test]
         public void CompareTest()
         {
-            using var context = new DemoDbContext();
-            context.SugarClient.CodeFirst.InitTables(typeof(SparrowVersion));
-
-            var list = new List<SparrowVersion>()
+            var list = new List<Migration>()
             {
-                new SparrowVersion(0, 0, 0, 1),
-                new SparrowVersion(0, 0, 1, 0),
-                new SparrowVersion(0, 0, 1, 1),
-                new SparrowVersion(0, 1, 0, 0),
-                new SparrowVersion(0, 1, 0, 1),
-                new SparrowVersion(0, 1, 1, 0),
-                new SparrowVersion(0, 1, 1, 1),
-                new SparrowVersion(1, 0, 0, 0),
-                new SparrowVersion(1, 0, 0, 1),
-                new SparrowVersion(1, 0, 1, 0),
-                new SparrowVersion(1, 0, 1, 1),
-                new SparrowVersion(1, 1, 0, 0),
-                new SparrowVersion(1, 1, 0, 1),
-                new SparrowVersion(1, 1, 1, 0),
-                new SparrowVersion(1, 1, 1, 1),
-                new SparrowVersion(2, 2, 2, 2),
-                new SparrowVersion(2, 3, 2, 2),
-                new SparrowVersion(2, 3, 2, 3),
+                new Migration(0, 0, 0, 1),
+                new Migration(0, 0, 1, 0),
+                new Migration(0, 0, 1, 1),
+                new Migration(0, 1, 0, 0),
+                new Migration(0, 1, 0, 1),
+                new Migration(0, 1, 1, 0),
+                new Migration(0, 1, 1, 1),
+                new Migration(1, 0, 0, 0),
+                new Migration(1, 0, 0, 1),
+                new Migration(1, 0, 1, 0),
+                new Migration(1, 0, 1, 1),
+                new Migration(1, 1, 0, 0),
+                new Migration(1, 1, 0, 1),
+                new Migration(1, 1, 1, 0),
+                new Migration(1, 1, 1, 1),
+                new Migration(2, 2, 2, 2),
+                new Migration(2, 3, 2, 2),
+                new Migration(2, 3, 2, 3),
             };
             for (int main = 0; main < list.Count; main++)
             {

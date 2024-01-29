@@ -1,7 +1,7 @@
 ﻿using Sparrow.Database.SqlSugar.Migrations;
 using Sparrow.Database.SqlSugar.Test.Entities;
 
-namespace Sparrow.Database.SqlSugar.Test.Migration
+namespace Sparrow.Database.SqlSugar.Test.Migrations
 {
     internal class DemoHumpMigration : SparrowHumpDatabaseMigration
     {

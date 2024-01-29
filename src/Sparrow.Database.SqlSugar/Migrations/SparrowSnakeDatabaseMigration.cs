@@ -1,9 +1,7 @@
 ﻿using Sparrow.Database.Interface;
 using Sparrow.Database.SqlSugar.Interfaces;
 using Sparrow.Database.SqlSugar.Models;
-using SqlSugar;
 using System;
-using System.Reflection;
 
 namespace Sparrow.Database.SqlSugar.Migrations
 {
@@ -12,6 +10,7 @@ namespace Sparrow.Database.SqlSugar.Migrations
     /// </summary>
     public abstract class SparrowSnakeDatabaseMigration : ISparrowDatabaseMigration
     {
+
         /// <summary>
         /// 获取数据库上下文
         /// </summary>
@@ -26,15 +25,22 @@ namespace Sparrow.Database.SqlSugar.Migrations
         /// 获取已同步的最新的数据库版本号
         /// </summary>
         /// <param name="context">数据库上下文</param>
-        /// <param name="current">当前版本</param>
+        /// <param name="options">数据库迁移配置项</param>
         /// <returns></returns>
-        public object GetSyncDatabaseVersion(DbContext context, object current)
+        public Migration GetSyncDatabaseVersion(DbContext context, Migration options)
         {
-            var version = current as sparrow_version;
-            return context.SugarClient.Queryable<sparrow_version>()
-                .Where(e => e.name == version.name)
+            return context.SugarClient.Queryable<sparrow_version>().AS(options.table_name)
+                .Where(e => e.name == options.name)
                 .Where(e => e.is_deleted == false)
                 .OrderByDescending(e => e.serial)
+                .Select(e => new Migration
+                {
+                    major = e.major,
+                    minor = e.minor,
+                    name = e.name,
+                    revision = e.revision,
+                    temporary = e.temporary
+                })
                 .First();
         }
 
@@ -42,30 +48,22 @@ namespace Sparrow.Database.SqlSugar.Migrations
         /// 判断版本表是否存在
         /// </summary>
         /// <param name="context">数据库上下文</param>
+        /// <param name="options">数据库迁移配置项</param>
         /// <returns></returns>
-        public bool ExistVersionTable(DbContext context)
+        public bool ExistVersionTable(DbContext context, Migration options)
         {
-            string name = "";
-            var table = typeof(sparrow_version).GetCustomAttribute<SugarTable>();
-            if (table != null && !string.IsNullOrWhiteSpace(table.TableName))
-            {
-                name = table.TableName;
-            }
-            else
-            {
-                name = nameof(sparrow_version);
-            }
-            return context.SugarClient.DbMaintenance.IsAnyTable(name);
+            return context.SugarClient.DbMaintenance.IsAnyTable(options.table_name);
         }
 
         /// <summary>
         /// 创建版本表
         /// </summary>
         /// <param name="context">数据库上下文</param>
+        /// <param name="options">数据库迁移配置项</param>
         /// <returns></returns>
-        public bool CreateVersionTable(DbContext context)
+        public bool CreateVersionTable(DbContext context, Migration options)
         {
-            context.SugarClient.CodeFirst.InitTables<sparrow_version>();
+            context.SugarClient.CodeFirst.As<sparrow_version>(options.table_name).InitTables<sparrow_version>();
             return true;
         }
 
@@ -73,16 +71,23 @@ namespace Sparrow.Database.SqlSugar.Migrations
         /// 新增已同步到数据库的版本数据
         /// </summary>
         /// <param name="context">数据库上下文</param>
-        /// <param name="current">当前版本</param>
+        /// <param name="options">数据库迁移配置项</param>
         /// <returns></returns>
-        public bool InsertVersionData(DbContext context, object current)
+        public bool InsertVersionData(DbContext context, Migration options)
         {
-            var version = current as sparrow_version;
-            version.serial = SparrowVersionStatic.ComputerVersionSeria(version.major, version.minor, version.revision, version.temporary);
-            version.create_time = DateTime.Now;
-            version.creator = "system";
-            version.is_deleted = false;
-            context.SugarClient.Insertable(version).ExecuteReturnSnowflakeId();
+            var version = new sparrow_version
+            {
+                major = options.major,
+                minor = options.minor,
+                revision = options.revision,
+                temporary = options.temporary,
+                name = options.name,
+                serial = options.ComputerVersionSeria(),
+                create_time = DateTime.Now,
+                creator = "system",
+                is_deleted = false
+            };
+            context.SugarClient.Insertable(version).AS(options.table_name).ExecuteReturnSnowflakeId();
             return true;
         }
 
@@ -92,30 +97,28 @@ namespace Sparrow.Database.SqlSugar.Migrations
         /// <param name="current">当前版本信息</param>
         /// <param name="version">数据库中最新版本信息</param>
         /// <returns></returns>
-        public bool CanUpdateVersion(object current, object version)
+        public bool CanUpdateVersion(Migration current, Migration version)
         {
-            var current_entity = current as sparrow_version;
-            var version_entity = version as sparrow_version;
-            return current_entity.Compare(version_entity) > 0;
+            return current.Compare(version) > 0;
         }
 
         /// <summary>
         /// 执行版本同步
         /// </summary>
-        /// <param name="current">版本信息</param>
+        /// <param name="options">版本信息</param>
         /// <typeparam name="D">数据库上下文</typeparam>
-        public bool Execute<D>(object current) where D : IDbContext, new()
+        public bool Execute<D>(Migration options) where D : IDbContext, new()
         {
             using var context = GetDbContext<D>();
-            if (!ExistVersionTable(context))
+            if (!ExistVersionTable(context, options))
             {
-                if (!CreateVersionTable(context))
+                if (!CreateVersionTable(context, options))
                 {
                     return false;
                 }
             }
-            var sync_version = GetSyncDatabaseVersion(context, current) as sparrow_version;
-            if (sync_version is null || CanUpdateVersion(current, sync_version))
+            var sync_version = GetSyncDatabaseVersion(context, options);
+            if (sync_version is null || CanUpdateVersion(options, sync_version))
             {
                 if (!ExcuteBeforeDatabaseSynchronous())
                 {
@@ -129,7 +132,7 @@ namespace Sparrow.Database.SqlSugar.Migrations
                 {
                     return false;
                 }
-                if (InsertVersionData(context, current))
+                if (InsertVersionData(context, options))
                 {
                     return true;
                 }

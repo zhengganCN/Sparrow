@@ -4,7 +4,7 @@ using System;
 
 namespace Sparrow.Database.SqlSugar.Test
 {
-    internal class DemoDbContext : DbContext
+    public class DemoDbContext : DbContext
     {
 
         protected override void ExectionSql(string sql, SugarParameter[] parameters)
