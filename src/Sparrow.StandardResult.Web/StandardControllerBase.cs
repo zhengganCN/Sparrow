@@ -23,7 +23,7 @@ namespace Sparrow.StandardResult.Web
         /// </summary>
         /// <returns></returns>
         [ApiExplorerSettings(IgnoreApi = true)]
-        internal StandardDto GetStandard()
+        public StandardDto GetStandard()
         {
             return new StandardDto(_key);
         }
@@ -33,7 +33,7 @@ namespace Sparrow.StandardResult.Web
         /// <typeparam name="T">数据类型</typeparam>
         /// <returns></returns>
         [ApiExplorerSettings(IgnoreApi = true)]
-        internal StandardDto<T> GetStandard<T>()
+        public StandardDto<T> GetStandard<T>()
         {
             return new StandardDto<T>(_key);
         }
@@ -42,7 +42,7 @@ namespace Sparrow.StandardResult.Web
         /// </summary>
         /// <returns></returns>
         [ApiExplorerSettings(IgnoreApi = true)]
-        internal StandardPagination GetStandardPagination()
+        public StandardPagination GetStandardPagination()
         {
             return new StandardPagination(_key);
         }
@@ -55,7 +55,7 @@ namespace Sparrow.StandardResult.Web
         /// <param name="size">页大小</param>
         /// <returns></returns>
         [ApiExplorerSettings(IgnoreApi = true)]
-        internal object GetStandardPagination(object list, int count, int index, int size)
+        public object GetStandardPagination(object list, int count, int index, int size)
         {
             return new StandardPagination(_key).GetPagination(list, count, index, size);
         }
@@ -67,7 +67,7 @@ namespace Sparrow.StandardResult.Web
         /// <param name="page">分页参数接口</param>
         /// <returns></returns>
         [ApiExplorerSettings(IgnoreApi = true)]
-        internal object GetStandardPagination(object list, int count, IPagination page)
+        public object GetStandardPagination(object list, int count, IPagination page)
         {
             return new StandardPagination(_key).GetPagination(list, count, page);
         }
@@ -77,7 +77,7 @@ namespace Sparrow.StandardResult.Web
         /// <typeparam name="T">数据类型</typeparam>
         /// <returns></returns>
         [ApiExplorerSettings(IgnoreApi = true)]
-        internal StandardPagination<T> GetStandardPagination<T>()
+        public StandardPagination<T> GetStandardPagination<T>()
         {
             return new StandardPagination<T>(_key);
         }
@@ -91,7 +91,7 @@ namespace Sparrow.StandardResult.Web
         /// <param name="size">页大小</param>
         /// <returns></returns>
         [ApiExplorerSettings(IgnoreApi = true)]
-        internal object GetStandardPagination<T>(IList<T> list, int count, int index, int size)
+        public object GetStandardPagination<T>(IList<T> list, int count, int index, int size)
         {
             return new StandardPagination<T>(_key).GetPagination(list, count, index, size);
         }
@@ -104,13 +104,18 @@ namespace Sparrow.StandardResult.Web
         /// <param name="page">分页参数接口</param>
         /// <returns></returns>
         [ApiExplorerSettings(IgnoreApi = true)]
-        internal object GetStandardPagination<T>(IList<T> list, int count, IPagination page)
+        public object GetStandardPagination<T>(IList<T> list, int count, IPagination page)
         {
             return new StandardPagination<T>(_key).GetPagination(list, count, page);
         }
 
+        /// <summary>
+        /// 标准输出
+        /// </summary>
+        /// <param name="standard"></param>
+        /// <returns></returns>
         [ApiExplorerSettings(IgnoreApi = true)]
-        internal IActionResult StandardContent(StandardDto standard)
+        public IActionResult StandardContent(StandardDto standard)
         {
             return new ObjectResult(standard)
             {
