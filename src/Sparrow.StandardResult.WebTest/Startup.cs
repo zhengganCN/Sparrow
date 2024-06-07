@@ -20,7 +20,7 @@ namespace Sparrow.StandardResult.WebTest
         {
             services.AddDefaultStandardResult(option =>
             {
-                option.FormatStandardDto = (dto) =>
+                option.FormatStandard = (dto) =>
                 {
                     return new
                     {

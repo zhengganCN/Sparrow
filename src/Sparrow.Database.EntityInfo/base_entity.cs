@@ -3,7 +3,6 @@ using System;
 
 namespace Sparrow.Database.EntityInfo
 {
-#pragma warning disable IDE1006 // 命名样式
     /// <summary>
     /// 实体基类（下划线命名/蛇形命名法）
     /// </summary>
@@ -45,5 +44,4 @@ namespace Sparrow.Database.EntityInfo
         [SugarColumn(IsNullable = true, Length = 32, ColumnDescription = "更新人")]
         public string updator { get; set; }
     }
-#pragma warning restore IDE1006 // 命名样式
 }

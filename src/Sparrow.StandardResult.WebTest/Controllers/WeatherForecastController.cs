@@ -31,21 +31,21 @@ namespace Sparrow.StandardResult.WebTest.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-            var dto = new StandardDto(); ;
+            var dto = new Standard(); ;
             return new JsonResult(dto.SuccessResult(weathers));
         }
 
         [HttpGet, Route("/modelvalid")]
         public IActionResult ModelValid([FromQuery] QueryWeather query)
         {
-            var dto = new StandardDto();
+            var dto = new Standard();
             return new JsonResult(dto.SuccessResult());
         }
 
         [HttpPost, Route("/CreateWeather")]
         public IActionResult CreateWeather([FromBody] CreateWeather weather)
         {
-            var dto = new StandardDto();
+            var dto = new Standard();
             return new JsonResult(dto.SuccessResult());
         }
 
@@ -55,7 +55,7 @@ namespace Sparrow.StandardResult.WebTest.Controllers
         [HttpGet, Route("/error")]
         public IActionResult Error()
         {
-            var dto = new StandardDto();
+            var dto = new Standard();
             return new JsonResult(dto.ExceptionResult());
         }
     }

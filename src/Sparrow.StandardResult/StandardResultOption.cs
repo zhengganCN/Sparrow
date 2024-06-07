@@ -1,10 +1,8 @@
-﻿using Sparrow.DataValidation;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Sparrow.DataValidation;
 using System;
 using System.Collections.Generic;
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Text.Unicode;
 
 namespace Sparrow.StandardResult
 {
@@ -64,46 +62,49 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public delegate string TimeFormat();
         /// <summary>
-        /// 设置<see cref="BaseDto.Time"/>的值，默认输出时间戳
+        /// 设置<see cref="Standard.Time"/>的值，默认输出时间戳
         /// </summary>
         public TimeFormat Time { get; set; } = () =>
         {
             return ((long)(DateTime.UtcNow - StandardResultValues.DateTime1970).TotalMilliseconds).ToString();
         };
         /// <summary>
-        /// <see cref="StandardDto"/>结果格式化委托
+        /// 格式化委托
         /// </summary>
         /// <param name="standard"></param>
         /// <returns></returns>
-        public delegate object StandardDtoFormat(StandardDto standard);
+        public delegate object StandardFormat(Standard standard);
         /// <summary>
-        /// <see cref="StandardDto"/>格式化
+        /// 格式化
         /// </summary>
-        public StandardDtoFormat FormatStandardDto { get; set; } = (standard) =>
+        public StandardFormat FormatStandard { get; set; } = (standard) =>
         {
             return standard;
         };
         /// <summary>
-        /// <see cref="StandardPagination"/>分页格式化委托
+        /// 格式化委托
         /// </summary>
         /// <param name="pagination"></param>
         /// <returns></returns>
-        public delegate object StandardPaginationDtoFormat(StandardPagination pagination);
+        public delegate object StandardPaginationFormat(StandardPagination<object> pagination);
         /// <summary>
-        /// <see cref="StandardPagination"/>格式化
+        /// 格式化
         /// </summary>
-        public StandardPaginationDtoFormat FormatStandardPagination { get; set; } = (pagination) =>
+        public StandardPaginationFormat FormatStandardPagination { get; set; } = (pagination) =>
         {
             return pagination;
         };
+
         /// <summary>
-        /// <see cref="StandardDto"/>格式化
+        /// <see cref="FormatJsonSerializerOption"/>格式化
         /// </summary>
-        public JsonSerializerOptions FormatJsonSerializerOption { get; set; } = new JsonSerializerOptions
+        public JsonSerializerSettings FormatJsonSerializerOption { get; set; } = new JsonSerializerSettings
         {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
+            NullValueHandling = NullValueHandling.Ignore,
+            ContractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new CamelCaseNamingStrategy()
+            }
         };
     }
 }

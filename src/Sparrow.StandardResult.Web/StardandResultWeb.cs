@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Sparrow.DataValidation;
 using System.Collections.Generic;
-using System.Text.Json;
 
 namespace Sparrow.StandardResult.Web
 {
@@ -24,14 +24,14 @@ namespace Sparrow.StandardResult.Web
         /// 模型验证错误信息处理
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="key"><see cref="StandardDto"/>构造函数中的key值</param>
+        /// <param name="key"><see cref="Standard"/>构造函数中的key值</param>
         /// <returns></returns>
         public static IActionResult StardandResultModelStateResponse(ActionContext context, string key)
         {
-            StandardDto dto = string.IsNullOrWhiteSpace(key) ? new StandardDto() : new StandardDto(key);
+            Standard dto = string.IsNullOrWhiteSpace(key) ? new Standard() : new Standard(key);
             var bad = new BadRequestObjectResult(context.ModelState);
-            var json = JsonSerializer.Serialize(bad.Value);
-            var errors = JsonSerializer.Deserialize<Dictionary<string, string[]>>(json);
+            var json = JsonConvert.SerializeObject(bad.Value);
+            var errors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(json);
             var list = new List<ModelValidErrorInfo>();
             foreach (var error in errors)
             {

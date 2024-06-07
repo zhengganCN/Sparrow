@@ -35,27 +35,27 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void SuccessTest()
         {
-            var dto = new StandardDto();
+            var dto = new Standard();
             dto.SuccessResult();
-            Assert.IsTrue(dto.Code == SuccessCode);
+            Assert.IsTrue(dto.Code as string == SuccessCode);
             Assert.IsTrue(dto.Message == SuccessMessage);
         }
 
         [Test]
         public void FailTest()
         {
-            var dto = new StandardDto();
+            var dto = new Standard();
             dto.FailResult();
-            Assert.IsTrue(dto.Code == FailCode);
+            Assert.IsTrue(dto.Code as string == FailCode);
             Assert.IsTrue(dto.Message == FailMessage);
         }
 
         [Test]
         public void ExceptionTest()
         {
-            var dto = new StandardDto();
+            var dto = new Standard();
             dto.ExceptionResult();
-            Assert.IsTrue(dto.Code == ExceptionCode);
+            Assert.IsTrue(dto.Code as string == ExceptionCode);
             Assert.IsTrue(dto.Message == ExceptionMessage);
         }
 

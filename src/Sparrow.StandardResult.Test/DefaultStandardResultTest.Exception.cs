@@ -7,7 +7,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void ExceptionTest()
         {
-            var dto = new StandardDto();
+            var dto = new Standard();
             dto.ExceptionResult();
             Assert.IsTrue(dto.Code as string == "-2");
             Assert.IsTrue(dto.Message == "未知错误");
@@ -23,7 +23,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void GenericExceptionTest()
         {
-            var dto = new StandardDto<string>();
+            var dto = new Standard();
             dto.ExceptionResult();
             Assert.IsTrue(dto.Code as string == "-2");
             Assert.IsTrue(dto.Message == "未知错误");

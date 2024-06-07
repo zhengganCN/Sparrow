@@ -1,5 +1,4 @@
-﻿using Sparrow.StandardResult;
-using Sparrow.StandardResult.Web;
+﻿using Sparrow.StandardResult.Web;
 
 namespace Microsoft.AspNetCore.Builder
 {

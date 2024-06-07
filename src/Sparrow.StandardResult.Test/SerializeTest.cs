@@ -12,7 +12,7 @@ namespace Sparrow.StandardResult.Test
             ServiceCollection services = new ServiceCollection();
             services.AddDefaultStandardResult(option =>
             {
-                option.FormatStandardDto = (dto) =>
+                option.FormatStandard = (dto) =>
                 {
                     return new DefinedDto
                     {
@@ -31,7 +31,7 @@ namespace Sparrow.StandardResult.Test
         public void SerializeSuccessTest()
         {
             var data = "数据";
-            var dto = new StandardDto();
+            var dto = new Standard();
             dto.SuccessResult(data);
             var json = JsonConvert.SerializeObject(new DefinedDto
             {

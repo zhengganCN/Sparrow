@@ -2,7 +2,6 @@
 using Sparrow.Database.Interface;
 using SqlSugar;
 using System;
-using System.Linq;
 
 namespace Sparrow.Database.SqlSugar
 {
@@ -58,7 +57,6 @@ namespace Sparrow.Database.SqlSugar
             client = new SqlSugarClient(builder.Connection);
             client.Aop.OnLogExecuting = ExectionSql;
             SetSqlSugarClient(client);
-            InitDbSets();
             SshConnect();
             isInitialization = true;
         }
@@ -80,6 +78,20 @@ namespace Sparrow.Database.SqlSugar
         {
         }
 
+        ///// <summary>
+        ///// 视图查询
+        ///// </summary>
+        ///// <typeparam name="T">视图实体类</typeparam>
+        ///// <returns></returns>
+        //public ISugarQueryable<T> DbView<T>() where T : class, ISparrowDatabaseView
+        //{
+        //    if (client.DbMaintenance.)
+        //    {
+
+        //    }
+        //    return client.Queryable<T>();
+        //}
+
         /// <summary>
         /// 打印日志
         /// </summary>
@@ -96,21 +108,6 @@ namespace Sparrow.Database.SqlSugar
                 sql += $"\nname: {parameter.ParameterName}; value: {parameter.Value}";
             }
             Console.WriteLine(sql);
-        }
-
-        /// <summary>
-        /// 初始化DbSet属性
-        /// </summary>
-        private void InitDbSets()
-        {
-            var properties = GetType().GetProperties();
-            var dbsets = properties.Where(e => e.PropertyType.Name == typeof(DbSet<>).Name).ToList();
-            foreach (var dbset in dbsets)
-            {
-                // 使用 Activator.CreateInstance 方法创建泛型实例
-                object instance = Activator.CreateInstance(dbset.PropertyType, client);
-                dbset.SetValue(this, instance);
-            }
         }
 
         /// <summary>

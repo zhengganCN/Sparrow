@@ -24,7 +24,7 @@ namespace Sparrow.StandardResult.Test
                         page_count = pagination.PageCount,
                     };
                 };
-                option.FormatStandardDto = (dto) =>
+                option.FormatStandard = (dto) =>
                 {
                     return new DefinedDto
                     {
@@ -51,42 +51,15 @@ namespace Sparrow.StandardResult.Test
                 { "name", "zheng" },
                 { "age", 23 }
             };
-            var pagination1 = new StandardPagination();
+            var pagination1 = new StandardPagination<int>();
             var obj1 = pagination1.GetPagination(list, 7, 1, 10);
             var json1 = JsonConvert.SerializeObject(obj1);
 
             var pagination2 = new StandardPagination<int>();
             var obj2 = pagination2.GetPagination(list, 7, 1, 10);
             var json2 = JsonConvert.SerializeObject(obj2);
-
-            var pagination3 = new StandardPagination();
-            var obj3 = pagination3.GetPagination(list, 7, additional, 1, 10);
-            var json3 = JsonConvert.SerializeObject(obj3);
-
-            var pagination4 = new StandardPagination<int>();
-            var obj4 = pagination4.GetPagination(list, 7, additional, 1, 10);
-            var json4 = JsonConvert.SerializeObject(obj4);
             Assert.Pass();
         }
 
-        [Test]
-        public void FormatGenericityTest()
-        {
-            var list = new List<int>
-            {
-                1,2, 3, 4, 5, 6, 7
-            };
-            var additional = new Dictionary<string, object>
-            {
-                { "name", "zheng" },
-                { "age", 23 }
-            };
-            var pagination1 = new StandardPagination();
-            var obj1 = pagination1.GetPagination<DefinedPaginationAdditional>(list, 7, 1, 10);
-
-            var pagination2 = new StandardPagination<int>();
-            var obj2 = pagination2.GetPagination<DefinedPaginationAdditional>(list, 7, additional, 1, 10);
-            Assert.Pass();
-        }
     }
 }

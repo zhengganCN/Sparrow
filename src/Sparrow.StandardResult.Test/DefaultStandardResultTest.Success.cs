@@ -8,7 +8,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void SuccessTest_1()
         {
-            var dto = new StandardDto();
+            var dto = new Standard();
             dto.SuccessResult();
             Assert.IsTrue(dto.Code as string == StandardResultConsts.SuccessCode);
             Assert.IsTrue(dto.Message == StandardResultConsts.SuccessMessage);
@@ -18,7 +18,7 @@ namespace Sparrow.StandardResult.Test
         public void SuccessTest_2()
         {
             var msg = "操作成功";
-            var dto = new StandardDto();
+            var dto = new Standard();
             dto.SuccessResult(null, msg);
             Assert.IsTrue(dto.Code as string == StandardResultConsts.SuccessCode);
             Assert.IsTrue(dto.Message == msg);
@@ -30,7 +30,7 @@ namespace Sparrow.StandardResult.Test
         {
             var code = "1";
             var msg = "操作成功";
-            var dto = new StandardDto();
+            var dto = new Standard();
             dto.SuccessResult(null, msg, code);
             Assert.IsTrue(dto.Code as string == code);
             Assert.IsTrue(dto.Message == msg);
@@ -40,7 +40,7 @@ namespace Sparrow.StandardResult.Test
         public void SuccessTest_4()
         {
             var data = "操作成功";
-            var dto = new StandardDto();
+            var dto = new Standard();
             dto.SuccessResult(data);
             Assert.IsTrue(dto.Data.ToString() == data);
             Assert.IsTrue(dto.Success == true);
@@ -52,7 +52,7 @@ namespace Sparrow.StandardResult.Test
         [Test]
         public void GenericSuccessTest()
         {
-            var dto = new StandardDto<string>();
+            var dto = new Standard();
             dto.SuccessResult();
             Assert.IsTrue(dto.Code as string == "200");
             Assert.IsTrue(dto.Message == "操作成功");

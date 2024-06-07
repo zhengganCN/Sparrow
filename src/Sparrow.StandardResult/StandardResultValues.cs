@@ -11,7 +11,7 @@ namespace Sparrow.StandardResult
         /// <summary>
         /// 起始时间
         /// </summary>
-        internal static readonly DateTime DateTime1970 = new DateTime(1970, 1, 1, 0, 0, 0);
+        internal static DateTime DateTime1970 { get; set; } = new DateTime(1970, 1, 1, 0, 0, 0);
         /// <summary>
         /// 配置项集合
         /// </summary>

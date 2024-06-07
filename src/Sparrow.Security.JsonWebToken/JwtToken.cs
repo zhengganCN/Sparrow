@@ -17,19 +17,5 @@
         /// 签名
         /// </summary>
         public string Signature { get; set; }
-
-        /// <summary>
-        /// 处理token字符串
-        /// </summary>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        public static string HandleToken(string token)
-        {
-            if (token.StartsWith("Bearer ", true, null))
-            {
-                token = token.Remove(0, 7);
-            }
-            return token;
-        }
     }
 }

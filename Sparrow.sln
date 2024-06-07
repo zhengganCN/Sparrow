@@ -118,6 +118,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Monitor.Test", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparrow.Monitor.Web.Test", "src\Sparrow.Monitor.Web.Test\Sparrow.Monitor.Web.Test.csproj", "{6B95E7B7-D2E2-4C36-843C-9339D863299B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Security.JsonWebToken.Test", "Sparrow.Security.JsonWebToken.Test\Sparrow.Security.JsonWebToken.Test.csproj", "{724034B4-C018-401C-BA7A-677F994456CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -280,6 +282,10 @@ Global
 		{6B95E7B7-D2E2-4C36-843C-9339D863299B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B95E7B7-D2E2-4C36-843C-9339D863299B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B95E7B7-D2E2-4C36-843C-9339D863299B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{724034B4-C018-401C-BA7A-677F994456CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{724034B4-C018-401C-BA7A-677F994456CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{724034B4-C018-401C-BA7A-677F994456CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{724034B4-C018-401C-BA7A-677F994456CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -324,6 +330,7 @@ Global
 		{0A2AF2AB-C07A-4FB4-895B-EC4CC1F902D6} = {C4CD5D93-556B-4F0A-8FD5-03843C0D888F}
 		{5451D2CF-C509-4B40-83ED-2F0A3F141D9E} = {C4CD5D93-556B-4F0A-8FD5-03843C0D888F}
 		{6B95E7B7-D2E2-4C36-843C-9339D863299B} = {C4CD5D93-556B-4F0A-8FD5-03843C0D888F}
+		{724034B4-C018-401C-BA7A-677F994456CF} = {414D5FCA-F8C2-4A6E-93E7-2CA7341D8AC0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A723675-990A-4041-86CE-0EC886489955}

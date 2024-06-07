@@ -27,7 +27,7 @@
         public int total { get; set; }
         public int page_count { get; set; }
     }
-    internal class DefinedPaginationAdditional : DefinedPagination
+    internal class DefinedPaginationAdditional<T> : StandardPagination<T>
     {
         public string name { get; set; }
         public int age { get; set; }

@@ -1,21 +1,22 @@
-﻿using Sparrow.Database.SqlSugar.Models;
+﻿using Sparrow.Database.SqlSugar.Migrations;
 
 namespace Sparrow.Database.SqlSugar
 {
     internal static class DatabaseStaticValue
     {
-        internal static Migration MigrationOptions
+        internal static MigrationOptions MigrationOptions
         {
             get
             {
-                return new Migration
+                var options = new MigrationOptions
                 {
-                    major = 0,
-                    minor = 0,
-                    revision = 0,
-                    temporary = 0,
-                    name = "database"
+                    Major = 0,
+                    Minor = 0,
+                    Revision = 0,
+                    Temporary = 0,
+                    Name = "database"
                 };
+                return options;
             }
         }
     }
