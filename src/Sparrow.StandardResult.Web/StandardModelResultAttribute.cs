@@ -49,7 +49,7 @@ namespace Sparrow.StandardResult
                         Errors = error.Value
                     });
                 }
-                dto.ModelValidResult(list);
+                dto.InvalidModelResult(list);
                 context.Result = new ContentResult { Content = dto.Serialize() };
             }
         }

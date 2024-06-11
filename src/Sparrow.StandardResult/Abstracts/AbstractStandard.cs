@@ -5,7 +5,7 @@ namespace Sparrow.StandardResult.Abstracts
     /// <summary>
     /// 抽象标准输出类
     /// </summary>
-    public abstract class AbstractStandard
+    public abstract class AbstractStandard : AbstractStandardBase
     {
         /// <summary>
         /// 数据

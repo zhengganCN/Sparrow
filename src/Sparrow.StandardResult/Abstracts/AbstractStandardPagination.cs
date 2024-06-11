@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Sparrow.StandardResult.Abstracts
 {
-    public abstract class AbstractStandardPagination<T>
+    public abstract class AbstractStandardPagination<T> : AbstractStandardBase
     {
         /// <summary>
         /// 数据列表

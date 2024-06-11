@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using Sparrow.StandardResult.Test.Models;
 
-namespace Sparrow.StandardResult.Test
+namespace Sparrow.StandardResult.Test.StandardTest
 {
-    internal class SerializeTest
+    internal class SerializeStandardTest
     {
         [SetUp]
         public void Setup()
@@ -14,7 +15,7 @@ namespace Sparrow.StandardResult.Test
             {
                 option.FormatStandard = (dto) =>
                 {
-                    return new DefinedDto
+                    return new DefinedStandard
                     {
                         defined_code = dto.Code as string,
                         defined_message = dto.Message,
@@ -33,7 +34,7 @@ namespace Sparrow.StandardResult.Test
             var data = "数据";
             var dto = new Standard();
             dto.SuccessResult(data);
-            var json = JsonConvert.SerializeObject(new DefinedDto
+            var json = JsonConvert.SerializeObject(new DefinedStandard
             {
                 defined_code = dto.Code as string,
                 defined_message = dto.Message,

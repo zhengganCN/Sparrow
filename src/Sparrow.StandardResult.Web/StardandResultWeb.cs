@@ -41,7 +41,7 @@ namespace Sparrow.StandardResult.Web
                     Errors = error.Value
                 });
             }
-            dto.ModelValidResult(list);
+            dto.InvalidModelResult(list);
             return new ContentResult { Content = dto.Serialize() };
         }
     }

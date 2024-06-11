@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sparrow.StandardResult
+﻿namespace Sparrow.StandardResult
 {
     /// <summary>
     /// 异常

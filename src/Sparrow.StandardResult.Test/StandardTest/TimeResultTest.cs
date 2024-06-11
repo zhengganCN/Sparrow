@@ -2,9 +2,9 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System;
 
-namespace Sparrow.StandardResult.Test
+namespace Sparrow.StandardResult.Test.StandardTest
 {
-    public class DefinedDefaultStandardResultTest
+    public class TimeResultTest
     {
         private readonly string SuccessMessage = "³É¹¦";
         private readonly string SuccessCode = "1";

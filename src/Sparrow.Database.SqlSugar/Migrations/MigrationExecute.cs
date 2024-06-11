@@ -127,11 +127,11 @@ namespace Sparrow.Database.SqlSugar.Migrations
                 return false;
             }
             if (CanUpdateVersion(context, options))
-            {                
+            {
                 if (!migration.ExcuteDatabaseSynchronous(options))
                 {
                     return false;
-                }               
+                }
                 if (!InsertVersionData(context, options))
                 {
                     return false;

@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Sparrow.DataValidation;
 using Sparrow.StandardResult.Abstracts;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,11 +8,12 @@ namespace Sparrow.StandardResult
     /// <summary>
     /// 标准输出
     /// </summary>
-    public class Standard : AbstractStandard, IStandardFormat
+    public class Standard : AbstractStandard, IStandardFormat, IAdditionalField
     {
-        internal string Key { get; set; } 
+        internal string Key { get; set; }
         internal StandardResultOption Option { get; set; }
         internal StandardPagination<object> Pagination { get; set; }
+        internal Dictionary<string, object> AdditionalFieldDict { get; set; } = new Dictionary<string, object>();
         /// <summary>
         /// 标准输出
         /// </summary>
@@ -32,50 +31,6 @@ namespace Sparrow.StandardResult
             Key = key;
             Option = StandardResultValues.StandardResultOptions[key];
         }
-        /// <summary>
-        /// 数据是否已格式化
-        /// </summary>
-        private bool IsFormatStandard { get; set; }
-        /// <summary>
-        /// 格式化数据
-        /// </summary>
-        private object FormatData { get; set; }
-
-
-        /// <summary>
-        /// 重置格式化状态
-        /// </summary>
-        public void ResetFormat()
-        {
-            IsFormatStandard = false;
-            FormatData = null;
-        }
-
-        /// <summary>
-        /// 标准输出属性名列表
-        /// </summary>
-        private string[] StandardPropertyNames { get; set; } = new string[]
-        {
-            nameof(Data),
-            nameof(Message),
-            nameof(Code),
-            nameof(Success),
-            nameof(TraceId),
-            nameof(Time),
-            nameof(Errors),
-        };
-
-        /// <summary>
-        /// 分页属性名列表
-        /// </summary>
-        private string[] PaginationPropertyNames { get; set; } = new string[]
-        {
-            "List",
-            "Count",
-            "PageIndex",
-            "PageSize",
-            "PageCount"
-        };
 
         /// <summary>
         /// 格式化
@@ -83,16 +38,12 @@ namespace Sparrow.StandardResult
         /// <returns></returns>
         public object StandardFormat()
         {
-            if (IsFormatStandard)
-            {
-                return FormatData;
-            }
             var type = Data?.GetType();
             if (Data != null && Data is IStandardPagination)
             {
                 Data = (Data as IStandardPagination).StandardFormat();
             }
-            FormatData = Option.FormatStandard(new Standard
+            var obj = Option.FormatStandard(new Standard
             {
                 Success = Success,
                 Code = Code,
@@ -102,8 +53,14 @@ namespace Sparrow.StandardResult
                 Time = Time,
                 TraceId = TraceId
             });
-            IsFormatStandard = true;
-            return FormatData;
+            if (AdditionalFieldDict is null || AdditionalFieldDict.Count == 0)
+            {
+                return obj;
+            }
+            else
+            {
+                return AdditionalField(obj, AdditionalFieldDict);
+            }
         }
 
         /// <summary>
@@ -125,29 +82,57 @@ namespace Sparrow.StandardResult
         }
 
         /// <summary>
-        /// 格式化
+        /// 为对象添加附加字段
         /// </summary>
-        /// <param name="original">格式化前的数据实例</param>
-        /// <param name="format">格式化后的数据实例</param>
-        /// <returns></returns>
-        private object Additional(object original, object format)
+        /// <param name="name">附加字段名</param>
+        /// <param name="value">附加字段值</param>
+        public void AddAdditionalField(string name, object value)
         {
-            var dic = new Dictionary<string, object>();
-            var formatProperties = format.GetType().GetProperties();
-            foreach (var property in formatProperties)
+            if (AdditionalFieldDict.ContainsKey(name))
             {
-                dic.Add(property.Name, property.GetValue(format, null));
+                AdditionalFieldDict[name] = value;
             }
-            var originalProperties = original.GetType().GetProperties()
-                .Where(e => !PaginationPropertyNames.Contains(e.Name))
-                .ToList();
-            foreach (var property in originalProperties)
+            else
             {
-                dic.Add(property.Name, property.GetValue(original, null));
+                AdditionalFieldDict.Add(name, value);
             }
-            return dic;
         }
 
+        /// <summary>
+        /// 为对象添加附加字段
+        /// </summary>
+        /// <param name="obj">需要附加字段的对象实例</param>
+        /// <param name="fields">附加字段字典</param>
+        /// <returns></returns>
+        internal override Dictionary<string, object> AdditionalField(object obj, Dictionary<string, object> fields)
+        {
+            if (obj is null)
+            {
+                return null;
+            }
+            var properties = obj.GetType().GetProperties();
+            var dict = new Dictionary<string, object>();
+            foreach (var property in properties)
+            {
+                if (!dict.ContainsKey(property.Name))
+                {
+                    dict.Add(property.Name, property.GetValue(obj, null));
+                }
+            }
+            if (fields is null || fields.Count == 0)
+            {
+                return dict;
+            }
+            var keys = fields.Keys.ToList();
+            for (int i = 0; i < keys.Count; i++)
+            {
+                if (!dict.ContainsKey(keys[i]))
+                {
+                    dict.Add(keys[i], fields[keys[i]]);
+                }
+            }
+            return dict;
+        }
     }
     /// <summary>
     /// 标准输出
