@@ -14,7 +14,7 @@ namespace Sparrow.StandardResult
         internal StandardResultOption Option { get; set; }
         internal Dictionary<string, object> AdditionalFieldDict { get; set; } = new Dictionary<string, object>();
         /// <summary>
-        /// 初始化
+        /// 分页数据
         /// </summary>
         public StandardPagination()
         {
@@ -22,13 +22,28 @@ namespace Sparrow.StandardResult
             Option = StandardResultValues.StandardResultOptions[StandardResultConsts.DefaultKey];
         }
         /// <summary>
-        /// 初始化
+        /// 分页数据
         /// </summary>
         /// <param name="key">标识</param>
         public StandardPagination(string key)
         {
             Key = key;
             Option = StandardResultValues.StandardResultOptions[key];
+        }
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="key">标识</param>
+        /// <param name="list">数据列表</param>
+        /// <param name="count">总数</param>
+        /// <param name="pageIndex">页码，默认值为1</param>
+        /// <param name="pageSize">页面大小，默认值为10</param>
+        /// <returns></returns>
+        public StandardPagination(string key, IList<T> list, int count, int pageIndex = 1, int pageSize = 10)
+        {
+            Key = key;
+            Option = StandardResultValues.StandardResultOptions[key];
+            Computer(list, count, pageIndex, pageSize);
         }
 
         /// <summary>

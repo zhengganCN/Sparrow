@@ -15,7 +15,7 @@ namespace Sparrow.StandardResult.WebTest.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        public WeatherForecastController() : base()
+        public WeatherForecastController() : base("weather")
         {
 
         }
@@ -33,6 +33,15 @@ namespace Sparrow.StandardResult.WebTest.Controllers
             .ToArray();
             var dto = new Standard(); ;
             return new JsonResult(dto.SuccessResult(weathers));
+        }
+        [HttpGet, Route("/page")]
+        public IActionResult Page()
+        {
+            var result = GetStandard();
+            var pagination = new StandardPagination<string>();
+            pagination.GetPagination(null, 92, 1, 10);
+            result.SuccessResult(pagination);
+            return StandardContent(result);
         }
 
         [HttpGet, Route("/modelvalid")]

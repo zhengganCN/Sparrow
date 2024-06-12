@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace Sparrow.StandardResult.WebTest
 {
@@ -18,7 +19,7 @@ namespace Sparrow.StandardResult.WebTest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDefaultStandardResult(option =>
+            services.AddStandardResult("weather", option =>
             {
                 option.FormatStandard = (dto) =>
                 {
@@ -30,6 +31,17 @@ namespace Sparrow.StandardResult.WebTest
                         we_time = dto.Time,
                         we_traceId = dto.TraceId,
                         we_success = dto.Success,
+                    };
+                };
+                option.FormatStandardPagination = (pagination) =>
+                {
+                    return new
+                    {
+                        list = pagination.List,
+                        pageNum = pagination.PageIndex,
+                        pages = pagination.PageCount,
+                        pageSize = pagination.PageSize,
+                        total = pagination.Count
                     };
                 };
             });

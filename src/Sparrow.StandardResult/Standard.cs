@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Sparrow.StandardResult.Abstracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,9 +40,19 @@ namespace Sparrow.StandardResult
         public object StandardFormat()
         {
             var type = Data?.GetType();
-            if (Data != null && Data is IStandardPagination)
+            if (Data != null && type != null && type.IsGenericType)
             {
-                Data = (Data as IStandardPagination).StandardFormat();
+                var paginationType = type.GetGenericTypeDefinition();
+                if (paginationType == typeof(StandardPagination<>) && Data is IStandardPagination)
+                {
+                    var list = type.GetProperty(nameof(StandardPagination<object>.List)).GetValue(Data, null);
+                    var count = type.GetProperty(nameof(StandardPagination<object>.Count)).GetValue(Data, null);
+                    var index = type.GetProperty(nameof(StandardPagination<object>.PageIndex)).GetValue(Data, null);
+                    var size = type.GetProperty(nameof(StandardPagination<object>.PageSize)).GetValue(Data, null);
+                    Type genericType = paginationType.MakeGenericType(typeof(object));
+                    var instance = Activator.CreateInstance(genericType, Key, list, count, index, size) as IStandardPagination;
+                    Data = instance?.StandardFormat();
+                }                
             }
             var obj = Option.FormatStandard(new Standard
             {
