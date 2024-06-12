@@ -10,5 +10,10 @@
         /// </summary>
         /// <returns></returns>
         object StandardFormat();
+        /// <summary>
+        /// 标准格式化
+        /// </summary>
+        /// <returns></returns>
+        object StandardFormat(string key);
     }
 }

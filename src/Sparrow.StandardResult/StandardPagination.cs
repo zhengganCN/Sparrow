@@ -103,6 +103,35 @@ namespace Sparrow.StandardResult
         }
 
         /// <summary>
+        /// 格式化
+        /// </summary>
+        /// <returns></returns>
+        public object StandardFormat(string key)
+        {
+            IList<object> list = default;
+            if (List != null)
+            {
+                list = JsonConvert.DeserializeObject<IList<object>>(JsonConvert.SerializeObject(List));
+            };
+            var obj = StandardResultValues.StandardResultOptions[key].FormatStandardPagination(new StandardPagination<object>
+            {
+                List = list,
+                Count = Count,
+                PageIndex = PageIndex,
+                PageSize = PageSize,
+                PageCount = PageCount
+            });
+            if (AdditionalFieldDict is null || AdditionalFieldDict.Count == 0)
+            {
+                return obj;
+            }
+            else
+            {
+                return AdditionalField(obj, AdditionalFieldDict);
+            }
+        }
+
+        /// <summary>
         /// 为对象添加附加字段
         /// </summary>
         /// <param name="name">附加字段名</param>

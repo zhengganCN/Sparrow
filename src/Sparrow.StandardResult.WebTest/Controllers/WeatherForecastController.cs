@@ -38,8 +38,16 @@ namespace Sparrow.StandardResult.WebTest.Controllers
         public IActionResult Page()
         {
             var result = GetStandard();
-            var pagination = new StandardPagination<string>();
-            pagination.GetPagination(null, 92, 1, 10);
+            var pagination = new StandardPagination<WeatherForecast>();
+            var rng = new Random();
+            var weathers = Enumerable.Range(1, 92).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
+            pagination.GetPagination(weathers, 92, 1, 10);
             result.SuccessResult(pagination);
             return StandardContent(result);
         }
