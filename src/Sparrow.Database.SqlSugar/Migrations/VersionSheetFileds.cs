@@ -163,12 +163,12 @@ namespace Sparrow.Database.SqlSugar.Migrations
         /// <summary>
         /// 删除标识
         /// </summary>
-        public static SheetField IsDeleted = new SheetField
+        public static SheetField Deleted = new SheetField
         {
-            FieldHumpName = nameof(BaseEntity.IsDeleted),
-            FieldSnakeName = nameof(base_entity.is_deleted),
-            FieldType = typeof(bool),
-            FieldColumn = new SugarColumn { IsNullable = false, ColumnDescription = "删除标识" }
+            FieldHumpName = "Deleted",
+            FieldSnakeName = "deleted",
+            FieldType = typeof(string),
+            FieldColumn = new SugarColumn { IsNullable = false, Length = 1, ColumnDescription = "删除标识" }
         };
         /// <summary>
         /// 获取版本表所有字段
@@ -179,7 +179,7 @@ namespace Sparrow.Database.SqlSugar.Migrations
             var list = new List<SheetField>
             {
                 Id,Name,Major,Minor,Revision,Temporary,Serial,Content,Type,
-                CreateTime,Creator,UpdateTime,Updator,DeleteTime,Deletor,IsDeleted
+                CreateTime,Creator,UpdateTime,Updator,DeleteTime,Deletor,Deleted
             };
             return list;
         }

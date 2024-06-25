@@ -30,6 +30,24 @@ namespace Sparrow.StandardResult.Test.PaginationTest
             Assert.IsTrue(CompareStandard.Compare(obj, defined));
         }
 
+        [Test]
+        public void FormatTest()
+        {
+            StandardPaginationOutputTypes.GetOverrideDefault();
+            var list = new List<StudentView>
+            {
+                new StudentView
+                {
+                    Name = "Tom",
+                    Age = 22
+                }
+            };
+            var pagination = new StandardPagination<StudentView>().GetPagination(list, 1).StandardFormat();
+            var standard = new Standard();
+            standard.SuccessResult(pagination);            
+            var serialize = standard.Serialize();
+            Assert.IsTrue(serialize.Contains("\"name\":\"Tom\""));            
+        }
 
     }
 }

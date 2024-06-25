@@ -5,7 +5,7 @@ namespace Sparrow.Database.SqlSugar.Interfaces
     /// <summary>
     /// 定义数据库视图接口
     /// </summary>
-    public interface ISparrowDefineView
+    public interface ISparrowView
     {
         /// <summary>
         /// 定义视图SQL

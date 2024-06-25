@@ -1,7 +1,9 @@
 ﻿using Sparrow.Database.Interface;
+using Sparrow.Database.SqlSugar.Extensions;
 using Sparrow.Database.SqlSugar.Interfaces;
 using SqlSugar;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Sparrow.Database.SqlSugar.Migrations
@@ -19,7 +21,15 @@ namespace Sparrow.Database.SqlSugar.Migrations
         /// <returns></returns>
         private static bool ExistVersionTable(DbContext context, MigrationOptions options)
         {
-            return context.SugarClient.DbMaintenance.IsAnyTable(options.SheetName);
+            if (context.SugarClient.DbMaintenance.IsAnyTable(options.SheetName, false))
+            {
+                var columns = context.SugarClient.DbMaintenance.GetColumnInfosByTableName(options.SheetName, false);
+                if (!columns.Any(e => e.DbColumnName.ToLower() == VersionSheetFileds.Deleted.GetFieldName(options.NamingScheme).ToLower()))
+                {
+                    context.SugarClient.DbMaintenance.DropTable(options.SheetName);
+                }
+            }
+            return context.SugarClient.DbMaintenance.IsAnyTable(options.SheetName, false);
         }
 
         /// <summary>
@@ -62,18 +72,18 @@ namespace Sparrow.Database.SqlSugar.Migrations
             var version = new Dictionary<string, object>
             {
                 { VersionSheetFileds.Id.GetFieldName(options.NamingScheme), $"{SnowFlakeSingle.Instance.NextId()}" },
-                { VersionSheetFileds.Major.GetFieldName(options.NamingScheme), options.Major },
-                { VersionSheetFileds.Minor.GetFieldName(options.NamingScheme), options.Minor },
-                { VersionSheetFileds.Revision.GetFieldName(options.NamingScheme), options.Revision },
-                { VersionSheetFileds.Temporary.GetFieldName(options.NamingScheme), options.Temporary },
+                { VersionSheetFileds.Major.GetFieldName(options.NamingScheme), (long)options.Major },
+                { VersionSheetFileds.Minor.GetFieldName(options.NamingScheme), (long)options.Minor },
+                { VersionSheetFileds.Revision.GetFieldName(options.NamingScheme), (long)options.Revision },
+                { VersionSheetFileds.Temporary.GetFieldName(options.NamingScheme), (long)options.Temporary },
                 { VersionSheetFileds.Name.GetFieldName(options.NamingScheme), options.Name },
-                { VersionSheetFileds.Serial.GetFieldName(options.NamingScheme), serial },
+                { VersionSheetFileds.Serial.GetFieldName(options.NamingScheme),  (long)serial },
                 { VersionSheetFileds.Type.GetFieldName(options.NamingScheme), (int)VersionType.Sheet },
                 { VersionSheetFileds.CreateTime.GetFieldName(options.NamingScheme), DateTime.Now },
                 { VersionSheetFileds.Creator.GetFieldName(options.NamingScheme), "system" },
-                { VersionSheetFileds.IsDeleted.GetFieldName(options.NamingScheme), false }
+                { VersionSheetFileds.Deleted.GetFieldName(options.NamingScheme),  "N"  }
             };
-            context.SugarClient.Insertable(version).AS(options.SheetName).ExecuteCommand();
+            context.InsertVersionMigrationData(version, options);
             return true;
         }
 
@@ -88,7 +98,7 @@ namespace Sparrow.Database.SqlSugar.Migrations
             var exist = context.SugarClient.Queryable<object>().AS(options.SheetName)
                 .Where($"{VersionSheetFileds.Type.GetFieldName(options.NamingScheme)}=@Type", new { Type = (int)VersionType.Sheet })
                 .Where($"{VersionSheetFileds.Name.GetFieldName(options.NamingScheme)}=@Name", new { options.Name })
-                .Where($"{VersionSheetFileds.IsDeleted.GetFieldName(options.NamingScheme)}=@IsDeleted", new { IsDeleted = false })
+                .Where($"{VersionSheetFileds.Deleted.GetFieldName(options.NamingScheme)}=@Deleted", new { Deleted = "N" })
                 .Any();
             if (!exist)
             {
@@ -97,7 +107,7 @@ namespace Sparrow.Database.SqlSugar.Migrations
             var actual_serial = context.SugarClient.Queryable<object>().AS(options.SheetName)
                 .Where($"{VersionSheetFileds.Type.GetFieldName(options.NamingScheme)}=@Type", new { Type = (int)VersionType.Sheet })
                 .Where($"{VersionSheetFileds.Name.GetFieldName(options.NamingScheme)}=@Name", new { options.Name })
-                .Where($"{VersionSheetFileds.IsDeleted.GetFieldName(options.NamingScheme)}=@IsDeleted", new { IsDeleted = false })
+                .Where($"{VersionSheetFileds.Deleted.GetFieldName(options.NamingScheme)}=@Deleted", new { Deleted = "N" })
                 .Max<ulong>(VersionSheetFileds.Serial.GetFieldName(options.NamingScheme));
             return options.ComputerVersionSeria() > actual_serial;
         }

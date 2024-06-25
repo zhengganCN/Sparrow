@@ -82,7 +82,7 @@ namespace Sparrow.StandardResult
             IList<object> list = default;
             if (List != null)
             {
-                list = JsonConvert.DeserializeObject<IList<object>>(JsonConvert.SerializeObject(List));
+                list = List.Cast<object>().ToList();
             }
             var obj = Option.FormatStandardPagination(new StandardPagination<object>
             {
@@ -111,8 +111,8 @@ namespace Sparrow.StandardResult
             IList<object> list = default;
             if (List != null)
             {
-                list = JsonConvert.DeserializeObject<IList<object>>(JsonConvert.SerializeObject(List));
-            };
+                list = List.Cast<object>().ToList();
+            }
             var obj = StandardResultValues.StandardResultOptions[key].FormatStandardPagination(new StandardPagination<object>
             {
                 List = list,

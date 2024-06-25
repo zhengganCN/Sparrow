@@ -3,7 +3,7 @@ using Sparrow.Database.SqlSugar.Test.Entities;
 
 namespace Sparrow.Database.SqlSugar.Test.Views
 {
-    internal class ViewDistricts : AbstractSparrowDefineView
+    internal class ViewDistricts : AbstractSparrowView
     {
         public override string DefineView(DbContext context, out string name, out SparrowVersion version)
         {

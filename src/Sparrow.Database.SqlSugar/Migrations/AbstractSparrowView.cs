@@ -6,7 +6,7 @@ namespace Sparrow.Database.SqlSugar.Migrations
     /// <summary>
     /// 抽象定义视图语句类
     /// </summary>
-    public abstract class AbstractSparrowDefineView : ISparrowDefineView
+    public abstract class AbstractSparrowView : ISparrowView
     {
         /// <summary>
         /// 定义视图SQL
